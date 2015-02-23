@@ -1,5 +1,5 @@
 /**
- * About view
+ * Editor view
  */
 (function(app, $)
 {
@@ -23,18 +23,19 @@
         };
 
         /**
-         * Inits the main window and waits for its content to be loaded
+         * Show main window & inits events
          */
         this.show = function()
         {
-            var bootstrap = new app.utils.windowbootstrap('templates/about.html', {
-                title: '',
+            var bootstrap = new app.utils.windowbootstrap('templates/editor.html', {
                 toolbar: false,
                 frame: true,
+                width: 400,
+                height: 362,
+                position: 'mouse',
                 resizable: false,
                 show: false,
-                width: 200,
-                height: 210
+                title: ''
             });
             bootstrap.on('loaded', _onWindowLoaded);
             bootstrap.on('close', _onWindowClose);
@@ -50,34 +51,25 @@
         };
 
         /**
-         * Closes the view
+         * Loads the template when the view is ready
+         * @param $body
+         */
+        var _onWindowLoaded = function($body)
+        {
+            //app.log($body);
+        };
+
+        /**
+         * Tell the controller that the view has been closed
+         * @param evt
          */
         var _onWindowClose = function()
         {
             events.emit('close');
         };
 
-        /**
-         * Triggered when the window content has been loaded (DOM and assets)
-         * @param $body
-         */
-        var _onWindowLoaded = function($body)
-        {
-            $body.find('a').on('click', $.proxy(_onLinkClick, this));
-        };
-
-        /**
-         * Opens an external link
-         * @param evt
-         */
-        var _onLinkClick = function(evt)
-        {
-            evt.preventDefault();
-            app.node.gui.Shell.openExternal($(evt.currentTarget).attr('href'));
-        };
-
     };
 
-    app.views.about = module;
+    app.views.main = module;
 
 })(window.App, jQuery);

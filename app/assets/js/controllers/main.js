@@ -1,5 +1,5 @@
 /**
- * Form controller
+ * Main controller
  */
 (function(app, $)
 {
@@ -9,18 +9,8 @@
     var module = function()
     {
 
-        var view = new app.views.editor();
-        var events = new app.node.events.EventEmitter();
-
-        /**
-         * Attaches an event
-         * @param event
-         * @param callback
-         */
-        this.on = function(event, callback)
-        {
-            events.on(event, callback);
-        };
+        var view = new app.views.main();
+        var model = new app.models.main();
 
         /**
          * Inits the controller
@@ -41,6 +31,6 @@
 
     };
 
-    app.controllers.editor = module;
+    app.controllers.main = module;
 
 })(window.App, jQuery);

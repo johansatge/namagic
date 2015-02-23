@@ -13,34 +13,42 @@
     app.node.events = require('events');
     app.node.crypto = require('crypto');
     app.node.util = require('util');
+    app.models = {};
     app.views = {};
     app.controllers = {};
     app.utils = {};
     app.devMode = app.node.fs.existsSync('.dev') && app.node.fs.readFileSync('.dev', {encoding: 'utf8'}) === '1';
-    app.locale = eval('(' + app.node.fs.readFileSync('locale/en.json') + ')');
-    app.menubar = false;
 
     /**
      * Inits
+     * @todo support multiple languages
      */
     app.init = function()
     {
-        app.menubar = new app.node.gui.Menu({type: 'menubar'});
+        app.utils.locale.init('en');
+        app.utils.menubar.init();
+        app.utils.menubar.on('new', _onNew);
+        app.utils.menubar.on('close', _onClose);
+        app.utils.menubar.on('about', _onAbout);
+        app.utils.menubar.on('quit', _onQuit);
+        _onNew();
+    };
 
-        var app_menu = new app.node.gui.Menu();
-        app_menu.append(new app.node.gui.MenuItem({label: app.locale.menu_about, click: $.proxy(_onAbout, this)}));
-        app_menu.append(new app.node.gui.MenuItem({type: 'separator'}));
-        app_menu.append(new app.node.gui.MenuItem({label: app.locale.menu_quit, key: 'q', modifiers: 'cmd', click: $.proxy(_onQuit, this)}));
+    /**
+     * Request a new window
+     */
+    var _onNew = function()
+    {
+        var main = new app.controllers.main();
+        main.init();
+    };
 
-        var file_menu = new app.node.gui.Menu();
-        file_menu.append(new app.node.gui.MenuItem({label: app.locale.menu_new, key: 'n', modifiers: 'cmd', click: $.proxy(_onNewEditor, this)}));
-        file_menu.append(new app.node.gui.MenuItem({type: 'separator'}));
-        file_menu.append(new app.node.gui.MenuItem({label: app.locale.menu_close, key: 'w', modifiers: 'cmd', click: $.proxy(_onClose, this)}));
-
-        app.menubar.append(new app.node.gui.MenuItem({label: app.node.gui.App.manifest.name, submenu: app_menu}));
-        app.menubar.append(new app.node.gui.MenuItem({label: app.locale.menu_file, submenu: file_menu}));
-
-        _onNewEditor();
+    /**
+     * Tries to close the current window
+     */
+    var _onClose = function()
+    {
+        app.utils.windowmanager.closeCurrentWindow();
     };
 
     /**
@@ -50,23 +58,6 @@
     {
         var about = new app.controllers.about();
         about.init();
-    };
-
-    /**
-     * Tries to close the current window
-     */
-    var _onClose = function()
-    {
-        app.utils.window.closeCurrentWindow();
-    };
-
-    /**
-     * Request a new editor
-     */
-    var _onNewEditor = function()
-    {
-        var editor = new app.controllers.editor();
-        editor.init();
     };
 
     /**

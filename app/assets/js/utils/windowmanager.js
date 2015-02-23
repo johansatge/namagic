@@ -1,5 +1,5 @@
 /**
- * Window utils
+ * Window manager
  */
 (function(app, $)
 {
@@ -10,22 +10,14 @@
     var _currentWindow = false;
 
     /**
-     * Disables drag&drop
-     * @param document
+     * Tries to close the current window
      */
-    module.disableDragDrop = function(document)
+    module.closeCurrentWindow = function()
     {
-        var $document = $(document);
-        $document.on('dragover', function(evt)
+        if (_currentWindow !== false)
         {
-            evt.preventDefault();
-            evt.stopPropagation();
-        });
-        $document.on('drop', function(evt)
-        {
-            evt.preventDefault();
-            evt.stopPropagation();
-        });
+            _currentWindow.close();
+        }
     };
 
     /**
@@ -47,19 +39,7 @@
     };
 
     /**
-     * Tries to close the current window
-     */
-    module.closeCurrentWindow = function()
-    {
-        if (_currentWindow !== false)
-        {
-            _currentWindow.close();
-        }
-    };
-
-    /**
      * The main app window has to follow the current window - contextual menu positions are based on it
-     * @todo make this prettier
      */
     var _updateBackgroundWindowPosition = function()
     {
@@ -68,6 +48,6 @@
         background_window.y = _currentWindow.y;
     };
 
-    app.utils.window = module;
+    app.utils.windowmanager = module;
 
 })(window.App, jQuery);
