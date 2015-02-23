@@ -24,5 +24,11 @@
 <script src="./assets/js/controllers/about.js"></script>
 
 <script>
-    App.init();
+    App.init({
+        gui: require('nw.gui'),
+        fs: require('fs'),
+        events: require('events'),
+        crypto: require('crypto'),
+        util: require('util')
+    });
 </script>

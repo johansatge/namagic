@@ -8,7 +8,7 @@
 
     var module = {};
     var menubar;
-    var events = new app.node.events.EventEmitter();
+    var events;
 
     /**
      * Attaches an event
@@ -25,6 +25,7 @@
      */
     module.init = function()
     {
+        events = new app.node.events.EventEmitter();
         menubar = new app.node.gui.Menu({type: 'menubar'});
 
         var app_menu = new app.node.gui.Menu();

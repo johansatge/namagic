@@ -1,30 +1,25 @@
 /**
  * App bootstrap
  */
-(function(window, $, require)
+(function(window, $)
 {
 
     'use strict';
 
     var app = {};
-    app.node = {};
-    app.node.gui = require('nw.gui');
-    app.node.fs = require('fs');
-    app.node.events = require('events');
-    app.node.crypto = require('crypto');
-    app.node.util = require('util');
     app.models = {};
     app.views = {};
     app.controllers = {};
     app.utils = {};
-    app.devMode = app.node.fs.existsSync('.dev') && app.node.fs.readFileSync('.dev', {encoding: 'utf8'}) === '1';
 
     /**
      * Inits
      * @todo support multiple languages
      */
-    app.init = function()
+    app.init = function(modules)
     {
+        app.node = modules;
+        app.devMode = app.node.fs.existsSync('.dev') && app.node.fs.readFileSync('.dev', {encoding: 'utf8'}) === '1';
         app.utils.locale.init('en');
         app.utils.menubar.init();
         app.utils.menubar.on('new', _onNew);
@@ -70,4 +65,4 @@
 
     window.App = app;
 
-})(window, jQuery, require);
+})(window, jQuery);
