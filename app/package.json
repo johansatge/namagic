@@ -1,0 +1,16 @@
+{
+    "name": "Namage",
+    "version": "1.0.0",
+    "main": "app.html",
+    "window": {
+        "width": 500,
+        "height": 500,
+        "show": true
+    },
+    "webkit": {
+        "plugin": true,
+        "page-cache": false
+    },
+    "dependencies": {
+    }
+}
