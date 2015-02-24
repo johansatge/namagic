@@ -1,0 +1,104 @@
+html, body, div, span, p, form, input, textarea, select, h1, h2, h3, table, tbody, tr, td, label
+{
+    margin  : 0;
+    padding : 0;
+    border  : 0;
+    outline: 0;
+}
+
+html, body
+{
+    font-family            : 'Helvetica Neue';
+    /*-webkit-font-smoothing : antialiased;*/
+    -webkit-user-select    : none;
+}
+
+.files-panel
+{
+    position: absolute;
+    left: 0;
+    top: 0;
+    overflow-y: auto;
+    border-top: 1px solid #a3a3a3;
+    box-sizing: border-box;
+}
+
+.files-panel table
+{
+    width: 100%;
+}
+
+.files-panel tr td
+{
+    cursor: default;
+    font-size      : 13px;
+    letter-spacing : 0.02em;
+    padding: 5px;
+    color: #333333;
+}
+
+.files-panel tr:nth-child(odd) td
+{
+    background: #ffffff;
+}
+
+.files-panel tr:nth-child(even) td
+{
+    background: #F3F6FA;
+}
+
+.files-panel tr td:nth-child(1)
+{
+    width: 50%;
+}
+
+.files-panel tr td:nth-child(2)
+{
+    width: 10px;
+}
+
+.files-panel tr td i
+{
+    color: #999999;
+    font-size: 11px;
+}
+
+.operations-panel
+{
+    position: absolute;
+    width: 300px;
+    right: 0;
+    top: 0;
+    overflow-y: auto;
+    background: #ff99ff;
+    border-top: 1px solid #a3a3a3;
+    box-sizing: border-box;
+}
+
+.options-panel
+{
+    position: absolute;
+    width: 100%;
+    height: 33px;
+    left: 0;
+    bottom: 0;
+    background: #123456;
+    background: linear-gradient(to top, #d4d4d4, #ebebeb);
+    border-top: 1px solid #a3a3a3;
+    box-sizing: border-box;
+}
+
+.options-panel label
+{
+    float: left;
+    font-size: 11px;
+    color: #333333;
+    text-shadow: 0 1px 0 #ffffff;
+    margin: 9px 0 0 5px;
+}
+
+.options-panel label input
+{
+    float: left;
+    margin: 0 4px 0 0;
+}

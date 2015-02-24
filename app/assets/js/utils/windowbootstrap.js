@@ -72,7 +72,7 @@
             window.focus();
             var $body = $(window.window.document.body);
             $body.html(app.utils.template.render($body.html(), [app.utils.locale.getAll()]));
-            events.emit('loaded', $body);
+            events.emit('loaded', $(window.window), $body);
         };
 
         /**

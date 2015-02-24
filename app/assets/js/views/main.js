@@ -11,6 +11,7 @@
 
         var window = null;
         var events = new app.node.events.EventEmitter();
+        var $ui = {};
 
         /**
          * Attaches an event
@@ -30,10 +31,10 @@
             var bootstrap = new app.utils.windowbootstrap('templates/main.html', {
                 toolbar: false,
                 frame: true,
-                width: 400,
-                height: 362,
+                width: 900,
+                height: 600,
                 position: 'mouse',
-                resizable: false,
+                resizable: true,
                 show: false,
                 title: ''
             });
@@ -52,11 +53,17 @@
 
         /**
          * Loads the template when the view is ready
+         * @param $window
          * @param $body
          */
-        var _onWindowLoaded = function($body)
+        var _onWindowLoaded = function($window, $body)
         {
-            //app.log($body);
+            $ui.window = $window;
+            $ui.body = $body;
+            $ui.filesPanel = $ui.body.find('.js-files-panel');
+            $ui.operationsPanel = $ui.body.find('.js-operations-panel');
+            $ui.optionsPanel = $ui.body.find('.js-options-panel');
+            $ui.window.on('resize', $.proxy(_onWindowResize, this)).trigger('resize');
         };
 
         /**
@@ -66,6 +73,18 @@
         var _onWindowClose = function()
         {
             events.emit('close');
+        };
+
+        /**
+         * Window resize
+         */
+        var _onWindowResize = function()
+        {
+            var win_width = $ui.window.width();
+            var win_height = $ui.window.height();
+            var options_height = $ui.optionsPanel.height();
+            $ui.filesPanel.css({width: (win_width - $ui.operationsPanel.width()) + 'px', height: (win_height - options_height) + 'px'});
+            $ui.operationsPanel.css({height: (win_height - options_height) + 'px'});
         };
 
     };

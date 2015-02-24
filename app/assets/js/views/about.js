@@ -59,9 +59,10 @@
 
         /**
          * Triggered when the window content has been loaded (DOM and assets)
+         * @param $window
          * @param $body
          */
-        var _onWindowLoaded = function($body)
+        var _onWindowLoaded = function($window, $body)
         {
             $body.find('a').on('click', $.proxy(_onLinkClick, this));
         };
