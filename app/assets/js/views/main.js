@@ -27,7 +27,7 @@
          */
         this.show = function()
         {
-            var bootstrap = new app.utils.windowbootstrap('templates/editor.html', {
+            var bootstrap = new app.utils.windowbootstrap('templates/main.html', {
                 toolbar: false,
                 frame: true,
                 width: 400,
