@@ -88,104 +88,101 @@ html, body
     border-bottom : 1px solid rgba(163, 163, 163, 0.75);
     box-sizing    : border-box;
     box-shadow    : 0 7px 16px -7px rgba(0, 0, 0, 0.2);
+    background    : linear-gradient(to top, #f2f2f2, #ffffff);
+    padding       : 12px 0 0 0;
 }
 
 .operations-panel .operation .bar
 {
-    position      : relative;
-    padding       : 12px 0 12px 0;
-    border-bottom : 1px dotted rgba(163, 163, 163, 0.75);
-    background    : linear-gradient(to top, #f2f2f2, #ffffff);
+    position : relative;
+    padding  : 0 0 12px 0;
 }
 
-.operations-panel .operation .bar .type,
-.operations-panel .operation .bar .move
+.operations-panel .operation .bar .type
 {
     position   : absolute;
-    top        : 19px;
-    left       : 10px;
-    font-size  : 14px;
-    color      : #c2c2c2;
+    z-index    : 3;
+    top        : 9px;
+    left       : 18px;
+    font-size  : 12px;
+    color      : #999999;
     float      : left;
     transition : opacity 200ms;
 }
 
 .operations-panel .operation .bar .type.fa-pencil
 {
-    top : 20px;
-}
-
-.operations-panel .operation .bar .move
-{
-    cursor  : move;
-    opacity : 0;
-}
-
-.operations-panel .operation .bar:hover .move
-{
-    opacity : 1;
-}
-
-.operations-panel .operation .bar:hover .type
-{
-    opacity : 0;
+    top : 9px;
 }
 
 .operations-panel .operation .bar select
 {
-    position    : relative;
-    z-index     : 2;
-    font-family : 'Helvetica Neue';
-    width       : 256px;
-    height      : 30px;
-    font-size   : 12px;
-    margin      : 0 0 0 32px;
-    background  : linear-gradient(to top, #f2f2f2, #ffffff);
-    border      : 1px solid rgba(163, 163, 163, 0.75);
-    transition  : width 200ms;
+    color         : #343434;
+    position      : relative;
+    z-index       : 2;
+    font-family   : 'Helvetica Neue';
+    text-indent   : 16px;
+    width         : 279px;
+    height        : 30px;
+    font-size     : 12px;
+    margin        : 0 0 0 10px;
+    background    : linear-gradient(to top, #f2f2f2, #ffffff);
+    border        : 1px solid rgba(163, 163, 163, 0.75);
+    transition    : width 200ms;
+    text-shadow   : 0 1px 0 #ffffff;
+    border-radius : 5px;
 }
 
-.operations-panel .operation .bar:hover select
+.operations-panel .operation .tools:hover select
 {
-    width : 238px;
+    width : 234px;
 }
 
-.operations-panel .operation .bar .delete
+.operations-panel .operation .tools .action
 {
     opacity    : 0;
-    font-size  : 16px;
-    color      : #c2c2c2;
-    cursor     : default;
+    color      : #999999;
     position   : absolute;
-    top        : 19px;
-    right      : 10px;
-    transition : color 200ms, opacity 200ms;
+    transition : color 150ms, opacity 150ms;
 }
 
-.operations-panel .operation .bar:hover .delete
+.operations-panel .operation .tools:hover .action
 {
     opacity : 1;
 }
 
-.operations-panel .operation .bar .delete:hover
+.operations-panel .operation .tools .action:hover
 {
-    color : #797979;
+    color : #606060;
 }
 
-.operations-panel .operation .bar .delete:active
+.operations-panel .operation .tools .action:active
 {
     color : #252525;
 }
 
-.operations-panel .operation .bar .delete i
+.operations-panel .operation .tools .move
 {
-    float : left;
+    font-size : 13px;
+    top       : 9px;
+    right     : 32px;
+}
+
+.operations-panel .operation .tools .delete
+{
+    font-size : 16px;
+    top       : 8px;
+    right     : 10px;
 }
 
 .operations-panel .operation .options
 {
-    position : relative;
-    padding  : 12px 0 12px 0;
+    position      : relative;
+    margin        : 0 10px 12px 10px;
+    background    : #e2e2e2;
+    border-radius : 5px;
+    box-shadow    : inset 0 1px 0 #d3d3d3;
+    padding       : 12px;
 }
 
 .options-panel
