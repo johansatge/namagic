@@ -1,221 +1,231 @@
-html, body, div, span, p, form, input, textarea, select, h1, h2, h3, table, tbody, tr, td, label
-{
-    margin  : 0;
-    padding : 0;
-    border  : 0;
-    outline : 0;
+/**
+ * Fonts
+ */
+/**
+ * Colors
+ */
+/**
+ * Reset
+ */
+/* line 21, ../sass/_base.scss */
+html, body, div, span, p, form, input, textarea, select, h1, h2, h3, table, tbody, tr, td, label {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: 0;
 }
 
-html, body
-{
-    font-family         : 'Helvetica Neue';
-    /*-webkit-font-smoothing : antialiased;*/
-    -webkit-user-select : none;
+/* line 29, ../sass/_base.scss */
+html, body {
+  font-family: "Helvetica Neue";
+  /*-webkit-font-smoothing : antialiased;*/
+  -webkit-user-select: none;
 }
 
-.files-panel
-{
-    position   : absolute;
-    left       : 0;
-    top        : 0;
-    overflow-y : auto;
-    border-top : 1px solid #a3a3a3;
-    box-sizing : border-box;
+/* line 1, ../sass/_files-panel.scss */
+.files-panel {
+  position: absolute;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+  border-top: 1px solid #a3a3a3;
+  box-sizing: border-box;
 }
 
-.files-panel table
-{
-    width : 100%;
+/* line 11, ../sass/_files-panel.scss */
+.files-panel table {
+  width: 100%;
 }
 
-.files-panel tr td
-{
-    cursor         : default;
-    font-size      : 13px;
-    letter-spacing : 0.02em;
-    padding        : 6px 8px 6px 8px;
-    color          : #333333;
+/* line 16, ../sass/_files-panel.scss */
+.files-panel tr td {
+  cursor: default;
+  color: #333333;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  padding: 6px 8px 6px 8px;
 }
 
-.files-panel tr:nth-child(odd) td
-{
-    background : #ffffff;
+/* line 25, ../sass/_files-panel.scss */
+.files-panel tr:nth-child(odd) td {
+  background: #ffffff;
 }
 
-.files-panel tr:nth-child(even) td
-{
-    background : #f3f6fa;
+/* line 30, ../sass/_files-panel.scss */
+.files-panel tr:nth-child(even) td {
+  background: #f3f6fa;
 }
 
-.files-panel tr td:nth-child(1)
-{
-    width : 50%;
+/* line 35, ../sass/_files-panel.scss */
+.files-panel tr td:nth-child(1) {
+  width: 50%;
 }
 
-.files-panel tr td:nth-child(2)
-{
-    width : 10px;
+/* line 40, ../sass/_files-panel.scss */
+.files-panel tr td:nth-child(2) {
+  width: 10px;
 }
 
-.files-panel tr td i
-{
-    color     : #999999;
-    font-size : 11px;
+/* line 45, ../sass/_files-panel.scss */
+.files-panel tr td i {
+  color: #999999;
+  font-size: 11px;
 }
 
-.files-panel tr td .dir
-{
-    color : #a0a0a0;
+/* line 51, ../sass/_files-panel.scss */
+.files-panel tr td .dir {
+  color: #a0a0a0;
 }
 
-.operations-panel
-{
-    position    : absolute;
-    width       : 300px;
-    right       : 0;
-    top         : 0;
-    overflow-y  : auto;
-    background  : #f3f3f4;
-    border-left : 1px solid #a3a3a3;
-    border-top  : 1px solid #a3a3a3;
-    box-sizing  : border-box;
-    box-shadow  : inset 0 0 15px rgba(0, 0, 0, 0.2);
+/* line 1, ../sass/_operations-panel.scss */
+.operations-panel {
+  position: absolute;
+  width: 300px;
+  right: 0;
+  top: 0;
+  overflow-y: auto;
+  background: #f3f3f4;
+  border-left: 1px solid #a3a3a3;
+  border-top: 1px solid #a3a3a3;
+  box-sizing: border-box;
+  box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
 }
 
-.operations-panel .operation
-{
-    background    : #f2f2f2;
-    border-bottom : 1px solid rgba(163, 163, 163, 0.75);
-    box-sizing    : border-box;
-    box-shadow    : 0 7px 16px -7px rgba(0, 0, 0, 0.2);
-    background    : linear-gradient(to top, #f2f2f2, #ffffff);
-    padding       : 12px 0 0 0;
+/* line 15, ../sass/_operations-panel.scss */
+.operations-panel .operation {
+  background: #f2f2f2;
+  border-bottom: 1px solid rgba(163, 163, 163, 0.75);
+  box-sizing: border-box;
+  box-shadow: 0 7px 16px -7px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(to top, #f2f2f2, #ffffff);
+  padding: 12px 0 0 0;
 }
 
-.operations-panel .operation .bar
-{
-    position : relative;
-    padding  : 0 0 12px 0;
+/* line 25, ../sass/_operations-panel.scss */
+.operations-panel .operation .bar {
+  position: relative;
+  padding: 0 0 12px 0;
 }
 
-.operations-panel .operation .bar .type
-{
-    position   : absolute;
-    z-index    : 3;
-    top        : 9px;
-    left       : 18px;
-    font-size  : 12px;
-    color      : #999999;
-    float      : left;
-    transition : opacity 200ms;
+/* line 31, ../sass/_operations-panel.scss */
+.operations-panel .operation .bar .type {
+  position: absolute;
+  z-index: 3;
+  top: 9px;
+  left: 18px;
+  color: #999999;
+  font-size: 12px;
+  float: left;
+  transition: opacity 200ms;
 }
 
-.operations-panel .operation .bar .type.fa-pencil
-{
-    top : 9px;
+/* line 43, ../sass/_operations-panel.scss */
+.operations-panel .operation .bar .type.fa-pencil {
+  top: 9px;
 }
 
-.operations-panel .operation .bar select
-{
-    color         : #343434;
-    position      : relative;
-    z-index       : 2;
-    font-family   : 'Helvetica Neue';
-    text-indent   : 16px;
-    width         : 279px;
-    height        : 30px;
-    font-size     : 12px;
-    margin        : 0 0 0 10px;
-    background    : linear-gradient(to top, #f2f2f2, #ffffff);
-    border        : 1px solid rgba(163, 163, 163, 0.75);
-    transition    : width 200ms;
-    text-shadow   : 0 1px 0 #ffffff;
-    border-radius : 5px;
+/* line 48, ../sass/_operations-panel.scss */
+.operations-panel .operation .bar select {
+  font-family: "Helvetica Neue";
+  color: #333333;
+  position: relative;
+  z-index: 2;
+  text-indent: 16px;
+  width: 279px;
+  height: 30px;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  margin: 0 0 0 10px;
+  background: linear-gradient(to top, #f2f2f2, #ffffff);
+  border: 1px solid rgba(163, 163, 163, 0.75);
+  transition: width 200ms;
+  text-shadow: 0 1px 0 #ffffff;
+  border-radius: 5px;
 }
 
-.operations-panel .operation .tools:hover select
-{
-    width : 234px;
+/* line 67, ../sass/_operations-panel.scss */
+.operations-panel .operation .tools:hover select {
+  width: 234px;
 }
 
-.operations-panel .operation .tools .action
-{
-    opacity    : 0;
-    color      : #999999;
-    position   : absolute;
-    transition : color 150ms, opacity 150ms;
+/* line 72, ../sass/_operations-panel.scss */
+.operations-panel .operation .tools .action {
+  opacity: 0;
+  color: #999999;
+  position: absolute;
+  transition: color 150ms, opacity 150ms;
 }
 
-.operations-panel .operation .tools:hover .action
-{
-    opacity : 1;
+/* line 80, ../sass/_operations-panel.scss */
+.operations-panel .operation .tools:hover .action {
+  opacity: 1;
 }
 
-.operations-panel .operation .tools .action:hover
-{
-    color : #606060;
+/* line 85, ../sass/_operations-panel.scss */
+.operations-panel .operation .tools .action:hover {
+  color: #606060;
 }
 
-.operations-panel .operation .tools .action:active
-{
-    color : #252525;
+/* line 90, ../sass/_operations-panel.scss */
+.operations-panel .operation .tools .action:active {
+  color: #252525;
 }
 
-.operations-panel .operation .tools .move
-{
-    font-size : 13px;
-    top       : 9px;
-    right     : 32px;
+/* line 95, ../sass/_operations-panel.scss */
+.operations-panel .operation .tools .move {
+  font-size: 13px;
+  top: 9px;
+  right: 32px;
 }
 
-.operations-panel .operation .tools .delete
-{
-    font-size : 16px;
-    top       : 8px;
-    right     : 10px;
+/* line 102, ../sass/_operations-panel.scss */
+.operations-panel .operation .tools .delete {
+  font-size: 16px;
+  top: 8px;
+  right: 10px;
 }
 
-.operations-panel .operation .fields
-{
-    position      : relative;
-    margin        : 0 10px 12px 10px;
-    background    : #e2e2e2;
-    border-radius : 5px;
-    box-shadow    : inset 0 1px 0 #d3d3d3;
-    padding       : 12px 12px 0 12px;
+/* line 109, ../sass/_operations-panel.scss */
+.operations-panel .operation .fields {
+  position: relative;
+  margin: 0 10px 12px 10px;
+  background: #e2e2e2;
+  border-radius: 5px;
+  box-shadow: inset 0 1px 0 #d3d3d3;
+  padding: 12px 12px 0 12px;
 }
 
-.operations-panel .operation .fields .field
-{
-    color         : #343434;
-    width: 100%;
-    font-size: 12px;
-    padding: 0 0 12px 0;
+/* line 119, ../sass/_operations-panel.scss */
+.operations-panel .operation .fields .field {
+  width: 100%;
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  padding: 0 0 12px 0;
 }
 
-.options-panel
-{
-    position   : absolute;
-    width      : 100%;
-    height     : 32px;
-    left       : 0;
-    bottom     : 0;
-    background : linear-gradient(to top, #d4d4d4, #ebebeb);
-    border-top : 1px solid #a3a3a3;
-    box-sizing : border-box;
+/* line 1, ../sass/_options-panel.scss */
+.options-panel {
+  position: absolute;
+  width: 100%;
+  height: 32px;
+  left: 0;
+  bottom: 0;
+  background: linear-gradient(to top, #d4d4d4, #ebebeb);
+  border-top: 1px solid #a3a3a3;
+  box-sizing: border-box;
 }
 
-.options-panel label
-{
-    float       : left;
-    font-size   : 11px;
-    color       : #333333;
-    text-shadow : 0 1px 0 #ffffff;
-    margin      : 9px 0 0 8px;
+/* line 13, ../sass/_options-panel.scss */
+.options-panel label {
+  float: left;
+  font-size: 11px;
+  color: #333333;
+  text-shadow: 0 1px 0 #ffffff;
+  margin: 9px 0 0 8px;
 }
 
-.options-panel label input
-{
-    float  : left;
-    margin : 0 4px 0 0;
+/* line 22, ../sass/_options-panel.scss */
+.options-panel label input {
+  float: left;
+  margin: 0 4px 0 0;
 }

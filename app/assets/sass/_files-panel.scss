@@ -1,0 +1,54 @@
+.files-panel
+{
+    position   : absolute;
+    left       : 0;
+    top        : 0;
+    overflow-y : auto;
+    border-top : 1px solid $border-color;
+    box-sizing : border-box;
+}
+
+.files-panel table
+{
+    width : 100%;
+}
+
+.files-panel tr td
+{
+    cursor         : default;
+    color: $text-color;
+    font-size      : $font-size;
+    letter-spacing : $letter-spacing;
+    padding        : 6px 8px 6px 8px;
+}
+
+.files-panel tr:nth-child(odd) td
+{
+    background : #ffffff;
+}
+
+.files-panel tr:nth-child(even) td
+{
+    background : #f3f6fa;
+}
+
+.files-panel tr td:nth-child(1)
+{
+    width : 50%;
+}
+
+.files-panel tr td:nth-child(2)
+{
+    width : 10px;
+}
+
+.files-panel tr td i
+{
+    color     : $icon-inactive-color;
+    font-size : 11px;
+}
+
+.files-panel tr td .dir
+{
+    color : #a0a0a0;
+}
