@@ -222,7 +222,7 @@ html, body {
 
 /* line 144, ../sass/_operations-panel.scss */
 .operations-panel .operation .fields .field input[type=text]:focus {
-  border: 3px solid #71C0EC;
+  border: 3px solid #71c0ec;
 }
 
 /* line 1, ../sass/_options-panel.scss */
