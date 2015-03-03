@@ -217,6 +217,12 @@ html, body {
   border: 1px solid #b2b2b2;
   box-sizing: border-box;
   margin: 4px 0 0 0;
+  transition: border 150ms;
+}
+
+/* line 144, ../sass/_operations-panel.scss */
+.operations-panel .operation .fields .field input[type=text]:focus {
+  border: 3px solid #71C0EC;
 }
 
 /* line 1, ../sass/_options-panel.scss */
