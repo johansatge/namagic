@@ -229,10 +229,10 @@ html, body {
 .options-panel {
   position: absolute;
   width: 100%;
-  height: 32px;
+  height: 48px;
   left: 0;
   bottom: 0;
-  background: linear-gradient(to top, #d4d4d4, #ebebeb);
+  background: linear-gradient(to bottom, #e4e4e4, #d8d8d8);
   border-top: 1px solid #a3a3a3;
   box-sizing: border-box;
 }
@@ -240,14 +240,52 @@ html, body {
 /* line 13, ../sass/_options-panel.scss */
 .options-panel label {
   float: left;
-  font-size: 11px;
+  font-size: 12px;
   color: #333333;
   text-shadow: 0 1px 0 #ffffff;
-  margin: 9px 0 0 8px;
+  margin: 15px 0 0 8px;
 }
 
 /* line 22, ../sass/_options-panel.scss */
 .options-panel label input {
   float: left;
-  margin: 0 4px 0 0;
+  margin: 1px 4px 0 0;
+}
+
+/* line 28, ../sass/_options-panel.scss */
+.options-panel a {
+  cursor: default;
+  float: right;
+  margin: 12px 10px 0 0;
+  border-radius: 4px;
+  padding: 4px 14px 4px 12px;
+  box-shadow: 0 1px 0 #c4c4c4;
+  text-decoration: none;
+  font-size: 13px;
+}
+
+/* line 40, ../sass/_options-panel.scss */
+.options-panel a.primary {
+  color: #ffffff;
+  background: linear-gradient(to bottom, #4FB6F7, #008AFA);
+  border: 1px solid #0080F8;
+  -webkit-font-smoothing: antialiased;
+  padding: 3px 13px 3px 11px;
+}
+
+/* line 49, ../sass/_options-panel.scss */
+.options-panel a.primary:active {
+  background: linear-gradient(to bottom, #46a2dc, #007ce1);
+}
+
+/* line 54, ../sass/_options-panel.scss */
+.options-panel a.secondary {
+  color: #333333;
+  background: #ffffff;
+}
+
+/* line 60, ../sass/_options-panel.scss */
+.options-panel a.secondary:active {
+  color: #000000;
+  background: #dddddd;
 }

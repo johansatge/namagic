@@ -5,7 +5,7 @@
     "window": {
         "width": 500,
         "height": 500,
-        "show": true
+        "show": false
     },
     "webkit": {
         "plugin": true,
