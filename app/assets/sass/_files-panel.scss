@@ -9,6 +9,11 @@
     box-sizing : border-box;
     background : $background-color;
 
+    &.js-drag
+    {
+        cursor : copy;
+    }
+
     & .empty
     {
         position      : absolute;
@@ -18,9 +23,10 @@
         top           : 50%;
         left          : 50%;
         margin        : -65px 0 0 -150px;
-        color         : $icon-drop-color;
-        border        : 3px dashed $icon-drop-color;
+        color         : $icon-drop-inactive-color;
+        border        : 3px dashed $icon-drop-inactive-color;
         border-radius : 8px;
+        transition    : color 300ms, border 300ms;
 
         & div
         {
@@ -41,6 +47,12 @@
             margin    : 25px 0 0 -20px;
             font-size : 48px;
         }
+    }
+
+    &.js-drag .empty
+    {
+        color  : $icon-drop-active-color;
+        border : 3px dashed $icon-drop-active-color;
     }
 }
 

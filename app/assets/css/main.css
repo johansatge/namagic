@@ -7,7 +7,7 @@
 /**
  * Reset
  */
-/* line 22, ../sass/_base.scss */
+/* line 23, ../sass/_base.scss */
 html, body, div, span, p, form, input, textarea, select, h1, h2, h3, table, tbody, tr, td, label {
   margin: 0;
   padding: 0;
@@ -15,7 +15,7 @@ html, body, div, span, p, form, input, textarea, select, h1, h2, h3, table, tbod
   outline: 0;
 }
 
-/* line 30, ../sass/_base.scss */
+/* line 31, ../sass/_base.scss */
 html, body {
   font-family: "Helvetica Neue";
   /*-webkit-font-smoothing : antialiased;*/
@@ -34,6 +34,10 @@ html, body {
   background: #f3f3f4;
 }
 /* line 12, ../sass/_files-panel.scss */
+.files-panel.js-drag {
+  cursor: copy;
+}
+/* line 17, ../sass/_files-panel.scss */
 .files-panel .empty {
   position: absolute;
   z-index: 3;
@@ -45,8 +49,9 @@ html, body {
   color: #cccccc;
   border: 3px dashed #cccccc;
   border-radius: 8px;
+  transition: color 300ms, border 300ms;
 }
-/* line 25, ../sass/_files-panel.scss */
+/* line 31, ../sass/_files-panel.scss */
 .files-panel .empty div {
   position: relative;
   width: 100%;
@@ -57,21 +62,26 @@ html, body {
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
 }
-/* line 37, ../sass/_files-panel.scss */
+/* line 43, ../sass/_files-panel.scss */
 .files-panel .empty i {
   position: relative;
   left: 50%;
   margin: 25px 0 0 -20px;
   font-size: 48px;
 }
+/* line 52, ../sass/_files-panel.scss */
+.files-panel.js-drag .empty {
+  color: #999999;
+  border: 3px dashed #999999;
+}
 
-/* line 47, ../sass/_files-panel.scss */
+/* line 59, ../sass/_files-panel.scss */
 .files-list {
   position: relative;
   z-index: 4;
   width: 100%;
 }
-/* line 53, ../sass/_files-panel.scss */
+/* line 65, ../sass/_files-panel.scss */
 .files-list tr td {
   cursor: default;
   color: #333333;
@@ -79,28 +89,28 @@ html, body {
   letter-spacing: 0.02em;
   padding: 6px 8px 6px 8px;
 }
-/* line 62, ../sass/_files-panel.scss */
+/* line 74, ../sass/_files-panel.scss */
 .files-list tr:nth-child(odd) td {
   background: #ffffff;
 }
-/* line 67, ../sass/_files-panel.scss */
+/* line 79, ../sass/_files-panel.scss */
 .files-list tr:nth-child(even) td {
   background: #f3f6fa;
 }
-/* line 74, ../sass/_files-panel.scss */
+/* line 86, ../sass/_files-panel.scss */
 .files-list td:nth-child(1) {
   width: 50%;
 }
-/* line 79, ../sass/_files-panel.scss */
+/* line 91, ../sass/_files-panel.scss */
 .files-list td:nth-child(2) {
   width: 10px;
 }
-/* line 84, ../sass/_files-panel.scss */
+/* line 96, ../sass/_files-panel.scss */
 .files-list td i {
   color: #999999;
   font-size: 11px;
 }
-/* line 90, ../sass/_files-panel.scss */
+/* line 102, ../sass/_files-panel.scss */
 .files-list td .dir {
   color: #a0a0a0;
 }

@@ -12,6 +12,7 @@
         var window = null;
         var events = new app.node.events.EventEmitter();
         var $ui = {};
+        var files;
 
         /**
          * Attaches an event
@@ -60,12 +61,33 @@
          */
         var _onWindowLoaded = function($window, $body)
         {
+            _initUI($window, $body);
+            _initSubviews();
+        };
+
+        /**
+         * Inits view UI
+         * @param $window
+         * @param $body
+         */
+        var _initUI = function($window, $body)
+        {
             $ui.window = $window;
             $ui.body = $body;
             $ui.filesPanel = $ui.body.find('.js-files-panel');
             $ui.operationsPanel = $ui.body.find('.js-operations-panel');
             $ui.optionsPanel = $ui.body.find('.js-options-panel');
+
             $ui.window.on('resize', $.proxy(_onWindowResize, this)).trigger('resize');
+        };
+
+        /**
+         * Inits subviews
+         */
+        var _initSubviews = function()
+        {
+            files = new app.views.main.files();
+            files.init($ui.filesPanel);
         };
 
         /**
