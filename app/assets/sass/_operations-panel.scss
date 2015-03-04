@@ -5,11 +5,44 @@
     right       : 0;
     top         : 0;
     overflow-y  : auto;
-    background  : #f3f3f4;
+    background  : $background-color;
     border-left : 1px solid $border-color;
     border-top  : 1px solid $border-color;
     box-sizing  : border-box;
     box-shadow  : inset 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.operations-panel .empty
+{
+    position : absolute;
+    z-index  : 1;
+    width    : 300px;
+    height   : 130px;
+    top      : 50%;
+    left     : 50%;
+    margin   : -65px 0 0 -150px;
+    color    : $icon-drop-color;
+    border   : 3px solid transparent;
+}
+
+.operations-panel .empty div
+{
+    position               : relative;
+    width                  : 100%;
+    text-align             : center;
+    margin                 : 10px 0 0 0;
+    font-family            : $font-family;
+    font-size              : 18px;
+    font-weight            : bold;
+    -webkit-font-smoothing : antialiased;
+}
+
+.operations-panel .empty i
+{
+    position  : relative;
+    left      : 50%;
+    margin    : 25px 0 0 -20px;
+    font-size : 48px;
 }
 
 .operations-panel .operation

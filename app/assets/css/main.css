@@ -7,7 +7,7 @@
 /**
  * Reset
  */
-/* line 21, ../sass/_base.scss */
+/* line 22, ../sass/_base.scss */
 html, body, div, span, p, form, input, textarea, select, h1, h2, h3, table, tbody, tr, td, label {
   margin: 0;
   padding: 0;
@@ -15,7 +15,7 @@ html, body, div, span, p, form, input, textarea, select, h1, h2, h3, table, tbod
   outline: 0;
 }
 
-/* line 29, ../sass/_base.scss */
+/* line 30, ../sass/_base.scss */
 html, body {
   font-family: "Helvetica Neue";
   /*-webkit-font-smoothing : antialiased;*/
@@ -30,14 +30,51 @@ html, body {
   overflow-y: auto;
   border-top: 1px solid #a3a3a3;
   box-sizing: border-box;
+  background: #f3f3f4;
 }
 
-/* line 11, ../sass/_files-panel.scss */
+/* line 12, ../sass/_files-panel.scss */
+.files-panel .empty {
+  position: absolute;
+  z-index: 1;
+  width: 300px;
+  height: 130px;
+  top: 50%;
+  left: 50%;
+  margin: -65px 0 0 -150px;
+  color: #cccccc;
+  border: 3px dashed #cccccc;
+  border-radius: 8px;
+}
+
+/* line 26, ../sass/_files-panel.scss */
+.files-panel .empty div {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin: 10px 0 0 0;
+  font-family: "Helvetica Neue";
+  font-size: 18px;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 38, ../sass/_files-panel.scss */
+.files-panel .empty i {
+  position: relative;
+  left: 50%;
+  margin: 25px 0 0 -20px;
+  font-size: 48px;
+}
+
+/* line 46, ../sass/_files-panel.scss */
 .files-panel table {
+  position: relative;
+  z-index: 2;
   width: 100%;
 }
 
-/* line 16, ../sass/_files-panel.scss */
+/* line 53, ../sass/_files-panel.scss */
 .files-panel tr td {
   cursor: default;
   color: #333333;
@@ -46,33 +83,33 @@ html, body {
   padding: 6px 8px 6px 8px;
 }
 
-/* line 25, ../sass/_files-panel.scss */
+/* line 62, ../sass/_files-panel.scss */
 .files-panel tr:nth-child(odd) td {
   background: #ffffff;
 }
 
-/* line 30, ../sass/_files-panel.scss */
+/* line 67, ../sass/_files-panel.scss */
 .files-panel tr:nth-child(even) td {
   background: #f3f6fa;
 }
 
-/* line 35, ../sass/_files-panel.scss */
+/* line 72, ../sass/_files-panel.scss */
 .files-panel tr td:nth-child(1) {
   width: 50%;
 }
 
-/* line 40, ../sass/_files-panel.scss */
+/* line 77, ../sass/_files-panel.scss */
 .files-panel tr td:nth-child(2) {
   width: 10px;
 }
 
-/* line 45, ../sass/_files-panel.scss */
+/* line 82, ../sass/_files-panel.scss */
 .files-panel tr td i {
   color: #999999;
   font-size: 11px;
 }
 
-/* line 51, ../sass/_files-panel.scss */
+/* line 88, ../sass/_files-panel.scss */
 .files-panel tr td .dir {
   color: #a0a0a0;
 }
@@ -92,6 +129,39 @@ html, body {
 }
 
 /* line 15, ../sass/_operations-panel.scss */
+.operations-panel .empty {
+  position: absolute;
+  z-index: 1;
+  width: 300px;
+  height: 130px;
+  top: 50%;
+  left: 50%;
+  margin: -65px 0 0 -150px;
+  color: #cccccc;
+  border: 3px solid transparent;
+}
+
+/* line 28, ../sass/_operations-panel.scss */
+.operations-panel .empty div {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  margin: 10px 0 0 0;
+  font-family: "Helvetica Neue";
+  font-size: 18px;
+  font-weight: bold;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* line 40, ../sass/_operations-panel.scss */
+.operations-panel .empty i {
+  position: relative;
+  left: 50%;
+  margin: 25px 0 0 -20px;
+  font-size: 48px;
+}
+
+/* line 48, ../sass/_operations-panel.scss */
 .operations-panel .operation {
   background: #f2f2f2;
   border-bottom: 1px solid rgba(163, 163, 163, 0.75);
@@ -101,13 +171,13 @@ html, body {
   padding: 12px 0 0 0;
 }
 
-/* line 25, ../sass/_operations-panel.scss */
+/* line 58, ../sass/_operations-panel.scss */
 .operations-panel .operation .bar {
   position: relative;
   padding: 0 0 12px 0;
 }
 
-/* line 31, ../sass/_operations-panel.scss */
+/* line 64, ../sass/_operations-panel.scss */
 .operations-panel .operation .bar .type {
   position: absolute;
   z-index: 3;
@@ -119,12 +189,12 @@ html, body {
   transition: opacity 200ms;
 }
 
-/* line 43, ../sass/_operations-panel.scss */
+/* line 76, ../sass/_operations-panel.scss */
 .operations-panel .operation .bar .type.fa-pencil {
   top: 9px;
 }
 
-/* line 48, ../sass/_operations-panel.scss */
+/* line 81, ../sass/_operations-panel.scss */
 .operations-panel .operation .bar select {
   font-family: "Helvetica Neue";
   color: #333333;
@@ -143,12 +213,12 @@ html, body {
   border-radius: 5px;
 }
 
-/* line 67, ../sass/_operations-panel.scss */
+/* line 100, ../sass/_operations-panel.scss */
 .operations-panel .operation .tools:hover select {
   width: 234px;
 }
 
-/* line 72, ../sass/_operations-panel.scss */
+/* line 105, ../sass/_operations-panel.scss */
 .operations-panel .operation .tools .action {
   opacity: 0;
   color: #999999;
@@ -156,36 +226,36 @@ html, body {
   transition: color 150ms, opacity 150ms;
 }
 
-/* line 80, ../sass/_operations-panel.scss */
+/* line 113, ../sass/_operations-panel.scss */
 .operations-panel .operation .tools:hover .action {
   opacity: 1;
 }
 
-/* line 85, ../sass/_operations-panel.scss */
+/* line 118, ../sass/_operations-panel.scss */
 .operations-panel .operation .tools .action:hover {
   color: #606060;
 }
 
-/* line 90, ../sass/_operations-panel.scss */
+/* line 123, ../sass/_operations-panel.scss */
 .operations-panel .operation .tools .action:active {
   color: #252525;
 }
 
-/* line 95, ../sass/_operations-panel.scss */
+/* line 128, ../sass/_operations-panel.scss */
 .operations-panel .operation .tools .move {
   font-size: 13px;
   top: 9px;
   right: 32px;
 }
 
-/* line 102, ../sass/_operations-panel.scss */
+/* line 135, ../sass/_operations-panel.scss */
 .operations-panel .operation .tools .delete {
   font-size: 16px;
   top: 8px;
   right: 10px;
 }
 
-/* line 109, ../sass/_operations-panel.scss */
+/* line 142, ../sass/_operations-panel.scss */
 .operations-panel .operation .fields {
   position: relative;
   margin: 0 10px 12px 10px;
@@ -195,7 +265,7 @@ html, body {
   padding: 12px 12px 0 12px;
 }
 
-/* line 119, ../sass/_operations-panel.scss */
+/* line 152, ../sass/_operations-panel.scss */
 .operations-panel .operation .fields .field {
   width: 100%;
   font-size: 13px;
@@ -204,7 +274,7 @@ html, body {
   padding: 0 0 12px 0;
 }
 
-/* line 128, ../sass/_operations-panel.scss */
+/* line 161, ../sass/_operations-panel.scss */
 .operations-panel .operation .fields .field input[type=text] {
   width: 100%;
   font-size: 12px;
@@ -220,7 +290,7 @@ html, body {
   transition: border 150ms;
 }
 
-/* line 144, ../sass/_operations-panel.scss */
+/* line 177, ../sass/_operations-panel.scss */
 .operations-panel .operation .fields .field input[type=text]:focus {
   border: 3px solid #71c0ec;
 }

@@ -10,5 +10,13 @@
     "about": "About...",
     "new": "New...",
     "quit": "Quit"
+  },
+  "main": {
+    "drop": "Drop files here",
+    "actions": {
+      "add": "Add action",
+      "apply": "Apply"
+    },
+    "no_action": "No action set"
   }
 }

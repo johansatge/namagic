@@ -7,7 +7,11 @@
     </head>
     <body>
         <div class="files-panel js-files-panel">
-            <table cellpadding="0" cellspacing="0">
+            <div class="empty">
+                <i class="fa fa-arrow-circle-down"></i>
+                <div>{{main.drop}}</div>
+            </div>
+            <!--<table cellpadding="0" cellspacing="0">
                 <tbody>
                     <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
                     <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
@@ -45,10 +49,14 @@
                     <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
                     <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
                 </tbody>
-            </table>
+            </table>-->
         </div>
         <div class="operations-panel js-operations-panel">
-            <div class="operation">
+            <div class="empty">
+                <i class="fa fa-cogs"></i>
+                <div>{{main.no_action}}</div>
+            </div>
+            <!--<div class="operation">
                 <div class="bar tools">
                     <i class="type fa fa-search"></i>
                     <select>
@@ -101,7 +109,7 @@
                         </label>
                     </div>
                 </div>
-            </div>
+            </div>-->
         </div>
         <div class="options-panel js-options-panel">
             <label>
@@ -109,10 +117,10 @@
                 @todo wording directories
             </label>
             <a class="primary" href="#">
-                @todo apply
+                {{main.actions.apply}}
             </a>
             <a class="secondary" href="#">
-                @todo add
+                {{main.actions.add}}
             </a>
         </div>
     </body>
