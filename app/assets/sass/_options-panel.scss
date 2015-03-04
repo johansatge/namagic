@@ -1,5 +1,6 @@
 .options-panel
 {
+    z-index    : 20;
     position   : absolute;
     width      : 100%;
     height     : 48px;
@@ -8,57 +9,57 @@
     background : linear-gradient(to bottom, #e4e4e4, #d8d8d8);
     border-top : 1px solid $border-color;
     box-sizing : border-box;
+
+    & label
+    {
+        float       : left;
+        font-size   : 12px;
+        color       : $text-color;
+        text-shadow : 0 1px 0 #ffffff;
+        margin      : 15px 0 0 8px;
+    }
+
+    & label input
+    {
+        float  : left;
+        margin : 1px 4px 0 0;
+    }
 }
 
-.options-panel label
+.options-action
 {
-    float       : left;
-    font-size   : 12px;
-    color       : $text-color;
-    text-shadow : 0 1px 0 #ffffff;
-    margin      : 15px 0 0 8px;
-}
+    cursor          : default;
+    float           : right;
+    margin          : 12px 10px 0 0;
+    border-radius   : 4px;
+    padding         : 4px 14px 4px 12px;
+    box-shadow      : 0 1px 0 #c4c4c4;
+    text-decoration : none;
+    font-size       : $font-size;
 
-.options-panel label input
-{
-    float  : left;
-    margin : 1px 4px 0 0;
-}
+    &.primary
+    {
+        color                  : #ffffff;
+        background             : linear-gradient(to bottom, #4fb6f7, #008afa);
+        border                 : 1px solid #0080f8;
+        -webkit-font-smoothing : antialiased;
+        padding                : 3px 13px 3px 11px;
+    }
 
-.options-panel a
-{
-    cursor: default;
-    float: right;
-    margin: 12px 10px 0 0;
-    border-radius: 4px;
-    padding: 4px 14px 4px 12px;
-    box-shadow: 0 1px 0 #c4c4c4;
-    text-decoration: none;
-    font-size: $font-size;
-}
+    &.primary:active
+    {
+        background : linear-gradient(to bottom, #46a2dc, #007ce1);
+    }
 
-.options-panel a.primary
-{
-    color: #ffffff;
-    background : linear-gradient(to bottom, #4FB6F7, #008AFA);
-    border: 1px solid #0080F8;
-    -webkit-font-smoothing: antialiased;
-    padding: 3px 13px 3px 11px;
-}
+    &.secondary
+    {
+        color      : $text-color;
+        background : #ffffff;
+    }
 
-.options-panel a.primary:active
-{
-    background : linear-gradient(to bottom, #46a2dc, #007ce1);
-}
-
-.options-panel a.secondary
-{
-    color: $text-color;
-    background: #ffffff;
-}
-
-.options-panel a.secondary:active
-{
-    color: #000000;
-    background: #dddddd;
+    &.secondary:active
+    {
+        color      : #000000;
+        background : #dddddd;
+    }
 }

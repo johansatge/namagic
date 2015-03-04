@@ -1,5 +1,6 @@
 .files-panel
 {
+    z-index    : 2;
     position   : absolute;
     left       : 0;
     top        : 0;
@@ -7,85 +8,88 @@
     border-top : 1px solid $border-color;
     box-sizing : border-box;
     background : $background-color;
+
+    & .empty
+    {
+        position      : absolute;
+        z-index       : 3;
+        width         : 300px;
+        height        : 130px;
+        top           : 50%;
+        left          : 50%;
+        margin        : -65px 0 0 -150px;
+        color         : $icon-drop-color;
+        border        : 3px dashed $icon-drop-color;
+        border-radius : 8px;
+
+        & div
+        {
+            position               : relative;
+            width                  : 100%;
+            text-align             : center;
+            margin                 : 10px 0 0 0;
+            font-family            : $font-family;
+            font-size              : 18px;
+            font-weight            : bold;
+            -webkit-font-smoothing : antialiased;
+        }
+
+        & i
+        {
+            position  : relative;
+            left      : 50%;
+            margin    : 25px 0 0 -20px;
+            font-size : 48px;
+        }
+    }
 }
 
-.files-panel .empty
-{
-    position      : absolute;
-    z-index       : 1;
-    width         : 300px;
-    height        : 130px;
-    top           : 50%;
-    left          : 50%;
-    margin        : -65px 0 0 -150px;
-    color         : $icon-drop-color;
-    border        : 3px dashed $icon-drop-color;
-    border-radius : 8px;
-}
-
-.files-panel .empty div
-{
-    position               : relative;
-    width                  : 100%;
-    text-align             : center;
-    margin                 : 10px 0 0 0;
-    font-family            : $font-family;
-    font-size              : 18px;
-    font-weight            : bold;
-    -webkit-font-smoothing : antialiased;
-}
-
-.files-panel .empty i
-{
-    position  : relative;
-    left      : 50%;
-    margin    : 25px 0 0 -20px;
-    font-size : 48px;
-}
-
-.files-panel table
+.files-list
 {
     position : relative;
-    z-index  : 2;
+    z-index  : 4;
     width    : 100%;
-}
 
-.files-panel tr td
-{
-    cursor         : default;
-    color          : $text-color;
-    font-size      : $font-size;
-    letter-spacing : $letter-spacing;
-    padding        : 6px 8px 6px 8px;
-}
+    & tr td
+    {
+        cursor         : default;
+        color          : $text-color;
+        font-size      : $font-size;
+        letter-spacing : $letter-spacing;
+        padding        : 6px 8px 6px 8px;
+    }
 
-.files-panel tr:nth-child(odd) td
-{
-    background : #ffffff;
-}
+    & tr:nth-child(odd) td
+    {
+        background : #ffffff;
+    }
 
-.files-panel tr:nth-child(even) td
-{
-    background : #f3f6fa;
-}
+    & tr:nth-child(even) td
+    {
+        background : #f3f6fa;
+    }
 
-.files-panel tr td:nth-child(1)
-{
-    width : 50%;
-}
+    & td
+    {
+        &:nth-child(1)
+        {
+            width : 50%;
+        }
 
-.files-panel tr td:nth-child(2)
-{
-    width : 10px;
-}
+        &:nth-child(2)
+        {
+            width : 10px;
+        }
 
-.files-panel tr td i
-{
-    color     : $icon-inactive-color;
-    font-size : 11px;
-}
+        & i
+        {
+            color     : $icon-inactive-color;
+            font-size : 11px;
+        }
 
-.files-panel tr td .dir
-{
-    color : #a0a0a0;
+        & .dir
+        {
+            color : #a0a0a0;
+        }
+    }
 }

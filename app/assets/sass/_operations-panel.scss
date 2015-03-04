@@ -1,5 +1,6 @@
 .operations-panel
 {
+    z-index     : 10;
     position    : absolute;
     width       : 300px;
     right       : 0;
@@ -10,43 +11,45 @@
     border-top  : 1px solid $border-color;
     box-sizing  : border-box;
     box-shadow  : inset 0 0 15px rgba(0, 0, 0, 0.2);
+
+    & .empty
+    {
+        position : absolute;
+        z-index  : 11;
+        width    : 300px;
+        height   : 130px;
+        top      : 50%;
+        left     : 50%;
+        margin   : -65px 0 0 -150px;
+        color    : $icon-drop-color;
+        border   : 3px solid transparent;
+
+        & div
+        {
+            position               : relative;
+            width                  : 100%;
+            text-align             : center;
+            margin                 : 10px 0 0 0;
+            font-family            : $font-family;
+            font-size              : 18px;
+            font-weight            : bold;
+            -webkit-font-smoothing : antialiased;
+        }
+
+        & i
+        {
+            position  : relative;
+            left      : 50%;
+            margin    : 25px 0 0 -20px;
+            font-size : 48px;
+        }
+    }
 }
 
-.operations-panel .empty
+.operation
 {
-    position : absolute;
-    z-index  : 1;
-    width    : 300px;
-    height   : 130px;
-    top      : 50%;
-    left     : 50%;
-    margin   : -65px 0 0 -150px;
-    color    : $icon-drop-color;
-    border   : 3px solid transparent;
-}
-
-.operations-panel .empty div
-{
-    position               : relative;
-    width                  : 100%;
-    text-align             : center;
-    margin                 : 10px 0 0 0;
-    font-family            : $font-family;
-    font-size              : 18px;
-    font-weight            : bold;
-    -webkit-font-smoothing : antialiased;
-}
-
-.operations-panel .empty i
-{
-    position  : relative;
-    left      : 50%;
-    margin    : 25px 0 0 -20px;
-    font-size : 48px;
-}
-
-.operations-panel .operation
-{
+    position      : relative;
+    z-index       : 12;
     background    : #f2f2f2;
     border-bottom : 1px solid rgba(163, 163, 163, 0.75);
     box-sizing    : border-box;
@@ -55,91 +58,94 @@
     padding       : 12px 0 0 0;
 }
 
-.operations-panel .operation .bar
+.operation-bar
 {
     position : relative;
     padding  : 0 0 12px 0;
+
+    & .type
+    {
+        position   : absolute;
+        z-index    : 3;
+        top        : 9px;
+        left       : 18px;
+        color      : $icon-inactive-color;
+        font-size  : 12px;
+        float      : left;
+        transition : opacity 200ms;
+    }
+
+    & .type.fa-pencil
+    {
+        top : 9px;
+    }
+
+    & select
+    {
+        font-family    : $font-family;
+        color          : $text-color;
+        position       : relative;
+        z-index        : 2;
+        text-indent    : 16px;
+        width          : 279px;
+        height         : 30px;
+        font-size      : $font-size;
+        letter-spacing : $letter-spacing;
+        margin         : 0 0 0 10px;
+        background     : linear-gradient(to top, #f2f2f2, #ffffff);
+        border         : 1px solid rgba(163, 163, 163, 0.75);
+        transition     : width 200ms;
+        text-shadow    : 0 1px 0 #ffffff;
+        border-radius  : 5px;
+    }
 }
 
-.operations-panel .operation .bar .type
+.operation-tools
 {
-    position   : absolute;
-    z-index    : 3;
-    top        : 9px;
-    left       : 18px;
-    color      : $icon-inactive-color;
-    font-size  : 12px;
-    float      : left;
-    transition : opacity 200ms;
+    &:hover select
+    {
+        width : 234px;
+    }
+
+    & .action
+    {
+        opacity    : 0;
+        color      : $icon-inactive-color;
+        position   : absolute;
+        transition : color 150ms, opacity 150ms;
+    }
+
+    &:hover .action
+    {
+        opacity : 1;
+    }
+
+    & .action:hover
+    {
+        color : $icon-color;
+    }
+
+    & .action:active
+    {
+        color : $icon-active-color;
+    }
+
+    & .move
+    {
+        font-size : 13px;
+        top       : 9px;
+        right     : 32px;
+    }
+
+    & .delete
+    {
+        font-size : 16px;
+        top       : 8px;
+        right     : 10px;
+    }
 }
 
-.operations-panel .operation .bar .type.fa-pencil
-{
-    top : 9px;
-}
-
-.operations-panel .operation .bar select
-{
-    font-family    : $font-family;
-    color          : $text-color;
-    position       : relative;
-    z-index        : 2;
-    text-indent    : 16px;
-    width          : 279px;
-    height         : 30px;
-    font-size      : $font-size;
-    letter-spacing : $letter-spacing;
-    margin         : 0 0 0 10px;
-    background     : linear-gradient(to top, #f2f2f2, #ffffff);
-    border         : 1px solid rgba(163, 163, 163, 0.75);
-    transition     : width 200ms;
-    text-shadow    : 0 1px 0 #ffffff;
-    border-radius  : 5px;
-}
-
-.operations-panel .operation .tools:hover select
-{
-    width : 234px;
-}
-
-.operations-panel .operation .tools .action
-{
-    opacity    : 0;
-    color      : $icon-inactive-color;
-    position   : absolute;
-    transition : color 150ms, opacity 150ms;
-}
-
-.operations-panel .operation .tools:hover .action
-{
-    opacity : 1;
-}
-
-.operations-panel .operation .tools .action:hover
-{
-    color : $icon-color;
-}
-
-.operations-panel .operation .tools .action:active
-{
-    color : $icon-active-color;
-}
-
-.operations-panel .operation .tools .move
-{
-    font-size : 13px;
-    top       : 9px;
-    right     : 32px;
-}
-
-.operations-panel .operation .tools .delete
-{
-    font-size : 16px;
-    top       : 8px;
-    right     : 10px;
-}
-
-.operations-panel .operation .fields
+.operation-fields
 {
     position      : relative;
     margin        : 0 10px 12px 10px;
@@ -147,34 +153,34 @@
     border-radius : 5px;
     box-shadow    : inset 0 1px 0 #d3d3d3;
     padding       : 12px 12px 0 12px;
-}
 
-.operations-panel .operation .fields .field
-{
-    width          : 100%;
-    font-size      : $font-size;
-    letter-spacing : $letter-spacing;
-    text-shadow    : 0 1px 0 #ffffff;
-    padding        : 0 0 12px 0;
-}
+    & .field
+    {
+        width          : 100%;
+        font-size      : $font-size;
+        letter-spacing : $letter-spacing;
+        text-shadow    : 0 1px 0 #ffffff;
+        padding        : 0 0 12px 0;
 
-.operations-panel .operation .fields .field input[type=text]
-{
-    width          : 100%;
-    font-size      : 12px;
-    font-family    : $font-family;
-    letter-spacing : $letter-spacing;
-    padding        : 4px;
-    border-radius  : 4px;
-    box-shadow     : inset 0 1px 0 #ededed;
-    height         : 28px;
-    border         : 1px solid #b2b2b2;
-    box-sizing     : border-box;
-    margin         : 4px 0 0 0;
-    transition     : border 150ms;
-}
+        & input[type=text]
+        {
+            width          : 100%;
+            font-size      : 12px;
+            font-family    : $font-family;
+            letter-spacing : $letter-spacing;
+            padding        : 4px;
+            border-radius  : 4px;
+            box-shadow     : inset 0 1px 0 #ededed;
+            height         : 28px;
+            border         : 1px solid #b2b2b2;
+            box-sizing     : border-box;
+            margin         : 4px 0 0 0;
+            transition     : border 150ms;
+        }
 
-.operations-panel .operation .fields .field input[type=text]:focus
-{
-    border : 3px solid #71c0ec;
+        & input[type=text]:focus
+        {
+            border : 3px solid #71c0ec;
+        }
+    }
 }
