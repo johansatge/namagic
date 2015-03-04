@@ -7,10 +7,13 @@
     </head>
     <body>
         <div class="files-panel js-files-panel">
-            <div class="empty">
-                <i class="fa fa-arrow-circle-down"></i>
-                <div>{{main.drop}}</div>
+            <div class="empty js-file-empty">
+                <div class="text">
+                    <i class="fa fa-arrow-circle-down"></i>
+                    <div>{{main.drop}}</div>
+                </div>
             </div>
+            <input type="file" multiple class="js-files-input">
             <table class="files-list" cellpadding="0" cellspacing="0">
                 <tbody>
                     <!--<tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
@@ -20,36 +23,13 @@
                     <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
                     <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
                     <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>-->
-                </tbody>
+                --></tbody>
             </table>
+            <div class="options-actions">
+                <a class="secondary js-files-add" href="#">
+                    {{main.actions.add_files}}
+                </a>
+            </div>
         </div>
         <div class="operations-panel js-operations-panel">
             <div class="empty">
@@ -110,18 +90,15 @@
                     </div>
                 </div>
             </div>
+            <div class="options-actions">
+                <a class="primary" href="#">
+                    {{main.actions.apply}}
+                </a>
+                <a class="secondary" href="#">
+                    {{main.actions.add_action}}
+                </a>
+            </div>
         </div>
-        <div class="options-panel js-options-panel">
-            <label>
-                <input type="checkbox">
-                @todo wording directories
-            </label>
-            <a class="options-action primary" href="#">
-                {{main.actions.apply}}
-            </a>
-            <a class="options-action secondary" href="#">
-                {{main.actions.add}}
-            </a>
-        </div>
+        <div class="toolbar-panel js-toolbar-panel"></div>
     </body>
 </html>

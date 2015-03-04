@@ -14,7 +14,8 @@
   "main": {
     "drop": "Drop files here",
     "actions": {
-      "add": "Add action",
+      "add_action": "Add action",
+      "add_files": "Add files...",
       "apply": "Apply"
     },
     "no_action": "No action set"

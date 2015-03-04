@@ -76,7 +76,7 @@
             $ui.body = $body;
             $ui.filesPanel = $ui.body.find('.js-files-panel');
             $ui.operationsPanel = $ui.body.find('.js-operations-panel');
-            $ui.optionsPanel = $ui.body.find('.js-options-panel');
+            $ui.optionsPanel = $ui.body.find('.js-toolbar-panel');
 
             $ui.window.on('resize', $.proxy(_onWindowResize, this)).trigger('resize');
         };
