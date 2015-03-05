@@ -110,7 +110,7 @@
             }
             if (evt.which === 8 && evt.type === 'keyup')
             {
-                filesView.handleDelete();
+                filesView.deleteActiveFiles();
             }
         };
 

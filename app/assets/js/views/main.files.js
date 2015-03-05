@@ -31,8 +31,8 @@
          */
         this.init = function($dom)
         {
-            _initUI($dom);
-            _initEvents();
+            _initUI.apply(this, [$dom]);
+            _initEvents.apply(this);
         };
 
         /**
@@ -47,10 +47,12 @@
         /**
          * Handles files deletion
          */
-        this.handleDelete = function()
+        this.deleteActiveFiles = function()
         {
             $ui.list.children().filter('.js-active').remove();
             $lastSelectedFile = false;
+            $ui.remove.attr('disabled', 'disabled');
+            $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
         };
 
         /**
@@ -63,6 +65,7 @@
             $ui.placeholder = $dom.find('.js-file-placeholder');
             $ui.input = $dom.find('.js-files-input');
             $ui.add = $dom.find('.js-files-add');
+            $ui.remove = $dom.find('.js-files-remove');
             $ui.list = $dom.find('.js-files-list');
             fileTemplate = $dom.find('.js-file-template').html();
         };
@@ -72,19 +75,14 @@
          */
         var _initEvents = function()
         {
-            $ui.panel.on('keypress', $.proxy(_onKeyPress, this));
             $ui.placeholder.on('dragenter mouseenter', $.proxy(_onDragEnter, this));
             $ui.placeholder.on('dragleave mouseleave', $.proxy(_onDragLeave, this));
             $ui.placeholder.on('drop', $.proxy(_onDropFiles, this));
             $ui.add.on('click', $.proxy(_onAddNewsFiles, this));
+            $ui.remove.on('click', $.proxy(this, 'deleteActiveFiles'));
             $ui.placeholder.on('click', $.proxy(_onAddNewsFiles, this));
             $ui.input.on('change', $.proxy(_onSelectNewFiles, this));
             $ui.list.on('click', '.js-file', $.proxy(_onSelectFile, this));
-        };
-
-        var _onKeyPress = function(evt)
-        {
-            console.log(evt.keyCode);
         };
 
         /**
@@ -166,6 +164,7 @@
                 }
             }
             $lastSelectedFile = $file.hasClass('js-active') ? $file : false;
+            $ui.remove.attr('disabled', $file.hasClass('js-active') ? false : 'disabled');
         };
 
         /**
@@ -186,10 +185,7 @@
                     $ui.list.append(row);
                 }
             }
-
             $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
-
-            // @todo sends event
         };
 
     };
