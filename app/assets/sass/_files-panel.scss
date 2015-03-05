@@ -88,7 +88,8 @@
         -webkit-font-smoothing : antialiased;
     }
 
-    & tr.js-active td .dir
+    & tr.js-active td .dir,
+    & tr.js-active td i
     {
         color : #ffffff !important;
     }

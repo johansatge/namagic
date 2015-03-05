@@ -139,8 +139,9 @@
                 }
                 else
                 {
-                    // @todo range selection (http://api.jquery.com/slice/)
-                    console.log('range');
+                    var start_index = Math.min($lastSelectedFile.index(), $file.index());
+                    var end_index = Math.max($lastSelectedFile.index(), $file.index());
+                    $ui.list.children().slice(start_index, end_index + 1).addClass('js-active');
                 }
             }
             else

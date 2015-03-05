@@ -103,10 +103,10 @@ html, body {
   -webkit-font-smoothing: antialiased;
 }
 /* line 91, ../sass/_files-panel.scss */
-.files-list tr.js-active td .dir {
+.files-list tr.js-active td .dir, .files-list tr.js-active td i {
   color: #ffffff !important;
 }
-/* line 96, ../sass/_files-panel.scss */
+/* line 97, ../sass/_files-panel.scss */
 .files-list tr td {
   cursor: default;
   color: #333333;
@@ -114,28 +114,28 @@ html, body {
   letter-spacing: 0.02em;
   padding: 6px 8px 6px 8px;
 }
-/* line 105, ../sass/_files-panel.scss */
+/* line 106, ../sass/_files-panel.scss */
 .files-list tr:nth-child(odd) td {
   background: #ffffff;
 }
-/* line 110, ../sass/_files-panel.scss */
+/* line 111, ../sass/_files-panel.scss */
 .files-list tr:nth-child(even) td {
   background: #f3f6fa;
 }
-/* line 117, ../sass/_files-panel.scss */
+/* line 118, ../sass/_files-panel.scss */
 .files-list td:nth-child(1) {
   width: 50%;
 }
-/* line 122, ../sass/_files-panel.scss */
+/* line 123, ../sass/_files-panel.scss */
 .files-list td:nth-child(2) {
   width: 10px;
 }
-/* line 127, ../sass/_files-panel.scss */
+/* line 128, ../sass/_files-panel.scss */
 .files-list td i {
   color: #999999;
   font-size: 11px;
 }
-/* line 133, ../sass/_files-panel.scss */
+/* line 134, ../sass/_files-panel.scss */
 .files-list td .dir {
   color: #a0a0a0;
 }
@@ -315,7 +315,7 @@ html, body {
   z-index: 1;
   position: absolute;
   width: 100%;
-  height: 48px;
+  height: 46px;
   left: 0;
   bottom: 0;
   background: linear-gradient(to bottom, #e4e4e4, #d8d8d8);
