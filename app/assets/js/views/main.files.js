@@ -45,6 +45,15 @@
         };
 
         /**
+         * Handles files deletion
+         */
+        this.handleDelete = function()
+        {
+            $ui.list.children().filter('.js-active').remove();
+            $lastSelectedFile = false;
+        };
+
+        /**
          * Inits UI
          * @param $dom
          */

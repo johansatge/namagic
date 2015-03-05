@@ -23,6 +23,18 @@ module.exports = function(grunt)
     });
 
     /**
+     * Builds sample files list
+     */
+    grunt.registerTask('files', function()
+    {
+        exec('mkdir cache');
+        for (var index = 0; index < 1000; index += 1)
+        {
+            exec('touch cache/test_' + index + '.txt');
+        }
+    });
+
+    /**
      * Builds the app
      */
     grunt.registerTask('build', function()

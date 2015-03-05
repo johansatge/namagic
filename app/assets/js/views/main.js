@@ -34,7 +34,7 @@
                 frame: true,
                 width: 900,
                 height: 600,
-                min_width: 900,
+                min_width: 750,
                 min_height: 450,
                 position: 'mouse',
                 resizable: true,
@@ -86,7 +86,7 @@
         var _initEvents = function()
         {
             $ui.window.on('resize', $.proxy(_onWindowResize, this)).trigger('resize');
-            $ui.window.on('keydown keyup', $.proxy(_onRecordHotkey, this));
+            $ui.window.on('keydown keyup', $.proxy(_onRecordKey, this));
         };
 
         /**
@@ -102,11 +102,15 @@
          * Records a hotkey
          * @param evt
          */
-        var _onRecordHotkey = function(evt)
+        var _onRecordKey = function(evt)
         {
             if (evt.which === 16 || evt.which === 91)
             {
                 filesView.setHotkey(evt.type === 'keydown' ? evt.which : false);
+            }
+            if (evt.which === 8 && evt.type === 'keyup')
+            {
+                filesView.handleDelete();
             }
         };
 

@@ -14,10 +14,10 @@
 {
     z-index  : 30;
     position : fixed;
-    bottom   : 12px;
+    bottom   : 11px;
     width    : 300px;
 
-    & a
+    & button
     {
         cursor          : default;
         float           : right;
@@ -55,14 +55,14 @@
     }
 }
 
-.operations-panel .options-actions a
+.operations-panel .options-actions button
 {
-    margin : 12px 10px 0 0;
+    margin : 0 10px 0 0;
     float  : right;
 }
 
-.files-panel .options-actions a
+.files-panel .options-actions button
 {
-    margin : 12px 0 0 10px;
+    margin : 0 0 0 10px;
     float  : left;
 }
