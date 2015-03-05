@@ -7,7 +7,7 @@
     </head>
     <body>
         <div class="files-panel js-files-panel">
-            <div class="empty js-file-empty">
+            <div class="placeholder js-file-placeholder">
                 <div class="text">
                     <i class="fa fa-arrow-circle-down"></i>
                     <div>{{main.drop}}</div>
@@ -15,16 +15,23 @@
             </div>
             <input type="file" multiple class="js-files-input">
             <table class="files-list" cellpadding="0" cellspacing="0">
-                <tbody>
-                    <!--<tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/Users/johan/www/github/min/builder/</span>test.js</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/Users/johan/www/github/min/builder/</span>test.js</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                    <tr><td><span class="dir">/test/</span>file.txt</td><td><i class="fa fa-arrow-right"></i></td><td><span class="dir">/test/</span>file-dest.txt</td></tr>
-                --></tbody>
+                <tbody class="js-files-list"></tbody>
             </table>
+            <script type="text/template" class="js-file-template">
+                <tr class="js-file">
+                    <td>
+                        <span class="dir">{{dir}}</span>
+                        <span>{{name}}</span>
+                    </td>
+                    <td>
+                        <i class="fa fa-arrow-right"></i>
+                    </td>
+                    <td>
+                        <span class="dir">{{dir}}</span>
+                        <span class="js-new-name">file.ext</span>
+                    </td>
+                </tr>
+            </script>
             <div class="options-actions">
                 <a class="secondary js-files-add" href="#">
                     {{main.actions.add_files}}

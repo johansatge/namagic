@@ -12,7 +12,7 @@
         var window = null;
         var events = new app.node.events.EventEmitter();
         var $ui = {};
-        var files;
+        var filesView;
 
         /**
          * Attaches an event
@@ -61,24 +61,32 @@
          */
         var _onWindowLoaded = function($window, $body)
         {
-            _initUI($window, $body);
+            _initDOM($window, $body);
+            _initEvents();
             _initSubviews();
         };
 
         /**
-         * Inits view UI
+         * Inits DOM
          * @param $window
          * @param $body
          */
-        var _initUI = function($window, $body)
+        var _initDOM = function($window, $body)
         {
             $ui.window = $window;
             $ui.body = $body;
             $ui.filesPanel = $ui.body.find('.js-files-panel');
             $ui.operationsPanel = $ui.body.find('.js-operations-panel');
             $ui.optionsPanel = $ui.body.find('.js-toolbar-panel');
+        };
 
+        /**
+         * Inits events
+         */
+        var _initEvents = function()
+        {
             $ui.window.on('resize', $.proxy(_onWindowResize, this)).trigger('resize');
+            $ui.window.on('keydown keyup', $.proxy(_onRecordHotkey, this));
         };
 
         /**
@@ -86,8 +94,20 @@
          */
         var _initSubviews = function()
         {
-            files = new app.views.main.files();
-            files.init($ui.filesPanel);
+            filesView = new app.views.main.files();
+            filesView.init($ui.filesPanel);
+        };
+
+        /**
+         * Records a hotkey
+         * @param evt
+         */
+        var _onRecordHotkey = function(evt)
+        {
+            if (evt.which === 16 || evt.which === 91)
+            {
+                filesView.setHotkey(evt.type === 'keydown' ? evt.which : false);
+            }
         };
 
         /**

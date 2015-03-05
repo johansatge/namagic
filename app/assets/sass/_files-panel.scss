@@ -10,7 +10,7 @@
     box-sizing    : border-box;
     background    : $background-color;
 
-    & .empty
+    & .placeholder
     {
         position : absolute;
         z-index  : 21;
@@ -53,15 +53,20 @@
         }
     }
 
-    &.js-drag .empty
+    &.js-drag .placeholder
     {
         cursor : copy;
     }
 
-    &.js-drag .empty .text
+    &.js-drag .placeholder .text
     {
         color  : $icon-drop-active-color;
         border : 3px dashed $icon-drop-active-color;
+    }
+
+    & .placeholder.js-hidden .text
+    {
+        display : none;
     }
 
     & input
@@ -75,6 +80,18 @@
     position : relative;
     z-index  : 23;
     width    : 100%;
+
+    & tr.js-active td
+    {
+        background             : #0072d5 !important;
+        color                  : #ffffff !important;
+        -webkit-font-smoothing : antialiased;
+    }
+
+    & tr.js-active td .dir
+    {
+        color : #ffffff !important;
+    }
 
     & tr td
     {
