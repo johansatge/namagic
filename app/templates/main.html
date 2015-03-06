@@ -6,8 +6,8 @@
         <link rel="stylesheet" href="../assets/css/main.css" type="text/css">
     </head>
     <body>
-        <div class="files-panel js-files-panel">
-            <div class="placeholder js-file-placeholder">
+        <div class="panel files js-files-panel">
+            <div class="placeholder bordered js-file-placeholder">
                 <div class="text">
                     <i class="fa fa-arrow-circle-down"></i>
                     <div>{{main.drop}}</div>
@@ -32,19 +32,21 @@
                     </td>
                 </tr>
             </script>
-            <div class="options-actions">
-                <button class="secondary js-files-add">
+            <div class="actions">
+                <button class="secondary left js-files-add">
                     {{main.actions.add_files}}
                 </button>
-                <button class="secondary js-files-remove" disabled="disabled">
+                <button class="secondary left js-files-remove" disabled="disabled">
                     {{main.actions.remove_files}}
                 </button>
             </div>
         </div>
-        <div class="operations-panel js-operations-panel">
-            <div class="empty">
-                <i class="fa fa-cogs"></i>
-                <div>{{main.no_action}}</div>
+        <div class="panel operations js-operations-panel">
+            <div class="placeholder">
+                <div class="text">
+                    <i class="fa fa-cogs"></i>
+                    <div>{{main.no_action}}</div>
+                </div>
             </div>
             <div class="operation">
                 <div class="operation-bar">
@@ -101,15 +103,15 @@
                     <i class="action delete fa fa-trash-o"></i>
                 </div>
             </div>
-            <div class="options-actions">
-                <button class="primary">
+            <div class="actions">
+                <button class="primary right">
                     {{main.actions.apply}}
                 </button>
-                <button class="secondary">
+                <button class="secondary right">
                     {{main.actions.add_action}}
                 </button>
             </div>
         </div>
-        <div class="toolbar-panel js-toolbar-panel"></div>
+        <div class="panel toolbar js-toolbar-panel"></div>
     </body>
 </html>

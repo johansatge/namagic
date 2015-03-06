@@ -1,0 +1,59 @@
+.files-list
+{
+    position : relative;
+    z-index  : 23;
+    width    : 100%;
+
+    & tr td
+    {
+        cursor         : default;
+        color          : $text-color;
+        font-size      : $font-size;
+        letter-spacing : $letter-spacing;
+        padding        : 6px 8px 6px 8px;
+
+        &:nth-child(1)
+        {
+            width : 50%;
+        }
+
+        &:nth-child(2)
+        {
+            width : 10px;
+        }
+
+        & i
+        {
+            color     : $icon-inactive-color;
+            font-size : 11px;
+        }
+
+        & .dir
+        {
+            color : $files-dir-color;
+        }
+    }
+
+    & tr:nth-child(odd) td
+    {
+        background : $files-bg-color;
+    }
+
+    & tr:nth-child(even) td
+    {
+        background : $files-bg-alt-color;
+    }
+
+    & tr.js-active td
+    {
+        background             : $files-active-bg-color !important;
+        color                  : $files-active-color !important;
+        -webkit-font-smoothing : antialiased;
+    }
+
+    & tr.js-active td .dir,
+    & tr.js-active td i
+    {
+        color : $files-active-color !important;
+    }
+}
