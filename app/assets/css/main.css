@@ -237,43 +237,7 @@ html, body {
   border-radius: 5px;
 }
 
-/* line 106, ../sass/_operations-panel.scss */
-.operation-tools:hover select {
-  width: 234px;
-}
-/* line 111, ../sass/_operations-panel.scss */
-.operation-tools .action {
-  opacity: 0;
-  color: #999999;
-  position: absolute;
-  transition: color 150ms, opacity 150ms;
-}
-/* line 119, ../sass/_operations-panel.scss */
-.operation-tools:hover .action {
-  opacity: 1;
-}
-/* line 124, ../sass/_operations-panel.scss */
-.operation-tools .action:hover {
-  color: #606060;
-}
-/* line 129, ../sass/_operations-panel.scss */
-.operation-tools .action:active {
-  color: #252525;
-}
-/* line 134, ../sass/_operations-panel.scss */
-.operation-tools .move {
-  font-size: 13px;
-  top: 9px;
-  right: 32px;
-}
-/* line 141, ../sass/_operations-panel.scss */
-.operation-tools .delete {
-  font-size: 16px;
-  top: 8px;
-  right: 10px;
-}
-
-/* line 149, ../sass/_operations-panel.scss */
+/* line 104, ../sass/_operations-panel.scss */
 .operation-fields {
   position: relative;
   margin: 0 10px 12px 10px;
@@ -282,7 +246,7 @@ html, body {
   box-shadow: inset 0 1px 0 #d3d3d3;
   padding: 12px 12px 0 12px;
 }
-/* line 158, ../sass/_operations-panel.scss */
+/* line 113, ../sass/_operations-panel.scss */
 .operation-fields .field {
   width: 100%;
   font-size: 13px;
@@ -290,7 +254,7 @@ html, body {
   text-shadow: 0 1px 0 #ffffff;
   padding: 0 0 12px 0;
 }
-/* line 166, ../sass/_operations-panel.scss */
+/* line 121, ../sass/_operations-panel.scss */
 .operation-fields .field input[type=text] {
   width: 100%;
   font-size: 12px;
@@ -305,9 +269,39 @@ html, body {
   margin: 4px 0 0 0;
   transition: border 150ms;
 }
-/* line 182, ../sass/_operations-panel.scss */
+/* line 137, ../sass/_operations-panel.scss */
 .operation-fields .field input[type=text]:focus {
   border: 3px solid #71c0ec;
+}
+
+/* line 144, ../sass/_operations-panel.scss */
+.operation-tools {
+  height: 14px;
+  margin: 0 0 12px 0;
+  background: #ff99ff;
+}
+/* line 150, ../sass/_operations-panel.scss */
+.operation-tools:hover select {
+  width: 234px;
+}
+/* line 155, ../sass/_operations-panel.scss */
+.operation-tools .action {
+  color: #999999;
+  transition: color 150ms, opacity 150ms;
+}
+/* line 161, ../sass/_operations-panel.scss */
+.operation-tools .action:hover {
+  color: #606060;
+}
+/* line 166, ../sass/_operations-panel.scss */
+.operation-tools .action:active {
+  color: #252525;
+}
+/* line 171, ../sass/_operations-panel.scss */
+.operation-tools .delete {
+  position: absolute;
+  left: 144px;
+  font-size: 14px;
 }
 
 /* line 1, ../sass/_toolbar-panel.scss */
@@ -332,12 +326,12 @@ html, body {
 /* line 20, ../sass/_toolbar-panel.scss */
 .options-actions button {
   cursor: default;
-  float: right;
   border-radius: 4px;
   padding: 4px 14px 4px 12px;
   box-shadow: 0 1px 0 #c4c4c4;
   text-decoration: none;
   font-size: 13px;
+  opacity: 1;
 }
 /* line 30, ../sass/_toolbar-panel.scss */
 .options-actions button[disabled=disabled] {

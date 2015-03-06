@@ -101,51 +101,6 @@
     }
 }
 
-.operation-tools
-{
-    &:hover select
-    {
-        width : 234px;
-    }
-
-    & .action
-    {
-        opacity    : 0;
-        color      : $icon-inactive-color;
-        position   : absolute;
-        transition : color 150ms, opacity 150ms;
-    }
-
-    &:hover .action
-    {
-        opacity : 1;
-    }
-
-    & .action:hover
-    {
-        color : $icon-color;
-    }
-
-    & .action:active
-    {
-        color : $icon-active-color;
-    }
-
-    & .move
-    {
-        font-size : 13px;
-        top       : 9px;
-        right     : 32px;
-    }
-
-    & .delete
-    {
-        font-size : 16px;
-        top       : 8px;
-        right     : 10px;
-    }
-}
-
 .operation-fields
 {
     position      : relative;
@@ -183,5 +138,40 @@
         {
             border : 3px solid #71c0ec;
         }
+    }
+}
+
+.operation-tools
+{
+    height     : 14px;
+    margin     : 0 0 12px 0;
+    background : #ff99ff;
+
+    &:hover select
+    {
+        width : 234px;
+    }
+
+    & .action
+    {
+        color      : $icon-inactive-color;
+        transition : color 150ms, opacity 150ms;
+    }
+
+    & .action:hover
+    {
+        color : $icon-color;
+    }
+
+    & .action:active
+    {
+        color : $icon-active-color;
+    }
+
+    & .delete
+    {
+        position  : absolute;
+        left      : 144px;
+        font-size : 14px;
     }
 }

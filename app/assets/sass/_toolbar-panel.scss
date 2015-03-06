@@ -20,12 +20,12 @@
     & button
     {
         cursor          : default;
-        float           : right;
         border-radius   : 4px;
         padding         : 4px 14px 4px 12px;
         box-shadow      : 0 1px 0 #c4c4c4;
         text-decoration : none;
         font-size       : $font-size;
+        opacity         : 1;
 
         &[disabled=disabled]
         {
