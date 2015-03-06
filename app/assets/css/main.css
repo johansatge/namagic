@@ -276,31 +276,57 @@ html, body {
 
 /* line 144, ../sass/_operations-panel.scss */
 .operation-tools {
-  height: 14px;
-  margin: 0 0 12px 0;
-  background: #ff99ff;
+  position: relative;
+  height: 5px;
+  margin: 0 10px 12px 10px;
+  border-top: 1px solid #d5d5d5;
+  border-bottom: 1px solid #d5d5d5;
 }
-/* line 150, ../sass/_operations-panel.scss */
+/* line 152, ../sass/_operations-panel.scss */
+.operation-tools:before {
+  content: ' ';
+  display: block;
+  width: 100%;
+  height: 1px;
+  position: absolute;
+  top: 2px;
+  background: #d5d5d5;
+}
+/* line 163, ../sass/_operations-panel.scss */
+.operation-tools:after {
+  z-index: 40;
+  content: ' ';
+  display: block;
+  position: absolute;
+  left: 129px;
+  top: -1px;
+  width: 22px;
+  height: 7px;
+  background: #f3f3f3;
+}
+/* line 176, ../sass/_operations-panel.scss */
 .operation-tools:hover select {
   width: 234px;
 }
-/* line 155, ../sass/_operations-panel.scss */
+/* line 181, ../sass/_operations-panel.scss */
 .operation-tools .action {
   color: #999999;
   transition: color 150ms, opacity 150ms;
 }
-/* line 161, ../sass/_operations-panel.scss */
+/* line 187, ../sass/_operations-panel.scss */
 .operation-tools .action:hover {
   color: #606060;
 }
-/* line 166, ../sass/_operations-panel.scss */
+/* line 192, ../sass/_operations-panel.scss */
 .operation-tools .action:active {
   color: #252525;
 }
-/* line 171, ../sass/_operations-panel.scss */
+/* line 197, ../sass/_operations-panel.scss */
 .operation-tools .delete {
+  z-index: 41;
+  top: -5px;
   position: absolute;
-  left: 144px;
+  left: 134px;
   font-size: 14px;
 }
 
