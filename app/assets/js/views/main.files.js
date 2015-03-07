@@ -67,6 +67,7 @@
             $ui.add = $dom.find('.js-files-add');
             $ui.remove = $dom.find('.js-files-remove');
             $ui.list = $dom.find('.js-files-list');
+            $ui.dirToggle = $dom.find('.js-toggle-dirs');
             fileTemplate = $dom.find('.js-file-template').html();
         };
 
@@ -83,6 +84,7 @@
             $ui.placeholder.on('click', $.proxy(_onAddNewsFiles, this));
             $ui.input.on('change', $.proxy(_onSelectNewFiles, this));
             $ui.list.on('click', '.js-file', $.proxy(_onSelectFile, this));
+            $ui.dirToggle.on('change', $.proxy(_onToggleDirectories, this));
         };
 
         /**
@@ -117,7 +119,6 @@
         var _onSelectNewFiles = function(evt)
         {
             _parseAndSendFiles(evt.target.files);
-
         };
 
         /**
@@ -128,6 +129,14 @@
         {
             evt.preventDefault();
             $ui.input.trigger('click');
+        };
+
+        /**
+         * Toggles directories
+         */
+        var _onToggleDirectories = function()
+        {
+            $ui.list.toggleClass('js-directories-visible');
         };
 
         /**

@@ -1,8 +1,5 @@
 .files-list
 {
-    position : relative;
-    z-index  : 23;
-    width    : 100%;
 
     & tr td
     {
@@ -30,8 +27,14 @@
 
         & .dir
         {
-            color : $files-dir-color;
+            display : none;
+            color   : $files-dir-color;
         }
+    }
+
+    &.js-directories-visible tr td .dir
+    {
+        display : inline;
     }
 
     & tr:nth-child(odd) td

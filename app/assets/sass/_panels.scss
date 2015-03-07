@@ -14,9 +14,17 @@
         box-sizing    : border-box;
         background    : $background-color;
 
-        & input
+        & input[type=file]
         {
             display : none;
+        }
+
+        & table
+        {
+            width    : 100%;
+            position : relative;
+            z-index  : 23;
+            width    : 100%;
         }
     }
 
@@ -60,6 +68,15 @@
         z-index  : 30;
         position : fixed;
         bottom   : 11px;
-        width    : 300px;
+    }
+
+    &.operations .actions
+    {
+        width : 300px;
+    }
+
+    &.files .actions
+    {
+        width : 500px;
     }
 }

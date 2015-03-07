@@ -68,7 +68,7 @@
             $ui.operations.append($new_operation);
             $ui.operations.sortable('refresh');
             $new_operation.find('.js-delete').on('click', $.proxy(_onDeleteOperation, this))
-            $ui.placeholder.hide();
+            $ui.placeholder.addClass('js-hidden');
         };
 
         /**
@@ -80,7 +80,7 @@
             evt.preventDefault();
             $(evt.currentTarget).closest('.js-operation').remove();
             $ui.operations.sortable('refresh');
-            $ui.placeholder.toggle($ui.operations.children().length === 0);
+            $ui.placeholder.toggleClass('js-hidden', $ui.operations.children().length > 0);
         };
 
         /**

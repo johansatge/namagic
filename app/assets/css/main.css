@@ -58,6 +58,21 @@ button.right {
   float: right;
 }
 
+/* line 54, ../sass/_buttons.scss */
+label {
+  float: left;
+  font-size: 11px;
+  text-shadow: 0 1px 0 #ffffff;
+  color: #333333;
+  letter-spacing: 0.02em;
+  margin: 6px 0 0 10px;
+}
+/* line 63, ../sass/_buttons.scss */
+label input[type=checkbox] {
+  float: left;
+  margin: 0px 4px 0 0;
+}
+
 /* line 1, ../sass/_panels.scss */
 .panel {
   box-sizing: border-box;
@@ -75,10 +90,17 @@ button.right {
   background: #f3f3f4;
 }
 /* line 17, ../sass/_panels.scss */
-.panel.files input {
+.panel.files input[type=file] {
   display: none;
 }
-/* line 23, ../sass/_panels.scss */
+/* line 22, ../sass/_panels.scss */
+.panel.files table {
+  width: 100%;
+  position: relative;
+  z-index: 23;
+  width: 100%;
+}
+/* line 31, ../sass/_panels.scss */
 .panel.operations {
   z-index: 30;
   width: 300px;
@@ -91,7 +113,7 @@ button.right {
   box-sizing: border-box;
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
 }
-/* line 36, ../sass/_panels.scss */
+/* line 44, ../sass/_panels.scss */
 .panel.operations:before {
   z-index: 50;
   content: ' ';
@@ -101,7 +123,7 @@ button.right {
   position: fixed;
   background: #a3a3a3;
 }
-/* line 48, ../sass/_panels.scss */
+/* line 56, ../sass/_panels.scss */
 .panel.toolbar {
   z-index: 1;
   width: 100%;
@@ -110,12 +132,19 @@ button.right {
   bottom: 0;
   background: linear-gradient(to bottom, #e4e4e4, #d8d8d8);
 }
-/* line 58, ../sass/_panels.scss */
+/* line 66, ../sass/_panels.scss */
 .panel .actions {
   z-index: 30;
   position: fixed;
   bottom: 11px;
+}
+/* line 73, ../sass/_panels.scss */
+.panel.operations .actions {
   width: 300px;
+}
+/* line 78, ../sass/_panels.scss */
+.panel.files .actions {
+  width: 500px;
 }
 
 /* line 1, ../sass/_placeholders.scss */
@@ -164,7 +193,7 @@ button.right {
 }
 /* line 49, ../sass/_placeholders.scss */
 .placeholder.js-hidden .text {
-  display: none;
+  opacity: 0;
 }
 
 /* line 55, ../sass/_placeholders.scss */
@@ -187,13 +216,7 @@ button.right {
   border: 3px dashed #cccccc;
 }
 
-/* line 1, ../sass/_files.scss */
-.files-list {
-  position: relative;
-  z-index: 23;
-  width: 100%;
-}
-/* line 7, ../sass/_files.scss */
+/* line 4, ../sass/_files.scss */
 .files-list tr td {
   cursor: default;
   color: #333333;
@@ -201,38 +224,43 @@ button.right {
   letter-spacing: 0.02em;
   padding: 6px 8px 6px 8px;
 }
-/* line 15, ../sass/_files.scss */
+/* line 12, ../sass/_files.scss */
 .files-list tr td:nth-child(1) {
   width: 50%;
 }
-/* line 20, ../sass/_files.scss */
+/* line 17, ../sass/_files.scss */
 .files-list tr td:nth-child(2) {
   width: 10px;
 }
-/* line 25, ../sass/_files.scss */
+/* line 22, ../sass/_files.scss */
 .files-list tr td i {
   color: #999999;
   font-size: 11px;
 }
-/* line 31, ../sass/_files.scss */
+/* line 28, ../sass/_files.scss */
 .files-list tr td .dir {
+  display: none;
   color: #a0a0a0;
 }
-/* line 37, ../sass/_files.scss */
+/* line 35, ../sass/_files.scss */
+.files-list.js-directories-visible tr td .dir {
+  display: inline;
+}
+/* line 40, ../sass/_files.scss */
 .files-list tr:nth-child(odd) td {
   background: #ffffff;
 }
-/* line 42, ../sass/_files.scss */
+/* line 45, ../sass/_files.scss */
 .files-list tr:nth-child(even) td {
   background: #f3f6fa;
 }
-/* line 47, ../sass/_files.scss */
+/* line 50, ../sass/_files.scss */
 .files-list tr.js-active td {
   background: #0072d5 !important;
   color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
 }
-/* line 54, ../sass/_files.scss */
+/* line 57, ../sass/_files.scss */
 .files-list tr.js-active td .dir, .files-list tr.js-active td i {
   color: #ffffff !important;
 }
