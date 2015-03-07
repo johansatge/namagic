@@ -62,8 +62,8 @@
         var _initUI = function($dom)
         {
             $ui.panel = $dom;
-            $ui.placeholder = $dom.find('.js-file-placeholder');
-            $ui.input = $dom.find('.js-files-input');
+            $ui.placeholder = $dom.find('.js-placeholder');
+            $ui.input = $dom.find('.js-upload');
             $ui.add = $dom.find('.js-files-add');
             $ui.remove = $dom.find('.js-files-remove');
             $ui.list = $dom.find('.js-files-list');

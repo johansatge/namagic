@@ -87,12 +87,21 @@ button.right {
   overflow-y: auto;
   background: #f3f3f4;
   border-left: 1px solid #a3a3a3;
-  border-top: 1px solid #a3a3a3;
   border-bottom: 1px solid #a3a3a3;
   box-sizing: border-box;
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
 }
-/* line 38, ../sass/_panels.scss */
+/* line 36, ../sass/_panels.scss */
+.panel.operations:before {
+  z-index: 50;
+  content: ' ';
+  display: block;
+  width: 100%;
+  height: 1px;
+  position: fixed;
+  background: #a3a3a3;
+}
+/* line 48, ../sass/_panels.scss */
 .panel.toolbar {
   z-index: 1;
   width: 100%;
@@ -101,7 +110,7 @@ button.right {
   bottom: 0;
   background: linear-gradient(to bottom, #e4e4e4, #d8d8d8);
 }
-/* line 48, ../sass/_panels.scss */
+/* line 58, ../sass/_panels.scss */
 .panel .actions {
   z-index: 30;
   position: fixed;
@@ -168,6 +177,15 @@ button.right {
   border: 3px dashed #999999;
 }
 
+/* line 65, ../sass/_placeholders.scss */
+.js-sortable {
+  margin: 10px;
+  height: 50px;
+  box-sizing: border-box;
+  border-radius: 8px;
+  border: 3px dashed #cccccc;
+}
+
 /* line 1, ../sass/_files.scss */
 .files-list {
   position: relative;
@@ -222,20 +240,22 @@ button.right {
 .operation {
   cursor: move;
   position: relative;
-  z-index: 32;
+  z-index: 31;
+  border-top: 1px solid #a3a3a3;
   border-bottom: 1px solid #a3a3a3;
   box-sizing: border-box;
   box-shadow: 0 7px 16px -7px rgba(0, 0, 0, 0.2);
   background: linear-gradient(to top, #f2f2f2, #ffffff);
   padding: 12px 0 0 0;
+  margin: 0 0 -1px 0;
 }
 
-/* line 13, ../sass/_operations.scss */
+/* line 15, ../sass/_operations.scss */
 .operation-bar {
   position: relative;
   padding: 0 0 12px 0;
 }
-/* line 18, ../sass/_operations.scss */
+/* line 20, ../sass/_operations.scss */
 .operation-bar .type {
   cursor: default;
   position: absolute;
@@ -247,11 +267,11 @@ button.right {
   float: left;
   transition: opacity 200ms;
 }
-/* line 31, ../sass/_operations.scss */
+/* line 33, ../sass/_operations.scss */
 .operation-bar .type.fa-pencil {
   top: 9px;
 }
-/* line 36, ../sass/_operations.scss */
+/* line 38, ../sass/_operations.scss */
 .operation-bar select {
   cursor: default;
   font-family: "Helvetica Neue";
@@ -271,7 +291,7 @@ button.right {
   border-radius: 5px;
 }
 
-/* line 57, ../sass/_operations.scss */
+/* line 59, ../sass/_operations.scss */
 .operation-fields {
   cursor: default;
   position: relative;
@@ -281,7 +301,7 @@ button.right {
   box-shadow: inset 0 1px 0 #d3d3d3;
   padding: 12px 12px 0 12px;
 }
-/* line 67, ../sass/_operations.scss */
+/* line 69, ../sass/_operations.scss */
 .operation-fields .field {
   width: 100%;
   font-size: 13px;
@@ -289,7 +309,7 @@ button.right {
   text-shadow: 0 1px 0 #ffffff;
   padding: 0 0 12px 0;
 }
-/* line 75, ../sass/_operations.scss */
+/* line 77, ../sass/_operations.scss */
 .operation-fields .field input[type=text] {
   width: 100%;
   font-size: 12px;
@@ -304,12 +324,12 @@ button.right {
   margin: 4px 0 0 0;
   transition: border 150ms;
 }
-/* line 91, ../sass/_operations.scss */
+/* line 93, ../sass/_operations.scss */
 .operation-fields .field input[type=text]:focus {
   border: 3px solid #71c0ec;
 }
 
-/* line 98, ../sass/_operations.scss */
+/* line 100, ../sass/_operations.scss */
 .operation-tools {
   position: relative;
   height: 5px;
@@ -317,7 +337,7 @@ button.right {
   border-top: 1px solid #d5d5d5;
   border-bottom: 1px solid #d5d5d5;
 }
-/* line 106, ../sass/_operations.scss */
+/* line 108, ../sass/_operations.scss */
 .operation-tools:before {
   content: ' ';
   display: block;
@@ -327,7 +347,7 @@ button.right {
   top: 2px;
   background: #d5d5d5;
 }
-/* line 117, ../sass/_operations.scss */
+/* line 119, ../sass/_operations.scss */
 .operation-tools:after {
   z-index: 40;
   content: ' ';
@@ -339,25 +359,25 @@ button.right {
   height: 7px;
   background: #f3f3f3;
 }
-/* line 130, ../sass/_operations.scss */
+/* line 132, ../sass/_operations.scss */
 .operation-tools:hover select {
   width: 234px;
 }
-/* line 135, ../sass/_operations.scss */
+/* line 137, ../sass/_operations.scss */
 .operation-tools .action {
   cursor: default;
   color: #999999;
   transition: color 150ms, opacity 150ms;
 }
-/* line 142, ../sass/_operations.scss */
+/* line 144, ../sass/_operations.scss */
 .operation-tools .action:hover {
   color: #606060;
 }
-/* line 147, ../sass/_operations.scss */
+/* line 149, ../sass/_operations.scss */
 .operation-tools .action:active {
   color: #252525;
 }
-/* line 152, ../sass/_operations.scss */
+/* line 154, ../sass/_operations.scss */
 .operation-tools .delete {
   z-index: 41;
   top: -5px;

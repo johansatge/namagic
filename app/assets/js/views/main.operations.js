@@ -40,8 +40,10 @@
         var _initUI = function($dom)
         {
             $ui.panel = $dom;
+            $ui.placeholder = $dom.find('.js-placeholder');
             $ui.add = $dom.find('.js-operation-add');
             $ui.apply = $dom.find('.js-operation-apply');
+            $ui.operations = $dom.find('.js-operations');
             operationTemplate = $dom.find('.js-operation-template').html();
         };
 
@@ -52,6 +54,7 @@
         {
             $ui.add.on('click', $.proxy(_onAddOperation, this));
             $ui.apply.on('click', $.proxy(_onApplyOperations, this));
+            $ui.operations.sortable({items: '.js-operation', axis: 'y', placeholder: 'js-sortable', zIndex: 40});
         };
 
         /**
@@ -61,7 +64,23 @@
         var _onAddOperation = function(evt)
         {
             evt.preventDefault();
-            console.log('add @todo');
+            var $new_operation = $(operationTemplate);
+            $ui.operations.append($new_operation);
+            $ui.operations.sortable('refresh');
+            $new_operation.find('.js-delete').on('click', $.proxy(_onDeleteOperation, this))
+            $ui.placeholder.hide();
+        };
+
+        /**
+         * Deletes an operation
+         * @param evt
+         */
+        var _onDeleteOperation = function(evt)
+        {
+            evt.preventDefault();
+            $(evt.currentTarget).closest('.js-operation').remove();
+            $ui.operations.sortable('refresh');
+            $ui.placeholder.toggle($ui.operations.children().length === 0);
         };
 
         /**

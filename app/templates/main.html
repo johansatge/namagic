@@ -7,13 +7,13 @@
     </head>
     <body>
         <div class="panel files js-files-panel">
-            <div class="placeholder bordered js-file-placeholder">
+            <div class="placeholder bordered js-placeholder">
                 <div class="text">
                     <i class="fa fa-arrow-circle-down"></i>
                     <div>{{main.drop}}</div>
                 </div>
             </div>
-            <input type="file" multiple class="js-files-input">
+            <input type="file" multiple class="js-upload">
             <table class="files-list" cellpadding="0" cellspacing="0">
                 <tbody class="js-files-list"></tbody>
             </table>
@@ -42,14 +42,15 @@
             </div>
         </div>
         <div class="panel operations js-operations-panel">
-            <div class="placeholder">
+            <div class="placeholder js-placeholder">
                 <div class="text">
                     <i class="fa fa-cogs"></i>
                     <div>{{main.no_action}}</div>
                 </div>
             </div>
+            <div class="js-operations"></div>
             <script type="text/template" class="js-operation-template">
-                <div class="operation">
+                <div class="operation js-operation">
                     <div class="operation-bar">
                         <i class="type fa fa-search"></i>
                         <select>
@@ -63,7 +64,7 @@
                             <option>Regular expression</option>
                         </select>
                     </div>
-                    <div class="operation-fields">
+                    <!--<div class="operation-fields">
                         <div class="field">
                             <label>
                                 <input type="checkbox">
@@ -76,7 +77,7 @@
                                 <input type="text">
                             </label>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="operation-bar">
                         <i class="type fa fa-pencil"></i>
                         <select>
@@ -86,7 +87,7 @@
                             <option>Same text with options</option>
                         </select>
                     </div>
-                    <div class="operation-fields">
+                    <!--<div class="operation-fields">
                         <div class="field">
                             <label>
                                 <input type="checkbox">
@@ -99,9 +100,9 @@
                                 <input type="text">
                             </label>
                         </div>
-                    </div>
+                    </div>-->
                     <div class="operation-tools">
-                        <i class="action delete fa fa-trash-o"></i>
+                        <i class="action delete fa fa-trash-o js-delete"></i>
                     </div>
                 </div>
             </script>
