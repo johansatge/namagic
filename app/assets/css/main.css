@@ -141,6 +141,7 @@ button.right {
 }
 /* line 22, ../sass/_placeholders.scss */
 .placeholder .text div {
+  cursor: default;
   position: relative;
   width: 100%;
   text-align: center;
@@ -150,34 +151,34 @@ button.right {
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
 }
-/* line 34, ../sass/_placeholders.scss */
+/* line 35, ../sass/_placeholders.scss */
 .placeholder .text i {
   position: relative;
   left: 50%;
   margin: 25px 0 0 -20px;
   font-size: 48px;
 }
-/* line 43, ../sass/_placeholders.scss */
+/* line 44, ../sass/_placeholders.scss */
 .placeholder.bordered .text {
   border: 3px dashed #cccccc;
 }
-/* line 48, ../sass/_placeholders.scss */
+/* line 49, ../sass/_placeholders.scss */
 .placeholder.js-hidden .text {
   display: none;
 }
 
-/* line 54, ../sass/_placeholders.scss */
+/* line 55, ../sass/_placeholders.scss */
 .js-drag .placeholder {
   cursor: copy;
 }
 
-/* line 59, ../sass/_placeholders.scss */
+/* line 60, ../sass/_placeholders.scss */
 .js-drag .placeholder .text {
-  color: #999999;
-  border: 3px dashed #999999;
+  color: #939393;
+  border: 3px dashed #939393;
 }
 
-/* line 65, ../sass/_placeholders.scss */
+/* line 66, ../sass/_placeholders.scss */
 .js-sortable {
   margin: 10px;
   height: 50px;
@@ -240,7 +241,7 @@ button.right {
 .operation {
   cursor: move;
   position: relative;
-  z-index: 31;
+  z-index: 32;
   border-top: 1px solid #a3a3a3;
   border-bottom: 1px solid #a3a3a3;
   box-sizing: border-box;
