@@ -14,7 +14,7 @@
         top           : 50%;
         left          : 50%;
         margin        : -65px 0 0 -150px;
-        color         : $icon-drop-inactive-color;
+        color         : $placeholder-inactive-color;
         border        : 3px dashed transparent;
         border-radius : 8px;
         transition    : color 300ms, border 300ms;
@@ -43,7 +43,7 @@
 
     &.bordered .text
     {
-        border : 3px dashed $icon-drop-inactive-color;
+        border : 3px dashed $placeholder-inactive-color;
     }
 
     &.js-hidden .text
@@ -59,8 +59,8 @@
 
 .js-drag .placeholder .text
 {
-    color  : $icon-drop-active-color;
-    border : 3px dashed $icon-drop-active-color;
+    color  : $placeholder-active-color;
+    border : 3px dashed $placeholder-active-color;
 }
 
 .js-sortable
@@ -69,5 +69,5 @@
     height        : 50px;
     box-sizing    : border-box;
     border-radius : 8px;
-    border        : 3px dashed $icon-drop-inactive-color;
+    border        : 3px dashed $placeholder-inactive-color;
 }

@@ -335,8 +335,8 @@ button.right {
   position: relative;
   height: 5px;
   margin: 0 10px 12px 10px;
-  border-top: 1px solid #d5d5d5;
-  border-bottom: 1px solid #d5d5d5;
+  border-top: 1px solid #e0e0e0;
+  border-bottom: 1px solid #e0e0e0;
 }
 /* line 108, ../sass/_operations.scss */
 .operation-tools:before {
@@ -346,7 +346,7 @@ button.right {
   height: 1px;
   position: absolute;
   top: 2px;
-  background: #d5d5d5;
+  background: #e0e0e0;
 }
 /* line 119, ../sass/_operations.scss */
 .operation-tools:after {

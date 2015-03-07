@@ -3,8 +3,8 @@
     cursor        : move;
     position      : relative;
     z-index       : 32;
-    border-top    : 1px solid $operation-border-color;
-    border-bottom : 1px solid $operation-border-color;
+    border-top    : 1px solid $border-color;
+    border-bottom : 1px solid $border-color;
     box-sizing    : border-box;
     box-shadow    : 0 7px 16px -7px rgba(0, 0, 0, 0.2);
     background    : $operation-bg-color;
@@ -49,7 +49,7 @@
         letter-spacing : $letter-spacing;
         margin         : 0 0 0 10px;
         background     : $operation-bg-color;
-        border         : 1px solid $operation-border-color;
+        border         : 1px solid $border-color;
         transition     : width 200ms;
         text-shadow    : $text-shadow;
         border-radius  : 5px;
@@ -102,8 +102,8 @@
     position      : relative;
     height        : 5px;
     margin        : 0 10px 12px 10px;
-    border-top    : 1px solid #d5d5d5;
-    border-bottom : 1px solid #d5d5d5;
+    border-top    : 1px solid $operation-draggable-color;
+    border-bottom : 1px solid $operation-draggable-color;
 
     &:before
     {
@@ -113,7 +113,7 @@
         height     : 1px;
         position   : absolute;
         top        : 2px;
-        background : #d5d5d5;
+        background : $operation-draggable-color;
     }
 
     &:after
