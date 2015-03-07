@@ -58,21 +58,6 @@ button.right {
   float: right;
 }
 
-/* line 54, ../sass/_buttons.scss */
-label {
-  float: left;
-  font-size: 11px;
-  text-shadow: 0 1px 0 #ffffff;
-  color: #333333;
-  letter-spacing: 0.02em;
-  margin: 6px 0 0 10px;
-}
-/* line 63, ../sass/_buttons.scss */
-label input[type=checkbox] {
-  float: left;
-  margin: 0px 4px 0 0;
-}
-
 /* line 1, ../sass/_panels.scss */
 .panel {
   box-sizing: border-box;
@@ -138,11 +123,25 @@ label input[type=checkbox] {
   position: fixed;
   bottom: 11px;
 }
-/* line 73, ../sass/_panels.scss */
+/* line 72, ../sass/_panels.scss */
+.panel .actions label {
+  float: left;
+  font-size: 11px;
+  text-shadow: 0 1px 0 #ffffff;
+  color: #333333;
+  letter-spacing: 0.02em;
+  margin: 6px 0 0 10px;
+}
+/* line 81, ../sass/_panels.scss */
+.panel .actions label input[type=checkbox] {
+  float: left;
+  margin: 0px 4px 0 0;
+}
+/* line 89, ../sass/_panels.scss */
 .panel.operations .actions {
   width: 300px;
 }
-/* line 78, ../sass/_panels.scss */
+/* line 94, ../sass/_panels.scss */
 .panel.files .actions {
   width: 500px;
 }

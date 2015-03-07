@@ -13,7 +13,6 @@
                     <div>{{main.drop}}</div>
                 </div>
             </div>
-            <input type="file" multiple class="js-upload">
             <table cellpadding="0" cellspacing="0">
                 <tbody class="files-list js-files-list"></tbody>
             </table>
@@ -33,6 +32,7 @@
                 </tr>
             </script>
             <div class="actions">
+                <input type="file" multiple class="js-upload">
                 <button class="secondary left js-files-add">
                     {{main.actions.add_files}}
                 </button>
@@ -55,55 +55,73 @@
             <div class="js-operations"></div>
             <script type="text/template" class="js-operation-template">
                 <div class="operation js-operation">
-                    <div class="operation-bar">
-                        <i class="type fa fa-search"></i>
-                        <select>
-                            <option>Select text...</option>
-                            <option>All text</option>
-                            <option>Digits</option>
-                            <option>Special characters</option>
-                            <option>List of characters</option>
-                            <option>Range of characters</option>
-                            <option>Regular expression</option>
-                        </select>
+                    <div class="js-options">
+                        <div class="operation-bar">
+                            <i class="type fa fa-search"></i>
+                            <select class="js-select-type">
+                                <option value="">Select text...</option>
+                                <option value="all">All text</option>
+                                <option value="digits">Digits</option>
+                                <option value="">Special characters @todo</option>
+                                <option value="">List of characters @todo</option>
+                                <option value="">Range of characters @todo</option>
+                                <option value="">Regular expression @todo</option>
+                            </select>
+                        </div>
+                        <div class="operation-fields js-fields" data-type="all">
+                            <div class="field">
+                                <label>
+                                    <input type="checkbox">
+                                    @todo wording champ
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label>
+                                    @todo wording champ
+                                    <input type="text">
+                                </label>
+                            </div>
+                        </div>
+                        <div class="operation-fields js-fields" data-type="digits">
+                            <div class="field">
+                                <label>
+                                    <input type="checkbox">
+                                    @todo wording champ
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label>
+                                    @todo wording champ
+                                    <input type="text">
+                                </label>
+                            </div>
+                        </div>
                     </div>
-                    <!--<div class="operation-fields">
-                        <div class="field">
-                            <label>
-                                <input type="checkbox">
-                                @todo wording champ
-                            </label>
+                    <div class="js-options">
+                        <div class="operation-bar">
+                            <i class="type fa fa-pencil"></i>
+                            <select class="js-select-type" data-type="js-replace-type">
+                                <option value="">Replace with...</option>
+                                <option value="free">Free text</option>
+                                <option value="">Digits sequence</option>
+                                <option value="">Same text with options</option>
+                            </select>
                         </div>
-                        <div class="field">
-                            <label>
-                                @todo wording champ
-                                <input type="text">
-                            </label>
+                        <div class="operation-fields js-fields" data-type="free">
+                            <div class="field">
+                                <label>
+                                    <input type="checkbox">
+                                    @todo wording champ
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label>
+                                    @todo wording champ
+                                    <input type="text">
+                                </label>
+                            </div>
                         </div>
-                    </div>-->
-                    <div class="operation-bar">
-                        <i class="type fa fa-pencil"></i>
-                        <select>
-                            <option>Replace with...</option>
-                            <option>Free text</option>
-                            <option>Digits sequence</option>
-                            <option>Same text with options</option>
-                        </select>
                     </div>
-                    <!--<div class="operation-fields">
-                        <div class="field">
-                            <label>
-                                <input type="checkbox">
-                                @todo wording champ
-                            </label>
-                        </div>
-                        <div class="field">
-                            <label>
-                                @todo wording champ
-                                <input type="text">
-                            </label>
-                        </div>
-                    </div>-->
                     <div class="operation-tools">
                         <i class="action delete fa fa-trash-o js-delete"></i>
                     </div>

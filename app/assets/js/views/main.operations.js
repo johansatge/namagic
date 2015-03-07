@@ -55,6 +55,23 @@
             $ui.add.on('click', $.proxy(_onAddOperation, this));
             $ui.apply.on('click', $.proxy(_onApplyOperations, this));
             $ui.operations.sortable({items: '.js-operation', axis: 'y', placeholder: 'js-sortable', zIndex: 40});
+            $ui.operations.on('change', '.js-select-type', $.proxy(_onSelectType, this));
+            $ui.operations.on('click', '.js-delete', $.proxy(_onDeleteOperation, this));
+        };
+
+        /**
+         * Select a search or replace type in an operation box
+         * @param evt
+         * @private
+         */
+        var _onSelectType = function(evt)
+        {
+            var $type = $(evt.currentTarget);
+            var $options = $type.closest('.js-options');
+            $options.find('.js-fields').hide();
+            $options.find('.js-fields[data-type="' + $type.val() + '"]').show();
+            app.utils.log($type.val());
+            // @todo show options
         };
 
         /**
@@ -67,7 +84,7 @@
             var $new_operation = $(operationTemplate);
             $ui.operations.append($new_operation);
             $ui.operations.sortable('refresh');
-            $new_operation.find('.js-delete').on('click', $.proxy(_onDeleteOperation, this))
+            $new_operation.find('.js-fields').hide();
             $ui.placeholder.addClass('js-hidden');
         };
 
