@@ -48,66 +48,68 @@
                     <div>{{main.no_action}}</div>
                 </div>
             </div>
-            <div class="operation">
-                <div class="operation-bar">
-                    <i class="type fa fa-search"></i>
-                    <select>
-                        <option>Select text...</option>
-                        <option>All text</option>
-                        <option>Digits</option>
-                        <option>Special characters</option>
-                        <option>Characters by case</option>
-                        <option>List of characters</option>
-                        <option>Range of characters</option>
-                        <option>Regular expression</option>
-                    </select>
-                </div>
-                <div class="operation-fields">
-                    <div class="field">
-                        <label>
-                            <input type="checkbox">
-                            @todo wording champ
-                        </label>
+            <script type="text/template" class="js-operation-template">
+                <div class="operation">
+                    <div class="operation-bar">
+                        <i class="type fa fa-search"></i>
+                        <select>
+                            <option>Select text...</option>
+                            <option>All text</option>
+                            <option>Digits</option>
+                            <option>Special characters</option>
+                            <option>Characters by case</option>
+                            <option>List of characters</option>
+                            <option>Range of characters</option>
+                            <option>Regular expression</option>
+                        </select>
                     </div>
-                    <div class="field">
-                        <label>
-                            @todo wording champ
-                            <input type="text">
-                        </label>
+                    <div class="operation-fields">
+                        <div class="field">
+                            <label>
+                                <input type="checkbox">
+                                @todo wording champ
+                            </label>
+                        </div>
+                        <div class="field">
+                            <label>
+                                @todo wording champ
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="operation-bar">
+                        <i class="type fa fa-pencil"></i>
+                        <select>
+                            <option>Replace with...</option>
+                            <option>Free text</option>
+                            <option>Digits sequence</option>
+                            <option>Same text with options</option>
+                        </select>
+                    </div>
+                    <div class="operation-fields">
+                        <div class="field">
+                            <label>
+                                <input type="checkbox">
+                                @todo wording champ
+                            </label>
+                        </div>
+                        <div class="field">
+                            <label>
+                                @todo wording champ
+                                <input type="text">
+                            </label>
+                        </div>
+                    </div>
+                    <div class="operation-tools">
+                        <i class="action delete fa fa-trash-o"></i>
                     </div>
                 </div>
-                <div class="operation-bar">
-                    <i class="type fa fa-pencil"></i>
-                    <select>
-                        <option>Replace with...</option>
-                        <option>Free text</option>
-                        <option>Digits sequence</option>
-                        <option>Same text with options</option>
-                    </select>
-                </div>
-                <div class="operation-fields">
-                    <div class="field">
-                        <label>
-                            <input type="checkbox">
-                            @todo wording champ
-                        </label>
-                    </div>
-                    <div class="field">
-                        <label>
-                            @todo wording champ
-                            <input type="text">
-                        </label>
-                    </div>
-                </div>
-                <div class="operation-tools">
-                    <i class="action delete fa fa-trash-o"></i>
-                </div>
-            </div>
+            </script>
             <div class="actions">
-                <button class="primary right">
+                <button class="primary right js-operation-apply">
                     {{main.actions.apply}}
                 </button>
-                <button class="secondary right">
+                <button class="secondary right js-operation-add">
                     {{main.actions.add_action}}
                 </button>
             </div>

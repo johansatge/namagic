@@ -13,6 +13,7 @@
         var events = new app.node.events.EventEmitter();
         var $ui = {};
         var filesView;
+        var operationsView;
 
         /**
          * Attaches an event
@@ -96,6 +97,8 @@
         {
             filesView = new app.views.main.files();
             filesView.init($ui.filesPanel);
+            operationsView = new app.views.main.operations();
+            operationsView.init($ui.operationsPanel);
         };
 
         /**
