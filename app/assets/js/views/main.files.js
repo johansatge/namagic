@@ -56,6 +56,20 @@
         };
 
         /**
+         * Adds files
+         * @param files
+         */
+        this.addFiles = function(files)
+        {
+            for (var index in files)
+            {
+                var row = app.utils.template.render(fileTemplate, [files[index]]);
+                $ui.list.append(row);
+            }
+            $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
+        };
+
+        /**
          * Inits UI
          * @param $dom
          */
@@ -110,7 +124,7 @@
         var _onDropFiles = function(evt)
         {
             _onDragLeave();
-            _parseAndSendFiles(evt.originalEvent.dataTransfer.files);
+            events.emit('add_files', evt.originalEvent.dataTransfer.files);
         };
 
         /**
@@ -118,7 +132,7 @@
          */
         var _onSelectNewFiles = function(evt)
         {
-            _parseAndSendFiles(evt.target.files);
+            events.emit('add_files', evt.target.files);
         };
 
         /**
@@ -174,27 +188,6 @@
             }
             $lastSelectedFile = $file.hasClass('js-active') ? $file : false;
             $ui.remove.attr('disabled', $file.hasClass('js-active') ? false : 'disabled');
-        };
-
-        /**
-         * Parses a list of files got from a user event
-         * @param raw_files
-         */
-        var _parseAndSendFiles = function(raw_files)
-        {
-            for (var index in raw_files)
-            {
-                if (typeof raw_files[index].path !== 'undefined' && raw_files[index].path !== '')
-                {
-                    var data = {
-                        dir: raw_files[index].path.substring(0, raw_files[index].path.length - raw_files[index].name.length),
-                        name: raw_files[index].name
-                    };
-                    var row = app.utils.template.render(fileTemplate, [data]);
-                    $ui.list.append(row);
-                }
-            }
-            $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
         };
 
     };

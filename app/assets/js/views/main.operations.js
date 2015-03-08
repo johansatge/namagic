@@ -57,6 +57,16 @@
             $ui.operations.sortable({items: '.js-operation', axis: 'y', placeholder: 'js-sortable', zIndex: 40});
             $ui.operations.on('change', '.js-select-type', $.proxy(_onSelectType, this));
             $ui.operations.on('click', '.js-delete', $.proxy(_onDeleteOperation, this));
+            $ui.operations.on('change keyup', 'input,select', $.proxy(_onEditOperations, this));
+        };
+
+        /**
+         * Editing operations
+         */
+        var _onEditOperations = function()
+        {
+            // @todo parse operations and send event
+            events.emit('edit_operations', '@todo');
         };
 
         /**
@@ -70,8 +80,6 @@
             var $options = $type.closest('.js-options');
             $options.find('.js-fields').hide();
             $options.find('.js-fields[data-type="' + $type.val() + '"]').show();
-            app.utils.log($type.val());
-            // @todo show options
         };
 
         /**

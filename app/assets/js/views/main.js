@@ -56,6 +56,15 @@
         };
 
         /**
+         * Adds files
+         * @param files
+         */
+        this.addFiles = function(files)
+        {
+            filesView.addFiles(files);
+        };
+
+        /**
          * Loads the template when the view is ready
          * @param $window
          * @param $body
@@ -63,8 +72,8 @@
         var _onWindowLoaded = function($window, $body)
         {
             _initDOM($window, $body);
-            _initEvents();
             _initSubviews();
+            _initEvents();
         };
 
         /**
@@ -82,15 +91,6 @@
         };
 
         /**
-         * Inits events
-         */
-        var _initEvents = function()
-        {
-            $ui.window.on('resize', $.proxy(_onWindowResize, this)).trigger('resize');
-            $ui.window.on('keydown keyup', $.proxy(_onRecordKey, this));
-        };
-
-        /**
          * Inits subviews
          */
         var _initSubviews = function()
@@ -99,6 +99,35 @@
             filesView.init($ui.filesPanel);
             operationsView = new app.views.main.operations();
             operationsView.init($ui.operationsPanel);
+        };
+
+        /**
+         * Inits events
+         */
+        var _initEvents = function()
+        {
+            $ui.window.on('resize', $.proxy(_onWindowResize, this)).trigger('resize');
+            $ui.window.on('keydown keyup', $.proxy(_onRecordKey, this));
+            operationsView.on('edit_operations', $.proxy(_onEditOperationsFromSubview, this));
+            filesView.on('add_files', $.proxy(_onAddFilesFromSubview, this));
+        };
+
+        /**
+         * Asks to add files from the subview
+         * @param raw_files
+         */
+        var _onAddFilesFromSubview = function(raw_files)
+        {
+            events.emit('add_files', raw_files);
+        };
+
+        /**
+         * Ask operations edition from the subview
+         * @param data
+         */
+        var _onEditOperationsFromSubview = function(data)
+        {
+            events.emit('edit_operations', data);
         };
 
         /**
