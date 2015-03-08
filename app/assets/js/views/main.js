@@ -65,6 +65,15 @@
         };
 
         /**
+         * Update existing files
+         * @param files
+         */
+        this.updateFiles = function(files)
+        {
+            filesView.updateFiles(files);
+        };
+
+        /**
          * Loads the template when the view is ready
          * @param $window
          * @param $body

@@ -22,13 +22,24 @@
                 if (typeof raw_files[index].path !== 'undefined' && raw_files[index].path !== '')
                 {
                     files.push({
-                        // @todo return an ID - will be used later to update the view for each file
+                        id: '@todo id',
                         dir: raw_files[index].path.substring(0, raw_files[index].path.length - raw_files[index].name.length),
-                        name: raw_files[index].name
+                        basename: raw_files[index].name,
+                        newname: '@todo new name' // @todo apply current operations on the name
                     });
                 }
             }
             return files;
+        };
+
+        /**
+         * Applies given operations on the current list of files
+         * @param data
+         */
+        this.applyOperations = function(data)
+        {
+            app.utils.log('@todo apply new operations on current files');
+            // @todo return files with updated names
         };
 
     };

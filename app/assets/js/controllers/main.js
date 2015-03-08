@@ -39,8 +39,8 @@
          */
         var _onEditOperations = function(data)
         {
-            app.utils.log(data);
-            // @todo parse files stored in the model and return the result for each file (id + filename)
+            var files = model.applyOperations(data);
+            view.updateFiles(files);
         };
 
         /**

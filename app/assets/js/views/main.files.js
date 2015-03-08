@@ -53,6 +53,7 @@
             $lastSelectedFile = false;
             $ui.remove.attr('disabled', 'disabled');
             $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
+            // @todo remove stored reference with its ID and sends an event to the model
         };
 
         /**
@@ -67,6 +68,17 @@
                 $ui.list.append(row);
             }
             $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
+            // @todo store file with its ID (will be used when applying new operations)
+        };
+
+        /**
+         * Updates files
+         * @param files
+         */
+        this.updateFiles = function(files)
+        {
+            app.utils.log('@todo update files in subview');
+            // @todo process current files (stored with addFiles) and apply the new filemane for each ID
         };
 
         /**
