@@ -14,6 +14,7 @@
         var currentHotkey = false;
         var fileTemplate;
         var $lastSelectedFile = false;
+        var $files = {};
 
         /**
          * Attaches an event
@@ -44,11 +45,27 @@
         {
             for (var index in files)
             {
-                var row = app.utils.template.render(fileTemplate, [files[index]]);
-                $ui.list.append(row);
+                var $file = $(app.utils.template.render(fileTemplate, [files[index]]));
+                $ui.list.append($file);
+                $files[files[index]['id']] = $file;
             }
             $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
-            // @todo store file with its ID (will be used when applying new operations)
+        };
+
+        /**
+         * Deletes a list of files
+         * @param ids
+         */
+        this.removeFiles = function(ids)
+        {
+            for (var index = 0; index < ids.length; index += 1)
+            {
+                $files[ids[index]].remove();
+                $files[ids[index]] = null;
+            }
+            $lastSelectedFile = false;
+            $ui.remove.attr('disabled', 'disabled');
+            $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
         };
 
         /**
@@ -87,7 +104,7 @@
             $ui.placeholder.on('dragenter dragleave mouseenter mouseleave', $.proxy(_onDrag, this));
             $ui.placeholder.on('drop', $.proxy(_onAddFilesFromDrop, this));
             $ui.add.on('click', $.proxy(_onAddFilesFromButton, this));
-            $ui.remove.on('click', $.proxy(_onDeleteActiveFiles, this));
+            $ui.remove.on('click', $.proxy(_onRemoveActiveFiles, this));
             $ui.placeholder.on('click', $.proxy(_onAddFilesFromButton, this));
             $ui.input.on('change', $.proxy(_onAddFilesFromUploader, this));
             $ui.list.on('click', '.js-file', $.proxy(_onFileClick, this));
@@ -106,7 +123,7 @@
             }
             if (evt.which === 8 && evt.type === 'keyup')
             {
-                _onDeleteActiveFiles.apply(this);
+                _onRemoveActiveFiles.apply(this);
             }
         };
 
@@ -178,13 +195,9 @@
             }
             else
             {
-                if (currentHotkey === 91)
+                $file.toggleClass('js-active');
+                if (currentHotkey !== 91)
                 {
-                    $file.toggleClass('js-active');
-                }
-                else
-                {
-                    $file.toggleClass('js-active');
                     $file.siblings().removeClass('js-active');
                 }
             }
@@ -195,13 +208,15 @@
         /**
          * Handles files deletion
          */
-        var _onDeleteActiveFiles = function()
+        var _onRemoveActiveFiles = function()
         {
-            $ui.list.children().filter('.js-active').remove();
-            $lastSelectedFile = false;
-            $ui.remove.attr('disabled', 'disabled');
-            $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
-            // @todo remove stored reference with its ID and sends an event to the model
+            var $items = $ui.list.children().filter('.js-active');
+            var raw_ids = [];
+            $items.each(function()
+            {
+                raw_ids.push($(this).data('id'));
+            });
+            events.emit('remove_files', raw_ids);
         };
 
     };

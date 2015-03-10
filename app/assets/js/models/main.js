@@ -9,6 +9,8 @@
     var module = function()
     {
 
+        var currentFiles = {};
+
         /**
          * Parses a list of files
          * @todo look for duplicates
@@ -21,15 +23,34 @@
             {
                 if (typeof raw_files[index].path !== 'undefined' && raw_files[index].path !== '')
                 {
-                    files.push({
-                        id: '@todo id',
+                    var id = app.node.crypto.createHash('md5').update(raw_files[index].path).digest('hex');
+                    currentFiles[id] = files[id] = {
+                        id: id,
                         dir: raw_files[index].path.substring(0, raw_files[index].path.length - raw_files[index].name.length),
                         basename: raw_files[index].name,
                         newname: '@todo new name' // @todo apply current operations on the name
-                    });
+                    };
                 }
             }
             return files;
+        };
+
+        /**
+         * Removes a list of files
+         * @param raw_ids
+         */
+        this.removeFiles = function(raw_ids)
+        {
+            var ids = [];
+            for (var index = 0; index < raw_ids.length; index += 1)
+            {
+                if (typeof currentFiles[raw_ids[index]] !== 'undefined')
+                {
+                    currentFiles[raw_ids[index]] = null;
+                    ids.push(raw_ids[index]);
+                }
+            }
+            return ids;
         };
 
         /**

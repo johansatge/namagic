@@ -65,6 +65,15 @@
         };
 
         /**
+         * Removes files
+         * @param ids
+         */
+        this.removeFiles = function(ids)
+        {
+            filesView.removeFiles(ids);
+        };
+
+        /**
          * Update existing files
          * @param files
          */
@@ -118,6 +127,7 @@
             $ui.window.on('resize', $.proxy(_onWindowResize, this)).trigger('resize');
             operationsView.on('edit_operations', $.proxy(_onEditOperationsFromSubview, this));
             filesView.on('add_files', $.proxy(_onAddFilesFromSubview, this));
+            filesView.on('remove_files', $.proxy(_onRemoveFilesFromSubview, this));
         };
 
         /**
@@ -127,6 +137,15 @@
         var _onAddFilesFromSubview = function(raw_files)
         {
             events.emit('add_files', raw_files);
+        };
+
+        /**
+         * Asks to delete files from the subview
+         * @param raw_ids
+         */
+        var _onRemoveFilesFromSubview = function(raw_ids)
+        {
+            events.emit('remove_files', raw_ids);
         };
 
         /**

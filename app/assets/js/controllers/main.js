@@ -19,6 +19,7 @@
         {
             view.on('close', $.proxy(_onViewClose, this));
             view.on('add_files', $.proxy(_onAddFiles, this));
+            view.on('remove_files', $.proxy(_onRemoveFiles, this));
             view.on('edit_operations', $.proxy(_onEditOperations, this));
             view.show();
         };
@@ -31,6 +32,16 @@
         {
             var files = model.parseFiles(raw_files);
             view.addFiles(files);
+        };
+
+        /**
+         * Handles files deletion from the view
+         * @param raw_ids
+         */
+        var _onRemoveFiles = function(raw_ids)
+        {
+            var ids = model.removeFiles(raw_ids);
+            view.removeFiles(ids);
         };
 
         /**
