@@ -105,7 +105,7 @@
         var _initSubviews = function()
         {
             filesView = new app.views.main.files();
-            filesView.init($ui.filesPanel);
+            filesView.init($ui.window, $ui.filesPanel);
             operationsView = new app.views.main.operations();
             operationsView.init($ui.operationsPanel);
         };
@@ -116,7 +116,6 @@
         var _initEvents = function()
         {
             $ui.window.on('resize', $.proxy(_onWindowResize, this)).trigger('resize');
-            $ui.window.on('keydown keyup', $.proxy(_onRecordKey, this));
             operationsView.on('edit_operations', $.proxy(_onEditOperationsFromSubview, this));
             filesView.on('add_files', $.proxy(_onAddFilesFromSubview, this));
         };
@@ -137,22 +136,6 @@
         var _onEditOperationsFromSubview = function(data)
         {
             events.emit('edit_operations', data);
-        };
-
-        /**
-         * Records a hotkey
-         * @param evt
-         */
-        var _onRecordKey = function(evt)
-        {
-            if (evt.which === 16 || evt.which === 91)
-            {
-                filesView.setHotkey(evt.type === 'keydown' ? evt.which : false);
-            }
-            if (evt.which === 8 && evt.type === 'keyup')
-            {
-                filesView.deleteActiveFiles();
-            }
         };
 
         /**

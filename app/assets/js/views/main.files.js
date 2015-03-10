@@ -27,33 +27,13 @@
 
         /**
          * Inits the subview
+         * @param $window
          * @param $dom
          */
-        this.init = function($dom)
+        this.init = function($window, $dom)
         {
             _initUI.apply(this, [$dom]);
-            _initEvents.apply(this);
-        };
-
-        /**
-         * Sets the current hotkey (used for files selection)
-         * @param hotkey
-         */
-        this.setHotkey = function(hotkey)
-        {
-            currentHotkey = hotkey;
-        };
-
-        /**
-         * Handles files deletion
-         */
-        this.deleteActiveFiles = function()
-        {
-            $ui.list.children().filter('.js-active').remove();
-            $lastSelectedFile = false;
-            $ui.remove.attr('disabled', 'disabled');
-            $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
-            // @todo remove stored reference with its ID and sends an event to the model
+            _initEvents.apply(this, [$window]);
         };
 
         /**
@@ -99,66 +79,76 @@
 
         /**
          * Inits events
+         * @param $window
          */
-        var _initEvents = function()
+        var _initEvents = function($window)
         {
-            $ui.placeholder.on('dragenter mouseenter', $.proxy(_onDragEnter, this));
-            $ui.placeholder.on('dragleave mouseleave', $.proxy(_onDragLeave, this));
-            $ui.placeholder.on('drop', $.proxy(_onDropFiles, this));
-            $ui.add.on('click', $.proxy(_onAddNewsFiles, this));
-            $ui.remove.on('click', $.proxy(this, 'deleteActiveFiles'));
-            $ui.placeholder.on('click', $.proxy(_onAddNewsFiles, this));
-            $ui.input.on('change', $.proxy(_onSelectNewFiles, this));
-            $ui.list.on('click', '.js-file', $.proxy(_onSelectFile, this));
+            $window.on('keydown keyup', $.proxy(_onRecordKey, this));
+            $ui.placeholder.on('dragenter dragleave mouseenter mouseleave', $.proxy(_onDrag, this));
+            $ui.placeholder.on('drop', $.proxy(_onAddFilesFromDrop, this));
+            $ui.add.on('click', $.proxy(_onAddFilesFromButton, this));
+            $ui.remove.on('click', $.proxy(_onDeleteActiveFiles, this));
+            $ui.placeholder.on('click', $.proxy(_onAddFilesFromButton, this));
+            $ui.input.on('change', $.proxy(_onAddFilesFromUploader, this));
+            $ui.list.on('click', '.js-file', $.proxy(_onFileClick, this));
             $ui.dirToggle.on('change', $.proxy(_onToggleDirectories, this));
         };
 
         /**
-         * Drags stuff on the panel
+         * Records a hotkey
+         * @param evt
          */
-        var _onDragEnter = function()
+        var _onRecordKey = function(evt)
         {
-            $ui.panel.addClass('js-drag');
+            if (evt.which === 16 || evt.which === 91)
+            {
+                currentHotkey = evt.type === 'keydown' ? evt.which : false;
+            }
+            if (evt.which === 8 && evt.type === 'keyup')
+            {
+                _onDeleteActiveFiles.apply(this);
+            }
         };
 
         /**
-         * Drags out from the panel
+         * Drags stuff over the panel
+         * @param evt
          */
-        var _onDragLeave = function()
+        var _onDrag = function(evt)
         {
-            $ui.panel.removeClass('js-drag');
+            $ui.panel.toggleClass('js-drag', evt.type === 'dragenter' || evt.type === 'mouseenter');
         };
 
         /**
          * Dropping stuff on the files panel
          * @param evt
          */
-        var _onDropFiles = function(evt)
+        var _onAddFilesFromDrop = function(evt)
         {
-            _onDragLeave();
+            _onDrag({type: 'dragleave'});
             events.emit('add_files', evt.originalEvent.dataTransfer.files);
         };
 
         /**
-         * Selecting files from the input
+         * Selecting files from the hidden upload input
          */
-        var _onSelectNewFiles = function(evt)
+        var _onAddFilesFromUploader = function(evt)
         {
             events.emit('add_files', evt.target.files);
         };
 
         /**
-         * Opens the file dialog when clicking on the empty area
+         * Selecting files from the "Add files..." button
          * @param evt
          */
-        var _onAddNewsFiles = function(evt)
+        var _onAddFilesFromButton = function(evt)
         {
             evt.preventDefault();
             $ui.input.trigger('click');
         };
 
         /**
-         * Toggles directories
+         * Toggles directories visibility
          */
         var _onToggleDirectories = function()
         {
@@ -170,7 +160,7 @@
          * @todo check if this works well with a lot of files
          * @param evt
          */
-        var _onSelectFile = function(evt)
+        var _onFileClick = function(evt)
         {
             var $file = $(evt.currentTarget);
             if (currentHotkey === 16)
@@ -200,6 +190,18 @@
             }
             $lastSelectedFile = $file.hasClass('js-active') ? $file : false;
             $ui.remove.attr('disabled', $file.hasClass('js-active') ? false : 'disabled');
+        };
+
+        /**
+         * Handles files deletion
+         */
+        var _onDeleteActiveFiles = function()
+        {
+            $ui.list.children().filter('.js-active').remove();
+            $lastSelectedFile = false;
+            $ui.remove.attr('disabled', 'disabled');
+            $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
+            // @todo remove stored reference with its ID and sends an event to the model
         };
 
     };
