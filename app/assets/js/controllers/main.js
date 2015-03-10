@@ -18,40 +18,47 @@
         this.init = function()
         {
             view.on('close', $.proxy(_onViewClose, this));
-            view.on('add_files', $.proxy(_onAddFiles, this));
-            view.on('remove_files', $.proxy(_onRemoveFiles, this));
-            view.on('edit_operations', $.proxy(_onEditOperations, this));
+            view.on('loaded', $.proxy(_onViewLoaded, this));
             view.show();
         };
 
         /**
-         * Handles new files from the view
-         * @param raw_files
+         * Inits the subview when the view is ready
          */
-        var _onAddFiles = function(raw_files)
+        var _onViewLoaded = function()
         {
-            var files = model.parseFiles(raw_files);
-            view.addFiles(files);
+            view.files.on('add_files', $.proxy(_onAddFiles, this));
+            view.files.on('remove_files', $.proxy(_onRemoveFiles, this));
+            view.operations.on('edit_operations', $.proxy(_onEditOperations, this));
         };
 
         /**
-         * Handles files deletion from the view
-         * @param raw_ids
+         * Processes files added from the view and send them back
+         * @param files
          */
-        var _onRemoveFiles = function(raw_ids)
+        var _onAddFiles = function(files)
         {
-            var ids = model.removeFiles(raw_ids);
-            view.removeFiles(ids);
+            view.files.addFiles(model.addFiles(files));
         };
 
         /**
-         * Editing operations
+         * Processes files deleted from the view and send them back
+         * @param ids
+         */
+        var _onRemoveFiles = function(ids)
+        {
+            model.removeFiles(ids);
+            view.files.removeFiles(ids);
+        };
+
+        /**
+         * Processes files when modifying an operation from the view
          * @param data
          */
         var _onEditOperations = function(data)
         {
             var files = model.applyOperations(data);
-            view.updateFiles(files);
+            view.files.updateFiles(files);
         };
 
         /**

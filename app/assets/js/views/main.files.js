@@ -45,9 +45,8 @@
         {
             for (var index in files)
             {
-                var $file = $(app.utils.template.render(fileTemplate, [files[index]]));
-                $ui.list.append($file);
-                $files[files[index]['id']] = $file;
+                $files[files[index].id] = $(app.utils.template.render(fileTemplate, [files[index]]));
+                $ui.list.append($files[files[index].id]);
             }
             $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
         };
@@ -101,7 +100,7 @@
         var _initEvents = function($window)
         {
             $window.on('keydown keyup', $.proxy(_onRecordKey, this));
-            $ui.placeholder.on('dragenter dragleave mouseenter mouseleave', $.proxy(_onDrag, this));
+            $ui.placeholder.on('dragenter dragleave mouseenter mouseleave', $.proxy(_onInteractWithPlaceholder, this));
             $ui.placeholder.on('drop', $.proxy(_onAddFilesFromDrop, this));
             $ui.add.on('click', $.proxy(_onAddFilesFromButton, this));
             $ui.remove.on('click', $.proxy(_onRemoveActiveFiles, this));
@@ -131,7 +130,7 @@
          * Drags stuff over the panel
          * @param evt
          */
-        var _onDrag = function(evt)
+        var _onInteractWithPlaceholder = function(evt)
         {
             $ui.panel.toggleClass('js-drag', evt.type === 'dragenter' || evt.type === 'mouseenter');
         };
@@ -142,8 +141,8 @@
          */
         var _onAddFilesFromDrop = function(evt)
         {
-            _onDrag({type: 'dragleave'});
-            events.emit('add_files', evt.originalEvent.dataTransfer.files);
+            _onInteractWithPlaceholder({type: 'dragleave'});
+            events.emit('add_files', _cleanSelectedFiles.apply(this, [evt.originalEvent.dataTransfer.files]));
         };
 
         /**
@@ -151,7 +150,7 @@
          */
         var _onAddFilesFromUploader = function(evt)
         {
-            events.emit('add_files', evt.target.files);
+            events.emit('add_files', _cleanSelectedFiles.apply(this, [evt.target.files]));
         };
 
         /**
@@ -211,13 +210,33 @@
         var _onRemoveActiveFiles = function()
         {
             var $items = $ui.list.children().filter('.js-active');
-            var raw_ids = [];
+            var ids = [];
             $items.each(function()
             {
-                raw_ids.push($(this).data('id'));
+                ids.push($(this).data('id'));
             });
-            events.emit('remove_files', raw_ids);
+            events.emit('remove_files', ids);
         };
+
+        /**
+         * Cleans files selected in the view
+         * @param raw_files
+         */
+        var _cleanSelectedFiles = function(raw_files)
+        {
+            var files = [];
+            for (var index in raw_files)
+            {
+                if (typeof raw_files[index].path !== 'undefined' && raw_files[index].path !== '')
+                {
+                    files.push({
+                        dir: raw_files[index].path.substring(0, raw_files[index].path.length - raw_files[index].name.length),
+                        name: raw_files[index].name
+                    });
+                }
+            }
+            return files;
+        }
 
     };
 

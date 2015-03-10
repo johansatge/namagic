@@ -9,11 +9,12 @@
     var module = function()
     {
 
+        this.files;
+        this.operations;
+
         var window = null;
         var events = new app.node.events.EventEmitter();
         var $ui = {};
-        var filesView;
-        var operationsView;
 
         /**
          * Attaches an event
@@ -42,8 +43,8 @@
                 show: false,
                 title: ''
             });
-            bootstrap.on('loaded', _onWindowLoaded);
-            bootstrap.on('close', _onWindowClose);
+            bootstrap.on('loaded', $.proxy(_onWindowLoaded, this));
+            bootstrap.on('close', $.proxy(_onWindowClose, this));
             window = bootstrap.initAndShow();
         };
 
@@ -56,42 +57,16 @@
         };
 
         /**
-         * Adds files
-         * @param files
-         */
-        this.addFiles = function(files)
-        {
-            filesView.addFiles(files);
-        };
-
-        /**
-         * Removes files
-         * @param ids
-         */
-        this.removeFiles = function(ids)
-        {
-            filesView.removeFiles(ids);
-        };
-
-        /**
-         * Update existing files
-         * @param files
-         */
-        this.updateFiles = function(files)
-        {
-            filesView.updateFiles(files);
-        };
-
-        /**
          * Loads the template when the view is ready
          * @param $window
          * @param $body
          */
         var _onWindowLoaded = function($window, $body)
         {
-            _initDOM($window, $body);
-            _initSubviews();
-            _initEvents();
+            _initDOM.apply(this, [$window, $body]);
+            _initSubviews.apply(this);
+            _initEvents.apply(this);
+            events.emit('loaded');
         };
 
         /**
@@ -113,10 +88,10 @@
          */
         var _initSubviews = function()
         {
-            filesView = new app.views.main.files();
-            filesView.init($ui.window, $ui.filesPanel);
-            operationsView = new app.views.main.operations();
-            operationsView.init($ui.operationsPanel);
+            this.files = new app.views.main.files();
+            this.files.init($ui.window, $ui.filesPanel);
+            this.operations = new app.views.main.operations();
+            this.operations.init($ui.operationsPanel);
         };
 
         /**
@@ -125,36 +100,6 @@
         var _initEvents = function()
         {
             $ui.window.on('resize', $.proxy(_onWindowResize, this)).trigger('resize');
-            operationsView.on('edit_operations', $.proxy(_onEditOperationsFromSubview, this));
-            filesView.on('add_files', $.proxy(_onAddFilesFromSubview, this));
-            filesView.on('remove_files', $.proxy(_onRemoveFilesFromSubview, this));
-        };
-
-        /**
-         * Asks to add files from the subview
-         * @param raw_files
-         */
-        var _onAddFilesFromSubview = function(raw_files)
-        {
-            events.emit('add_files', raw_files);
-        };
-
-        /**
-         * Asks to delete files from the subview
-         * @param raw_ids
-         */
-        var _onRemoveFilesFromSubview = function(raw_ids)
-        {
-            events.emit('remove_files', raw_ids);
-        };
-
-        /**
-         * Ask operations edition from the subview
-         * @param data
-         */
-        var _onEditOperationsFromSubview = function(data)
-        {
-            events.emit('edit_operations', data);
         };
 
         /**

@@ -12,45 +12,36 @@
         var currentFiles = {};
 
         /**
-         * Parses a list of files
+         * Adds a list of files
          * @todo look for duplicates
-         * @param raw_files
+         * @param files
          */
-        this.parseFiles = function(raw_files)
+        this.addFiles = function(files)
         {
-            var files = [];
-            for (var index in raw_files)
+            var new_files = [];
+            for (var index in files)
             {
-                if (typeof raw_files[index].path !== 'undefined' && raw_files[index].path !== '')
-                {
-                    var id = app.node.crypto.createHash('md5').update(raw_files[index].path).digest('hex');
-                    currentFiles[id] = files[id] = {
-                        id: id,
-                        dir: raw_files[index].path.substring(0, raw_files[index].path.length - raw_files[index].name.length),
-                        basename: raw_files[index].name,
-                        newname: '@todo new name' // @todo apply current operations on the name
-                    };
-                }
+                var id = app.node.crypto.createHash('md5').update(files[index].dir + files[index].name).digest('hex');
+                currentFiles[id] = new_files[id] = {
+                    id: id,
+                    dir: files[index].dir,
+                    current_name: files[index].name,
+                    new_name: '@todo new name' // @todo apply current operations on the name
+                };
             }
-            return files;
+            return new_files;
         };
 
         /**
          * Removes a list of files
-         * @param raw_ids
+         * @param ids
          */
-        this.removeFiles = function(raw_ids)
+        this.removeFiles = function(ids)
         {
-            var ids = [];
-            for (var index = 0; index < raw_ids.length; index += 1)
+            for (var index = 0; index < ids.length; index += 1)
             {
-                if (typeof currentFiles[raw_ids[index]] !== 'undefined')
-                {
-                    currentFiles[raw_ids[index]] = null;
-                    ids.push(raw_ids[index]);
-                }
+                currentFiles[ids[index]] = null;
             }
-            return ids;
         };
 
         /**
