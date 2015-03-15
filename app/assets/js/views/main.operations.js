@@ -106,6 +106,7 @@
             $(evt.currentTarget).closest('.js-operation').remove();
             $ui.operations.sortable('refresh');
             $ui.placeholder.toggleClass('js-hidden', $ui.operations.children().length > 0);
+            _onEditOperations();
         };
 
         /**
