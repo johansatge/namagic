@@ -173,7 +173,6 @@
 
         /**
          * Selects a file in the list
-         * @todo check if this works well with a lot of files
          * @param evt
          */
         var _onFileClick = function(evt)
