@@ -102,9 +102,9 @@
             $window.on('keydown keyup', $.proxy(_onRecordKey, this));
             $ui.placeholder.on('dragenter dragleave mouseenter mouseleave', $.proxy(_onInteractWithPlaceholder, this));
             $ui.placeholder.on('drop', $.proxy(_onAddFilesFromDrop, this));
+            $ui.placeholder.on('click', $.proxy(_onAddFilesFromButton, this));
             $ui.add.on('click', $.proxy(_onAddFilesFromButton, this));
             $ui.remove.on('click', $.proxy(_onRemoveActiveFiles, this));
-            $ui.placeholder.on('click', $.proxy(_onAddFilesFromButton, this));
             $ui.input.on('change', $.proxy(_onAddFilesFromUploader, this));
             $ui.list.on('click', '.js-file', $.proxy(_onFileClick, this));
             $ui.dirToggle.on('change', $.proxy(_onToggleDirectories, this));

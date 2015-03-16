@@ -191,8 +191,8 @@ button.right {
   border: 3px dashed #cccccc;
 }
 /* line 49, ../sass/_placeholders.scss */
-.placeholder.js-hidden .text {
-  opacity: 0;
+.placeholder.js-hidden {
+  display: none;
 }
 
 /* line 55, ../sass/_placeholders.scss */
