@@ -56,8 +56,9 @@
             <script type="text/template" class="js-operation-template">
                 <div class="operation js-operation">
                     <div class="js-options">
-                        <div class="operation-bar">
+                        <div class="operation-bar operation-actions">
                             <i class="type fa fa-search"></i>
+                            <i class="chevron fa fa-chevron-down"></i>
                             <select class="js-select-type">
                                 <option value="">Select text...</option>
                                 <option value="all">All text</option>
@@ -67,6 +68,9 @@
                                 <option value="">Range of characters @todo</option>
                                 <option value="">Regular expression @todo</option>
                             </select>
+                            <div class="delete js-delete">
+                                <i class="fa fa-trash-o"></i>
+                            </div>
                         </div>
                         <div class="operation-fields js-fields" data-type="all">
                             <div class="field">
@@ -100,6 +104,7 @@
                     <div class="js-options">
                         <div class="operation-bar">
                             <i class="type fa fa-pencil"></i>
+                            <i class="chevron fa fa-chevron-down"></i>
                             <select class="js-select-type" data-type="js-replace-type">
                                 <option value="">Replace with...</option>
                                 <option value="free">Free text</option>
@@ -121,9 +126,6 @@
                                 </label>
                             </div>
                         </div>
-                    </div>
-                    <div class="operation-tools">
-                        <i class="action delete fa fa-trash-o js-delete"></i>
                     </div>
                 </div>
             </script>
