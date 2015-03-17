@@ -48,16 +48,15 @@
         var _onRemoveFiles = function(ids)
         {
             model.removeFiles(ids);
-            view.files.removeFiles(ids);
         };
 
         /**
          * Processes files when modifying an operation from the view
-         * @param data
+         * @param operations
          */
-        var _onEditOperations = function(data)
+        var _onEditOperations = function(operations)
         {
-            var files = model.applyOperations(data);
+            var files = model.applyOperations(operations);
             view.files.updateFiles(files);
         };
 

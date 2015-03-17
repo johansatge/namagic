@@ -52,29 +52,16 @@
         };
 
         /**
-         * Deletes a list of files
-         * @param ids
-         */
-        this.removeFiles = function(ids)
-        {
-            for (var index = 0; index < ids.length; index += 1)
-            {
-                $files[ids[index]].remove();
-                $files[ids[index]] = null;
-            }
-            $lastSelectedFile = false;
-            $ui.remove.attr('disabled', 'disabled');
-            $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
-        };
-
-        /**
          * Updates files
+         * @todo optimize text update
          * @param files
          */
         this.updateFiles = function(files)
         {
-            app.utils.log('@todo update files in subview');
-            // @todo process current files (stored with addFiles) and apply the new filemane for each ID
+            for (var index in files)
+            {
+                $files[index].find('.js-new-name').text(files[index].new_name);
+            }
         };
 
         /**
@@ -212,9 +199,15 @@
             var ids = [];
             $items.each(function()
             {
-                ids.push($(this).data('id'));
+                var id = $(this).data('id');
+                $files[id].remove();
+                delete $files[id];
+                ids.push(id);
             });
             events.emit('remove_files', ids);
+            $lastSelectedFile = false;
+            $ui.remove.attr('disabled', 'disabled');
+            $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
         };
 
         /**

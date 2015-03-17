@@ -66,6 +66,15 @@
         var _onEditOperations = function()
         {
             // @todo parse operations and send event
+
+            /**
+             * @todo
+             * - get .js-operation list
+             * - for each, get search type & fields
+             * - for each, get replace type & fields
+             * return an array of options
+             */
+
             events.emit('edit_operations', '@todo');
         };
 

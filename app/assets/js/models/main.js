@@ -40,18 +40,32 @@
         {
             for (var index = 0; index < ids.length; index += 1)
             {
-                currentFiles[ids[index]] = null;
+                delete currentFiles[ids[index]];
             }
         };
 
         /**
-         * Applies given operations on the current list of files
-         * @param data
+         * Applies given operations on the current list of files and returns it
+         * @param operations
          */
-        this.applyOperations = function(data)
+        this.applyOperations = function(operations)
         {
-            app.utils.log('@todo apply new operations on current files');
-            // @todo return files with updated names
+            for (var index in currentFiles)
+            {
+                currentFiles[index].new_name = _applyOperationsOnFilename.apply(this, [operations, currentFiles[index].current_name]);
+            }
+            return currentFiles;
+        };
+
+        /**
+         * Applies given operations on a filename
+         * @param operations
+         * @param filename
+         */
+        var _applyOperationsOnFilename = function(operations, filename)
+        {
+            // @todo apply operations
+            return filename + new Date().getTime()
         };
 
     };
