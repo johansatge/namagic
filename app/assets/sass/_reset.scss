@@ -1,13 +1,18 @@
 html, body, div, span, p, form, input, textarea, select, h1, h2, h3, table, tbody, tr, td, label, button
 {
-    margin  : 0;
-    padding : 0;
-    border  : 0;
-    outline : 0;
+    margin         : 0;
+    padding        : 0;
+    border         : 0;
+    outline        : 0;
+
+    cursor         : default;
+    font-size      : 13px;
+    font-family    : "Helvetica Neue", sans-serif;
+    letter-spacing : 0.02em;
+    box-sizing     : border-box;
 }
 
 html, body
 {
-    font-family         : $font-family;
     -webkit-user-select : none;
 }
