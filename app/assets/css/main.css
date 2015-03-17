@@ -21,64 +21,50 @@ html, body {
   position: absolute;
   z-index: 1;
   width: 100%;
-  height: 46px;
+  height: 48px;
   left: 0;
   bottom: 0;
   background: linear-gradient(to bottom, #f1f6f9, #d8d8d8);
 }
 
 /* line 12, ../sass/_toolbar.scss */
-button {
-  cursor: default;
-  border-radius: 4px;
-  padding: 4px 14px 4px 12px;
-  box-shadow: 0 1px 0 #c4c4c4;
-  opacity: 1;
-}
-/* line 20, ../sass/_toolbar.scss */
-button[disabled=disabled] {
-  opacity: 0.5;
-}
-/* line 25, ../sass/_toolbar.scss */
-button.primary {
-  color: #ffffff;
-  background: linear-gradient(to bottom, #4fb6f7, #008afa);
-  border: 1px solid #0080f8;
-  -webkit-font-smoothing: antialiased;
-  padding: 3px 13px 3px 11px;
-}
-/* line 34, ../sass/_toolbar.scss */
-button.primary:active {
-  background: linear-gradient(to bottom, #46a2dc, #007ce1);
-}
-/* line 39, ../sass/_toolbar.scss */
-button.secondary {
-  color: #333333;
-  background: #ffffff;
-}
-/* line 45, ../sass/_toolbar.scss */
-button.secondary:active {
-  color: #000000;
-  background: #dddddd;
-}
-/* line 51, ../sass/_toolbar.scss */
-button.left {
-  margin: 0 0 0 10px;
-  float: left;
-}
-/* line 57, ../sass/_toolbar.scss */
-button.right {
-  margin: 0 10px 0 0;
-  float: right;
-}
-
-/* line 64, ../sass/_toolbar.scss */
 .panel .actions {
   z-index: 30;
   position: fixed;
   bottom: 11px;
+    /*
+    & button.left:nth-child(1)
+    {
+        float                      : left;
+        border-top-right-radius    : 0;
+        border-bottom-right-radius : 0;
+        border-right               : 0;
+    }
+
+    & button.left:nth-child(2)
+    {
+        float                     : left;
+        border-top-left-radius    : 0;
+        border-bottom-left-radius : 0;
+    }
+
+    & button.right:nth-child(1)
+    {
+        float                     : right;
+        border-top-left-radius    : 0;
+        border-bottom-left-radius : 0;
+    }
+
+    & button.right:nth-child(2)
+    {
+        float                      : right;
+        border-top-right-radius    : 0;
+        border-bottom-right-radius : 0;
+        border-right               : 0;
+    }
+    */
 }
-/* line 70, ../sass/_toolbar.scss */
+/* line 18, ../sass/_toolbar.scss */
 .panel .actions label {
   float: left;
   font-size: 11px;
@@ -86,10 +72,56 @@ button.right {
   text-shadow: 0 1px 0 #ffffff;
   margin: 6px 0 0 10px;
 }
-/* line 78, ../sass/_toolbar.scss */
+/* line 26, ../sass/_toolbar.scss */
 .panel .actions label input[type=checkbox] {
   float: left;
   margin: 0 4px 0 0;
+}
+/* line 33, ../sass/_toolbar.scss */
+.panel .actions button.left {
+  float: left;
+  margin: 0 0 0 10px;
+}
+/* line 39, ../sass/_toolbar.scss */
+.panel .actions button.right {
+  float: right;
+  margin: 0 10px 0 0;
+}
+/* line 77, ../sass/_toolbar.scss */
+.panel .actions button {
+  cursor: default;
+  border-radius: 4px;
+  padding: 4px 14px 4px 12px;
+  box-shadow: inset 0 1px 0 #ffffff, 0 1px 0 #f1f6f9;
+  opacity: 1;
+}
+/* line 85, ../sass/_toolbar.scss */
+.panel .actions button[disabled=disabled] {
+  opacity: 0.5;
+}
+/* line 90, ../sass/_toolbar.scss */
+.panel .actions button.primary {
+  color: #ffffff;
+  background: linear-gradient(to bottom, #4fb6f7, #008afa);
+  border: 1px solid #0080f8;
+  -webkit-font-smoothing: antialiased;
+  padding: 4px 13px 4px 11px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+/* line 100, ../sass/_toolbar.scss */
+.panel .actions button.primary:active {
+  background: linear-gradient(to bottom, #46a2dc, #007ce1);
+}
+/* line 105, ../sass/_toolbar.scss */
+.panel .actions button.secondary {
+  color: #333333;
+  background: linear-gradient(to bottom, #f1f6f9, #d8d8d8);
+  border: 1px solid #a3a3a3;
+}
+/* line 112, ../sass/_toolbar.scss */
+.panel .actions button.secondary:active {
+  color: #333333;
+  background: linear-gradient(to top, #f1f6f9, #d8d8d8);
 }
 
 /* line 1, ../sass/_placeholders.scss */

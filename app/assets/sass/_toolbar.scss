@@ -3,62 +3,10 @@
     position   : absolute;
     z-index    : 1;
     width      : 100%;
-    height     : 46px;
+    height     : 48px;
     left       : 0;
     bottom     : 0;
     background : linear-gradient(to bottom, #f1f6f9, #d8d8d8);
-}
-
-button
-{
-    cursor        : default;
-    border-radius : 4px;
-    padding       : 4px 14px 4px 12px;
-    box-shadow    : 0 1px 0 #c4c4c4;
-    opacity       : 1;
-
-    &[disabled=disabled]
-    {
-        opacity : 0.5;
-    }
-
-    &.primary
-    {
-        color                  : #ffffff;
-        background             : linear-gradient(to bottom, #4fb6f7, #008afa);
-        border                 : 1px solid #0080f8;
-        -webkit-font-smoothing : antialiased;
-        padding                : 3px 13px 3px 11px;
-    }
-
-    &.primary:active
-    {
-        background : linear-gradient(to bottom, #46a2dc, #007ce1);
-    }
-
-    &.secondary
-    {
-        color      : #333333;
-        background : #ffffff;
-    }
-
-    &.secondary:active
-    {
-        color      : #000000;
-        background : #dddddd;
-    }
-
-    &.left
-    {
-        margin : 0 0 0 10px;
-        float  : left;
-    }
-
-    &.right
-    {
-        margin : 0 10px 0 0;
-        float  : right;
-    }
 }
 
 .panel .actions
@@ -81,4 +29,92 @@ button
             margin : 0 4px 0 0;
         }
     }
+
+    & button.left
+    {
+        float  : left;
+        margin : 0 0 0 10px;
+    }
+
+    & button.right
+    {
+        float  : right;
+        margin : 0 10px 0 0;
+    }
+
+    /*
+    & button.left:nth-child(1)
+    {
+        float                      : left;
+        border-top-right-radius    : 0;
+        border-bottom-right-radius : 0;
+        border-right               : 0;
+    }
+
+    & button.left:nth-child(2)
+    {
+        float                     : left;
+        border-top-left-radius    : 0;
+        border-bottom-left-radius : 0;
+    }
+
+    & button.right:nth-child(1)
+    {
+        float                     : right;
+        border-top-left-radius    : 0;
+        border-bottom-left-radius : 0;
+    }
+
+    & button.right:nth-child(2)
+    {
+        float                      : right;
+        border-top-right-radius    : 0;
+        border-bottom-right-radius : 0;
+        border-right               : 0;
+    }
+    */
+
+    & button
+    {
+        cursor        : default;
+        border-radius : 4px;
+        padding       : 4px 14px 4px 12px;
+        box-shadow    : inset 0 1px 0 #ffffff, 0 1px 0 #f1f6f9;
+        opacity       : 1;
+
+        &[disabled=disabled]
+        {
+            opacity : 0.5;
+        }
+
+        &.primary
+        {
+            color                  : #ffffff;
+            background             : linear-gradient(to bottom, #4fb6f7, #008afa);
+            border                 : 1px solid #0080f8;
+            -webkit-font-smoothing : antialiased;
+            padding                : 4px 13px 4px 11px;
+            box-shadow             : inset 0 1px 0 rgba(255, 255, 255, 0.35);
+        }
+
+        &.primary:active
+        {
+            background : linear-gradient(to bottom, #46a2dc, #007ce1);
+        }
+
+        &.secondary
+        {
+            color      : #333333;
+            background : linear-gradient(to bottom, #f1f6f9, #d8d8d8);
+            border     : 1px solid #a3a3a3;
+        }
+
+        &.secondary:active
+        {
+            color      : #333333;
+            background : linear-gradient(to top, #f1f6f9, #d8d8d8);
+        }
+
+    }
+
 }
