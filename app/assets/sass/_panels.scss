@@ -3,31 +3,6 @@
     box-sizing : border-box;
     position   : absolute;
 
-    &.files
-    {
-        z-index       : 20;
-        left          : 0;
-        top           : 0;
-        overflow-y    : auto;
-        border-top    : 1px solid $border-color;
-        border-bottom : 1px solid $border-color;
-        box-sizing    : border-box;
-        background    : $background-color;
-
-        & input[type=file]
-        {
-            display : none;
-        }
-
-        & table
-        {
-            width    : 100%;
-            position : relative;
-            z-index  : 23;
-            width    : 100%;
-        }
-    }
-
     &.toolbar
     {
         z-index    : 1;
@@ -59,10 +34,5 @@
                 margin : 0px 4px 0 0;
             }
         }
-    }
-
-    &.files .actions
-    {
-        width : 500px;
     }
 }

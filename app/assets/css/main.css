@@ -64,28 +64,6 @@ button.right {
   position: absolute;
 }
 /* line 6, ../sass/_panels.scss */
-.panel.files {
-  z-index: 20;
-  left: 0;
-  top: 0;
-  overflow-y: auto;
-  border-top: 1px solid #a3a3a3;
-  border-bottom: 1px solid #a3a3a3;
-  box-sizing: border-box;
-  background: #f3f3f4;
-}
-/* line 17, ../sass/_panels.scss */
-.panel.files input[type=file] {
-  display: none;
-}
-/* line 22, ../sass/_panels.scss */
-.panel.files table {
-  width: 100%;
-  position: relative;
-  z-index: 23;
-  width: 100%;
-}
-/* line 31, ../sass/_panels.scss */
 .panel.toolbar {
   z-index: 1;
   width: 100%;
@@ -94,13 +72,13 @@ button.right {
   bottom: 0;
   background: linear-gradient(to bottom, #e4e4e4, #d8d8d8);
 }
-/* line 41, ../sass/_panels.scss */
+/* line 16, ../sass/_panels.scss */
 .panel .actions {
   z-index: 30;
   position: fixed;
   bottom: 11px;
 }
-/* line 47, ../sass/_panels.scss */
+/* line 22, ../sass/_panels.scss */
 .panel .actions label {
   float: left;
   font-size: 11px;
@@ -109,14 +87,10 @@ button.right {
   letter-spacing: 0.02em;
   margin: 6px 0 0 10px;
 }
-/* line 56, ../sass/_panels.scss */
+/* line 31, ../sass/_panels.scss */
 .panel .actions label input[type=checkbox] {
   float: left;
   margin: 0px 4px 0 0;
-}
-/* line 64, ../sass/_panels.scss */
-.panel.files .actions {
-  width: 500px;
 }
 
 /* line 1, ../sass/_placeholders.scss */
@@ -135,12 +109,11 @@ button.right {
   top: 50%;
   left: 50%;
   margin: -65px 0 0 -150px;
-  color: #cccccc;
   border: 3px dashed transparent;
   border-radius: 8px;
   transition: color 300ms, border 300ms;
 }
-/* line 22, ../sass/_placeholders.scss */
+/* line 21, ../sass/_placeholders.scss */
 .placeholder .text div {
   cursor: default;
   position: relative;
@@ -152,34 +125,64 @@ button.right {
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
 }
-/* line 35, ../sass/_placeholders.scss */
+/* line 34, ../sass/_placeholders.scss */
 .placeholder .text i {
   position: relative;
   left: 50%;
   margin: 25px 0 0 -20px;
   font-size: 48px;
 }
-/* line 44, ../sass/_placeholders.scss */
-.placeholder.bordered .text {
-  border: 3px dashed #cccccc;
-}
-/* line 49, ../sass/_placeholders.scss */
+/* line 43, ../sass/_placeholders.scss */
 .placeholder.js-hidden {
   display: none;
 }
 
-/* line 55, ../sass/_placeholders.scss */
-.js-drag .placeholder {
+/* line 1, ../sass/_files.scss */
+.panel.files {
+  z-index: 20;
+  left: 0;
+  top: 0;
+  overflow-y: auto;
+  border-top: 1px solid #a3a3a3;
+  border-bottom: 1px solid #a3a3a3;
+  box-sizing: border-box;
+  background: #d8dfe7;
+}
+/* line 12, ../sass/_files.scss */
+.panel.files input[type=file] {
+  display: none;
+}
+/* line 17, ../sass/_files.scss */
+.panel.files table {
+  width: 100%;
+  position: relative;
+  z-index: 23;
+  width: 100%;
+}
+/* line 25, ../sass/_files.scss */
+.panel.files.files .actions {
+  width: 500px;
+}
+/* line 30, ../sass/_files.scss */
+.panel.files .placeholder {
+  color: #aabcca;
+}
+/* line 34, ../sass/_files.scss */
+.panel.files .placeholder.bordered .text {
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
+  border: 2px dashed #aabcca;
+}
+/* line 41, ../sass/_files.scss */
+.panel.files.js-drag .placeholder {
   cursor: copy;
 }
-
-/* line 60, ../sass/_placeholders.scss */
-.js-drag .placeholder .text {
-  color: #939393;
-  border: 3px dashed #939393;
+/* line 46, ../sass/_files.scss */
+.panel.files.js-drag .placeholder .text {
+  color: #96a6b2;
+  border: 2px dashed #96a6b2;
 }
 
-/* line 4, ../sass/_files.scss */
+/* line 56, ../sass/_files.scss */
 .files-list tr td {
   cursor: default;
   color: #333333;
@@ -187,43 +190,43 @@ button.right {
   letter-spacing: 0.02em;
   padding: 6px 8px 6px 8px;
 }
-/* line 12, ../sass/_files.scss */
+/* line 64, ../sass/_files.scss */
 .files-list tr td:nth-child(1) {
   width: 50%;
 }
-/* line 17, ../sass/_files.scss */
+/* line 69, ../sass/_files.scss */
 .files-list tr td:nth-child(2) {
   width: 10px;
 }
-/* line 22, ../sass/_files.scss */
+/* line 74, ../sass/_files.scss */
 .files-list tr td i {
   color: #999999;
   font-size: 11px;
 }
-/* line 28, ../sass/_files.scss */
+/* line 80, ../sass/_files.scss */
 .files-list tr td .dir {
   display: none;
   color: #a0a0a0;
 }
-/* line 35, ../sass/_files.scss */
+/* line 87, ../sass/_files.scss */
 .files-list.js-directories-visible tr td .dir {
   display: inline;
 }
-/* line 40, ../sass/_files.scss */
+/* line 92, ../sass/_files.scss */
 .files-list tr:nth-child(odd) td {
   background: #ffffff;
 }
-/* line 45, ../sass/_files.scss */
+/* line 97, ../sass/_files.scss */
 .files-list tr:nth-child(even) td {
   background: #f3f6fa;
 }
-/* line 50, ../sass/_files.scss */
+/* line 102, ../sass/_files.scss */
 .files-list tr.js-active td {
   background: #0072d5 !important;
   color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
 }
-/* line 57, ../sass/_files.scss */
+/* line 109, ../sass/_files.scss */
 .files-list tr.js-active td .dir, .files-list tr.js-active td i {
   color: #ffffff !important;
 }
@@ -236,17 +239,23 @@ button.right {
   top: 0;
   overflow-y: auto;
   background: radial-gradient(ellipse at center, #3f3f3f 0%, #242424 100%);
-  border-bottom: 1px solid #a3a3a3;
+  border-bottom: 1px solid #282828;
+  border-left: 1px solid #282828;
   box-sizing: border-box;
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
   -webkit-font-smoothing: antialiased;
 }
-/* line 14, ../sass/_operations.scss */
+/* line 15, ../sass/_operations.scss */
+.panel.operations .placeholder {
+  color: #cccccc;
+  text-shadow: 0 1px 0 #282828;
+}
+/* line 21, ../sass/_operations.scss */
 .panel.operations .actions {
   width: 300px;
 }
 
-/* line 20, ../sass/_operations.scss */
+/* line 27, ../sass/_operations.scss */
 .js-sortable {
   margin: 10px;
   height: 50px;
@@ -255,7 +264,7 @@ button.right {
   border: 2px dashed #535353;
 }
 
-/* line 29, ../sass/_operations.scss */
+/* line 36, ../sass/_operations.scss */
 .operation {
   cursor: move;
   position: relative;
@@ -268,12 +277,12 @@ button.right {
   padding: 12px 0 0 0;
 }
 
-/* line 42, ../sass/_operations.scss */
+/* line 49, ../sass/_operations.scss */
 .operation-bar {
   position: relative;
   padding: 0 0 12px 0;
 }
-/* line 47, ../sass/_operations.scss */
+/* line 54, ../sass/_operations.scss */
 .operation-bar .type {
   cursor: default;
   position: absolute;
@@ -284,7 +293,7 @@ button.right {
   font-size: 12px;
   transition: opacity 200ms;
 }
-/* line 59, ../sass/_operations.scss */
+/* line 66, ../sass/_operations.scss */
 .operation-bar .chevron {
   cursor: default;
   position: absolute;
@@ -294,11 +303,11 @@ button.right {
   right: 20px;
   top: 9px;
 }
-/* line 70, ../sass/_operations.scss */
+/* line 77, ../sass/_operations.scss */
 .operation-bar.operation-actions .chevron {
   right: 51px;
 }
-/* line 75, ../sass/_operations.scss */
+/* line 82, ../sass/_operations.scss */
 .operation-bar .delete {
   cursor: default;
   color: #282828;
@@ -314,11 +323,11 @@ button.right {
   right: 12px;
   border-left: 1px dotted #282828;
 }
-/* line 92, ../sass/_operations.scss */
+/* line 99, ../sass/_operations.scss */
 .operation-bar .delete:active {
   background: linear-gradient(to top, #757575, #636363);
 }
-/* line 97, ../sass/_operations.scss */
+/* line 104, ../sass/_operations.scss */
 .operation-bar .delete i {
   cursor: default;
   position: absolute;
@@ -327,11 +336,11 @@ button.right {
   top: 6px;
   text-shadow: 0 1px 0 #696969;
 }
-/* line 107, ../sass/_operations.scss */
+/* line 114, ../sass/_operations.scss */
 .operation-bar .type.fa-pencil {
   top: 9px;
 }
-/* line 112, ../sass/_operations.scss */
+/* line 119, ../sass/_operations.scss */
 .operation-bar select {
   -webkit-appearance: none;
   cursor: default;
@@ -354,7 +363,7 @@ button.right {
   border-radius: 4px;
 }
 
-/* line 137, ../sass/_operations.scss */
+/* line 144, ../sass/_operations.scss */
 .operation-fields {
   color: #ffffff;
   text-shadow: 0 1px 0 #373737;
@@ -368,14 +377,14 @@ button.right {
   border: 1px solid #383838;
   box-sizing: border-box;
 }
-/* line 151, ../sass/_operations.scss */
+/* line 158, ../sass/_operations.scss */
 .operation-fields .field {
   width: 100%;
   font-size: 13px;
   letter-spacing: 0.02em;
   padding: 0 0 10px 0;
 }
-/* line 158, ../sass/_operations.scss */
+/* line 165, ../sass/_operations.scss */
 .operation-fields .field input[type=text] {
   width: 100%;
   font-size: 12px;
@@ -391,11 +400,11 @@ button.right {
   transition: border 150ms;
   background: #3a3a3a;
 }
-/* line 175, ../sass/_operations.scss */
+/* line 182, ../sass/_operations.scss */
 .operation-fields .field input[type=text]:focus {
   border: 2px solid #3b99fc;
 }
-/* line 180, ../sass/_operations.scss */
+/* line 187, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox] {
   float: left;
   margin: 1px 5px 0 0;

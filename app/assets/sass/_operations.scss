@@ -6,10 +6,17 @@
     top                    : 0;
     overflow-y             : auto;
     background             : radial-gradient(ellipse at center, #3f3f3f 0%, #242424 100%);
-    border-bottom          : 1px solid #a3a3a3;
+    border-bottom          : 1px solid #282828;
+    border-left            : 1px solid #282828;
     box-sizing             : border-box;
     box-shadow             : inset 0 0 15px rgba(0, 0, 0, 0.2);
     -webkit-font-smoothing : antialiased;
+
+    & .placeholder
+    {
+        color       : #cccccc;
+        text-shadow : 0 1px 0 #282828;
+    }
 
     & .actions
     {

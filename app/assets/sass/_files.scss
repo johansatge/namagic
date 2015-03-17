@@ -1,6 +1,58 @@
+.panel.files
+{
+    z-index       : 20;
+    left          : 0;
+    top           : 0;
+    overflow-y    : auto;
+    border-top    : 1px solid $border-color;
+    border-bottom : 1px solid $border-color;
+    box-sizing    : border-box;
+    background    : #d8dfe7;
+
+    & input[type=file]
+    {
+        display : none;
+    }
+
+    & table
+    {
+        width    : 100%;
+        position : relative;
+        z-index  : 23;
+        width    : 100%;
+    }
+
+    &.files .actions
+    {
+        width : 500px;
+    }
+
+    & .placeholder
+    {
+        color : #aabcca;
+
+        &.bordered .text
+        {
+            text-shadow : 0 1px 0 rgba(255, 255, 255, 0.5);
+            border      : 2px dashed #aabcca;
+        }
+    }
+
+    &.js-drag .placeholder
+    {
+        cursor : copy;
+    }
+
+    &.js-drag .placeholder .text
+    {
+        color  : #96a6b2;
+        border : 2px dashed #96a6b2;
+    }
+
+}
+
 .files-list
 {
-
     & tr td
     {
         cursor         : default;
