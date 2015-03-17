@@ -5,11 +5,9 @@
     "website_url": "https://johansatge.github.io/namage"
   },
   "menu": {
-    "close": "Close",
     "file": "File",
-    "about": "About...",
-    "new": "New...",
-    "quit": "Quit"
+    "about": "About",
+    "new": "New..."
   },
   "main": {
     "drop": "Drop files here",
