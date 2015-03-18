@@ -4,14 +4,13 @@ html, body, div, span, p, form, input, textarea, select, h1, h2, h3, table, tbod
   padding: 0;
   border: 0;
   outline: 0;
-  cursor: default;
   font-size: 13px;
   font-family: "Helvetica Neue", sans-serif;
   letter-spacing: 0.02em;
   box-sizing: border-box;
 }
 
-/* line 15, ../sass/_reset.scss */
+/* line 14, ../sass/_reset.scss */
 html, body {
   -webkit-user-select: none;
 }
@@ -139,6 +138,7 @@ html, body {
 }
 /* line 21, ../sass/_placeholders.scss */
 .placeholder .text div {
+  cursor: default;
   position: relative;
   width: 100%;
   text-align: center;
@@ -147,16 +147,12 @@ html, body {
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
 }
-/* line 32, ../sass/_placeholders.scss */
+/* line 33, ../sass/_placeholders.scss */
 .placeholder .text i {
   position: relative;
   left: 50%;
   margin: 25px 0 0 -20px;
   font-size: 48px;
-}
-/* line 41, ../sass/_placeholders.scss */
-.placeholder.js-hidden {
-  display: none;
 }
 
 /* line 1, ../sass/_files.scss */
@@ -190,67 +186,62 @@ html, body {
 }
 /* line 33, ../sass/_files.scss */
 .panel.files .placeholder.bordered .text {
-  cursor: copy;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   border: 2px dashed #aabcca;
 }
 /* line 40, ../sass/_files.scss */
-.panel.files .placeholder.bordered .text div {
+.panel.files.js-drag {
   cursor: copy;
 }
-/* line 46, ../sass/_files.scss */
-.panel.files.js-drag .placeholder {
-  cursor: copy;
-}
-/* line 51, ../sass/_files.scss */
+/* line 44, ../sass/_files.scss */
 .panel.files.js-drag .placeholder .text {
-  cursor: copy;
-  color: #96a6b2;
-  border: 2px dashed #96a6b2;
+  color: #8896a1;
+  border: 2px dashed #8896a1;
 }
 
-/* line 62, ../sass/_files.scss */
+/* line 55, ../sass/_files.scss */
 .files-list tr td {
+  cursor: default;
   color: #333333;
   padding: 6px 8px 6px 8px;
 }
-/* line 67, ../sass/_files.scss */
+/* line 61, ../sass/_files.scss */
 .files-list tr td:nth-child(1) {
   width: 50%;
 }
-/* line 72, ../sass/_files.scss */
+/* line 66, ../sass/_files.scss */
 .files-list tr td:nth-child(2) {
   width: 10px;
 }
-/* line 77, ../sass/_files.scss */
+/* line 71, ../sass/_files.scss */
 .files-list tr td i {
   color: #999999;
   font-size: 11px;
 }
-/* line 83, ../sass/_files.scss */
+/* line 77, ../sass/_files.scss */
 .files-list tr td .dir {
   display: none;
   color: #a0a0a0;
 }
-/* line 90, ../sass/_files.scss */
+/* line 84, ../sass/_files.scss */
 .files-list.js-directories-visible tr td .dir {
   display: inline;
 }
-/* line 95, ../sass/_files.scss */
+/* line 89, ../sass/_files.scss */
 .files-list tr:nth-child(odd) td {
   background: #ffffff;
 }
-/* line 100, ../sass/_files.scss */
+/* line 94, ../sass/_files.scss */
 .files-list tr:nth-child(even) td {
   background: #f3f6fa;
 }
-/* line 105, ../sass/_files.scss */
+/* line 99, ../sass/_files.scss */
 .files-list tr.js-active td {
   background: #0072d5 !important;
   color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
 }
-/* line 112, ../sass/_files.scss */
+/* line 106, ../sass/_files.scss */
 .files-list tr.js-active td .dir, .files-list tr.js-active td i {
   color: #ffffff !important;
 }
@@ -329,6 +320,7 @@ html, body {
 }
 /* line 78, ../sass/_operations.scss */
 .operation-bar .delete {
+  cursor: default;
   color: #282828;
   position: absolute;
   z-index: 34;
@@ -342,11 +334,11 @@ html, body {
   right: 12px;
   border-left: 1px dotted #282828;
 }
-/* line 94, ../sass/_operations.scss */
+/* line 95, ../sass/_operations.scss */
 .operation-bar .delete:active {
   background: linear-gradient(to top, #757575, #636363);
 }
-/* line 99, ../sass/_operations.scss */
+/* line 100, ../sass/_operations.scss */
 .operation-bar .delete i {
   position: absolute;
   z-index: 35;
@@ -354,11 +346,11 @@ html, body {
   top: 6px;
   text-shadow: 0 1px 0 #696969;
 }
-/* line 108, ../sass/_operations.scss */
+/* line 109, ../sass/_operations.scss */
 .operation-bar .type.fa-pencil {
   top: 9px;
 }
-/* line 113, ../sass/_operations.scss */
+/* line 114, ../sass/_operations.scss */
 .operation-bar select {
   -webkit-appearance: none;
   cursor: default;
@@ -377,7 +369,7 @@ html, body {
   border-radius: 4px;
 }
 
-/* line 134, ../sass/_operations.scss */
+/* line 135, ../sass/_operations.scss */
 .operation-fields {
   cursor: move;
   color: #ffffff;
@@ -390,12 +382,12 @@ html, body {
   padding: 10px 10px 0 10px;
   border: 1px solid #383838;
 }
-/* line 147, ../sass/_operations.scss */
+/* line 148, ../sass/_operations.scss */
 .operation-fields .field {
   width: 100%;
   padding: 0 0 10px 0;
 }
-/* line 152, ../sass/_operations.scss */
+/* line 153, ../sass/_operations.scss */
 .operation-fields .field input[type=text] {
   width: 100%;
   color: #ffffff;
@@ -407,11 +399,11 @@ html, body {
   transition: border 150ms;
   background: #3a3a3a;
 }
-/* line 165, ../sass/_operations.scss */
+/* line 166, ../sass/_operations.scss */
 .operation-fields .field input[type=text]:focus {
   border: 2px solid #3b99fc;
 }
-/* line 170, ../sass/_operations.scss */
+/* line 171, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox] {
   float: left;
   margin: 1px 5px 0 0;

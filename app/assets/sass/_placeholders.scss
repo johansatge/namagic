@@ -20,6 +20,7 @@
 
         & div
         {
+            cursor                 : default;
             position               : relative;
             width                  : 100%;
             text-align             : center;
@@ -36,10 +37,5 @@
             margin    : 25px 0 0 -20px;
             font-size : 48px;
         }
-    }
-
-    &.js-hidden
-    {
-        display : none;
     }
 }

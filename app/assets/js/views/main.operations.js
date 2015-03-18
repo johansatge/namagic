@@ -102,7 +102,7 @@
             $ui.operations.append($new_operation);
             $ui.operations.sortable('refresh');
             $new_operation.find('.js-fields').hide();
-            $ui.placeholder.addClass('js-hidden');
+            $ui.placeholder.hide();
         };
 
         /**
@@ -114,7 +114,7 @@
             evt.preventDefault();
             $(evt.currentTarget).closest('.js-operation').remove();
             $ui.operations.sortable('refresh');
-            $ui.placeholder.toggleClass('js-hidden', $ui.operations.children().length > 0);
+            $ui.placeholder.toggle($ui.operations.children().length > 0);
             _onEditOperations();
         };
 

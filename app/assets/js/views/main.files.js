@@ -48,7 +48,7 @@
                 $files[files[index].id] = $(app.utils.template.render(fileTemplate, [files[index]]));
                 $ui.list.append($files[files[index].id]);
             }
-            $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
+            $ui.placeholder.toggle($ui.list.children().length === 0);
         };
 
         /**
@@ -87,9 +87,8 @@
         var _initEvents = function($window)
         {
             $window.on('keydown keyup', $.proxy(_onRecordKey, this));
-            $ui.placeholder.on('dragenter dragleave mouseenter mouseleave', $.proxy(_onInteractWithPlaceholder, this));
-            $ui.placeholder.on('drop', $.proxy(_onAddFilesFromDrop, this));
-            $ui.placeholder.on('click', $.proxy(_onAddFilesFromButton, this));
+            $ui.panel.on('dragenter dragleave', $.proxy(_onPlaceholderDrag, this));
+            $ui.panel.on('drop', $.proxy(_onAddFilesFromDrop, this));
             $ui.add.on('click', $.proxy(_onAddFilesFromButton, this));
             $ui.remove.on('click', $.proxy(_onRemoveActiveFiles, this));
             $ui.input.on('change', $.proxy(_onAddFilesFromUploader, this));
@@ -117,9 +116,9 @@
          * Drags stuff over the panel
          * @param evt
          */
-        var _onInteractWithPlaceholder = function(evt)
+        var _onPlaceholderDrag = function(evt)
         {
-            $ui.panel.toggleClass('js-drag', evt.type === 'dragenter' || evt.type === 'mouseenter');
+            $ui.panel.toggleClass('js-drag', evt.type === 'dragenter');
         };
 
         /**
@@ -128,7 +127,7 @@
          */
         var _onAddFilesFromDrop = function(evt)
         {
-            _onInteractWithPlaceholder({type: 'dragleave'});
+            _onPlaceholderDrag({type: 'dragleave'});
             events.emit('add_files', _cleanSelectedFiles.apply(this, [evt.originalEvent.dataTransfer.files]));
         };
 
@@ -207,7 +206,7 @@
             events.emit('remove_files', ids);
             $lastSelectedFile = false;
             $ui.remove.attr('disabled', 'disabled');
-            $ui.placeholder.toggleClass('js-hidden', $ui.list.children().length > 0);
+            $ui.placeholder.toggle($ui.list.children().length === 0);
         };
 
         /**
