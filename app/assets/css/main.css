@@ -25,46 +25,16 @@ html, body {
   left: 0;
   bottom: 0;
   background: linear-gradient(to bottom, #f1f6f9, #d8d8d8);
+  box-shadow: inset 0 1px 0 #ffffff;
 }
 
-/* line 12, ../sass/_toolbar.scss */
+/* line 13, ../sass/_toolbar.scss */
 .panel .actions {
   z-index: 30;
   position: fixed;
   bottom: 11px;
-    /*
-    & button.left:nth-child(1)
-    {
-        float                      : left;
-        border-top-right-radius    : 0;
-        border-bottom-right-radius : 0;
-        border-right               : 0;
-    }
-
-    & button.left:nth-child(2)
-    {
-        float                     : left;
-        border-top-left-radius    : 0;
-        border-bottom-left-radius : 0;
-    }
-
-    & button.right:nth-child(1)
-    {
-        float                     : right;
-        border-top-left-radius    : 0;
-        border-bottom-left-radius : 0;
-    }
-
-    & button.right:nth-child(2)
-    {
-        float                      : right;
-        border-top-right-radius    : 0;
-        border-bottom-right-radius : 0;
-        border-right               : 0;
-    }
-    */
 }
-/* line 18, ../sass/_toolbar.scss */
+/* line 19, ../sass/_toolbar.scss */
 .panel .actions label {
   float: left;
   font-size: 11px;
@@ -72,56 +42,79 @@ html, body {
   text-shadow: 0 1px 0 #ffffff;
   margin: 6px 0 0 10px;
 }
-/* line 26, ../sass/_toolbar.scss */
+/* line 27, ../sass/_toolbar.scss */
 .panel .actions label input[type=checkbox] {
   float: left;
   margin: 0 4px 0 0;
 }
-/* line 33, ../sass/_toolbar.scss */
+/* line 34, ../sass/_toolbar.scss */
 .panel .actions button.left {
   float: left;
   margin: 0 0 0 10px;
 }
-/* line 39, ../sass/_toolbar.scss */
+/* line 40, ../sass/_toolbar.scss */
 .panel .actions button.right {
   float: right;
   margin: 0 10px 0 0;
 }
-/* line 77, ../sass/_toolbar.scss */
+/* line 46, ../sass/_toolbar.scss */
 .panel .actions button {
-  cursor: default;
   border-radius: 4px;
-  padding: 4px 14px 4px 12px;
+  padding: 4px 14px 4px 6px;
   box-shadow: inset 0 1px 0 #ffffff, 0 1px 0 #f1f6f9;
   opacity: 1;
 }
-/* line 85, ../sass/_toolbar.scss */
-.panel .actions button[disabled=disabled] {
-  opacity: 0.5;
-}
-/* line 90, ../sass/_toolbar.scss */
+/* line 53, ../sass/_toolbar.scss */
 .panel .actions button.primary {
   color: #ffffff;
-  background: linear-gradient(to bottom, #4fb6f7, #008afa);
-  border: 1px solid #0080f8;
+  background: linear-gradient(to bottom, #4a9de5, #0072d5);
+  border: 1px solid #005fb2;
   -webkit-font-smoothing: antialiased;
-  padding: 4px 13px 4px 11px;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+  padding: 4px 13px 4px 6px;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.22);
 }
-/* line 100, ../sass/_toolbar.scss */
+/* line 63, ../sass/_toolbar.scss */
 .panel .actions button.primary:active {
-  background: linear-gradient(to bottom, #46a2dc, #007ce1);
+  background: linear-gradient(to top, #4a9de5, #0072d5);
 }
-/* line 105, ../sass/_toolbar.scss */
+/* line 68, ../sass/_toolbar.scss */
 .panel .actions button.secondary {
   color: #333333;
   background: linear-gradient(to bottom, #f1f6f9, #d8d8d8);
   border: 1px solid #a3a3a3;
 }
-/* line 112, ../sass/_toolbar.scss */
+/* line 75, ../sass/_toolbar.scss */
 .panel .actions button.secondary:active {
   color: #333333;
   background: linear-gradient(to top, #f1f6f9, #d8d8d8);
+}
+/* line 81, ../sass/_toolbar.scss */
+.panel .actions button i {
+  float: left;
+  margin: 0 6px 0 0;
+  font-size: 15px;
+  color: rgba(51, 51, 51, 0.35);
+  transition: color 300ms;
+}
+/* line 90, ../sass/_toolbar.scss */
+.panel .actions button:hover i {
+  color: #333333;
+}
+/* line 95, ../sass/_toolbar.scss */
+.panel .actions button.primary i {
+  color: rgba(255, 255, 255, 0.4);
+}
+/* line 100, ../sass/_toolbar.scss */
+.panel .actions button.primary:hover i {
+  color: white;
+}
+/* line 105, ../sass/_toolbar.scss */
+.panel .actions button[disabled=disabled] {
+  opacity: 0.5;
+}
+/* line 109, ../sass/_toolbar.scss */
+.panel .actions button[disabled=disabled]:hover i {
+  color: rgba(51, 51, 51, 0.5);
 }
 
 /* line 1, ../sass/_placeholders.scss */
@@ -146,7 +139,6 @@ html, body {
 }
 /* line 21, ../sass/_placeholders.scss */
 .placeholder .text div {
-  cursor: default;
   position: relative;
   width: 100%;
   text-align: center;
@@ -155,14 +147,14 @@ html, body {
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
 }
-/* line 33, ../sass/_placeholders.scss */
+/* line 32, ../sass/_placeholders.scss */
 .placeholder .text i {
   position: relative;
   left: 50%;
   margin: 25px 0 0 -20px;
   font-size: 48px;
 }
-/* line 42, ../sass/_placeholders.scss */
+/* line 41, ../sass/_placeholders.scss */
 .placeholder.js-hidden {
   display: none;
 }
@@ -198,61 +190,67 @@ html, body {
 }
 /* line 33, ../sass/_files.scss */
 .panel.files .placeholder.bordered .text {
+  cursor: copy;
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   border: 2px dashed #aabcca;
 }
 /* line 40, ../sass/_files.scss */
+.panel.files .placeholder.bordered .text div {
+  cursor: copy;
+}
+/* line 46, ../sass/_files.scss */
 .panel.files.js-drag .placeholder {
   cursor: copy;
 }
-/* line 45, ../sass/_files.scss */
+/* line 51, ../sass/_files.scss */
 .panel.files.js-drag .placeholder .text {
+  cursor: copy;
   color: #96a6b2;
   border: 2px dashed #96a6b2;
 }
 
-/* line 55, ../sass/_files.scss */
+/* line 62, ../sass/_files.scss */
 .files-list tr td {
   color: #333333;
   padding: 6px 8px 6px 8px;
 }
-/* line 60, ../sass/_files.scss */
+/* line 67, ../sass/_files.scss */
 .files-list tr td:nth-child(1) {
   width: 50%;
 }
-/* line 65, ../sass/_files.scss */
+/* line 72, ../sass/_files.scss */
 .files-list tr td:nth-child(2) {
   width: 10px;
 }
-/* line 70, ../sass/_files.scss */
+/* line 77, ../sass/_files.scss */
 .files-list tr td i {
   color: #999999;
   font-size: 11px;
 }
-/* line 76, ../sass/_files.scss */
+/* line 83, ../sass/_files.scss */
 .files-list tr td .dir {
   display: none;
   color: #a0a0a0;
 }
-/* line 83, ../sass/_files.scss */
+/* line 90, ../sass/_files.scss */
 .files-list.js-directories-visible tr td .dir {
   display: inline;
 }
-/* line 88, ../sass/_files.scss */
+/* line 95, ../sass/_files.scss */
 .files-list tr:nth-child(odd) td {
   background: #ffffff;
 }
-/* line 93, ../sass/_files.scss */
+/* line 100, ../sass/_files.scss */
 .files-list tr:nth-child(even) td {
   background: #f3f6fa;
 }
-/* line 98, ../sass/_files.scss */
+/* line 105, ../sass/_files.scss */
 .files-list tr.js-active td {
   background: #0072d5 !important;
   color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
 }
-/* line 105, ../sass/_files.scss */
+/* line 112, ../sass/_files.scss */
 .files-list tr.js-active td .dir, .files-list tr.js-active td i {
   color: #ffffff !important;
 }
@@ -305,8 +303,9 @@ html, body {
 .operation-bar {
   position: relative;
   padding: 0 0 12px 0;
+  cursor: move;
 }
-/* line 52, ../sass/_operations.scss */
+/* line 53, ../sass/_operations.scss */
 .operation-bar .type {
   position: absolute;
   z-index: 35;
@@ -314,7 +313,6 @@ html, body {
   left: 20px;
   color: #b0b0b0;
   font-size: 12px;
-  transition: opacity 200ms;
 }
 /* line 63, ../sass/_operations.scss */
 .operation-bar .chevron {
@@ -375,13 +373,13 @@ html, body {
   margin: 0 0 0 10px;
   background: linear-gradient(to bottom, #757575, #636363);
   border: 1px solid #282828;
-  transition: width 200ms;
   box-shadow: inset 0 1px 0 #909090, 0 1px 0 #696969;
   border-radius: 4px;
 }
 
-/* line 135, ../sass/_operations.scss */
+/* line 134, ../sass/_operations.scss */
 .operation-fields {
+  cursor: move;
   color: #ffffff;
   text-shadow: 0 1px 0 #373737;
   position: relative;
