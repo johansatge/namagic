@@ -51,70 +51,118 @@
             <div class="placeholder js-placeholder">
                 <div class="text">
                     <i class="fa fa-cogs"></i>
-                    <div>{{main.no_action}}</div>
+                    <div>{{main.no_operation}}</div>
                 </div>
             </div>
             <div class="js-operations"></div>
             <script type="text/template" class="js-operation-template">
                 <div class="operation js-operation">
-                    <div class="js-options">
+                    <div class="js-options js-search">
                         <div class="operation-bar operation-actions">
                             <i class="type fa fa-search"></i>
                             <i class="chevron fa fa-chevron-down"></i>
                             <select class="js-select-type">
-                                <option value="">Select text...</option>
-                                <option value="all">All text</option>
-                                <option value="digits">Digits</option>
-                                <option value="">Special characters @todo</option>
-                                <option value="">List of characters @todo</option>
-                                <option value="">Range of characters @todo</option>
-                                <option value="">Regular expression @todo</option>
+                                <option value="">{{main.operations.search.select}}</option>
+                                <option value="allText">{{main.operations.search.all_text}}</option>
+                                <option value="freeText">{{main.operations.search.free_text}}</option>
+                                <option value="digitsOnly">{{main.operations.search.digits}}</option>
+                                <option value="specialChars">{{main.operations.search.special_chars}}</option>
+                                <option value="charsList">{{main.operations.search.chars_list}}</option>
+                                <option value="textRange">{{main.operations.search.text_range}}</option>
+                                <option value="regex">{{main.operations.search.regex}}</option>
                             </select>
                             <div class="delete js-delete">
                                 <i class="fa fa-trash-o"></i>
                             </div>
                         </div>
-                        <div class="operation-fields js-fields" data-type="all">
+                        <div class="operation-fields js-fields" data-type="allText">
                             <div class="field">
                                 <label>
                                     <input type="checkbox">
-                                    @todo wording champ
-                                </label>
-                            </div>
-                            <div class="field">
-                                <label>
-                                    @todo wording champ
-                                    <input type="text">
+                                    {{main.operations.options.include_extension}}
                                 </label>
                             </div>
                         </div>
-                        <div class="operation-fields js-fields" data-type="digits">
+                        <div class="operation-fields js-fields" data-type="freeText">
                             <div class="field">
                                 <label>
-                                    <input type="checkbox">
-                                    @todo wording champ
+                                    {{main.operations.options.text_to_find}}
+                                    <input type="text">
                                 </label>
                             </div>
                             <div class="field">
                                 <label>
-                                    @todo wording champ
+                                    <input type="checkbox">
+                                    {{main.operations.options.case_insensitive}}
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label>
+                                    <input type="checkbox">
+                                    {{main.operations.options.include_extension}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="operation-fields js-fields" data-type="digitsOnly">
+                            <div class="field">
+                                <label>
+                                    {{main.operations.options.select_digits}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="operation-fields js-fields" data-type="specialChars">
+                            <div class="field">@todo</div>
+                        </div>
+                        <div class="operation-fields js-fields" data-type="charsList">
+                            <div class="field">
+                                <label>
+                                    {{main.operations.options.chars_list}}
                                     <input type="text">
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label>
+                                    <input type="checkbox">
+                                    {{main.operations.options.case_insensitive}}
+                                </label>
+                            </div>
+                        </div>
+                        <div class="operation-fields js-fields" data-type="textRange">
+                            <div class="field">@todo</div>
+                        </div>
+                        <div class="operation-fields js-fields" data-type="regex">
+                            <div class="field">
+                                <label>
+                                    {{main.operations.options.regex}}
+                                    <input type="text">
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label>
+                                    <input type="checkbox">
+                                    {{main.operations.options.regex_global}}
+                                </label>
+                            </div>
+                            <div class="field">
+                                <label>
+                                    <input type="checkbox">
+                                    {{main.operations.options.case_insensitive}}
                                 </label>
                             </div>
                         </div>
                     </div>
-                    <div class="js-options">
+                    <div class="js-options js-replace">
                         <div class="operation-bar">
                             <i class="type fa fa-pencil"></i>
                             <i class="chevron fa fa-chevron-down"></i>
-                            <select class="js-select-type" data-type="js-replace-type">
-                                <option value="">Replace with...</option>
-                                <option value="free">Free text</option>
-                                <option value="">Digits sequence</option>
-                                <option value="">Same text with options</option>
+                            <select class="js-select-type">
+                                <option value="">{{main.operations.replace.select}}</option>
+                                <option value="freeText">Free text @todo</option>
+                                <option value="">Digits sequence @todo</option>
+                                <option value="">Same text with options @todo</option>
                             </select>
                         </div>
-                        <div class="operation-fields js-fields" data-type="free">
+                        <div class="operation-fields js-fields" data-type="freeText">
                             <div class="field">
                                 <label>
                                     <input type="checkbox">

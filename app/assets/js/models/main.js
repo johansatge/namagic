@@ -10,6 +10,7 @@
     {
 
         var currentFiles = {};
+        var currentOperations = [];
 
         /**
          * Adds a list of files
@@ -26,7 +27,7 @@
                     id: id,
                     dir: files[index].dir,
                     current_name: files[index].name,
-                    new_name: '@todo new name' // @todo apply current operations on the name
+                    new_name: _applyOperationsOnFilename.apply(this, [files[index].name])
                 };
             }
             return new_files;
@@ -50,21 +51,23 @@
          */
         this.applyOperations = function(operations)
         {
+            currentOperations = operations;
             for (var index in currentFiles)
             {
-                currentFiles[index].new_name = _applyOperationsOnFilename.apply(this, [operations, currentFiles[index].current_name]);
+                currentFiles[index].new_name = _applyOperationsOnFilename.apply(this, [currentFiles[index].current_name]);
             }
             return currentFiles;
         };
 
         /**
          * Applies given operations on a filename
-         * @param operations
          * @param filename
          */
-        var _applyOperationsOnFilename = function(operations, filename)
+        var _applyOperationsOnFilename = function(filename)
         {
             // @todo apply operations
+            app.utils.log(filename);
+            app.utils.log(currentOperations);
             return filename + new Date().getTime()
         };
 

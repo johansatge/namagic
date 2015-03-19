@@ -65,17 +65,29 @@
          */
         var _onEditOperations = function()
         {
-            // @todo parse operations and send event
+            var operations = [];
+            var $operations = $ui.operations.children();
+            $operations.each(function()
+            {
+                var $operation = $(this);
+                var $search = $operation.find('.js-search .js-fields:visible');
+                var $replace = $operation.find('.js-replace .js-fields:visible');
 
-            /**
-             * @todo
-             * - get .js-operation list
-             * - for each, get search type & fields
-             * - for each, get replace type & fields
-             * return an array of options
-             */
+                app.utils.log($search.serializeArray());
 
-            events.emit('edit_operations', '@todo');
+                var operation = {
+                    search: {type: $search.length > 0 ? $search.data('type') : false, options: {}},
+                    replace: {type: $replace.length > 0 ? $replace.data('type') : false, options: {}}
+                };
+                /**
+                 * @todo
+                 * - for each, get search type & fields
+                 * - for each, get replace type & fields
+                 * return an array of options
+                 */
+                operations.push(operation);
+            });
+            events.emit('edit_operations', operations);
         };
 
         /**
@@ -114,7 +126,7 @@
             evt.preventDefault();
             $(evt.currentTarget).closest('.js-operation').remove();
             $ui.operations.sortable('refresh');
-            $ui.placeholder.toggle($ui.operations.children().length > 0);
+            $ui.placeholder.toggle($ui.operations.children().length === 0);
             _onEditOperations();
         };
 
