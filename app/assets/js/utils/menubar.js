@@ -28,6 +28,8 @@
         events = new app.node.events.EventEmitter();
         menubar = new app.node.gui.Menu({type: 'menubar'});
         menubar.createMacBuiltin(app.utils.locale.get('manifest.name'));
+
+        // Overrides default "about" item
         menubar.items[0].submenu.removeAt(0);
         menubar.items[0].submenu.insert(new app.node.gui.MenuItem({
             label: app.utils.locale.get('menu.about') + ' ' + app.utils.locale.get('manifest.name'), click: function()
@@ -35,6 +37,13 @@
                 events.emit('about');
             }
         }), 0);
+
+        // Removes "cmd-z" items
+        menubar.items[1].submenu.removeAt(0);
+        menubar.items[1].submenu.removeAt(0);
+        menubar.items[1].submenu.removeAt(0);
+
+        // Adds "file" item
         menubar.items[0].submenu.insert(new app.node.gui.MenuItem({type: 'separator'}), 1);
         var file_menu = new app.node.gui.Menu();
         file_menu.append(new app.node.gui.MenuItem({
