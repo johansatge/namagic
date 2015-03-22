@@ -421,7 +421,7 @@ html, body {
 /* line 188, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked {
   background: #3b99fc;
-  box-shadow: 0 1px 0 rgba(105, 105, 105, 0.7);
+  box-shadow: inset 0 1px 0 #497AAD, 0 1px 0 rgba(105, 105, 105, 0.7);
 }
 /* line 194, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked:after {
