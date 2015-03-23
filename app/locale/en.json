@@ -24,27 +24,13 @@
         "select": "Select...",
         "all_text": "All text",
         "free_text": "Free text",
-        "digits": "Digits",
-        "special_chars": "Special characters",
         "chars_list": "List of characters",
-        "text_range": "Range of text",
+        "text_range": "Range of text or position",
         "regex": "Regular expression",
         "options": {
-          "include_extension": "Include extension",
-          "text_to_find": "Text to find",
-          "case_insensitive": "Case insensitive",
-          "select_digits": "Selects all digits.",
-          "chars_list": "Characters",
-          "regex": "Expression",
-          "regex_global": "Global"
         }
       },
       "replace": {
-        "select": "Replace...",
-        "free_text": "Free text",
-        "options": {
-          "replacement_text": "Replacement text"
-        }
       }
     }
   }

@@ -65,8 +65,6 @@
                                 <option value="">{{main.operations.search.select}}</option>
                                 <option value="allText">{{main.operations.search.all_text}}</option>
                                 <option value="freeText">{{main.operations.search.free_text}}</option>
-                                <option value="digitsOnly">{{main.operations.search.digits}}</option>
-                                <option value="specialChars">{{main.operations.search.special_chars}}</option>
                                 <option value="charsList">{{main.operations.search.chars_list}}</option>
                                 <option value="textRange">{{main.operations.search.text_range}}</option>
                                 <option value="regex">{{main.operations.search.regex}}</option>
@@ -77,10 +75,7 @@
                         </div>
                         <div class="operation-fields js-fields" data-type="allText">
                             <div class="field">
-                                <label>
-                                    <input type="checkbox" class="js-field-option" data-name="includeExtension">
-                                    {{main.operations.search.options.include_extension}}
-                                </label>
+                                @todo
                             </div>
                         </div>
                         <div class="operation-fields js-fields" data-type="freeText">
@@ -96,35 +91,10 @@
                                     {{main.operations.search.options.case_insensitive}}
                                 </label>
                             </div>
-                            <div class="field">
-                                <label>
-                                    <input type="checkbox" data-name="includeExtension">
-                                    {{main.operations.search.options.include_extension}}
-                                </label>
-                            </div>
-                        </div>
-                        <div class="operation-fields js-fields" data-type="digitsOnly">
-                            <div class="field">
-                                <label>
-                                    {{main.operations.search.options.select_digits}}
-                                </label>
-                            </div>
-                        </div>
-                        <div class="operation-fields js-fields" data-type="specialChars">
-                            <div class="field">@todo</div>
                         </div>
                         <div class="operation-fields js-fields" data-type="charsList">
                             <div class="field">
-                                <label>
-                                    {{main.operations.search.options.chars_list}}
-                                    <input type="text" data-name="charsList">
-                                </label>
-                            </div>
-                            <div class="field">
-                                <label>
-                                    <input type="checkbox" data-name="caseInsensitive">
-                                    {{main.operations.search.options.case_insensitive}}
-                                </label>
+                                @todo
                             </div>
                         </div>
                         <div class="operation-fields js-fields" data-type="textRange">
@@ -156,18 +126,12 @@
                             <i class="type fa fa-pencil"></i>
                             <i class="chevron fa fa-chevron-down"></i>
                             <select class="js-select-type">
-                                <option value="">{{main.operations.replace.select}}</option>
-                                <option value="freeText">{{main.operations.replace.free_text}}</option>
-                                <option value="">Digits sequence @todo</option>
-                                <option value="">Same text with options @todo</option>
+                                <option value="">@todo</option>
                             </select>
                         </div>
-                        <div class="operation-fields js-fields" data-type="freeText">
+                        <div class="operation-fields js-fields" data-type="">
                             <div class="field">
-                                <label>
-                                    {{main.operations.replace.options.replacement_text}}
-                                    <input type="text" data-name="replacementText">
-                                </label>
+                                @todo
                             </div>
                         </div>
                     </div>

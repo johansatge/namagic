@@ -66,6 +66,7 @@
         var _applyOperationsOnFilename = function(filename)
         {
             // @todo apply operations
+            // @todo check conflicts
             app.utils.log(filename);
             for (var index in currentOperations)
             {
