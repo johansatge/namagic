@@ -62,63 +62,77 @@
                             <i class="type fa fa-search"></i>
                             <i class="chevron fa fa-chevron-down"></i>
                             <select class="js-select-type">
-                                <option value="">{{main.operations.search.select}}</option>
-                                <option value="allText">{{main.operations.search.all_text}}</option>
-                                <option value="freeText">{{main.operations.search.free_text}}</option>
-                                <option value="charsList">{{main.operations.search.chars_list}}</option>
-                                <option value="textRange">{{main.operations.search.text_range}}</option>
-                                <option value="regex">{{main.operations.search.regex}}</option>
+                                <option value="">{{main.operations.search.none}}</option>
+                                <option value="allText">{{main.operations.search.all_text.option}}</option>
+                                <option value="freeText">{{main.operations.search.free_text.option}}</option>
+                                <option value="charsList">{{main.operations.search.chars_list.option}}</option>
+                                <option value="textRange">{{main.operations.search.text_range.option}}</option>
+                                <option value="regex">{{main.operations.search.regex.option}}</option>
                             </select>
                             <div class="delete js-delete">
                                 <i class="fa fa-trash-o"></i>
                             </div>
                         </div>
                         <div class="operation-fields js-fields" data-type="allText">
-                            <div class="field">
-                                @todo
-                            </div>
+
                         </div>
                         <div class="operation-fields js-fields" data-type="freeText">
-                            <div class="field">
-                                <label>
-                                    {{main.operations.search.options.text_to_find}}
-                                    <input type="text" data-name="textToFind">
-                                </label>
-                            </div>
-                            <div class="field">
-                                <label>
-                                    <input type="checkbox" data-name="caseInsensitive">
-                                    {{main.operations.search.options.case_insensitive}}
-                                </label>
-                            </div>
+                            <label class="field">
+                                {{main.operations.search.free_text.text_to_find}}
+                                <input type="text" name="text">
+                            </label>
+                            <label class="field">
+                                <input type="checkbox" name="caseInsensitive">
+                                {{main.operations.search.free_text.case_insensitive}}
+                            </label>
                         </div>
                         <div class="operation-fields js-fields" data-type="charsList">
-                            <div class="field">
-                                @todo
-                            </div>
+                            <label class="field">
+                                <input type="radio" name="charsList" value="digits">
+                                {{main.operations.search.chars_list.digits}}
+                            </label>
+                            <label class="field">
+                                <input type="radio" name="charsList" value="special_chars">
+                                {{main.operations.search.chars_list.special_chars}}
+                            </label>
+                            <label class="field">
+                                <input type="radio" name="charsList" value="custom">
+                                {{main.operations.search.chars_list.custom_list}}
+                            </label>
+                            <label class="field">
+                                <input type="text" name="customChars">
+                            </label>
                         </div>
                         <div class="operation-fields js-fields" data-type="textRange">
-                            <div class="field">@todo</div>
+                            <label class="field">
+                                <input type="radio" name="charsList" value="digits" checked="checked">
+                                {{main.operations.search.text_range.position}}
+                            </label>
+                            <label class="field">
+                                <input type="text" name="position">
+                            </label>
+                            <label class="field">
+                                <input type="checkbox" name="positionFromEnd">
+                                {{main.operations.search.text_range.position_from_end}}
+                            </label>
+                            <label class="field">
+                                <input type="radio" name="charsList" value="special_chars">
+                                {{main.operations.search.text_range.range}}
+                            </label>
                         </div>
                         <div class="operation-fields js-fields" data-type="regex">
-                            <div class="field">
-                                <label>
-                                    {{main.operations.search.options.regex}}
-                                    <input type="text" data-name="regex">
-                                </label>
-                            </div>
-                            <div class="field">
-                                <label>
-                                    <input type="checkbox" data-name="isGlobal">
-                                    {{main.operations.search.options.regex_global}}
-                                </label>
-                            </div>
-                            <div class="field">
-                                <label>
-                                    <input type="checkbox" data-name="caseInsensitive">
-                                    {{main.operations.search.options.case_insensitive}}
-                                </label>
-                            </div>
+                            <label class="field">
+                                {{main.operations.search.options.regex}}
+                                <input type="text" name="regex">
+                            </label>
+                            <label class="field">
+                                <input type="checkbox" name="isGlobal">
+                                {{main.operations.search.options.regex_global}}
+                            </label>
+                            <label class="field">
+                                <input type="checkbox" name="caseInsensitive">
+                                {{main.operations.search.options.case_insensitive}}
+                            </label>
                         </div>
                     </div>
                     <div class="js-options js-replace">
@@ -130,9 +144,7 @@
                             </select>
                         </div>
                         <div class="operation-fields js-fields" data-type="">
-                            <div class="field">
                                 @todo
-                            </div>
                         </div>
                     </div>
                 </div>

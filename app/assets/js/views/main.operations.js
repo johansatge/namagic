@@ -92,18 +92,17 @@
                 return false;
             }
             var fields_panel = {type: $fields_panel.data('type'), options: {}};
-            var $options = $fields_panel.find('.js-field-option');
-            $options.each(function()
+            var $inputs = $fields_panel.find('input[type="text"],input[type="radio"]:checked');
+            $inputs.each(function()
             {
                 var $option = $(this);
-                if ($option.attr('type') === 'checkbox')
-                {
-                    fields_panel.options[$option.data('name')] = $option.is(':checked');
-                }
-                else
-                {
-                    fields_panel.options[$option.data('name')] = $option.val();
-                }
+                fields_panel.options[$option.attr('name')] = $option.val();
+            });
+            var $checkboxes = $fields_panel.find('input[type="checkbox"]');
+            $checkboxes.each(function()
+            {
+                var $option = $(this);
+                fields_panel.options[$option.attr('name')] = $option.is(':checked');
             });
             return fields_panel;
         };

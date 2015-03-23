@@ -21,13 +21,29 @@
     "no_operation": "No operation set",
     "operations": {
       "search": {
-        "select": "Select...",
-        "all_text": "All text",
-        "free_text": "Free text",
-        "chars_list": "List of characters",
-        "text_range": "Range of text or position",
-        "regex": "Regular expression",
-        "options": {
+        "none": "Select a search pattern...",
+        "all_text": {
+          "option": "All text"
+        },
+        "free_text": {
+          "option": "Free text",
+          "text_to_find": "Text to find",
+          "case_insensitive": "Case insensitive"
+        },
+        "chars_list": {
+          "option": "List of characters",
+          "digits": "Digits",
+          "special_chars": "Special characters",
+          "custom_list": "Custom list"
+        },
+        "text_range": {
+          "option": "Range of text or position",
+          "position": "Position",
+          "position_from_end": "Start from end",
+          "range": "Range"
+        },
+        "regex": {
+          "option": "Regular expression"
         }
       },
       "replace": {
