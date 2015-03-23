@@ -28,19 +28,23 @@
         "special_chars": "Special characters",
         "chars_list": "List of characters",
         "text_range": "Range of text",
-        "regex": "Regular expression"
+        "regex": "Regular expression",
+        "options": {
+          "include_extension": "Include extension",
+          "text_to_find": "Text to find",
+          "case_insensitive": "Case insensitive",
+          "select_digits": "Selects all digits.",
+          "chars_list": "Characters",
+          "regex": "Expression",
+          "regex_global": "Global"
+        }
       },
       "replace": {
-        "select": "Replace..."
-      },
-      "options": {
-        "include_extension": "Include extension",
-        "text_to_find": "Text to find",
-        "case_insensitive": "Case insensitive",
-        "select_digits": "Selects all digits.",
-        "chars_list": "Characters",
-        "regex": "Expression",
-        "regex_global": "Global"
+        "select": "Replace...",
+        "free_text": "Free text",
+        "options": {
+          "replacement_text": "Replacement text"
+        }
       }
     }
   }

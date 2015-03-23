@@ -79,34 +79,34 @@
                             <div class="field">
                                 <label>
                                     <input type="checkbox" class="js-field-option" data-name="includeExtension">
-                                    {{main.operations.options.include_extension}}
+                                    {{main.operations.search.options.include_extension}}
                                 </label>
                             </div>
                         </div>
                         <div class="operation-fields js-fields" data-type="freeText">
                             <div class="field">
                                 <label>
-                                    {{main.operations.options.text_to_find}}
+                                    {{main.operations.search.options.text_to_find}}
                                     <input type="text" data-name="textToFind">
                                 </label>
                             </div>
                             <div class="field">
                                 <label>
                                     <input type="checkbox" data-name="caseInsensitive">
-                                    {{main.operations.options.case_insensitive}}
+                                    {{main.operations.search.options.case_insensitive}}
                                 </label>
                             </div>
                             <div class="field">
                                 <label>
                                     <input type="checkbox" data-name="includeExtension">
-                                    {{main.operations.options.include_extension}}
+                                    {{main.operations.search.options.include_extension}}
                                 </label>
                             </div>
                         </div>
                         <div class="operation-fields js-fields" data-type="digitsOnly">
                             <div class="field">
                                 <label>
-                                    {{main.operations.options.select_digits}}
+                                    {{main.operations.search.options.select_digits}}
                                 </label>
                             </div>
                         </div>
@@ -116,14 +116,14 @@
                         <div class="operation-fields js-fields" data-type="charsList">
                             <div class="field">
                                 <label>
-                                    {{main.operations.options.chars_list}}
+                                    {{main.operations.search.options.chars_list}}
                                     <input type="text" data-name="charsList">
                                 </label>
                             </div>
                             <div class="field">
                                 <label>
                                     <input type="checkbox" data-name="caseInsensitive">
-                                    {{main.operations.options.case_insensitive}}
+                                    {{main.operations.search.options.case_insensitive}}
                                 </label>
                             </div>
                         </div>
@@ -133,20 +133,20 @@
                         <div class="operation-fields js-fields" data-type="regex">
                             <div class="field">
                                 <label>
-                                    {{main.operations.options.regex}}
+                                    {{main.operations.search.options.regex}}
                                     <input type="text" data-name="regex">
                                 </label>
                             </div>
                             <div class="field">
                                 <label>
                                     <input type="checkbox" data-name="isGlobal">
-                                    {{main.operations.options.regex_global}}
+                                    {{main.operations.search.options.regex_global}}
                                 </label>
                             </div>
                             <div class="field">
                                 <label>
                                     <input type="checkbox" data-name="caseInsensitive">
-                                    {{main.operations.options.case_insensitive}}
+                                    {{main.operations.search.options.case_insensitive}}
                                 </label>
                             </div>
                         </div>
@@ -157,7 +157,7 @@
                             <i class="chevron fa fa-chevron-down"></i>
                             <select class="js-select-type">
                                 <option value="">{{main.operations.replace.select}}</option>
-                                <option value="freeText">Free text @todo</option>
+                                <option value="freeText">{{main.operations.replace.free_text}}</option>
                                 <option value="">Digits sequence @todo</option>
                                 <option value="">Same text with options @todo</option>
                             </select>
@@ -165,14 +165,8 @@
                         <div class="operation-fields js-fields" data-type="freeText">
                             <div class="field">
                                 <label>
-                                    <input type="checkbox">
-                                    @todo wording champ
-                                </label>
-                            </div>
-                            <div class="field">
-                                <label>
-                                    @todo wording champ
-                                    <input type="text">
+                                    {{main.operations.replace.options.replacement_text}}
+                                    <input type="text" data-name="replacementText">
                                 </label>
                             </div>
                         </div>

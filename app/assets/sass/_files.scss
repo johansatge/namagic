@@ -37,11 +37,11 @@
         }
     }
 
-    &.js-drag
+    &.js-drag .placeholder
     {
         cursor : copy;
 
-        & .placeholder .text
+        & .text
         {
             color  : #8896a1;
             border : 2px dashed #8896a1;
@@ -54,7 +54,6 @@
 {
     & tr td
     {
-        cursor  : default;
         color   : #333333;
         padding : 6px 8px 6px 8px;
 
