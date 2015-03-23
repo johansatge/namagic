@@ -78,7 +78,7 @@
                         <div class="operation-fields js-fields" data-type="allText">
                             <div class="field">
                                 <label>
-                                    <input type="checkbox">
+                                    <input type="checkbox" class="js-field-option" data-name="includeExtension">
                                     {{main.operations.options.include_extension}}
                                 </label>
                             </div>
@@ -87,18 +87,18 @@
                             <div class="field">
                                 <label>
                                     {{main.operations.options.text_to_find}}
-                                    <input type="text">
+                                    <input type="text" data-name="textToFind">
                                 </label>
                             </div>
                             <div class="field">
                                 <label>
-                                    <input type="checkbox">
+                                    <input type="checkbox" data-name="caseInsensitive">
                                     {{main.operations.options.case_insensitive}}
                                 </label>
                             </div>
                             <div class="field">
                                 <label>
-                                    <input type="checkbox">
+                                    <input type="checkbox" data-name="includeExtension">
                                     {{main.operations.options.include_extension}}
                                 </label>
                             </div>
@@ -117,12 +117,12 @@
                             <div class="field">
                                 <label>
                                     {{main.operations.options.chars_list}}
-                                    <input type="text">
+                                    <input type="text" data-name="charsList">
                                 </label>
                             </div>
                             <div class="field">
                                 <label>
-                                    <input type="checkbox">
+                                    <input type="checkbox" data-name="caseInsensitive">
                                     {{main.operations.options.case_insensitive}}
                                 </label>
                             </div>
@@ -134,18 +134,18 @@
                             <div class="field">
                                 <label>
                                     {{main.operations.options.regex}}
-                                    <input type="text">
+                                    <input type="text" data-name="regex">
                                 </label>
                             </div>
                             <div class="field">
                                 <label>
-                                    <input type="checkbox">
+                                    <input type="checkbox" data-name="isGlobal">
                                     {{main.operations.options.regex_global}}
                                 </label>
                             </div>
                             <div class="field">
                                 <label>
-                                    <input type="checkbox">
+                                    <input type="checkbox" data-name="caseInsensitive">
                                     {{main.operations.options.case_insensitive}}
                                 </label>
                             </div>

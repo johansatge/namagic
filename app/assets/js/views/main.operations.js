@@ -72,22 +72,40 @@
                 var $operation = $(this);
                 var $search = $operation.find('.js-search .js-fields:visible');
                 var $replace = $operation.find('.js-replace .js-fields:visible');
-
-                app.utils.log($search.serializeArray());
-
                 var operation = {
-                    search: {type: $search.length > 0 ? $search.data('type') : false, options: {}},
-                    replace: {type: $replace.length > 0 ? $replace.data('type') : false, options: {}}
+                    search: _parseOperationFieldsPanel.apply(this, [$search]),
+                    replace: _parseOperationFieldsPanel.apply(this, [$replace])
                 };
-                /**
-                 * @todo
-                 * - for each, get search type & fields
-                 * - for each, get replace type & fields
-                 * return an array of options
-                 */
                 operations.push(operation);
             });
             events.emit('edit_operations', operations);
+        };
+
+        /**
+         * Reads a panel of fields and returns its options
+         * @param $fields_panel
+         */
+        var _parseOperationFieldsPanel = function($fields_panel)
+        {
+            if ($fields_panel.length === 0)
+            {
+                return false;
+            }
+            var fields_panel = {type: $fields_panel.data('type'), options: {}};
+            var $options = $fields_panel.find('.js-field-option');
+            $options.each(function()
+            {
+                var $option = $(this);
+                if ($option.attr('type') === 'checkbox')
+                {
+                    fields_panel.options[$option.data('name')] = $option.is(':checked');
+                }
+                else
+                {
+                    fields_panel.options[$option.data('name')] = $option.val();
+                }
+            });
+            return fields_panel;
         };
 
         /**

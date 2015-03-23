@@ -67,8 +67,11 @@
         {
             // @todo apply operations
             app.utils.log(filename);
-            app.utils.log(currentOperations);
-            return filename + new Date().getTime()
+            for (var index in currentOperations)
+            {
+                app.utils.log(currentOperations[index]);
+            }
+            return filename + new Date().getTime();
         };
 
     };
