@@ -58,7 +58,24 @@
             $ui.operations.on('change', '.js-select-type', $.proxy(_onSelectType, this));
             $ui.operations.on('click', '.js-delete', $.proxy(_onDeleteOperation, this));
             $ui.operations.on('change keyup', 'input,select', $.proxy(_onEditOperations, this));
+            //$ui.operations.on('change', '.js-toggle', $.proxy(_onToggleField, this));
         };
+
+        /**
+         * Toggles areas depending on the clicked field
+         * @param evt
+         *
+         var _onToggleField = function(evt)
+         {
+             var $fields = $(evt.currentTarget).closest('.js-fields');
+             var $current_toggle = $fields.find('.js-toggle:checked');
+             var $toggle_targets = $fields.find('.js-toggle-target');
+             $toggle_targets.hide();
+             if ($current_toggle.length > 0 && typeof $current_toggle.data('toggle') !== 'undefined')
+             {
+                 $toggle_targets.filter('.' + $current_toggle.data('toggle')).show();
+             }
+         };*/
 
         /**
          * Editing operations

@@ -32,18 +32,27 @@
         },
         "chars_list": {
           "option": "List of characters",
+          "custom_list": "Custom list",
+          "alpha_chars": "Alphabetic characters",
           "digits": "Digits",
-          "special_chars": "Special characters",
-          "custom_list": "Custom list"
+          "special_chars": "Special characters"
+        },
+        "text_position": {
+          "option": "Position in text",
+          "index": "Index",
+          "from_end": "Start from end"
         },
         "text_range": {
-          "option": "Range of text or position",
-          "position": "Position",
-          "position_from_end": "Start from end",
-          "range": "Range"
+          "option": "Range of text",
+          "start_index": "Start index",
+          "end_index": "End index",
+          "from_end": "Start from end"
         },
         "regex": {
-          "option": "Regular expression"
+          "option": "Regular expression",
+          "expression": "Expression",
+          "is_global": "Global",
+          "case_insensitive": "Case insensitive"
         }
       },
       "replace": {

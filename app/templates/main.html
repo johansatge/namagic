@@ -66,6 +66,7 @@
                                 <option value="allText">{{main.operations.search.all_text.option}}</option>
                                 <option value="freeText">{{main.operations.search.free_text.option}}</option>
                                 <option value="charsList">{{main.operations.search.chars_list.option}}</option>
+                                <option value="textPosition">{{main.operations.search.text_position.option}}</option>
                                 <option value="textRange">{{main.operations.search.text_range.option}}</option>
                                 <option value="regex">{{main.operations.search.regex.option}}</option>
                             </select>
@@ -74,7 +75,7 @@
                             </div>
                         </div>
                         <div class="operation-fields js-fields" data-type="allText">
-
+                            @todo
                         </div>
                         <div class="operation-fields js-fields" data-type="freeText">
                             <label class="field">
@@ -88,50 +89,62 @@
                         </div>
                         <div class="operation-fields js-fields" data-type="charsList">
                             <label class="field">
-                                <input type="radio" name="charsList" value="digits">
+                                {{main.operations.search.chars_list.custom_list}}
+                                <input type="text" name="customList">
+                            </label>
+                            <label class="field">
+                                <input type="checkbox" name="alphabeticChars">
+                                {{main.operations.search.chars_list.alpha_chars}}
+                            </label>
+                            <label class="field">
+                                <input type="checkbox" name="digits">
                                 {{main.operations.search.chars_list.digits}}
                             </label>
                             <label class="field">
-                                <input type="radio" name="charsList" value="special_chars">
+                                <input type="checkbox" name="special">
                                 {{main.operations.search.chars_list.special_chars}}
                             </label>
+                        </div>
+                        <div class="operation-fields js-fields" data-type="textPosition">
                             <label class="field">
-                                <input type="radio" name="charsList" value="custom">
-                                {{main.operations.search.chars_list.custom_list}}
+                                {{main.operations.search.text_position.index}}
+                                <input type="text" name="index">
                             </label>
                             <label class="field">
-                                <input type="text" name="customChars">
+                                <input type="checkbox" name="fromEnd">
+                                {{main.operations.search.text_position.from_end}}
                             </label>
                         </div>
                         <div class="operation-fields js-fields" data-type="textRange">
                             <label class="field">
-                                <input type="radio" name="charsList" value="digits" checked="checked">
-                                {{main.operations.search.text_range.position}}
+                                {{main.operations.search.text_range.start_index}}
+                                <input type="text" name="startIndex">
                             </label>
                             <label class="field">
-                                <input type="text" name="position">
+                                <input type="checkbox" name="startFromEnd">
+                                {{main.operations.search.text_range.from_end}}
                             </label>
                             <label class="field">
-                                <input type="checkbox" name="positionFromEnd">
-                                {{main.operations.search.text_range.position_from_end}}
+                                {{main.operations.search.text_range.end_index}}
+                                <input type="text" name="endIndex">
                             </label>
                             <label class="field">
-                                <input type="radio" name="charsList" value="special_chars">
-                                {{main.operations.search.text_range.range}}
+                                <input type="checkbox" name="endFromEnd">
+                                {{main.operations.search.text_range.from_end}}
                             </label>
                         </div>
                         <div class="operation-fields js-fields" data-type="regex">
                             <label class="field">
-                                {{main.operations.search.options.regex}}
+                                {{main.operations.search.regex.expression}}
                                 <input type="text" name="regex">
                             </label>
                             <label class="field">
                                 <input type="checkbox" name="isGlobal">
-                                {{main.operations.search.options.regex_global}}
+                                {{main.operations.search.regex.is_global}}
                             </label>
                             <label class="field">
                                 <input type="checkbox" name="caseInsensitive">
-                                {{main.operations.search.options.case_insensitive}}
+                                {{main.operations.search.regex.case_insensitive}}
                             </label>
                         </div>
                     </div>
