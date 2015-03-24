@@ -161,16 +161,57 @@
                             </select>
                         </div>
                         <div class="operation-fields js-fields" data-type="freeText">
-                            @todo freeText
+                            <label class="field">
+                                {{main.operations.actions.free_text.text_to_set}}
+                                <input type="text" name="text">
+                            </label>
                         </div>
                         <div class="operation-fields js-fields" data-type="digitsSequence">
-                            @todo digitsSequence
+                            @todo digitsSequence (start, step)
                         </div>
                         <div class="operation-fields js-fields" data-type="dateAndTime">
-                            @todo dateAndTime
+                            <label class="field">
+                                {{main.operations.actions.date_and_time.creation_date}}
+                                <input type="radio" name="type" value="creation">
+                            </label>
+                            <label class="field">
+                                {{main.operations.actions.date_and_time.modification_date}}
+                                <input type="radio" name="type" value="modification">
+                            </label>
+                            <label class="field">
+                                {{main.operations.actions.date_and_time.today_date}}
+                                <input type="radio" name="type" value="today">
+                            </label>
+                            <label class="field">
+                                {{main.operations.actions.date_and_time.date_format}}
+                                <input type="text" name="format">
+                                <div class="input-helper">
+                                    <i class="fa fa-plus-square"></i>
+                                    <select>
+                                        <option value="">{{main.operations.actions.date_and_time.add}}</option>
+                                        <option value="">{{main.operations.actions.date_and_time.add_day}}</option>
+                                        <option value="">{{main.operations.actions.date_and_time.add_month}}</option>
+                                        <option value="">{{main.operations.actions.date_and_time.add_year}}</option>
+                                        <option value="">{{main.operations.actions.date_and_time.add_hour}}</option>
+                                        <option value="">{{main.operations.actions.date_and_time.add_minute}}</option>
+                                        <option value="">{{main.operations.actions.date_and_time.add_second}}</option>
+                                    </select>
+                                </div>
+                            </label>
                         </div>
                         <div class="operation-fields js-fields" data-type="updateCase">
-                            @todo updateCase
+                            <label class="field">
+                                {{main.operations.actions.update_case.switch_uppercase}}
+                                <input type="radio" name="type" value="uppercase">
+                            </label>
+                            <label class="field">
+                                {{main.operations.actions.update_case.switch_lowercase}}
+                                <input type="radio" name="type" value="lowercase">
+                            </label>
+                            <label class="field">
+                                {{main.operations.actions.update_case.invert_case}}
+                                <input type="radio" name="type" value="invert">
+                            </label>
                         </div>
                     </div>
                 </div>

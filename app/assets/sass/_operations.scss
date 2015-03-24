@@ -150,8 +150,34 @@
 
     & .field
     {
-        display : block;
-        padding : 0 0 10px 0;
+        display  : block;
+        position : relative;
+        padding  : 0 0 10px 0;
+
+        & .input-helper
+        {
+            width    : 26px;
+            height   : 26px;
+            position : absolute;
+            bottom   : 10px;
+            right    : 0;
+
+            & i
+            {
+                font-size : 14px;
+                color     : #b0b0b0;
+                position  : absolute;
+                top       : 6px;
+                left      : 7px;
+            }
+
+            & select
+            {
+                width   : 100%;
+                height  : 100%;
+                opacity : 0;
+            }
+        }
 
         & input[type=text]
         {
@@ -204,7 +230,6 @@
             color       : #ffffff;
         }
 
-        /*
         & input[type=radio]
         {
             position           : relative;
@@ -235,7 +260,6 @@
             content     : '\f111';
             color       : #ffffff;
         }
-        */
 
     }
 }

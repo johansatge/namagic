@@ -102,42 +102,27 @@ html, body {
 }
 /* line 94, ../sass/_toolbar.scss */
 .panel .actions button.secondary {
-  color: #333333;
   background: linear-gradient(to bottom, #f1f6f9, #d8d8d8);
   border: 1px solid #a3a3a3;
 }
-/* line 101, ../sass/_toolbar.scss */
+/* line 100, ../sass/_toolbar.scss */
 .panel .actions button.secondary:active {
-  color: #333333;
   background: linear-gradient(to top, #f1f6f9, #d8d8d8);
 }
-/* line 107, ../sass/_toolbar.scss */
+/* line 105, ../sass/_toolbar.scss */
 .panel .actions button i {
   float: left;
   margin: 0 6px 0 0;
   font-size: 15px;
   color: rgba(51, 51, 51, 0.35);
-  transition: color 300ms;
 }
-/* line 116, ../sass/_toolbar.scss */
-.panel .actions button:hover i {
-  color: #333333;
-}
-/* line 121, ../sass/_toolbar.scss */
+/* line 113, ../sass/_toolbar.scss */
 .panel .actions button.primary i {
   color: rgba(255, 255, 255, 0.4);
 }
-/* line 126, ../sass/_toolbar.scss */
-.panel .actions button.primary:hover i {
-  color: white;
-}
-/* line 131, ../sass/_toolbar.scss */
+/* line 118, ../sass/_toolbar.scss */
 .panel .actions button[disabled=disabled] {
   opacity: 0.5;
-}
-/* line 135, ../sass/_toolbar.scss */
-.panel .actions button[disabled=disabled]:hover i {
-  color: rgba(51, 51, 51, 0.5);
 }
 
 /* line 1, ../sass/_placeholders.scss */
@@ -410,41 +395,32 @@ html, body {
 /* line 151, ../sass/_operations.scss */
 .operation-fields .field {
   display: block;
+  position: relative;
   padding: 0 0 10px 0;
-        /*
-        & input[type=radio]
-        {
-            position           : relative;
-            float              : left;
-            margin             : 1px 5px 0 0;
-            -webkit-appearance : none;
-            width              : 13px;
-            height             : 13px;
-            background         : linear-gradient(to bottom, #757575, #636363);
-            box-shadow         : inset 0 1px 0 #909090, 0 1px 0 #696969;
-            border-radius      : 50%;
-            border             : 1px solid #282828;
-        }
-
-        & input[type=radio]:checked
-        {
-            background : #3b99fc;
-            box-shadow : 0 1px 0 rgba(105, 105, 105, 0.7);
-        }
-
-        & input[type=radio]:checked:after
-        {
-            font-family : "FontAwesome", sans-serif;
-            position    : absolute;
-            top         : 3px;
-            left        : 3px;
-            font-size   : 6px;
-            content     : '\f111';
-            color       : #ffffff;
-        }
-        */
 }
-/* line 156, ../sass/_operations.scss */
+/* line 157, ../sass/_operations.scss */
+.operation-fields .field .input-helper {
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  bottom: 10px;
+  right: 0;
+}
+/* line 165, ../sass/_operations.scss */
+.operation-fields .field .input-helper i {
+  font-size: 14px;
+  color: #b0b0b0;
+  position: absolute;
+  top: 6px;
+  left: 7px;
+}
+/* line 174, ../sass/_operations.scss */
+.operation-fields .field .input-helper select {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+/* line 182, ../sass/_operations.scss */
 .operation-fields .field input[type=text] {
   width: 100%;
   color: #ffffff;
@@ -457,12 +433,12 @@ html, body {
   background: #3a3a3a;
   text-indent: 2px;
 }
-/* line 170, ../sass/_operations.scss */
+/* line 196, ../sass/_operations.scss */
 .operation-fields .field input[type=text]:focus {
   border: 2px solid #3b99fc;
   text-indent: 0;
 }
-/* line 176, ../sass/_operations.scss */
+/* line 202, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox] {
   position: relative;
   float: left;
@@ -475,12 +451,12 @@ html, body {
   border-radius: 3px;
   border: 1px solid #282828;
 }
-/* line 190, ../sass/_operations.scss */
+/* line 216, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked {
   background: #3b99fc;
   box-shadow: 0 1px 0 rgba(105, 105, 105, 0.7);
 }
-/* line 196, ../sass/_operations.scss */
+/* line 222, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked:after {
   font-family: "FontAwesome", sans-serif;
   position: absolute;
@@ -488,5 +464,33 @@ html, body {
   left: 2px;
   font-size: 7px;
   content: '\f00c';
+  color: #ffffff;
+}
+/* line 233, ../sass/_operations.scss */
+.operation-fields .field input[type=radio] {
+  position: relative;
+  float: left;
+  margin: 1px 5px 0 0;
+  -webkit-appearance: none;
+  width: 13px;
+  height: 13px;
+  background: linear-gradient(to bottom, #757575, #636363);
+  box-shadow: inset 0 1px 0 #909090, 0 1px 0 #696969;
+  border-radius: 50%;
+  border: 1px solid #282828;
+}
+/* line 247, ../sass/_operations.scss */
+.operation-fields .field input[type=radio]:checked {
+  background: #3b99fc;
+  box-shadow: 0 1px 0 rgba(105, 105, 105, 0.7);
+}
+/* line 253, ../sass/_operations.scss */
+.operation-fields .field input[type=radio]:checked:after {
+  font-family: "FontAwesome", sans-serif;
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  font-size: 6px;
+  content: '\f111';
   color: #ffffff;
 }

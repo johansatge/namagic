@@ -58,16 +58,31 @@
       "actions": {
         "none": "Select an action...",
         "free_text": {
-          "option": "Insert free text"
+          "option": "Insert free text",
+          "text_to_set": "Text to set"
         },
         "digits_sequence": {
           "option": "Insert digits sequence"
         },
         "date_and_time": {
-          "option": "Insert date and time"
+          "option": "Insert date and time",
+          "creation_date": "Creation date",
+          "modification_date": "Modification date",
+          "today_date": "Today date",
+          "date_format": "Date format",
+          "add": "Add...",
+          "add_day": "Add day",
+          "add_month": "Add month",
+          "add_year": "Add year",
+          "add_hour": "Add hours",
+          "add_minute": "Add minutes",
+          "add_second": "Add seconds"
         },
         "update_case": {
-          "option": "Update text case"
+          "option": "Update text case",
+          "switch_uppercase": "Switch to uppercase",
+          "switch_lowercase": "Switch to lowercase",
+          "invert_case": "Invert case"
         }
       }
     }
