@@ -88,9 +88,9 @@
          */
         var _initSubviews = function()
         {
-            this.files = new app.views.main.files();
+            this.files = new app.views.files();
             this.files.init($ui.window, $ui.filesPanel);
-            this.operations = new app.views.main.operations();
+            this.operations = new app.views.operations();
             this.operations.init($ui.operationsPanel);
         };
 

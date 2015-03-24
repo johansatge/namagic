@@ -228,6 +228,6 @@
 
     };
 
-    app.views.main.files = module;
+    app.views.files = module;
 
 })(window.App, jQuery);

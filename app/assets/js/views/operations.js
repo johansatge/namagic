@@ -231,6 +231,6 @@
 
     };
 
-    app.views.main.operations = module;
+    app.views.operations = module;
 
 })(window.App, jQuery);
