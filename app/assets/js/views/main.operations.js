@@ -88,10 +88,10 @@
             {
                 var $operation = $(this);
                 var $search = $operation.find('.js-search .js-fields:visible');
-                var $replace = $operation.find('.js-replace .js-fields:visible');
+                var $action = $operation.find('.js-action .js-fields:visible');
                 var operation = {
                     search: _parseOperationFieldsPanel.apply(this, [$search]),
-                    replace: _parseOperationFieldsPanel.apply(this, [$replace])
+                    action: _parseOperationFieldsPanel.apply(this, [$action])
                 };
                 operations.push(operation);
             });

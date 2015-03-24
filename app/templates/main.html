@@ -148,16 +148,29 @@
                             </label>
                         </div>
                     </div>
-                    <div class="js-options js-replace">
+                    <div class="js-options js-action">
                         <div class="operation-bar">
                             <i class="type fa fa-pencil"></i>
                             <i class="chevron fa fa-chevron-down"></i>
                             <select class="js-select-type">
-                                <option value="">@todo</option>
+                                <option value="">{{main.operations.actions.none}}</option>
+                                <option value="freeText">{{main.operations.actions.free_text.option}}</option>
+                                <option value="digitsSequence">{{main.operations.actions.digits_sequence.option}}</option>
+                                <option value="dateAndTime">{{main.operations.actions.date_and_time.option}}</option>
+                                <option value="updateCase">{{main.operations.actions.update_case.option}}</option>
                             </select>
                         </div>
-                        <div class="operation-fields js-fields" data-type="">
-                                @todo
+                        <div class="operation-fields js-fields" data-type="freeText">
+                            @todo freeText
+                        </div>
+                        <div class="operation-fields js-fields" data-type="digitsSequence">
+                            @todo digitsSequence
+                        </div>
+                        <div class="operation-fields js-fields" data-type="dateAndTime">
+                            @todo dateAndTime
+                        </div>
+                        <div class="operation-fields js-fields" data-type="updateCase">
+                            @todo updateCase
                         </div>
                     </div>
                 </div>

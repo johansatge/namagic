@@ -55,7 +55,20 @@
           "case_insensitive": "Case insensitive"
         }
       },
-      "replace": {
+      "actions": {
+        "none": "Select an action...",
+        "free_text": {
+          "option": "Insert free text"
+        },
+        "digits_sequence": {
+          "option": "Insert digits sequence"
+        },
+        "date_and_time": {
+          "option": "Insert date and time"
+        },
+        "update_case": {
+          "option": "Update text case"
+        }
       }
     }
   }
