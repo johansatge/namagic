@@ -62,7 +62,9 @@
           "text_to_set": "Text to set"
         },
         "digits_sequence": {
-          "option": "Insert digits sequence"
+          "option": "Insert digits sequence",
+          "start_index": "Start index",
+          "step": "Step"
         },
         "date_and_time": {
           "option": "Insert date and time",
@@ -71,18 +73,19 @@
           "today_date": "Today date",
           "date_format": "Date format",
           "add": "Add...",
-          "add_day": "Add day",
-          "add_month": "Add month",
-          "add_year": "Add year",
-          "add_hours": "Add hours",
-          "add_minutes": "Add minutes",
-          "add_seconds": "Add seconds",
+          "presets": "Presets",
+          "date_parts": "Date parts",
           "day": "Day",
           "month": "Month",
           "year": "Year",
           "hours": "Hours",
           "minutes": "Minutes",
-          "seconds": "Seconds"
+          "seconds": "Seconds",
+          "separators": "Separators",
+          "slash": "/",
+          "dot": ".",
+          "dash": "-",
+          "colon": ":"
         },
         "update_case": {
           "option": "Update text case",
@@ -90,6 +93,12 @@
           "switch_lowercase": "Switch to lowercase",
           "invert_case": "Invert case"
         }
+      },
+      "apply_to": {
+        "none": "Apply to...",
+        "filename_only": "Apply to filename only",
+        "extension_only": "Apply to extension only",
+        "filename_and_extension": "Apply to filename and extension"
       }
     }
   }

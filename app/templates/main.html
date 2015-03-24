@@ -167,7 +167,14 @@
                             </label>
                         </div>
                         <div class="operation-fields js-fields" data-type="digitsSequence">
-                            @todo digitsSequence (start, step)
+                            <label class="field">
+                                {{main.operations.actions.digits_sequence.start_index}}
+                                <input type="text" name="startIndex" value="0">
+                            </label>
+                            <label class="field">
+                                {{main.operations.actions.digits_sequence.step}}
+                                <input type="text" name="step" value="1">
+                            </label>
                         </div>
                         <div class="operation-fields js-fields" data-type="dateAndTime">
                             <label class="field">
@@ -191,26 +198,43 @@
                                             <option value="">
                                                 {{main.operations.actions.date_and_time.add}}
                                             </option>
-                                            <option data-value="d" data-label="{{main.operations.actions.date_and_time.day}}">
-                                                {{main.operations.actions.date_and_time.add_day}}
-                                            </option>
-                                            <option data-value="m" data-label="{{main.operations.actions.date_and_time.month}}">
-                                                {{main.operations.actions.date_and_time.add_month}}
-                                            </option>
-                                            <option data-value="y" data-label="{{main.operations.actions.date_and_time.year}}">
-                                                {{main.operations.actions.date_and_time.add_year}}
-                                            </option>
-                                            <option data-value="h" data-label="{{main.operations.actions.date_and_time.hours}}">
-                                                {{main.operations.actions.date_and_time.add_hours}}
-                                            </option>
-                                            <option data-value="i" data-label="{{main.operations.actions.date_and_time.minutes}}">
-                                                {{main.operations.actions.date_and_time.add_minutes}}
-                                            </option>
-                                            <option data-value="s" data-label="{{main.operations.actions.date_and_time.seconds}}">
-                                                {{main.operations.actions.date_and_time.add_seconds}}
-                                            </option>
+                                            <optgroup label="{{main.operations.actions.date_and_time.date_parts}}">
+                                                <option data-value="d" data-label="{{main.operations.actions.date_and_time.day}}">
+                                                    {{main.operations.actions.date_and_time.day}}
+                                                </option>
+                                                <option data-value="m" data-label="{{main.operations.actions.date_and_time.month}}">
+                                                    {{main.operations.actions.date_and_time.month}}
+                                                </option>
+                                                <option data-value="y" data-label="{{main.operations.actions.date_and_time.year}}">
+                                                    {{main.operations.actions.date_and_time.year}}
+                                                </option>
+                                                <option data-value="h" data-label="{{main.operations.actions.date_and_time.hours}}">
+                                                    {{main.operations.actions.date_and_time.hours}}
+                                                </option>
+                                                <option data-value="i" data-label="{{main.operations.actions.date_and_time.minutes}}">
+                                                    {{main.operations.actions.date_and_time.minutes}}
+                                                </option>
+                                                <option data-value="s" data-label="{{main.operations.actions.date_and_time.seconds}}">
+                                                    {{main.operations.actions.date_and_time.seconds}}
+                                                </option>
+                                            </optgroup>
+                                            <optgroup label="{{main.operations.actions.date_and_time.separators}}">
+                                                <option data-value="/" data-label="/">
+                                                    {{main.operations.actions.date_and_time.slash}}
+                                                </option>
+                                                <option data-value="." data-label=".">
+                                                    {{main.operations.actions.date_and_time.dot}}
+                                                </option>
+                                                <option data-value="-" data-label="-">
+                                                    {{main.operations.actions.date_and_time.dash}}
+                                                </option>
+                                                <option data-value=":" data-label=":">
+                                                    {{main.operations.actions.date_and_time.colon}}
+                                                </option>
+                                            </optgroup>
                                         </select>
                                     </div>
+                                    <input type="hidden" name="format" value="" class="js-value">
                                 </div>
                             </label>
                         </div>
@@ -228,6 +252,16 @@
                                 <input type="radio" name="type" value="invert">
                             </label>
                         </div>
+                    </div>
+                    <div class="operation-bar">
+                        <i class="type fa fa-file-text-o"></i>
+                        <i class="chevron fa fa-chevron-down"></i>
+                        <select class="js-apply-to">
+                            <option value="">{{main.operations.apply_to.none}}</option>
+                            <option value="filename">{{main.operations.apply_to.filename_only}}</option>
+                            <option value="extension">{{main.operations.apply_to.extension_only}}</option>
+                            <option value="both">{{main.operations.apply_to.filename_and_extension}}</option>
+                        </select>
                     </div>
                 </div>
             </script>

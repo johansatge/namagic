@@ -67,6 +67,7 @@
             $ui.operations.on('click', '.js-delete-item', $.proxy(_onDeleteInputItem, this));
             $ui.operations.on('change', '.js-add-item', $.proxy(_onAddInputItem, this));
             $ui.operations.on('change keyup', 'input,select', $.proxy(_onEditOperations, this));
+            $ui.operations.on('change', '.js-apply-to', $.proxy(_onEditOperations, this));
         };
 
         /**
@@ -81,9 +82,11 @@
                 var $operation = $(this);
                 var $search = $operation.find('.js-search .js-fields:visible');
                 var $action = $operation.find('.js-action .js-fields:visible');
+                var $apply_to = $operation.find('.js-apply-to');
                 var operation = {
                     search: _parseOperationFieldsPanel.apply(this, [$search]),
-                    action: _parseOperationFieldsPanel.apply(this, [$action])
+                    action: _parseOperationFieldsPanel.apply(this, [$action]),
+                    applyTo: $apply_to.find('option:selected').val()
                 };
                 operations.push(operation);
             });
@@ -101,7 +104,7 @@
                 return false;
             }
             var fields_panel = {type: $fields_panel.data('type'), options: {}};
-            var $inputs = $fields_panel.find('input[type="text"],input[type="radio"]:checked');
+            var $inputs = $fields_panel.find('input[type="text"],input[type="radio"]:checked,input[type="hidden"]');
             $inputs.each(function()
             {
                 var $option = $(this);
@@ -142,7 +145,8 @@
             $new_operation.find('.js-fields').hide();
             $new_operation.find('.js-sortable-input').sortable({
                 items: '.js-sortable-item',
-                placeholder: 'js-item-placeholder'
+                placeholder: 'js-item-placeholder',
+                stop: $.proxy(_onSortInputItem, this)
             });
             $ui.placeholder.hide();
         };
@@ -153,8 +157,10 @@
          */
         var _onDeleteInputItem = function(evt)
         {
-            $(evt.currentTarget).closest('.js-sortable-item').remove();
-            // @todo update hidden field
+            var $item = $(evt.currentTarget);
+            var $field = $item.closest('.js-sortable-input');
+            $item.closest('.js-sortable-item').remove();
+            _updateInputWithItems.apply(this, [$field]);
         };
 
         /**
@@ -173,8 +179,31 @@
             }]);
             $field.append(template).sortable('refresh');
             $select.val('');
-            // @todo update hidden field & updates template
-            // @todo update hidden field on sortable event
+            _updateInputWithItems.apply(this, [$field]);
+        };
+
+        /**
+         * Sorts items in a sortable input
+         * @param evt
+         * @param ui
+         */
+        var _onSortInputItem = function(evt, ui)
+        {
+            _updateInputWithItems.apply(this, [ui.item.closest('.js-sortable-input')]);
+        };
+
+        /**
+         * Updates the value of a sortable field, depending on the current configuration
+         * @param $sortable_field
+         */
+        var _updateInputWithItems = function($sortable_field)
+        {
+            var value = [];
+            $sortable_field.find('.js-sortable-item').each(function()
+            {
+                value.push($(this).data('value'));
+            });
+            $sortable_field.find('.js-value').val(value.join(''));
         };
 
         /**
