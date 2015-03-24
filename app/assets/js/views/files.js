@@ -38,16 +38,13 @@
         };
 
         /**
-         * Adds files
-         * @param files
+         * Adds a file
+         * @param file
          */
-        this.addFiles = function(files)
+        this.addFile = function(file)
         {
-            for (var index in files)
-            {
-                $files[files[index].id] = $(app.utils.template.render(fileTemplate, [files[index]]));
-                $ui.list.append($files[files[index].id]);
-            }
+            $files[file.id] = $(app.utils.template.render(fileTemplate, [file]));
+            $ui.list.append($files[file.id]);
             $ui.placeholder.toggle($ui.list.children().length === 0);
         };
 

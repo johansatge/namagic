@@ -19,6 +19,7 @@
         {
             view.on('close', $.proxy(_onViewClose, this));
             view.on('loaded', $.proxy(_onViewLoaded, this));
+            model.on('add_file', $.proxy(_onAddFileFromModel, this));
             view.show();
         };
 
@@ -27,25 +28,34 @@
          */
         var _onViewLoaded = function()
         {
-            view.files.on('add_files', $.proxy(_onAddFiles, this));
-            view.files.on('remove_files', $.proxy(_onRemoveFiles, this));
-            view.operations.on('edit_operations', $.proxy(_onEditOperations, this));
+            view.files.on('add_files', $.proxy(_onAddFilesFromView, this));
+            view.files.on('remove_files', $.proxy(_onRemoveFilesFromView, this));
+            view.operations.on('edit_operations', $.proxy(_onEditOperationsFromView, this));
         };
 
         /**
          * Processes files added from the view and send them back
          * @param files
          */
-        var _onAddFiles = function(files)
+        var _onAddFilesFromView = function(files)
         {
-            view.files.addFiles(model.addFiles(files));
+            model.addFiles(files);
+        };
+
+        /**
+         * Adds a file to the view when the model has processed it
+         * @param file
+         */
+        var _onAddFileFromModel = function(file)
+        {
+            view.files.addFile(file);
         };
 
         /**
          * Processes files deleted from the view and send them back
          * @param ids
          */
-        var _onRemoveFiles = function(ids)
+        var _onRemoveFilesFromView = function(ids)
         {
             model.removeFiles(ids);
         };
@@ -54,7 +64,7 @@
          * Processes files when modifying an operation from the view
          * @param operations
          */
-        var _onEditOperations = function(operations)
+        var _onEditOperationsFromView = function(operations)
         {
             var files = model.applyOperations(operations);
             view.files.updateFiles(files);

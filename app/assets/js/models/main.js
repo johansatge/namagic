@@ -1,7 +1,7 @@
 /**
  * Main model
  */
-(function(app)
+(function(app, process)
 {
 
     'use strict';
@@ -9,8 +9,20 @@
     var module = function()
     {
 
+        var events = new app.node.events.EventEmitter();
         var currentFiles = {};
         var currentOperations = [];
+        var newFiles = [];
+
+        /**
+         * Attaches an event
+         * @param event
+         * @param callback
+         */
+        this.on = function(event, callback)
+        {
+            events.on(event, callback);
+        };
 
         /**
          * Adds a list of files
@@ -18,23 +30,25 @@
          */
         this.addFiles = function(files)
         {
-            var new_files = [];
             for (var index in files)
             {
                 var file = app.node.path.parse(files[index]);
                 var id = app.node.crypto.createHash('md5').update(files[index]).digest('hex');
                 if (typeof currentFiles[id] === 'undefined')
                 {
-                    currentFiles[id] = new_files[id] = {
+                    newFiles.push({
                         id: id,
                         dir: file.dir,
                         name: file.name,
                         ext: file.ext,
-                        updated_name: _applyOperationsOnFilename.apply(this, [file.name, file.ext])
-                    };
+                        updated_name: ''
+                    });
                 }
             }
-            return new_files;
+            if (newFiles.length > 0)
+            {
+                _processNewFile.apply(this);
+            }
         };
 
         /**
@@ -58,9 +72,26 @@
             currentOperations = operations;
             for (var index in currentFiles)
             {
-                currentFiles[index].updated_name = _applyOperationsOnFilename.apply(this, [file.name, file.ext]);
+                currentFiles[index].updated_name = _applyOperationsOnFilename.apply(this, [currentFiles[index].name, currentFiles[index].ext]);
             }
             return currentFiles;
+        };
+
+        /**
+         * Processes a new file and recursively calls itself if the queue is not empty
+         */
+        var _processNewFile = function()
+        {
+            var file = newFiles.shift();
+            currentFiles[file.id] = file;
+            currentFiles[file.id].updated_name = _applyOperationsOnFilename.apply(this, [file.name, file.ext]);
+            events.emit('add_file', file);
+            if (newFiles.length > 0)
+            {
+                app.utils.log(newFiles.length);
+                setTimeout($.proxy(_processNewFile, this), 0);
+                // @todo make this faster
+            }
         };
 
         /**
@@ -70,18 +101,18 @@
          */
         var _applyOperationsOnFilename = function(file_name, file_ext)
         {
-            // @todo apply operations
             // @todo check conflicts
-            app.utils.log(file_name + ' - ' + file_ext);
+            var file = {name: file_name, ext: file_ext};
             for (var index in currentOperations)
             {
-                app.utils.log(currentOperations[index]);
+                // @todo apply each operation
+                //file = app.models.operation.applyOperation(currentOperations[index], file);
             }
-            return file_name + file_ext + new Date().getTime();
+            return file.name + file.ext;
         };
 
     };
 
     app.models.main = module;
 
-})(window.App);
+})(window.App, process);
