@@ -70,7 +70,7 @@
                                 <option value="textRange">{{main.operations.search.text_range.option}}</option>
                                 <option value="regex">{{main.operations.search.regex.option}}</option>
                             </select>
-                            <div class="delete js-delete">
+                            <div class="delete js-delete-operation">
                                 <i class="fa fa-trash-o"></i>
                             </div>
                         </div>
@@ -184,18 +184,33 @@
                             </label>
                             <label class="field">
                                 {{main.operations.actions.date_and_time.date_format}}
-                                <input type="text" name="format">
-                                <div class="input-helper">
-                                    <i class="fa fa-plus-square"></i>
-                                    <select>
-                                        <option value="">{{main.operations.actions.date_and_time.add}}</option>
-                                        <option value="">{{main.operations.actions.date_and_time.add_day}}</option>
-                                        <option value="">{{main.operations.actions.date_and_time.add_month}}</option>
-                                        <option value="">{{main.operations.actions.date_and_time.add_year}}</option>
-                                        <option value="">{{main.operations.actions.date_and_time.add_hour}}</option>
-                                        <option value="">{{main.operations.actions.date_and_time.add_minute}}</option>
-                                        <option value="">{{main.operations.actions.date_and_time.add_second}}</option>
-                                    </select>
+                                <div class="sortable-input js-sortable-input">
+                                    <div class="add-helper">
+                                        <i class="fa fa-plus-square"></i>
+                                        <select class="js-add-item">
+                                            <option value="">
+                                                {{main.operations.actions.date_and_time.add}}
+                                            </option>
+                                            <option data-value="d" data-label="{{main.operations.actions.date_and_time.day}}">
+                                                {{main.operations.actions.date_and_time.add_day}}
+                                            </option>
+                                            <option data-value="m" data-label="{{main.operations.actions.date_and_time.month}}">
+                                                {{main.operations.actions.date_and_time.add_month}}
+                                            </option>
+                                            <option data-value="y" data-label="{{main.operations.actions.date_and_time.year}}">
+                                                {{main.operations.actions.date_and_time.add_year}}
+                                            </option>
+                                            <option data-value="h" data-label="{{main.operations.actions.date_and_time.hours}}">
+                                                {{main.operations.actions.date_and_time.add_hours}}
+                                            </option>
+                                            <option data-value="i" data-label="{{main.operations.actions.date_and_time.minutes}}">
+                                                {{main.operations.actions.date_and_time.add_minutes}}
+                                            </option>
+                                            <option data-value="s" data-label="{{main.operations.actions.date_and_time.seconds}}">
+                                                {{main.operations.actions.date_and_time.add_seconds}}
+                                            </option>
+                                        </select>
+                                    </div>
                                 </div>
                             </label>
                         </div>
@@ -214,6 +229,11 @@
                             </label>
                         </div>
                     </div>
+                </div>
+            </script>
+            <script type="text/template" class="js-sortable-input-template">
+                <div class="sortable-item js-sortable-item" data-value="{{value}}">
+                    {{label}}<i class="fa fa-times js-delete-item"></i>
                 </div>
             </script>
             <div class="actions">

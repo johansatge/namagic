@@ -74,9 +74,15 @@
           "add_day": "Add day",
           "add_month": "Add month",
           "add_year": "Add year",
-          "add_hour": "Add hours",
-          "add_minute": "Add minutes",
-          "add_second": "Add seconds"
+          "add_hours": "Add hours",
+          "add_minutes": "Add minutes",
+          "add_seconds": "Add seconds",
+          "day": "Day",
+          "month": "Month",
+          "year": "Year",
+          "hours": "Hours",
+          "minutes": "Minutes",
+          "seconds": "Seconds"
         },
         "update_case": {
           "option": "Update text case",

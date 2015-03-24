@@ -24,7 +24,7 @@
         width : 300px;
     }
 
-    & .js-sortable
+    & .js-operation-placeholder
     {
         margin        : 10px;
         height        : 50px;
@@ -154,31 +154,6 @@
         position : relative;
         padding  : 0 0 10px 0;
 
-        & .input-helper
-        {
-            width    : 26px;
-            height   : 26px;
-            position : absolute;
-            bottom   : 10px;
-            right    : 0;
-
-            & i
-            {
-                font-size : 14px;
-                color     : #b0b0b0;
-                position  : absolute;
-                top       : 6px;
-                left      : 7px;
-            }
-
-            & select
-            {
-                width   : 100%;
-                height  : 100%;
-                opacity : 0;
-            }
-        }
-
         & input[type=text]
         {
             width         : 100%;
@@ -260,6 +235,79 @@
             content     : '\f111';
             color       : #ffffff;
         }
-
     }
+
+    & .sortable-input
+    {
+        width         : 100%;
+        color         : #ffffff;
+        border-radius : 3px;
+        box-shadow    : inset 0 1px 2px #373737, 0 1px 0 #5e5e5e;
+        min-height    : 26px;
+        padding       : 3px 25px 0 3px;
+        margin        : 6px 0 0 0;
+        transition    : border 150ms;
+        background    : #3a3a3a;
+        overflow      : hidden;
+
+        & .sortable-item
+        {
+            cursor        : move;
+            float         : left;
+            padding       : 2px 6px 4px 6px;
+            margin        : 0 3px 3px 0;
+            color         : #ffffff;
+            font-size     : 11px;
+            border        : 1px solid #282828;
+            box-shadow    : inset 0 1px 0 #666666;
+            border-radius : 3px;
+            background    : #4a4a4a;
+
+            & i
+            {
+                cursor    : default;
+                font-size : 10px;
+                color     : #b0b0b0;
+                float     : right;
+                margin    : 2px 0 0 4px;
+            }
+        }
+
+        & .js-item-placeholder
+        {
+            width         : 40px;
+            float         : left;
+            height        : 20px;
+            border-radius : 3px;
+            margin        : 0 3px 3px 0;
+            border        : 1px dashed #535353;
+        }
+
+        & .add-helper
+        {
+            width    : 26px;
+            height   : 26px;
+            position : absolute;
+            top      : 50%;
+            right    : 0;
+            margin   : -8px 0 0 0;
+
+            & i
+            {
+                font-size : 14px;
+                color     : #b0b0b0;
+                position  : absolute;
+                top       : 6px;
+                left      : 7px;
+            }
+
+            & select
+            {
+                width   : 100%;
+                height  : 100%;
+                opacity : 0;
+            }
+        }
+    }
+
 }

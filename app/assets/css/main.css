@@ -279,7 +279,7 @@ html, body {
   width: 300px;
 }
 /* line 27, ../sass/_operations.scss */
-.panel.operations .js-sortable {
+.panel.operations .js-operation-placeholder {
   margin: 10px;
   height: 50px;
   border-radius: 8px;
@@ -399,28 +399,6 @@ html, body {
   padding: 0 0 10px 0;
 }
 /* line 157, ../sass/_operations.scss */
-.operation-fields .field .input-helper {
-  width: 26px;
-  height: 26px;
-  position: absolute;
-  bottom: 10px;
-  right: 0;
-}
-/* line 165, ../sass/_operations.scss */
-.operation-fields .field .input-helper i {
-  font-size: 14px;
-  color: #b0b0b0;
-  position: absolute;
-  top: 6px;
-  left: 7px;
-}
-/* line 174, ../sass/_operations.scss */
-.operation-fields .field .input-helper select {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-}
-/* line 182, ../sass/_operations.scss */
 .operation-fields .field input[type=text] {
   width: 100%;
   color: #ffffff;
@@ -433,12 +411,12 @@ html, body {
   background: #3a3a3a;
   text-indent: 2px;
 }
-/* line 196, ../sass/_operations.scss */
+/* line 171, ../sass/_operations.scss */
 .operation-fields .field input[type=text]:focus {
   border: 2px solid #3b99fc;
   text-indent: 0;
 }
-/* line 202, ../sass/_operations.scss */
+/* line 177, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox] {
   position: relative;
   float: left;
@@ -451,12 +429,12 @@ html, body {
   border-radius: 3px;
   border: 1px solid #282828;
 }
-/* line 216, ../sass/_operations.scss */
+/* line 191, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked {
   background: #3b99fc;
   box-shadow: 0 1px 0 rgba(105, 105, 105, 0.7);
 }
-/* line 222, ../sass/_operations.scss */
+/* line 197, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked:after {
   font-family: "FontAwesome", sans-serif;
   position: absolute;
@@ -466,7 +444,7 @@ html, body {
   content: '\f00c';
   color: #ffffff;
 }
-/* line 233, ../sass/_operations.scss */
+/* line 208, ../sass/_operations.scss */
 .operation-fields .field input[type=radio] {
   position: relative;
   float: left;
@@ -479,12 +457,12 @@ html, body {
   border-radius: 50%;
   border: 1px solid #282828;
 }
-/* line 247, ../sass/_operations.scss */
+/* line 222, ../sass/_operations.scss */
 .operation-fields .field input[type=radio]:checked {
   background: #3b99fc;
   box-shadow: 0 1px 0 rgba(105, 105, 105, 0.7);
 }
-/* line 253, ../sass/_operations.scss */
+/* line 228, ../sass/_operations.scss */
 .operation-fields .field input[type=radio]:checked:after {
   font-family: "FontAwesome", sans-serif;
   position: absolute;
@@ -493,4 +471,70 @@ html, body {
   font-size: 6px;
   content: '\f111';
   color: #ffffff;
+}
+/* line 240, ../sass/_operations.scss */
+.operation-fields .sortable-input {
+  width: 100%;
+  color: #ffffff;
+  border-radius: 3px;
+  box-shadow: inset 0 1px 2px #373737, 0 1px 0 #5e5e5e;
+  min-height: 26px;
+  padding: 3px 25px 0 3px;
+  margin: 6px 0 0 0;
+  transition: border 150ms;
+  background: #3a3a3a;
+  overflow: hidden;
+}
+/* line 253, ../sass/_operations.scss */
+.operation-fields .sortable-input .sortable-item {
+  cursor: move;
+  float: left;
+  padding: 2px 6px 4px 6px;
+  margin: 0 3px 3px 0;
+  color: #ffffff;
+  font-size: 11px;
+  border: 1px solid #282828;
+  box-shadow: inset 0 1px 0 #666666;
+  border-radius: 3px;
+  background: #4a4a4a;
+}
+/* line 266, ../sass/_operations.scss */
+.operation-fields .sortable-input .sortable-item i {
+  cursor: default;
+  font-size: 10px;
+  color: #b0b0b0;
+  float: right;
+  margin: 2px 0 0 4px;
+}
+/* line 276, ../sass/_operations.scss */
+.operation-fields .sortable-input .js-item-placeholder {
+  width: 40px;
+  float: left;
+  height: 20px;
+  border-radius: 3px;
+  margin: 0 3px 3px 0;
+  border: 1px dashed #535353;
+}
+/* line 286, ../sass/_operations.scss */
+.operation-fields .sortable-input .add-helper {
+  width: 26px;
+  height: 26px;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  margin: -8px 0 0 0;
+}
+/* line 295, ../sass/_operations.scss */
+.operation-fields .sortable-input .add-helper i {
+  font-size: 14px;
+  color: #b0b0b0;
+  position: absolute;
+  top: 6px;
+  left: 7px;
+}
+/* line 304, ../sass/_operations.scss */
+.operation-fields .sortable-input .add-helper select {
+  width: 100%;
+  height: 100%;
+  opacity: 0;
 }

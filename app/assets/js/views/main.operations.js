@@ -12,6 +12,7 @@
         var events = new app.node.events.EventEmitter();
         var $ui = {};
         var operationTemplate;
+        var sortableInputTemplate;
 
         /**
          * Attaches an event
@@ -45,6 +46,7 @@
             $ui.apply = $dom.find('.js-operation-apply');
             $ui.operations = $dom.find('.js-operations');
             operationTemplate = $dom.find('.js-operation-template').html();
+            sortableInputTemplate = $dom.find('.js-sortable-input-template').html();
         };
 
         /**
@@ -54,28 +56,18 @@
         {
             $ui.add.on('click', $.proxy(_onAddOperation, this));
             $ui.apply.on('click', $.proxy(_onApplyOperations, this));
-            $ui.operations.sortable({items: '.js-operation', axis: 'y', placeholder: 'js-sortable', zIndex: 40});
+            $ui.operations.sortable({
+                items: '.js-operation',
+                axis: 'y',
+                placeholder: 'js-operation-placeholder',
+                zIndex: 40
+            });
             $ui.operations.on('change', '.js-select-type', $.proxy(_onSelectType, this));
-            $ui.operations.on('click', '.js-delete', $.proxy(_onDeleteOperation, this));
+            $ui.operations.on('click', '.js-delete-operation', $.proxy(_onDeleteOperation, this));
+            $ui.operations.on('click', '.js-delete-item', $.proxy(_onDeleteInputItem, this));
+            $ui.operations.on('change', '.js-add-item', $.proxy(_onAddInputItem, this));
             $ui.operations.on('change keyup', 'input,select', $.proxy(_onEditOperations, this));
-            //$ui.operations.on('change', '.js-toggle', $.proxy(_onToggleField, this));
         };
-
-        /**
-         * Toggles areas depending on the clicked field
-         * @param evt
-         *
-         var _onToggleField = function(evt)
-         {
-             var $fields = $(evt.currentTarget).closest('.js-fields');
-             var $current_toggle = $fields.find('.js-toggle:checked');
-             var $toggle_targets = $fields.find('.js-toggle-target');
-             $toggle_targets.hide();
-             if ($current_toggle.length > 0 && typeof $current_toggle.data('toggle') !== 'undefined')
-             {
-                 $toggle_targets.filter('.' + $current_toggle.data('toggle')).show();
-             }
-         };*/
 
         /**
          * Editing operations
@@ -148,7 +140,41 @@
             $ui.operations.append($new_operation);
             $ui.operations.sortable('refresh');
             $new_operation.find('.js-fields').hide();
+            $new_operation.find('.js-sortable-input').sortable({
+                items: '.js-sortable-item',
+                placeholder: 'js-item-placeholder'
+            });
             $ui.placeholder.hide();
+        };
+
+        /**
+         * Deletes an item from a sortable input
+         * @param evt
+         */
+        var _onDeleteInputItem = function(evt)
+        {
+            $(evt.currentTarget).closest('.js-sortable-item').remove();
+            // @todo update hidden field
+        };
+
+        /**
+         * Adds an item in a sortable input
+         * @param evt
+         * @private
+         */
+        var _onAddInputItem = function(evt)
+        {
+            var $select = $(evt.currentTarget);
+            var $option = $select.find('option:selected');
+            var $field = $select.closest('.js-sortable-input');
+            var template = app.utils.template.render(sortableInputTemplate, [{
+                label: $option.data('label'),
+                value: $option.data('value')
+            }]);
+            $field.append(template).sortable('refresh');
+            $select.val('');
+            // @todo update hidden field & updates template
+            // @todo update hidden field on sortable event
         };
 
         /**
