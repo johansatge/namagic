@@ -60,7 +60,7 @@
         {
             for (var index in files)
             {
-                $files[index].find('.js-new-name').text(files[index].new_name);
+                $files[index].find('.js-new-name').text(files[index].updated_name);
             }
         };
 
@@ -220,10 +220,7 @@
             {
                 if (typeof raw_files[index].path !== 'undefined' && raw_files[index].path !== '')
                 {
-                    files.push({
-                        dir: raw_files[index].path.substring(0, raw_files[index].path.length - raw_files[index].name.length),
-                        name: raw_files[index].name
-                    });
+                    files.push(raw_files[index].path);
                 }
             }
             return files;

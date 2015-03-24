@@ -14,7 +14,6 @@
 
         /**
          * Adds a list of files
-         * @todo look for duplicates
          * @param files
          */
         this.addFiles = function(files)
@@ -22,13 +21,18 @@
             var new_files = [];
             for (var index in files)
             {
-                var id = app.node.crypto.createHash('md5').update(files[index].dir + files[index].name).digest('hex');
-                currentFiles[id] = new_files[id] = {
-                    id: id,
-                    dir: files[index].dir,
-                    current_name: files[index].name,
-                    new_name: _applyOperationsOnFilename.apply(this, [files[index].name])
-                };
+                var file = app.node.path.parse(files[index]);
+                var id = app.node.crypto.createHash('md5').update(files[index]).digest('hex');
+                if (typeof currentFiles[id] === 'undefined')
+                {
+                    currentFiles[id] = new_files[id] = {
+                        id: id,
+                        dir: file.dir,
+                        name: file.name,
+                        ext: file.ext,
+                        updated_name: _applyOperationsOnFilename.apply(this, [file.name, file.ext])
+                    };
+                }
             }
             return new_files;
         };
@@ -54,25 +58,26 @@
             currentOperations = operations;
             for (var index in currentFiles)
             {
-                currentFiles[index].new_name = _applyOperationsOnFilename.apply(this, [currentFiles[index].current_name]);
+                currentFiles[index].updated_name = _applyOperationsOnFilename.apply(this, [file.name, file.ext]);
             }
             return currentFiles;
         };
 
         /**
          * Applies given operations on a filename
-         * @param filename
+         * @param file_name
+         * @param file_ext
          */
-        var _applyOperationsOnFilename = function(filename)
+        var _applyOperationsOnFilename = function(file_name, file_ext)
         {
             // @todo apply operations
             // @todo check conflicts
-            app.utils.log(filename);
+            app.utils.log(file_name + ' - ' + file_ext);
             for (var index in currentOperations)
             {
                 app.utils.log(currentOperations[index]);
             }
-            return filename + new Date().getTime();
+            return file_name + file_ext + new Date().getTime();
         };
 
     };

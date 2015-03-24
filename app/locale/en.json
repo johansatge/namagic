@@ -23,33 +23,34 @@
       "search": {
         "none": "Select a search pattern...",
         "all_text": {
-          "option": "All text"
+          "option": "Select all text",
+          "no_options": "No option available."
         },
         "free_text": {
-          "option": "Free text",
+          "option": "Search free text",
           "text_to_find": "Text to find",
           "case_insensitive": "Case insensitive"
         },
         "chars_list": {
-          "option": "List of characters",
+          "option": "Search list of characters",
           "custom_list": "Custom list",
           "alpha_chars": "Alphabetic characters",
           "digits": "Digits",
           "special_chars": "Special characters"
         },
         "text_position": {
-          "option": "Position in text",
+          "option": "Select position in text",
           "index": "Index",
           "from_end": "Start from end"
         },
         "text_range": {
-          "option": "Range of text",
+          "option": "Select range of text",
           "start_index": "Start index",
           "end_index": "End index",
           "from_end": "Start from end"
         },
         "regex": {
-          "option": "Regular expression",
+          "option": "Execute regular expression",
           "expression": "Expression",
           "is_global": "Global",
           "case_insensitive": "Case insensitive"

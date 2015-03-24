@@ -20,14 +20,14 @@
                 <tr class="js-file" data-id="{{id}}">
                     <td>
                         <span class="dir">{{dir}}</span>
-                        <span>{{current_name}}</span>
+                        <span>{{name}}{{ext}}</span>
                     </td>
                     <td>
                         <i class="fa fa-arrow-right"></i>
                     </td>
                     <td>
                         <span class="dir">{{dir}}</span>
-                        <span class="js-new-name">{{new_name}}</span>
+                        <span class="js-new-name">{{updated_name}}</span>
                     </td>
                 </tr>
             </script>
@@ -75,7 +75,9 @@
                             </div>
                         </div>
                         <div class="operation-fields js-fields" data-type="allText">
-                            @todo
+                            <label class="field">
+                                {{main.operations.search.all_text.no_options}}
+                            </label>
                         </div>
                         <div class="operation-fields js-fields" data-type="freeText">
                             <label class="field">
@@ -101,7 +103,7 @@
                                 {{main.operations.search.chars_list.digits}}
                             </label>
                             <label class="field">
-                                <input type="checkbox" name="special">
+                                <input type="checkbox" name="specialChars">
                                 {{main.operations.search.chars_list.special_chars}}
                             </label>
                         </div>
@@ -234,7 +236,7 @@
                                             </optgroup>
                                         </select>
                                     </div>
-                                    <input type="hidden" name="format" value="" class="js-value">
+                                    <input type="hidden" name="format" class="js-value">
                                 </div>
                             </label>
                         </div>
