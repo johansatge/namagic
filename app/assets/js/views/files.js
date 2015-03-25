@@ -15,6 +15,8 @@
         var fileTemplate;
         var $lastSelectedFile = false;
         var $files = {};
+        var newFiles = [];
+        var newFilesCount;
 
         /**
          * Attaches an event
@@ -38,14 +40,18 @@
         };
 
         /**
-         * Adds a file
-         * @param file
+         * Adds files from the model to the files queue
+         * @param files
          */
-        this.addFile = function(file)
+        this.addFiles = function(files)
         {
-            $files[file.id] = $(app.utils.template.render(fileTemplate, [file]));
-            $ui.list.append($files[file.id]);
-            $ui.placeholder.toggle($ui.list.children().length === 0);
+            newFiles = files;
+            if (newFiles.length > 0)
+            {
+                this.updateProgressbar(0);
+                newFilesCount = newFiles.length;
+                _processNewFiles.apply(this);
+            }
         };
 
         /**
@@ -62,7 +68,7 @@
         };
 
         /**
-         * Updates the progressbar
+         * Updates the progressbar and UI
          * @param percentage
          */
         this.updateProgressbar = function(percentage)
@@ -81,7 +87,31 @@
                 $ui.progressbar.hide();
                 $ui.add.show();
                 $ui.remove.show();
+                $ui.placeholder.toggle($ui.list.children().length === 0);
                 // @todo enable drag&drop et files selection/deletion
+            }
+        };
+
+        /**
+         * Processes a slice of new files and recursively calls itself while the queue is not empty
+         */
+        var _processNewFiles = function()
+        {
+            var files = newFiles.splice(0, 50);
+            for (var index in files)
+            {
+                var file = files[index];
+                $files[file.id] = $(app.utils.template.render(fileTemplate, [file]));
+                $ui.list.append($files[file.id]);
+            }
+            if (newFiles.length > 0)
+            {
+                this.updateProgressbar(((newFilesCount - newFiles.length) * 100) / newFilesCount);
+                setTimeout($.proxy(_processNewFiles, this), 0);
+            }
+            else
+            {
+                this.updateProgressbar(100);
             }
         };
 

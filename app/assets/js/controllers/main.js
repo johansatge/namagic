@@ -19,8 +19,6 @@
         {
             view.on('close', $.proxy(_onViewClose, this));
             view.on('loaded', $.proxy(_onViewLoaded, this));
-            model.on('add_file', $.proxy(_onAddFileFromModel, this));
-            model.on('progress', $.proxy(_onModelProgress, this));
             view.show();
         };
 
@@ -40,16 +38,7 @@
          */
         var _onAddFilesFromView = function(files)
         {
-            model.addFiles(files);
-        };
-
-        /**
-         * Adds a file to the view when the model has processed it
-         * @param file
-         */
-        var _onAddFileFromModel = function(file)
-        {
-            view.files.addFile(file);
+            view.files.addFiles(model.addFiles(files));
         };
 
         /**
@@ -59,15 +48,6 @@
         var _onRemoveFilesFromView = function(ids)
         {
             model.removeFiles(ids);
-        };
-
-        /**
-         * Handles progress events sent from the model
-         * @param percentage
-         */
-        var _onModelProgress = function(percentage)
-        {
-            view.files.updateProgressbar(percentage);
         };
 
         /**
