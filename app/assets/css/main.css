@@ -34,60 +34,23 @@ html, body {
   bottom: 11px;
 }
 /* line 19, ../sass/_toolbar.scss */
-.panel .actions label {
-  float: left;
-  font-size: 11px;
-  color: #333333;
-  text-shadow: 0 1px 0 #ffffff;
-  margin: 7px 0 0 10px;
-}
-/* line 27, ../sass/_toolbar.scss */
-.panel .actions label input[type=checkbox] {
-  float: left;
-  margin: -1px 4px 0 0;
-  position: relative;
-  -webkit-appearance: none;
-  width: 14px;
-  height: 14px;
-  background: linear-gradient(to bottom, #f1f6f9, #d8d8d8);
-  border: 1px solid #a3a3a3;
-  box-shadow: inset 0 1px 0 #ffffff, 0 1px 0 #ffffff;
-  border-radius: 3px;
-}
-/* line 41, ../sass/_toolbar.scss */
-.panel .actions label input[type=checkbox]:checked {
-  background: #3b99fc;
-  box-shadow: 0 1px 0 #ffffff;
-  border: 1px solid #676767;
-}
-/* line 48, ../sass/_toolbar.scss */
-.panel .actions label input[type=checkbox]:checked:after {
-  font-family: "FontAwesome", sans-serif;
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  font-size: 8px;
-  content: '\f00c';
-  color: #ffffff;
-}
-/* line 60, ../sass/_toolbar.scss */
 .panel .actions button.left {
   float: left;
   margin: 0 0 0 10px;
 }
-/* line 66, ../sass/_toolbar.scss */
+/* line 25, ../sass/_toolbar.scss */
 .panel .actions button.right {
   float: right;
   margin: 0 10px 0 0;
 }
-/* line 72, ../sass/_toolbar.scss */
+/* line 31, ../sass/_toolbar.scss */
 .panel .actions button {
   border-radius: 4px;
   padding: 4px 14px 4px 6px;
   box-shadow: inset 0 1px 0 #ffffff, 0 1px 0 #f1f6f9;
   opacity: 1;
 }
-/* line 79, ../sass/_toolbar.scss */
+/* line 38, ../sass/_toolbar.scss */
 .panel .actions button.primary {
   color: #ffffff;
   background: linear-gradient(to bottom, #4a9de5, #0072d5);
@@ -96,31 +59,31 @@ html, body {
   padding: 4px 13px 4px 6px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
-/* line 89, ../sass/_toolbar.scss */
+/* line 48, ../sass/_toolbar.scss */
 .panel .actions button.primary:active {
   background: linear-gradient(to top, #4a9de5, #0072d5);
 }
-/* line 94, ../sass/_toolbar.scss */
+/* line 53, ../sass/_toolbar.scss */
 .panel .actions button.secondary {
   background: linear-gradient(to bottom, #f1f6f9, #d8d8d8);
   border: 1px solid #a3a3a3;
 }
-/* line 100, ../sass/_toolbar.scss */
+/* line 59, ../sass/_toolbar.scss */
 .panel .actions button.secondary:active {
   background: linear-gradient(to top, #f1f6f9, #d8d8d8);
 }
-/* line 105, ../sass/_toolbar.scss */
+/* line 64, ../sass/_toolbar.scss */
 .panel .actions button i {
   float: left;
   margin: 0 6px 0 0;
   font-size: 15px;
   color: rgba(51, 51, 51, 0.35);
 }
-/* line 113, ../sass/_toolbar.scss */
+/* line 72, ../sass/_toolbar.scss */
 .panel .actions button.primary i {
   color: rgba(255, 255, 255, 0.4);
 }
-/* line 118, ../sass/_toolbar.scss */
+/* line 77, ../sass/_toolbar.scss */
 .panel .actions button[disabled=disabled] {
   opacity: 0.5;
 }
@@ -176,80 +139,99 @@ html, body {
   background: #d8dfe7;
 }
 /* line 12, ../sass/_files.scss */
+.panel.files .loader {
+  position: fixed;
+  z-index: 26;
+  width: 150px;
+  right: 310px;
+  bottom: 17px;
+  height: 12px;
+  margin: -6px 0 0 0;
+  border-radius: 5px;
+  background: linear-gradient(to top, #f1f6f9, #d8d8d8);
+  border: 1px solid #a3a3a3;
+  box-shadow: inset 0 1px 0 #ffffff, 0 1px 0 #f1f6f9;
+}
+/* line 26, ../sass/_files.scss */
+.panel.files .loader .progress {
+  position: relative;
+  margin: 1px 0 0 1px;
+  width: 40%;
+  height: 8px;
+  border-radius: 4px;
+  background: linear-gradient(to bottom, #4a9de5, #0072d5);
+}
+/* line 37, ../sass/_files.scss */
 .panel.files input[type=file] {
   display: none;
 }
-/* line 17, ../sass/_files.scss */
+/* line 42, ../sass/_files.scss */
 .panel.files table {
   width: 100%;
   position: relative;
   z-index: 23;
 }
-/* line 24, ../sass/_files.scss */
+/* line 49, ../sass/_files.scss */
 .panel.files.files .actions {
   width: 500px;
 }
-/* line 29, ../sass/_files.scss */
+/* line 54, ../sass/_files.scss */
 .panel.files .placeholder {
   color: #aabcca;
 }
-/* line 33, ../sass/_files.scss */
+/* line 58, ../sass/_files.scss */
 .panel.files .placeholder.bordered .text {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   border: 2px dashed #aabcca;
 }
-/* line 40, ../sass/_files.scss */
+/* line 65, ../sass/_files.scss */
 .panel.files.js-drag .placeholder {
   cursor: copy;
 }
-/* line 44, ../sass/_files.scss */
+/* line 69, ../sass/_files.scss */
 .panel.files.js-drag .placeholder .text {
   color: #8896a1;
   border: 2px dashed #8896a1;
 }
 
-/* line 55, ../sass/_files.scss */
+/* line 80, ../sass/_files.scss */
 .files-list tr td {
   color: #333333;
   padding: 6px 8px 6px 8px;
 }
-/* line 60, ../sass/_files.scss */
+/* line 85, ../sass/_files.scss */
 .files-list tr td:nth-child(1) {
   width: 50%;
 }
-/* line 65, ../sass/_files.scss */
+/* line 90, ../sass/_files.scss */
 .files-list tr td:nth-child(2) {
   width: 10px;
 }
-/* line 70, ../sass/_files.scss */
+/* line 95, ../sass/_files.scss */
 .files-list tr td i {
   color: #999999;
   font-size: 11px;
 }
-/* line 76, ../sass/_files.scss */
+/* line 101, ../sass/_files.scss */
 .files-list tr td .dir {
   display: none;
   color: #a0a0a0;
 }
-/* line 83, ../sass/_files.scss */
-.files-list.js-directories-visible tr td .dir {
-  display: inline;
-}
-/* line 88, ../sass/_files.scss */
+/* line 108, ../sass/_files.scss */
 .files-list tr:nth-child(odd) td {
   background: #ffffff;
 }
-/* line 93, ../sass/_files.scss */
+/* line 113, ../sass/_files.scss */
 .files-list tr:nth-child(even) td {
   background: #f3f6fa;
 }
-/* line 98, ../sass/_files.scss */
+/* line 118, ../sass/_files.scss */
 .files-list tr.js-active td {
   background: #0072d5 !important;
   color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
 }
-/* line 105, ../sass/_files.scss */
+/* line 125, ../sass/_files.scss */
 .files-list tr.js-active td .dir, .files-list tr.js-active td i {
   color: #ffffff !important;
 }

@@ -82,15 +82,17 @@
          */
         var _processNewFile = function()
         {
-            var file = newFiles.shift();
-            currentFiles[file.id] = file;
-            currentFiles[file.id].updated_name = _applyOperationsOnFilename.apply(this, [file.name, file.ext]);
-            events.emit('add_file', file);
+            var files = newFiles.splice(0, 50);
+            for (var index in files)
+            {
+                var file = files[index];
+                currentFiles[file.id] = file;
+                currentFiles[file.id].updated_name = _applyOperationsOnFilename.apply(this, [file.name, file.ext]);
+                events.emit('add_file', file);
+            }
             if (newFiles.length > 0)
             {
-                app.utils.log(newFiles.length);
                 setTimeout($.proxy(_processNewFile, this), 0);
-                // @todo make this faster
             }
         };
 

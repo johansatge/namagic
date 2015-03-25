@@ -19,15 +19,13 @@
             <script type="text/template" class="js-file-template">
                 <tr class="js-file" data-id="{{id}}">
                     <td>
-                        <span class="dir">{{dir}}</span>
-                        <span>{{name}}{{ext}}</span>
+                        {{name}}{{ext}}
                     </td>
                     <td>
                         <i class="fa fa-arrow-right"></i>
                     </td>
-                    <td>
-                        <span class="dir">{{dir}}</span>
-                        <span class="js-new-name">{{updated_name}}</span>
+                    <td class="js-new-name">
+                        {{updated_name}}
                     </td>
                 </tr>
             </script>
@@ -40,11 +38,10 @@
                     <i class="fa fa-trash-o"></i>
                     {{main.actions.remove_files}}
                 </button>
-                <label>
-                    <input type="checkbox" class="js-toggle-dirs">
-                    {{main.actions.show_directories}}
-                </label>
                 <input type="file" multiple class="js-upload">
+            </div>
+            <div class="loader">
+                <div class="progress"></div>
             </div>
         </div>
         <div class="panel operations js-operations-panel">

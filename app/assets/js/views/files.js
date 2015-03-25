@@ -73,7 +73,6 @@
             $ui.add = $dom.find('.js-files-add');
             $ui.remove = $dom.find('.js-files-remove');
             $ui.list = $dom.find('.js-files-list');
-            $ui.dirToggle = $dom.find('.js-toggle-dirs');
             fileTemplate = $dom.find('.js-file-template').html();
         };
 
@@ -90,7 +89,6 @@
             $ui.remove.on('click', $.proxy(_onRemoveActiveFiles, this));
             $ui.input.on('change', $.proxy(_onAddFilesFromUploader, this));
             $ui.list.on('click', '.js-file', $.proxy(_onFileClick, this));
-            $ui.dirToggle.on('change', $.proxy(_onToggleDirectories, this));
         };
 
         /**
@@ -144,14 +142,6 @@
         {
             evt.preventDefault();
             $ui.input.trigger('click');
-        };
-
-        /**
-         * Toggles directories visibility
-         */
-        var _onToggleDirectories = function()
-        {
-            $ui.list.toggleClass('js-directories-visible');
         };
 
         /**

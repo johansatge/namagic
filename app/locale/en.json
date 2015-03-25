@@ -15,8 +15,7 @@
       "add_action": "Add action",
       "add_files": "Add files...",
       "remove_files": "Remove",
-      "apply": "Apply",
-      "show_directories": "Show directories"
+      "apply": "Apply"
     },
     "no_operation": "No operation set",
     "operations": {
