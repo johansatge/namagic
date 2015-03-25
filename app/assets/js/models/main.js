@@ -74,12 +74,12 @@
         {
             // @todo check conflicts
             var file = {name: file_name, ext: file_ext};
+            var operation = new app.models.operation();
             for (var index in currentOperations)
             {
-                // @todo apply each operation
-                //file = app.models.operation.applyOperation(currentOperations[index], file);
+                file = operation.applyOperation(currentOperations[index], file.name, file.ext);
             }
-            return file.name + file.ext + new Date().getTime();
+            return file.name + file.ext;
         };
 
     };

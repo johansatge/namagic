@@ -9,10 +9,17 @@
     var module = function()
     {
 
+        /**
+         * Applies an operation on the given file
+         * @param operation
+         * @param file_name
+         * @param file_ext
+         */
         this.applyOperation = function(operation, file_name, file_ext)
         {
             // @todo apply operation
-            return file_name + file_ext + new Date().getTime();
+            app.utils.log(operation);
+            return file_name + new Date().getTime() + file_ext;
         };
 
 
