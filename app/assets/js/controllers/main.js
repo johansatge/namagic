@@ -20,6 +20,7 @@
             view.on('close', $.proxy(_onViewClose, this));
             view.on('loaded', $.proxy(_onViewLoaded, this));
             model.on('add_file', $.proxy(_onAddFileFromModel, this));
+            model.on('progress', $.proxy(_onModelProgress, this));
             view.show();
         };
 
@@ -58,6 +59,15 @@
         var _onRemoveFilesFromView = function(ids)
         {
             model.removeFiles(ids);
+        };
+
+        /**
+         * Handles progress events sent from the model
+         * @param percentage
+         */
+        var _onModelProgress = function(percentage)
+        {
+            view.files.updateProgressbar(percentage);
         };
 
         /**

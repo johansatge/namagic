@@ -33,8 +33,8 @@
          */
         this.init = function($window, $dom)
         {
-            _initUI.apply(this, [$dom]);
-            _initEvents.apply(this, [$window]);
+            _initUI.apply(this, [$window, $dom]);
+            _initEvents.apply(this);
         };
 
         /**
@@ -62,17 +62,45 @@
         };
 
         /**
+         * Updates the progressbar
+         * @param percentage
+         */
+        this.updateProgressbar = function(percentage)
+        {
+            $ui.progressBarProgress.css({width: percentage + '%'});
+            if (percentage === 0)
+            {
+                $ui.progressBarProgress.css({width: 0});
+                $ui.progressbar.show();
+                $ui.add.hide();
+                $ui.remove.hide();
+                // @todo block drag&drop et files selection/deletion
+            }
+            if (percentage === 100)
+            {
+                $ui.progressbar.hide();
+                $ui.add.show();
+                $ui.remove.show();
+                // @todo enable drag&drop et files selection/deletion
+            }
+        };
+
+        /**
          * Inits UI
+         * @param $window
          * @param $dom
          */
-        var _initUI = function($dom)
+        var _initUI = function($window, $dom)
         {
+            $ui.window = $window;
             $ui.panel = $dom;
             $ui.placeholder = $dom.find('.js-placeholder');
             $ui.input = $dom.find('.js-upload');
             $ui.add = $dom.find('.js-files-add');
             $ui.remove = $dom.find('.js-files-remove');
             $ui.list = $dom.find('.js-files-list');
+            $ui.progressbar = $dom.find('.js-progressbar');
+            $ui.progressBarProgress = $dom.find('.js-progressbar-progress');
             fileTemplate = $dom.find('.js-file-template').html();
         };
 
@@ -80,9 +108,9 @@
          * Inits events
          * @param $window
          */
-        var _initEvents = function($window)
+        var _initEvents = function()
         {
-            $window.on('keydown keyup', $.proxy(_onRecordKey, this));
+            $ui.window.on('keydown keyup', $.proxy(_onRecordKey, this));
             $ui.panel.on('dragenter dragleave', $.proxy(_onPlaceholderDrag, this));
             $ui.panel.on('drop', $.proxy(_onAddFilesFromDrop, this));
             $ui.add.on('click', $.proxy(_onAddFilesFromButton, this));

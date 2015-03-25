@@ -139,21 +139,24 @@ html, body {
   background: #d8dfe7;
 }
 /* line 12, ../sass/_files.scss */
-.panel.files .loader {
+.panel.files .progressbar {
+  display: none;
   position: fixed;
   z-index: 26;
-  width: 150px;
-  right: 310px;
+  left: 10px;
   bottom: 17px;
+}
+/* line 20, ../sass/_files.scss */
+.panel.files .progressbar .bar {
+  width: 200px;
   height: 12px;
-  margin: -6px 0 0 0;
   border-radius: 5px;
   background: linear-gradient(to top, #f1f6f9, #d8d8d8);
   border: 1px solid #a3a3a3;
   box-shadow: inset 0 1px 0 #ffffff, 0 1px 0 #f1f6f9;
 }
-/* line 26, ../sass/_files.scss */
-.panel.files .loader .progress {
+/* line 29, ../sass/_files.scss */
+.panel.files .progressbar .bar .progress {
   position: relative;
   margin: 1px 0 0 1px;
   width: 40%;
@@ -161,77 +164,77 @@ html, body {
   border-radius: 4px;
   background: linear-gradient(to bottom, #4a9de5, #0072d5);
 }
-/* line 37, ../sass/_files.scss */
+/* line 41, ../sass/_files.scss */
 .panel.files input[type=file] {
   display: none;
 }
-/* line 42, ../sass/_files.scss */
+/* line 46, ../sass/_files.scss */
 .panel.files table {
   width: 100%;
   position: relative;
   z-index: 23;
 }
-/* line 49, ../sass/_files.scss */
+/* line 53, ../sass/_files.scss */
 .panel.files.files .actions {
   width: 500px;
 }
-/* line 54, ../sass/_files.scss */
+/* line 58, ../sass/_files.scss */
 .panel.files .placeholder {
   color: #aabcca;
 }
-/* line 58, ../sass/_files.scss */
+/* line 62, ../sass/_files.scss */
 .panel.files .placeholder.bordered .text {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   border: 2px dashed #aabcca;
 }
-/* line 65, ../sass/_files.scss */
+/* line 69, ../sass/_files.scss */
 .panel.files.js-drag .placeholder {
   cursor: copy;
 }
-/* line 69, ../sass/_files.scss */
+/* line 73, ../sass/_files.scss */
 .panel.files.js-drag .placeholder .text {
   color: #8896a1;
   border: 2px dashed #8896a1;
 }
 
-/* line 80, ../sass/_files.scss */
+/* line 84, ../sass/_files.scss */
 .files-list tr td {
   color: #333333;
   padding: 6px 8px 6px 8px;
 }
-/* line 85, ../sass/_files.scss */
+/* line 89, ../sass/_files.scss */
 .files-list tr td:nth-child(1) {
   width: 50%;
 }
-/* line 90, ../sass/_files.scss */
+/* line 94, ../sass/_files.scss */
 .files-list tr td:nth-child(2) {
   width: 10px;
 }
-/* line 95, ../sass/_files.scss */
+/* line 99, ../sass/_files.scss */
 .files-list tr td i {
   color: #999999;
   font-size: 11px;
 }
-/* line 101, ../sass/_files.scss */
+/* line 105, ../sass/_files.scss */
 .files-list tr td .dir {
   display: none;
   color: #a0a0a0;
 }
-/* line 108, ../sass/_files.scss */
+/* line 112, ../sass/_files.scss */
 .files-list tr:nth-child(odd) td {
   background: #ffffff;
 }
-/* line 113, ../sass/_files.scss */
+/* line 117, ../sass/_files.scss */
 .files-list tr:nth-child(even) td {
   background: #f3f6fa;
 }
-/* line 118, ../sass/_files.scss */
+/* line 122, ../sass/_files.scss */
 .files-list tr.js-active td {
   background: #0072d5 !important;
   color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
 }
-/* line 125, ../sass/_files.scss */
+/* line 129, ../sass/_files.scss */
 .files-list tr.js-active td .dir, .files-list tr.js-active td i {
   color: #ffffff !important;
 }

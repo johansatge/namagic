@@ -40,8 +40,10 @@
                 </button>
                 <input type="file" multiple class="js-upload">
             </div>
-            <div class="loader">
-                <div class="progress"></div>
+            <div class="progressbar js-progressbar">
+                <div class="bar">
+                    <div class="progress js-progressbar-progress"></div>
+                </div>
             </div>
         </div>
         <div class="panel operations js-operations-panel">
@@ -67,9 +69,9 @@
                                 <option value="textRange">{{main.operations.search.text_range.option}}</option>
                                 <option value="regex">{{main.operations.search.regex.option}}</option>
                             </select>
-                            <div class="delete js-delete-operation">
+                            <button class="delete js-delete-operation">
                                 <i class="fa fa-trash-o"></i>
-                            </div>
+                            </button>
                         </div>
                         <div class="operation-fields js-fields" data-type="allText">
                             <label class="field">

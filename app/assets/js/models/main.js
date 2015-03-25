@@ -13,6 +13,7 @@
         var currentFiles = {};
         var currentOperations = [];
         var newFiles = [];
+        var newFilesCount;
 
         /**
          * Attaches an event
@@ -47,6 +48,8 @@
             }
             if (newFiles.length > 0)
             {
+                newFilesCount = newFiles.length;
+                events.emit('progress', 0);
                 _processNewFile.apply(this);
             }
         };
@@ -69,6 +72,7 @@
          */
         this.applyOperations = function(operations)
         {
+            // @todo make async
             currentOperations = operations;
             for (var index in currentFiles)
             {
@@ -92,7 +96,12 @@
             }
             if (newFiles.length > 0)
             {
+                events.emit('progress', ((newFilesCount - newFiles.length) * 100) / newFilesCount);
                 setTimeout($.proxy(_processNewFile, this), 0);
+            }
+            else
+            {
+                events.emit('progress', 100);
             }
         };
 
