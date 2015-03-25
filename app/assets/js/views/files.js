@@ -83,7 +83,7 @@
         {
             for (var index in files)
             {
-                $files[index].find('.js-new-name').text(files[index].updated_name);
+                $files[index].new_name.text(files[index].updated_name);
             }
         };
 
@@ -115,8 +115,9 @@
             for (var index in files)
             {
                 var file = files[index];
-                $files[file.id] = $(app.utils.template.render(fileTemplate, [file]));
-                $ui.list.append($files[file.id]);
+                $files[file.id] = {$row: $(app.utils.template.render(fileTemplate, [file]))};
+                $files[file.id].new_name = $files[file.id].$row.find('.js-new-name');
+                $ui.list.append($files[file.id].$row);
             }
             this.setProgress(newFiles.length > 0 ? ((newFilesCount - newFiles.length) * 100) / newFilesCount : 100);
             if (newFiles.length > 0)
@@ -258,7 +259,7 @@
             $items.each(function()
             {
                 var id = $(this).data('id');
-                $files[id].remove();
+                $files[id].$row.remove();
                 delete $files[id];
                 ids.push(id);
             });
