@@ -17,7 +17,7 @@
       "remove_files": "Remove",
       "apply": "Apply"
     },
-    "no_operation": "No operation set",
+    "no_operation": "No action set",
     "operations": {
       "search": {
         "none": "Select a search pattern...",

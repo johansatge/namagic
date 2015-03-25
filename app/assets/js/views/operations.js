@@ -35,6 +35,17 @@
         };
 
         /**
+         * Locks the UI
+         * @param is_locked
+         */
+        this.lockInterface = function(is_locked)
+        {
+            $ui.add.attr('disabled', is_locked ? 'disabled' : null);
+            $ui.apply.attr('disabled', is_locked ? 'disabled' : null);
+            $ui.operations.find('input,select,button').attr('disabled', is_locked ? 'disabled' : null);
+        };
+
+        /**
          * Inits UI
          * @param $dom
          */

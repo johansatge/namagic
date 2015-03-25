@@ -27,6 +27,7 @@
          */
         var _onViewLoaded = function()
         {
+            view.files.on('idle', $.proxy(_onIdle), this);
             view.files.on('add_files', $.proxy(_onAddFilesFromView, this));
             view.files.on('remove_files', $.proxy(_onRemoveFilesFromView, this));
             view.operations.on('edit_operations', $.proxy(_onEditOperationsFromView, this));
@@ -38,6 +39,8 @@
          */
         var _onAddFilesFromView = function(files)
         {
+            view.files.lockInterface(true);
+            view.operations.lockInterface(true);
             view.files.addFiles(model.addFiles(files));
         };
 
@@ -56,8 +59,17 @@
          */
         var _onEditOperationsFromView = function(operations)
         {
-            var files = model.applyOperations(operations);
-            view.files.updateFiles(files);
+            view.files.updateFiles(model.applyOperations(operations));
+        };
+
+        /**
+         * Enables UI when a delayed operation has been finished
+         * @private
+         */
+        var _onIdle = function()
+        {
+            view.files.lockInterface(false);
+            view.operations.lockInterface(false);
         };
 
         /**

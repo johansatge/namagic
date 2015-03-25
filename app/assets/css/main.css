@@ -15,6 +15,11 @@ html, body {
   -webkit-user-select: none;
 }
 
+/* line 19, ../sass/_reset.scss */
+*[disabled=disabled] {
+  opacity: 0.5 !important;
+}
+
 /* line 1, ../sass/_toolbar.scss */
 .panel.toolbar {
   position: absolute;
@@ -82,10 +87,6 @@ html, body {
 /* line 72, ../sass/_toolbar.scss */
 .panel .actions button.primary i {
   color: rgba(255, 255, 255, 0.4);
-}
-/* line 77, ../sass/_toolbar.scss */
-.panel .actions button[disabled=disabled] {
-  opacity: 0.5;
 }
 
 /* line 1, ../sass/_placeholders.scss */
@@ -199,42 +200,43 @@ html, body {
 
 /* line 84, ../sass/_files.scss */
 .files-list tr td {
+  cursor: default;
   color: #333333;
   padding: 6px 8px 6px 8px;
 }
-/* line 89, ../sass/_files.scss */
+/* line 90, ../sass/_files.scss */
 .files-list tr td:nth-child(1) {
   width: 50%;
 }
-/* line 94, ../sass/_files.scss */
+/* line 95, ../sass/_files.scss */
 .files-list tr td:nth-child(2) {
   width: 10px;
 }
-/* line 99, ../sass/_files.scss */
+/* line 100, ../sass/_files.scss */
 .files-list tr td i {
   color: #999999;
   font-size: 11px;
 }
-/* line 105, ../sass/_files.scss */
+/* line 106, ../sass/_files.scss */
 .files-list tr td .dir {
   display: none;
   color: #a0a0a0;
 }
-/* line 112, ../sass/_files.scss */
+/* line 113, ../sass/_files.scss */
 .files-list tr:nth-child(odd) td {
   background: #ffffff;
 }
-/* line 117, ../sass/_files.scss */
+/* line 118, ../sass/_files.scss */
 .files-list tr:nth-child(even) td {
   background: #f3f6fa;
 }
-/* line 122, ../sass/_files.scss */
+/* line 123, ../sass/_files.scss */
 .files-list tr.js-active td {
   background: #0072d5 !important;
   color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
 }
-/* line 129, ../sass/_files.scss */
+/* line 130, ../sass/_files.scss */
 .files-list tr.js-active td .dir, .files-list tr.js-active td i {
   color: #ffffff !important;
 }
@@ -484,14 +486,17 @@ html, body {
   background: #4a4a4a;
 }
 /* line 266, ../sass/_operations.scss */
-.operation-fields .sortable-input .sortable-item i {
+.operation-fields .sortable-input .sortable-item button {
+  width: 9px;
+  height: 11px;
   cursor: default;
   font-size: 10px;
   color: #b0b0b0;
   float: right;
-  margin: 2px 0 0 4px;
+  margin: 0px 0 0 4px;
+  background: transparent;
 }
-/* line 276, ../sass/_operations.scss */
+/* line 279, ../sass/_operations.scss */
 .operation-fields .sortable-input .js-item-placeholder {
   width: 40px;
   float: left;
@@ -500,7 +505,7 @@ html, body {
   margin: 0 3px 3px 0;
   border: 1px dashed #535353;
 }
-/* line 286, ../sass/_operations.scss */
+/* line 289, ../sass/_operations.scss */
 .operation-fields .sortable-input .add-helper {
   width: 26px;
   height: 26px;
@@ -509,7 +514,7 @@ html, body {
   right: 0;
   margin: -8px 0 0 0;
 }
-/* line 295, ../sass/_operations.scss */
+/* line 298, ../sass/_operations.scss */
 .operation-fields .sortable-input .add-helper i {
   font-size: 14px;
   color: #b0b0b0;
@@ -517,9 +522,12 @@ html, body {
   top: 6px;
   left: 7px;
 }
-/* line 304, ../sass/_operations.scss */
+/* line 307, ../sass/_operations.scss */
 .operation-fields .sortable-input .add-helper select {
   width: 100%;
   height: 100%;
-  opacity: 0;
+  opacity: 0.5;
+  -webkit-appearance: none;
+  text-indent: 100%;
+  background: transparent;
 }

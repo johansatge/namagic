@@ -40,6 +40,26 @@
         };
 
         /**
+         * Locks the UI
+         * @param is_locked
+         */
+        this.lockInterface = function(is_locked)
+        {
+            if (is_locked)
+            {
+                $ui.add.hide();
+                $ui.remove.hide();
+                // @todo block drag&drop et files selection/deletion
+            }
+            else
+            {
+                $ui.add.show();
+                $ui.remove.show();
+                // @todo enable drag&drop et files selection/deletion
+            }
+        };
+
+        /**
          * Adds files from the model to the files queue
          * @param files
          */
@@ -48,7 +68,7 @@
             newFiles = files;
             if (newFiles.length > 0)
             {
-                this.updateProgressbar(0);
+                this.setProgress(0);
                 newFilesCount = newFiles.length;
                 _processNewFiles.apply(this);
             }
@@ -68,27 +88,21 @@
         };
 
         /**
-         * Updates the progressbar and UI
+         * Updates the progress of an operation
          * @param percentage
          */
-        this.updateProgressbar = function(percentage)
+        this.setProgress = function(percentage)
         {
             $ui.progressBarProgress.css({width: percentage + '%'});
             if (percentage === 0)
             {
                 $ui.progressBarProgress.css({width: 0});
                 $ui.progressbar.show();
-                $ui.add.hide();
-                $ui.remove.hide();
-                // @todo block drag&drop et files selection/deletion
             }
             if (percentage === 100)
             {
                 $ui.progressbar.hide();
-                $ui.add.show();
-                $ui.remove.show();
                 $ui.placeholder.toggle($ui.list.children().length === 0);
-                // @todo enable drag&drop et files selection/deletion
             }
         };
 
@@ -104,14 +118,14 @@
                 $files[file.id] = $(app.utils.template.render(fileTemplate, [file]));
                 $ui.list.append($files[file.id]);
             }
+            this.setProgress(newFiles.length > 0 ? ((newFilesCount - newFiles.length) * 100) / newFilesCount : 100);
             if (newFiles.length > 0)
             {
-                this.updateProgressbar(((newFilesCount - newFiles.length) * 100) / newFilesCount);
                 setTimeout($.proxy(_processNewFiles, this), 0);
             }
             else
             {
-                this.updateProgressbar(100);
+                events.emit('idle');
             }
         };
 
