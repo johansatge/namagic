@@ -36,27 +36,24 @@
         this.init = function($window, $dom)
         {
             _initUI.apply(this, [$window, $dom]);
-            _initEvents.apply(this);
+            this.lockInterface(false);
         };
 
         /**
-         * Locks the UI
+         * Locks the UI by updating buttons and events
          * @param is_locked
          */
         this.lockInterface = function(is_locked)
         {
-            if (is_locked)
-            {
-                $ui.add.hide();
-                $ui.remove.hide();
-                // @todo block drag&drop et files selection/deletion
-            }
-            else
-            {
-                $ui.add.show();
-                $ui.remove.show();
-                // @todo enable drag&drop et files selection/deletion
-            }
+            $ui.add.attr('disabled', is_locked ? 'disabled' : null);
+            $ui.remove.attr('disabled', is_locked ? 'disabled' : null);
+            (is_locked ? $ui.window.off : $ui.window.on).apply($ui.window, ['keydown keyup', $.proxy(_onRecordKey, this)]);
+            (is_locked ? $ui.panel.off : $ui.panel.on).apply($ui.panel, ['dragenter dragleave', $.proxy(_onPlaceholderDrag, this)]);
+            (is_locked ? $ui.panel.off : $ui.panel.on).apply($ui.panel, ['drop', $.proxy(_onAddFilesFromDrop, this)]);
+            (is_locked ? $ui.list.off : $ui.list.on).apply($ui.list, ['click', '.js-file', $.proxy(_onFileClick, this)]);
+            (is_locked ? $ui.add.off : $ui.add.on).apply($ui.add, ['click', $.proxy(_onAddFilesFromButton, this)]);
+            (is_locked ? $ui.remove.off : $ui.remove.on).apply($ui.remove, ['click', $.proxy(_onRemoveActiveFiles, this)]);
+            (is_locked ? $ui.input.off : $ui.input.on).apply($ui.input, ['change', $.proxy(_onAddFilesFromUploader, this)]);
         };
 
         /**
@@ -76,7 +73,6 @@
 
         /**
          * Updates files
-         * @todo optimize text update
          * @param files
          */
         this.updateFiles = function(files)
@@ -96,11 +92,15 @@
             $ui.progressBarProgress.css({width: percentage + '%'});
             if (percentage === 0)
             {
+                $ui.add.hide();
+                $ui.remove.hide();
                 $ui.progressBarProgress.css({width: 0});
                 $ui.progressbar.show();
             }
             if (percentage === 100)
             {
+                $ui.add.show();
+                $ui.remove.show();
                 $ui.progressbar.hide();
                 $ui.placeholder.toggle($ui.list.children().length === 0);
             }
@@ -147,21 +147,6 @@
             $ui.progressbar = $dom.find('.js-progressbar');
             $ui.progressBarProgress = $dom.find('.js-progressbar-progress');
             fileTemplate = $dom.find('.js-file-template').html();
-        };
-
-        /**
-         * Inits events
-         * @param $window
-         */
-        var _initEvents = function()
-        {
-            $ui.window.on('keydown keyup', $.proxy(_onRecordKey, this));
-            $ui.panel.on('dragenter dragleave', $.proxy(_onPlaceholderDrag, this));
-            $ui.panel.on('drop', $.proxy(_onAddFilesFromDrop, this));
-            $ui.add.on('click', $.proxy(_onAddFilesFromButton, this));
-            $ui.remove.on('click', $.proxy(_onRemoveActiveFiles, this));
-            $ui.input.on('change', $.proxy(_onAddFilesFromUploader, this));
-            $ui.list.on('click', '.js-file', $.proxy(_onFileClick, this));
         };
 
         /**
