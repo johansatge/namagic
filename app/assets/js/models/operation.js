@@ -12,16 +12,43 @@
         /**
          * Applies an operation on the given file
          * @param operation
-         * @param file_name
-         * @param file_ext
+         * @param filename
          */
-        this.applyOperation = function(operation, file_name, file_ext)
+        this.applyOperation = function(operation, filename)
         {
-            // @todo apply operation
-            app.utils.log(operation);
-            return file_name + new Date().getTime() + file_ext;
+            if (operation.search !== false && operation.action !== false)
+            {
+                var name = filename.substring(0, filename.lastIndexOf('.'));
+                var ext = filename.substring(filename.lastIndexOf('.'));
+                if (operation.applyTo === 'filename')
+                {
+                    return _doActionOnSubject.apply(this, [name, operation.search, operation.action]) + ext;
+                }
+                if (operation.applyTo === 'extension')
+                {
+                    return name + _doActionOnSubject.apply(this, [ext, operation.search, operation.action]);
+                }
+                if (operation.applyTo === 'both')
+                {
+                    return _doActionOnSubject.apply(this, [filename, operation.search, operation.action]);
+                }
+            }
+            return filename;
         };
 
+        /**
+         * Searches pattern in the given subject and applies action on it
+         * @param subject
+         * @param search
+         * @param action
+         */
+        var _doActionOnSubject = function(subject, search, action)
+        {
+            app.utils.log(search);
+            app.utils.log(action);
+            // @todo search and action
+            return subject + new Date().getTime();
+        };
 
     };
 

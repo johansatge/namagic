@@ -28,9 +28,8 @@
                     var new_file = {
                         id: id,
                         dir: file.dir,
-                        name: file.name,
-                        ext: file.ext,
-                        updated_name: _applyOperationsOnFilename.apply(this, [file.name, file.ext])
+                        name: file.name + file.ext,
+                        updated_name: _applyOperationsOnFilename.apply(this, [file.name + file.ext])
                     };
                     new_files.push(new_file);
                     currentFiles[id] = new_file;
@@ -60,7 +59,7 @@
             currentOperations = operations;
             for (var index in currentFiles)
             {
-                currentFiles[index].updated_name = _applyOperationsOnFilename.apply(this, [currentFiles[index].name, currentFiles[index].ext]);
+                currentFiles[index].updated_name = _applyOperationsOnFilename.apply(this, [currentFiles[index].name]);
             }
             return currentFiles;
         };
@@ -70,16 +69,15 @@
          * @param file_name
          * @param file_ext
          */
-        var _applyOperationsOnFilename = function(file_name, file_ext)
+        var _applyOperationsOnFilename = function(filename)
         {
             // @todo check conflicts
-            var file = {name: file_name, ext: file_ext};
             var operation = new app.models.operation();
             for (var index in currentOperations)
             {
-                file = operation.applyOperation(currentOperations[index], file.name, file.ext);
+                filename = operation.applyOperation(currentOperations[index], filename);
             }
-            return file.name + file.ext;
+            return filename;
         };
 
     };

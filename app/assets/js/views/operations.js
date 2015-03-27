@@ -93,11 +93,11 @@
                 var $operation = $(this);
                 var $search = $operation.find('.js-search .js-fields:visible');
                 var $action = $operation.find('.js-action .js-fields:visible');
-                var $apply_to = $operation.find('.js-apply-to');
+                var apply_to = $operation.find('.js-apply-to option:selected').val();
                 var operation = {
                     search: _parseOperationFieldsPanel.apply(this, [$search]),
                     action: _parseOperationFieldsPanel.apply(this, [$action]),
-                    applyTo: $apply_to.find('option:selected').val()
+                    applyTo: apply_to !== '' ? apply_to : false
                 };
                 operations.push(operation);
             });
