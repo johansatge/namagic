@@ -66,19 +66,47 @@
 
         /**
          * Applies given operations on a filename
-         * @param file_name
-         * @param file_ext
+         * @param filename
          */
         var _applyOperationsOnFilename = function(filename)
         {
             // @todo check conflicts
-            var operation = new app.models.operation();
             for (var index in currentOperations)
             {
-                filename = operation.applyOperation(currentOperations[index], filename);
+                var operation = currentOperations[index];
+                if (operation.search !== false && operation.action !== false)
+                {
+                    var name = filename.substring(0, filename.lastIndexOf('.'));
+                    var ext = filename.substring(filename.lastIndexOf('.'));
+                    if (operation.applyTo === 'filename')
+                    {
+                        return _applyOperation.apply(this, [name, operation.search, operation.action]) + ext;
+                    }
+                    if (operation.applyTo === 'extension')
+                    {
+                        return name + _applyOperation.apply(this, [ext, operation.search, operation.action]);
+                    }
+                    if (operation.applyTo === 'both')
+                    {
+                        return _applyOperation.apply(this, [filename, operation.search, operation.action]);
+                    }
+                    return filename;
+                }
             }
             return filename;
         };
+
+        /**
+         * Searches pattern in the given subject and applies action on it
+         * @param subject
+         * @param search
+         * @param action
+         */
+        var _applyOperation = function(subject, search, action)
+        {
+            var search_patterns = app.models.search[search.type](subject, search.options);
+            return app.models.action[action.type](subject, search_patterns, action.options);
+        }
 
     };
 
