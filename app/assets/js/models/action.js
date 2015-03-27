@@ -8,24 +8,48 @@
 
     var module = {};
 
+    /**
+     * Inserts free text
+     * @param subject
+     * @param patterns
+     * @param options
+     */
     module.freeText = function(subject, patterns, options)
     {
         // @todo
         return subject;
     };
 
+    /**
+     * Inserts a sequence of digits
+     * @param subject
+     * @param patterns
+     * @param options
+     */
     module.digitsSequence = function(subject, patterns, options)
     {
         // @todo
         return subject;
     };
 
+    /**
+     * Inserts date and time
+     * @param subject
+     * @param patterns
+     * @param options
+     */
     module.dateAndTime = function(subject, patterns, options)
     {
         // @todo
         return subject;
     };
 
+    /**
+     * Updates text case
+     * @param subject
+     * @param patterns
+     * @param options
+     */
     module.updateCase = function(subject, patterns, options)
     {
         if (typeof options.type === 'undefined' || options.type === '')
