@@ -17,6 +17,7 @@
     module.freeText = function(subject, patterns, options)
     {
         // @todo
+        // options.text
         return subject;
     };
 
@@ -29,6 +30,8 @@
     module.digitsSequence = function(subject, patterns, options)
     {
         // @todo
+        // options.startIndex
+        // options.step
         return subject;
     };
 
@@ -41,6 +44,8 @@
     module.dateAndTime = function(subject, patterns, options)
     {
         // @todo
+        // options.type
+        // options.format
         return subject;
     };
 
@@ -56,29 +61,44 @@
         {
             return subject;
         }
+        var type = options.type;
         for (var index = 0; index < patterns.length; index += 1)
         {
             var pattern = patterns[index];
-            var pattern_subject = subject.substring(pattern.start, pattern.length);
-            subject = subject.substring(0, pattern.start);
-            if (options.type === 'uppercase')
+            subject = _applyPatternOnSubject(pattern, subject, function(text)
             {
-                subject += pattern_subject.toUpperCase();
-            }
-            if (options.type === 'lowercase')
-            {
-                subject += pattern_subject.toLowerCase();
-            }
-            if (options.type === 'invert')
-            {
-                for (var str_index = 0; str_index < pattern_subject.length; str_index += 1)
-                {
-                    subject += pattern_subject.charAt(str_index) === pattern_subject.charAt(str_index).toLowerCase() ? pattern_subject.charAt(str_index).toUpperCase() : pattern_subject.charAt(str_index).toLowerCase();
-                }
-            }
-            subject += subject.substring(pattern.start + pattern.length);
+                return type === 'uppercase' ? text.toUpperCase() : (type === 'lowercase' ? text.toLowerCase() : _inverseCase(text));
+            });
         }
         return subject;
+    };
+
+    /**
+     * Applies a pattern on the given subject by using the required callable
+     * @param pattern
+     * @param subject
+     * @param callable
+     */
+    var _applyPatternOnSubject = function(pattern, subject, callable)
+    {
+        var updated_subject = subject.substring(0, pattern.start);
+        updated_subject += callable(subject.substring(pattern.start, pattern.end));
+        updated_subject += subject.substring(pattern.end);
+        return updated_subject;
+    };
+
+    /**
+     * Inverses the case of the given text
+     * @param text
+     */
+    var _inverseCase = function(text)
+    {
+        var new_text = '';
+        for (var str_index = 0; str_index < text.length; str_index += 1)
+        {
+            new_text += text.charAt(str_index) === text.charAt(str_index).toLowerCase() ? text.charAt(str_index).toUpperCase() : text.charAt(str_index).toLowerCase();
+        }
+        return new_text;
     };
 
     app.models.action = module;

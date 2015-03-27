@@ -15,7 +15,7 @@
      */
     module.allText = function(subject, options)
     {
-        return [{start: 0, length: subject.length}];
+        return [{start: 0, end: subject.length}];
     };
 
     /**
@@ -25,8 +25,17 @@
      */
     module.freeText = function(subject, options)
     {
-        // @todo
-        return [];
+        var matches = [];
+        if (options.text !== '')
+        {
+            var regex = new RegExp(_quoteRegex(options.text), options.caseInsensitive ? 'gi' : 'g');
+            var match;
+            while ((match = regex.exec(subject)) !== null)
+            {
+                matches.push({start: match.index, end: match.index + match[0].length});
+            }
+        }
+        return matches;
     };
 
     /**
@@ -38,6 +47,10 @@
     module.charsList = function(subject, options)
     {
         // @todo
+        // options.customList
+        // options.alphabeticChars
+        // options.digits
+        // options.specialChars
         return [];
     };
 
@@ -49,6 +62,8 @@
     module.textPosition = function(subject, options)
     {
         // @todo
+        // options.index
+        // options.fromEnd
         return [];
     };
 
@@ -60,6 +75,10 @@
     module.textRange = function(subject, options)
     {
         // @todo
+        // options.startIndex
+        // options.startFromEnd
+        // options.endIndex
+        // options.endFromEnd
         return [];
     };
 
@@ -71,7 +90,20 @@
     module.regex = function(subject, options)
     {
         // @todo
+        // options.regex
+        // options.isGlobal
+        // options.caseInsensitive
         return [];
+    };
+
+    /**
+     * Quotes the given subject to be used in a regex
+     * @param subject
+     */
+    var _quoteRegex = function(subject)
+    {
+        var regex = new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]', 'g');
+        return subject.replace(regex, '\\$&');
     };
 
     app.models.search = module;
