@@ -62,29 +62,28 @@
             return subject;
         }
         var type = options.type;
-        for (var index = 0; index < patterns.length; index += 1)
+        return _applyPatternOnSubject(patterns, subject, function(text)
         {
-            var pattern = patterns[index];
-            subject = _applyPatternOnSubject(pattern, subject, function(text)
-            {
-                return type === 'uppercase' ? text.toUpperCase() : (type === 'lowercase' ? text.toLowerCase() : _inverseCase(text));
-            });
-        }
-        return subject;
+            return type === 'uppercase' ? text.toUpperCase() : (type === 'lowercase' ? text.toLowerCase() : _inverseCase(text));
+        });
     };
 
     /**
-     * Applies a pattern on the given subject by using the required callable
-     * @param pattern
+     * Applies patterns on the given subject by using the required callable
+     * @param patterns
      * @param subject
      * @param callable
      */
-    var _applyPatternOnSubject = function(pattern, subject, callable)
+    var _applyPatternOnSubject = function(patterns, subject, callable)
     {
-        var updated_subject = subject.substring(0, pattern.start);
-        updated_subject += callable(subject.substring(pattern.start, pattern.end));
-        updated_subject += subject.substring(pattern.end);
-        return updated_subject;
+        for (var index = 0; index < patterns.length; index += 1)
+        {
+            var updated_subject = subject.substring(0, patterns[index].start);
+            updated_subject += callable(subject.substring(patterns[index].start, patterns[index].end));
+            updated_subject += subject.substring(patterns[index].end);
+            subject = updated_subject;
+        }
+        return subject;
     };
 
     /**
