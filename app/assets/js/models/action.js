@@ -11,10 +11,11 @@
     /**
      * Inserts free text
      * @param subject
+     * @param index
      * @param patterns
      * @param options
      */
-    module.freeText = function(subject, patterns, options)
+    module.freeText = function(subject, index, patterns, options)
     {
         return _applyPatternOnSubject(patterns, subject, function(text)
         {
@@ -25,27 +26,31 @@
     /**
      * Inserts a sequence of digits
      * @param subject
+     * @param index
      * @param patterns
      * @param options
      */
-    module.digitsSequence = function(subject, patterns, options)
+    module.digitsSequence = function(subject, index, patterns, options)
     {
-        // @todo
-        // options.startIndex
-        // options.step
-        return subject;
+        var start_index = !isNaN(parseInt(options.startIndex)) ? parseInt(options.startIndex) : 0;
+        var step = !isNaN(parseInt(options.step)) ? parseInt(options.step) : 1;
+        return _applyPatternOnSubject(patterns, subject, function(text)
+        {
+            return start_index + (index * step);
+        });
     };
 
     /**
      * Inserts date and time
      * @param subject
+     * @param index
      * @param patterns
      * @param options
      */
-    module.dateAndTime = function(subject, patterns, options)
+    module.dateAndTime = function(subject, index, patterns, options)
     {
         // @todo
-        // options.type
+        // options.type (creation / modification / today)
         // options.format
         return subject;
     };
@@ -53,10 +58,11 @@
     /**
      * Updates text case
      * @param subject
+     * @param index
      * @param patterns
      * @param options
      */
-    module.updateCase = function(subject, patterns, options)
+    module.updateCase = function(subject, index, patterns, options)
     {
         if (typeof options.type === 'undefined' || options.type === '')
         {

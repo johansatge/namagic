@@ -61,9 +61,18 @@
      */
     module.textPosition = function(subject, options)
     {
-        // @todo
-        // options.index
-        // options.fromEnd
+        var index = !isNaN(parseInt(options.index)) ? parseInt(options.index) : false;
+        if (index !== false)
+        {
+            if (!options.fromEnd && index < subject.length)
+            {
+                return [{start: index, end: index}];
+            }
+            if (options.fromEnd && subject.length - index >= 0)
+            {
+                return [{start: subject.length - index, end: subject.length - index}];
+            }
+        }
         return [];
     };
 

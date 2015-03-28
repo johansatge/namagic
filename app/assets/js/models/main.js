@@ -10,6 +10,7 @@
     {
 
         var currentFiles = {};
+        var currentFilesIndex = -1;
         var currentOperations = [];
 
         /**
@@ -25,11 +26,12 @@
                 var id = app.node.crypto.createHash('md5').update(files[index]).digest('hex');
                 if (typeof currentFiles[id] === 'undefined')
                 {
+                    currentFilesIndex += 1;
                     var new_file = {
                         id: id,
                         dir: file.dir,
                         name: file.name + file.ext,
-                        updated_name: _applyOperationsOnFilename.apply(this, [file.name + file.ext])
+                        updated_name: _applyOperationsOnFilename.apply(this, [file.name + file.ext, currentFilesIndex])
                     };
                     new_files.push(new_file);
                     currentFiles[id] = new_file;
@@ -47,6 +49,7 @@
             for (var index = 0; index < ids.length; index += 1)
             {
                 delete currentFiles[ids[index]];
+                currentFilesIndex -= 1;
             }
         };
 
@@ -57,9 +60,11 @@
         this.applyOperations = function(operations)
         {
             currentOperations = operations;
-            for (var index in currentFiles)
+            var index = 0;
+            for (var id in currentFiles)
             {
-                currentFiles[index].updated_name = _applyOperationsOnFilename.apply(this, [currentFiles[index].name]);
+                currentFiles[id].updated_name = _applyOperationsOnFilename.apply(this, [currentFiles[id].name, index]);
+                index += 1;
             }
             return currentFiles;
         };
@@ -68,29 +73,28 @@
          * Applies given operations on a filename
          * @param filename
          */
-        var _applyOperationsOnFilename = function(filename)
+        var _applyOperationsOnFilename = function(filename, index)
         {
             // @todo check conflicts
-            for (var index in currentOperations)
+            for (var num in currentOperations)
             {
-                var operation = currentOperations[index];
+                var operation = currentOperations[num];
                 if (operation.search !== false && operation.action !== false)
                 {
                     var name = filename.substring(0, filename.lastIndexOf('.'));
                     var ext = filename.substring(filename.lastIndexOf('.'));
                     if (operation.applyTo === 'filename')
                     {
-                        return _applyOperation.apply(this, [name, operation.search, operation.action]) + ext;
+                        filename = _applyOperation.apply(this, [name, operation.search, operation.action, index]) + ext;
                     }
                     if (operation.applyTo === 'extension')
                     {
-                        return name + _applyOperation.apply(this, [ext, operation.search, operation.action]);
+                        filename = name + _applyOperation.apply(this, [ext, operation.search, operation.action, index]);
                     }
                     if (operation.applyTo === 'both')
                     {
-                        return _applyOperation.apply(this, [filename, operation.search, operation.action]);
+                        filename = _applyOperation.apply(this, [filename, operation.search, operation.action, index]);
                     }
-                    return filename;
                 }
             }
             return filename;
@@ -101,11 +105,12 @@
          * @param subject
          * @param search
          * @param action
+         * @param index
          */
-        var _applyOperation = function(subject, search, action)
+        var _applyOperation = function(subject, search, action, index)
         {
             var search_patterns = app.models.search[search.type](subject, search.options);
-            return app.models.action[action.type](subject, search_patterns, action.options);
+            return app.models.action[action.type](subject, index, search_patterns, action.options);
         }
 
     };
