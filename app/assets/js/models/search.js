@@ -94,11 +94,29 @@
      */
     module.regex = function(subject, options)
     {
-        // @todo
-        // options.regex
-        // options.isGlobal
-        // options.caseInsensitive
-        return [];
+        var regex = false;
+        var matches = [];
+        try
+        {
+            regex = options.regex !== '' ? new RegExp(options.regex, (options.isGlobal ? 'g' : '') + (options.caseInsensitive ? 'i' : '')) : false;
+        }
+        catch (error)
+        {
+            regex = false;
+        }
+        if (regex !== false)
+        {
+            var match;
+            while ((match = regex.exec(subject)) !== null)
+            {
+                matches.push({start: match.index, end: match.index + match[0].length});
+                if (!options.isGlobal)
+                {
+                    break;
+                }
+            }
+        }
+        return matches;
     };
 
     /**
