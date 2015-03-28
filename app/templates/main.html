@@ -118,19 +118,15 @@
                         </div>
                         <div class="operation-fields js-fields" data-type="textRange">
                             <label class="field">
-                                {{main.operations.search.text_range.start_index}}
-                                <input type="text" name="startIndex">
+                                {{main.operations.search.text_range.index}}
+                                <input type="text" name="index">
                             </label>
                             <label class="field">
-                                <input type="checkbox" name="startFromEnd">
-                                {{main.operations.search.text_range.from_end}}
+                                {{main.operations.search.text_range.length}}
+                                <input type="text" name="length">
                             </label>
                             <label class="field">
-                                {{main.operations.search.text_range.end_index}}
-                                <input type="text" name="endIndex">
-                            </label>
-                            <label class="field">
-                                <input type="checkbox" name="endFromEnd">
+                                <input type="checkbox" name="fromEnd">
                                 {{main.operations.search.text_range.from_end}}
                             </label>
                         </div>

@@ -44,9 +44,9 @@
         },
         "text_range": {
           "option": "Select range of text",
-          "start_index": "Start index",
-          "end_index": "End index",
-          "from_end": "Start from end"
+          "index": "Start index",
+          "from_end": "Start from end",
+          "length": "Length"
         },
         "regex": {
           "option": "Execute regular expression",

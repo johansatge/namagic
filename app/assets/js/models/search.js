@@ -64,14 +64,8 @@
         var index = !isNaN(parseInt(options.index)) ? parseInt(options.index) : false;
         if (index !== false)
         {
-            if (!options.fromEnd && index < subject.length)
-            {
-                return [{start: index, end: index}];
-            }
-            if (options.fromEnd && subject.length - index >= 0)
-            {
-                return [{start: subject.length - index, end: subject.length - index}];
-            }
+            var real_index = !options.fromEnd ? index : subject.length - index;
+            return [{start: real_index, end: real_index}];
         }
         return [];
     };
@@ -83,11 +77,13 @@
      */
     module.textRange = function(subject, options)
     {
-        // @todo
-        // options.startIndex
-        // options.startFromEnd
-        // options.endIndex
-        // options.endFromEnd
+        var index = !isNaN(parseInt(options.index)) ? parseInt(options.index) : false;
+        var length = !isNaN(parseInt(options.length)) ? parseInt(options.length) : false;
+        if (index !== false && length !== false)
+        {
+            var real_index = !options.fromEnd ? index : subject.length - index - length;
+            return [{start: real_index, end: real_index + length}];
+        }
         return [];
     };
 
