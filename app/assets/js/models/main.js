@@ -110,6 +110,7 @@
         var _applyOperation = function(subject, search, action, index)
         {
             var search_patterns = app.models.search[search.type](subject, search.options);
+            // @todo group patterns if needed and check order
             return app.models.action[action.type](subject, index, search_patterns, action.options);
         }
 

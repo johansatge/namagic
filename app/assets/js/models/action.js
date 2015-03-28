@@ -83,14 +83,17 @@
      */
     var _applyPatternOnSubject = function(patterns, subject, callable)
     {
+        var updated_subject = '';
+        var previous_pattern = false;
+        var pattern = false;
         for (var index = 0; index < patterns.length; index += 1)
         {
-            var updated_subject = subject.substring(0, patterns[index].start);
-            updated_subject += callable(subject.substring(patterns[index].start, patterns[index].end));
-            updated_subject += subject.substring(patterns[index].end);
-            subject = updated_subject;
+            pattern = patterns[index];
+            updated_subject += subject.substring(previous_pattern !== false ? previous_pattern.end : 0, pattern.start);
+            updated_subject += callable(subject.substring(pattern.start, pattern.end));
+            previous_pattern = pattern;
         }
-        return subject;
+        return pattern !== false ? updated_subject + subject.substring(previous_pattern.end) : subject;
     };
 
     /**
