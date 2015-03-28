@@ -46,12 +46,36 @@
      */
     module.charsList = function(subject, options)
     {
-        // @todo
-        // options.customList
-        // options.alphabeticChars
-        // options.digits
-        // options.specialChars
-        return [];
+        // @todo test this function
+        var regex_parts = [];
+        if (options.customList !== '')
+        {
+            regex_parts.push('[' + _quoteRegex(options.customList) + ']+');
+        }
+        if (options.alphabeticChars)
+        {
+            regex_parts.push('[a-zA-Z]+');
+        }
+        if (options.digits)
+        {
+            regex_parts.push('[0-9]+');
+        }
+        if (options.specialChars)
+        {
+            regex_parts.push('[^a-zA-Z0-9]+');
+        }
+        if (regex_parts.length === 0)
+        {
+            return [];
+        }
+        var regex = new RegExp('(' + regex_parts.join('|') + ')', 'g');
+        var matches = [];
+        var match;
+        while ((match = regex.exec(subject)) !== null)
+        {
+            matches.push({start: match.index, end: match.index + match[0].length});
+        }
+        return matches;
     };
 
     /**
