@@ -95,7 +95,6 @@
         }
       },
       "apply_to": {
-        "none": "Apply to...",
         "filename_only": "Apply to filename only",
         "extension_only": "Apply to extension only",
         "filename_and_extension": "Apply to filename and extension"

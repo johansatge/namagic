@@ -16,9 +16,10 @@
      */
     module.freeText = function(subject, patterns, options)
     {
-        // @todo
-        // options.text
-        return subject;
+        return _applyPatternOnSubject(patterns, subject, function(text)
+        {
+            return options.text;
+        });
     };
 
     /**
