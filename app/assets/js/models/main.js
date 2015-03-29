@@ -27,11 +27,12 @@
                 if (typeof currentFiles[id] === 'undefined')
                 {
                     currentFilesIndex += 1;
+                    var name = file.name + file.ext;
                     var new_file = {
                         id: id,
                         dir: file.dir,
-                        name: file.name + file.ext,
-                        updated_name: _applyOperationsOnFilename.apply(this, [file.name + file.ext, currentFilesIndex])
+                        name: name,
+                        updated_name: _applyOperationsOnFilename.apply(this, [name, file.dir + '/' + name, currentFilesIndex])
                     };
                     new_files.push(new_file);
                     currentFiles[id] = new_file;
@@ -63,7 +64,8 @@
             var index = 0;
             for (var id in currentFiles)
             {
-                currentFiles[id].updated_name = _applyOperationsOnFilename.apply(this, [currentFiles[id].name, index]);
+                var file = currentFiles[id];
+                currentFiles[id].updated_name = _applyOperationsOnFilename.apply(this, [file.name, file.dir + '/' + file.name, index]);
                 index += 1;
             }
             return currentFiles;
@@ -73,28 +75,24 @@
          * Applies given operations on a filename
          * @param filename
          */
-        var _applyOperationsOnFilename = function(filename, index)
+        var _applyOperationsOnFilename = function(filename, filepath, index)
         {
-            // @todo check conflicts
             for (var num in currentOperations)
             {
                 var operation = currentOperations[num];
-                if (operation.search !== false && operation.action !== false)
+                var name = filename.substring(0, filename.lastIndexOf('.'));
+                var ext = filename.substring(filename.lastIndexOf('.'));
+                if (operation.applyTo === 'filename')
                 {
-                    var name = filename.substring(0, filename.lastIndexOf('.'));
-                    var ext = filename.substring(filename.lastIndexOf('.'));
-                    if (operation.applyTo === 'filename')
-                    {
-                        filename = _applyOperation.apply(this, [name, operation.search, operation.action, index]) + ext;
-                    }
-                    if (operation.applyTo === 'extension')
-                    {
-                        filename = name + _applyOperation.apply(this, [ext, operation.search, operation.action, index]);
-                    }
-                    if (operation.applyTo === 'both')
-                    {
-                        filename = _applyOperation.apply(this, [filename, operation.search, operation.action, index]);
-                    }
+                    filename = _applyOperation.apply(this, [name, operation.search, operation.action, index, filepath]) + ext;
+                }
+                if (operation.applyTo === 'extension')
+                {
+                    filename = name + _applyOperation.apply(this, [ext, operation.search, operation.action, index, filepath]);
+                }
+                if (operation.applyTo === 'both')
+                {
+                    filename = _applyOperation.apply(this, [filename, operation.search, operation.action, index, filepath]);
                 }
             }
             return filename;
@@ -106,12 +104,17 @@
          * @param search
          * @param action
          * @param index
+         * @param filepath
          */
-        var _applyOperation = function(subject, search, action, index)
+        var _applyOperation = function(subject, search, action, index, filepath)
         {
+            if (search === false || action === false)
+            {
+                return subject;
+            }
             var search_callable = app.models.search[search.type];
             var action_callable = app.models.action[action.type];
-            return action_callable(subject, index, search_callable(subject, search.options), action.options);
+            return action_callable(subject, index, search_callable(subject, search.options), action.options, filepath);
         }
 
     };

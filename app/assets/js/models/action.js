@@ -14,8 +14,9 @@
      * @param index
      * @param patterns
      * @param options
+     * @param path
      */
-    module.freeText = function(subject, index, patterns, options)
+    module.freeText = function(subject, index, patterns, options, path)
     {
         return app.utils.string.applyPatternsOnSubject(patterns, subject, function(text)
         {
@@ -29,8 +30,9 @@
      * @param index
      * @param patterns
      * @param options
+     * @param path
      */
-    module.digitsSequence = function(subject, index, patterns, options)
+    module.digitsSequence = function(subject, index, patterns, options, path)
     {
         var start_index = !isNaN(parseInt(options.startIndex)) ? parseInt(options.startIndex) : 0;
         var step = !isNaN(parseInt(options.step)) ? parseInt(options.step) : 1;
@@ -46,12 +48,15 @@
      * @param index
      * @param patterns
      * @param options
+     * @param path
      */
-    module.dateAndTime = function(subject, index, patterns, options)
+    module.dateAndTime = function(subject, index, patterns, options, path)
     {
+        var stats = app.node.fs.statSync(path);
         // @todo
         // options.type (creation / modification / today)
         // options.format
+        app.utils.log(stats);
         return subject;
     };
 
@@ -61,8 +66,9 @@
      * @param index
      * @param patterns
      * @param options
+     * @param path
      */
-    module.updateCase = function(subject, index, patterns, options)
+    module.updateCase = function(subject, index, patterns, options, path)
     {
         if (typeof options.type === 'undefined' || options.type === '')
         {
