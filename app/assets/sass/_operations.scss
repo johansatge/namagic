@@ -35,28 +35,27 @@
 
 .operation
 {
-    cursor        : move;
+
     position      : relative;
     z-index       : 32;
     border-top    : 1px solid #6a6a6a;
     border-bottom : 1px solid #282828;
     box-shadow    : 0 7px 16px -7px rgba(0, 0, 0, 0.2);
     background    : #535353;
-    padding       : 12px 0 0 0;
+    padding       : 0 0 12px 0;
 }
 
 .operation-bar
 {
     position : relative;
-    padding  : 0 0 12px 0;
-    cursor   : move;
+    padding  : 12px 0 0 0;
 
     & .type
     {
         cursor    : default;
         position  : absolute;
         z-index   : 35;
-        top       : 9px;
+        top       : 21px;
         left      : 20px;
         color     : #b0b0b0;
         font-size : 12px;
@@ -70,10 +69,10 @@
         color     : #b0b0b0;
         font-size : 11px;
         right     : 20px;
-        top       : 9px;
+        top       : 21px;
     }
 
-    &.operation-actions .chevron
+    &.operation-buttons .chevron
     {
         right : 51px;
     }
@@ -90,7 +89,7 @@
         background                 : linear-gradient(to bottom, #757575, #636363);
         border-top-right-radius    : 4px;
         border-bottom-right-radius : 4px;
-        top                        : 2px;
+        top                        : 14px;
         right                      : 12px;
         border-left                : 1px dotted #282828;
     }
@@ -111,7 +110,7 @@
 
     & .type.fa-pencil
     {
-        top : 9px;
+        top : 21px;
     }
 
     & select
@@ -135,13 +134,105 @@
 
 }
 
+.operation-actions
+{
+    margin : 12px 0 0 0;
+
+    & .js-action-placeholder
+    {
+        margin        : 10px;
+        height        : 50px;
+        border-radius : 8px;
+        border        : 2px dashed #282828;
+    }
+}
+
+.operation-add-action
+{
+    position : relative;
+
+    & i
+    {
+        cursor    : default;
+        position  : absolute;
+        z-index   : 35;
+        color     : #b0b0b0;
+        font-size : 14px;
+        right     : 18px;
+        top       : 8px;
+    }
+
+    & select
+    {
+        -webkit-appearance : none;
+        cursor             : default;
+        color              : #ffffff;
+        text-shadow        : 0 1px 0 #373737;
+        position           : relative;
+        z-index            : 34;
+        text-indent        : 10px;
+        line-height        : 14px;
+        width              : 280px;
+        height             : 30px;
+        margin             : 0 0 0 10px;
+        background         : linear-gradient(to bottom, #757575, #636363);
+        border             : 1px solid #282828;
+        box-shadow         : inset 0 1px 0 #909090, 0 1px 0 #696969;
+        border-radius      : 4px;
+    }
+
+}
+
+.operation-action
+{
+    & .heading
+    {
+        position      : relative;
+        padding       : 6px 0 0 0;
+        color         : #ffffff;
+        text-shadow   : 0 1px 0 #373737;
+        text-indent   : 28px;
+        background    : linear-gradient(to bottom, #757575, #636363);
+        width         : 280px;
+        height        : 30px;
+        margin        : 0 0 0 10px;
+        border        : 1px solid #282828;
+        box-shadow    : inset 0 1px 0 #909090, 0 1px 0 #696969;
+        border-radius : 4px;
+
+        & .type
+        {
+            cursor      : default;
+            position    : absolute;
+            z-index     : 35;
+            top         : 8px;
+            left        : -18px;
+            color       : #b0b0b0;
+            font-size   : 12px;
+            text-shadow : none;
+        }
+
+        & .chevron
+        {
+            cursor      : default;
+            position    : absolute;
+            z-index     : 35;
+            color       : #b0b0b0;
+            font-size   : 11px;
+            right       : 10px;
+            top         : 9px;
+            text-shadow : none;
+        }
+    }
+}
+
 .operation-fields
 {
-    cursor        : move;
+
     color         : #ffffff;
     text-shadow   : 0 1px 0 #373737;
     position      : relative;
-    margin        : 0 10px 12px 10px;
+    margin        : 0 10px 0 10px;
     background    : #4a4a4a;
     border-radius : 4px;
     box-shadow    : inset 0 1px 2px #464646, 0 1px 0 #696969;
@@ -237,6 +328,7 @@
         }
     }
 
+    /*
     & .sortable-input
     {
         width         : 100%;
@@ -252,7 +344,7 @@
 
         & .sortable-item
         {
-            cursor        : move;
+
             float         : left;
             padding       : 2px 6px 4px 6px;
             margin        : 0 3px 3px 0;
@@ -315,5 +407,6 @@
             }
         }
     }
+    */
 
 }

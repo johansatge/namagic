@@ -56,7 +56,7 @@
         }
       },
       "actions": {
-        "none": "Select an action...",
+        "none": "Add action...",
         "free_text": {
           "option": "Insert free text",
           "text_to_set": "Text to set"

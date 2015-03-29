@@ -84,15 +84,15 @@
                 var ext = filename.substring(filename.lastIndexOf('.'));
                 if (operation.applyTo === 'filename')
                 {
-                    filename = _applyOperation.apply(this, [name, operation.search, operation.action, index, filepath]) + ext;
+                    filename = _applyOperation.apply(this, [name, operation.search, operation.actions, index, filepath]) + ext;
                 }
                 if (operation.applyTo === 'extension')
                 {
-                    filename = name + _applyOperation.apply(this, [ext, operation.search, operation.action, index, filepath]);
+                    filename = name + _applyOperation.apply(this, [ext, operation.search, operation.actions, index, filepath]);
                 }
                 if (operation.applyTo === 'both')
                 {
-                    filename = _applyOperation.apply(this, [filename, operation.search, operation.action, index, filepath]);
+                    filename = _applyOperation.apply(this, [filename, operation.search, operation.actions, index, filepath]);
                 }
             }
             return filename;
@@ -102,19 +102,34 @@
          * Searches pattern in the given subject and applies action on it
          * @param subject
          * @param search
-         * @param action
+         * @param actions
          * @param index
          * @param filepath
          */
-        var _applyOperation = function(subject, search, action, index, filepath)
+        var _applyOperation = function(subject, search, actions, index, filepath)
         {
-            if (search === false || action === false)
+            if (search === false || actions.length === 0)
             {
                 return subject;
             }
+            var action = actions.length > 0 ? actions[0] : false;
             var search_callable = app.models.search[search.type];
             var action_callable = app.models.action[action.type];
-            return action_callable(subject, index, search_callable(subject, search.options), action.options, filepath);
+            var patterns = search_callable(subject, search.options);
+
+            // @todo apply multiple actions on the same search subject
+            // @todo process patterns and apply each action in each pattern loop ?
+            /*
+             for (pattern as text)
+             {
+             for(actions as action)
+             {
+             result += action(text);
+             }
+             }
+             */
+
+            return action_callable(subject, index, patterns, action.options, filepath);
         }
 
     };
