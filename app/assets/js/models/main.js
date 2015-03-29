@@ -112,25 +112,47 @@
             {
                 return subject;
             }
-            var action = actions.length > 0 ? actions[0] : false;
+            //var action = actions.length > 0 ? actions[0] : false;
             var search_callable = app.models.search[search.type];
-            var action_callable = app.models.action[action.type];
+            //            var action_callable = app.models.action[action.type];
             var patterns = search_callable(subject, search.options);
 
             // @todo apply multiple actions on the same search subject
             // @todo process patterns and apply each action in each pattern loop ?
-            /*
-             for (pattern as text)
-             {
-             for(actions as action)
-             {
-             result += action(text);
-             }
-             }
-             */
 
-            return action_callable(subject, index, patterns, action.options, filepath);
-        }
+            return _applyPatternsOnSubject.apply(this, [patterns, subject, function(text)
+            {
+                var updated_text = text;
+                for (var index = 0; index < actions.length; index += 1)
+                {
+                    var action = actions[index];
+                    var new_text = app.models.action[action.type](text, index, patterns, action.options, filepath);
+                    updated_text = new_text !== false ? updated_text + new_text : '';
+                }
+                return updated_text;
+            }]);
+        };
+
+        /**
+         * Applies patterns on the given subject by using the required callable
+         * @param patterns
+         * @param subject
+         * @param callable
+         */
+        var _applyPatternsOnSubject = function(patterns, subject, callable)
+        {
+            var updated_subject = '';
+            var previous_pattern = false;
+            var pattern = false;
+            for (var index = 0; index < patterns.length; index += 1)
+            {
+                pattern = patterns[index];
+                updated_subject += subject.substring(previous_pattern !== false ? previous_pattern.end : 0, pattern.start);
+                updated_subject += callable(subject.substring(pattern.start, pattern.end));
+                previous_pattern = pattern;
+            }
+            return pattern !== false ? updated_subject + subject.substring(previous_pattern.end) : subject;
+        };
 
     };
 

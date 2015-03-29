@@ -9,27 +9,6 @@
     var module = {};
 
     /**
-     * Applies patterns on the given subject by using the required callable
-     * @param patterns
-     * @param subject
-     * @param callable
-     */
-    module.applyPatternsOnSubject = function(patterns, subject, callable)
-    {
-        var updated_subject = '';
-        var previous_pattern = false;
-        var pattern = false;
-        for (var index = 0; index < patterns.length; index += 1)
-        {
-            pattern = patterns[index];
-            updated_subject += subject.substring(previous_pattern !== false ? previous_pattern.end : 0, pattern.start);
-            updated_subject += callable(subject.substring(pattern.start, pattern.end));
-            previous_pattern = pattern;
-        }
-        return pattern !== false ? updated_subject + subject.substring(previous_pattern.end) : subject;
-    };
-
-    /**
      * Inverses the case of the given text
      * @param text
      */

@@ -77,7 +77,8 @@
                 items: '.js-operation',
                 axis: 'y',
                 placeholder: 'js-operation-placeholder',
-                zIndex: 40
+                zIndex: 40,
+                stop: $.proxy(_onEditOperations, this)
             });
             $ui.operations.on('change', '.js-select-search-type', $.proxy(_onSelectSearchType, this));
             $ui.operations.on('click', '.js-delete-operation', $.proxy(_onDeleteOperation, this));
@@ -99,13 +100,15 @@
             var $new_action = $(actionTemplates[$select.val()]);
             $select.val('');
             $operation.find('.js-actions').append($new_action).sortable('refresh');
+            _onEditOperations.apply(this);
         };
 
         /**
-         * Editing operations
+         * Sends an event when editing operations
          */
         var _onEditOperations = function()
         {
+            app.utils.log('edit');
             var operations = [];
             var $operations = $ui.operations.children();
             $operations.each(function()
@@ -182,7 +185,8 @@
                 items: '.js-action',
                 placeholder: 'js-action-placeholder',
                 handle: '.js-action-handle',
-                axis: 'y'
+                axis: 'y',
+                stop: $.proxy(_onEditOperations, this)
             });
             $ui.placeholder.hide();
         };

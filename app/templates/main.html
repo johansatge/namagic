@@ -130,6 +130,7 @@
                         <i class="fa fa-plus-square"></i>
                         <select class="js-add-action">
                             <option value="">{{main.operations.actions.none}}</option>
+                            <option value="removeText">{{main.operations.actions.remove_text.option}}</option>
                             <option value="freeText">{{main.operations.actions.free_text.option}}</option>
                             <option value="digitsSequence">{{main.operations.actions.digits_sequence.option}}</option>
                             <option value="dateAndTime">{{main.operations.actions.date_and_time.option}}</option>
@@ -144,6 +145,20 @@
                             <option value="extension">{{main.operations.apply_to.extension_only}}</option>
                             <option value="both">{{main.operations.apply_to.filename_and_extension}}</option>
                         </select>
+                    </div>
+                </div>
+            </script>
+            <script type="text/template" class="js-action-template" data-type="removeText">
+                <div class="operation-action js-action" data-type="removeText">
+                    <div class="heading js-action-handle">
+                        <i class="type fa fa-pencil"></i>
+                        <i class="chevron fa fa-chevron-down"></i>
+                        {{main.operations.actions.remove_text.option}}
+                    </div>
+                    <div class="operation-fields js-fields">
+                        <label class="field">
+                            {{main.operations.actions.remove_text.help}}
+                        </label>
                     </div>
                 </div>
             </script>
@@ -306,7 +321,7 @@
                 </button>
                 <button class="secondary right js-operation-add">
                     <i class="fa fa-cog"></i>
-                    {{main.actions.add_action}}
+                    {{main.actions.add_operation}}
                 </button>
             </div>
         </div>

@@ -12,7 +12,7 @@
   "main": {
     "drop": "Drop files here",
     "actions": {
-      "add_action": "Add action",
+      "add_operation": "Add operation",
       "add_files": "Add files...",
       "remove_files": "Remove",
       "apply": "Apply"
@@ -57,17 +57,21 @@
       },
       "actions": {
         "none": "Add action...",
+        "remove_text": {
+          "option": "Remove selected text",
+          "help": "No options available."
+        },
         "free_text": {
-          "option": "Insert free text",
+          "option": "Add free text",
           "text_to_set": "Text to set"
         },
         "digits_sequence": {
-          "option": "Insert digits sequence",
+          "option": "Add digits sequence",
           "start_index": "Start index",
           "step": "Step"
         },
         "date_and_time": {
-          "option": "Insert date and time",
+          "option": "Add date and time",
           "creation_date": "Creation date",
           "modification_date": "Modification date",
           "today_date": "Today date",

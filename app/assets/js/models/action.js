@@ -9,6 +9,19 @@
     var module = {};
 
     /**
+     * Removes text
+     * @param subject
+     * @param index
+     * @param patterns
+     * @param options
+     * @param path
+     */
+    module.removeText = function(subject, index, patterns, options, path)
+    {
+        return false;
+    };
+
+    /**
      * Inserts free text
      * @param subject
      * @param index
@@ -18,10 +31,7 @@
      */
     module.freeText = function(subject, index, patterns, options, path)
     {
-        return app.utils.string.applyPatternsOnSubject(patterns, subject, function(text)
-        {
-            return options.text;
-        });
+        return options.text;
     };
 
     /**
@@ -36,10 +46,7 @@
     {
         var start_index = !isNaN(parseInt(options.startIndex)) ? parseInt(options.startIndex) : 0;
         var step = !isNaN(parseInt(options.step)) ? parseInt(options.step) : 1;
-        return app.utils.string.applyPatternsOnSubject(patterns, subject, function(text)
-        {
-            return start_index + (index * step);
-        });
+        return start_index + (index * step);
     };
 
     /**
@@ -57,7 +64,7 @@
         // options.type (creation / modification / today)
         // options.format
         app.utils.log(stats);
-        return subject;
+        return '1970-01-01';
     };
 
     /**
@@ -75,10 +82,7 @@
             return subject;
         }
         var type = options.type;
-        return app.utils.string.applyPatternsOnSubject(patterns, subject, function(text)
-        {
-            return type === 'uppercase' ? text.toUpperCase() : (type === 'lowercase' ? text.toLowerCase() : app.utils.string.inverseCase(text));
-        });
+        return type === 'uppercase' ? subject.toUpperCase() : (type === 'lowercase' ? subject.toLowerCase() : app.utils.string.inverseCase(subject));
     };
 
     app.models.action = module;
