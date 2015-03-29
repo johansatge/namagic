@@ -109,9 +109,9 @@
          */
         var _applyOperation = function(subject, search, action, index)
         {
-            var search_patterns = app.models.search[search.type](subject, search.options);
-            // @todo group patterns if needed and check order
-            return app.models.action[action.type](subject, index, search_patterns, action.options);
+            var search_callable = app.models.search[search.type];
+            var action_callable = app.models.action[action.type];
+            return action_callable(subject, index, search_callable(subject, search.options), action.options);
         }
 
     };

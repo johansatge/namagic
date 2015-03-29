@@ -28,11 +28,11 @@
         var matches = [];
         if (options.text !== '')
         {
-            var regex = new RegExp(_quoteRegex(options.text), options.caseInsensitive ? 'gi' : 'g');
+            var regex = new RegExp(app.utils.string.quoteRegex(options.text), options.caseInsensitive ? 'gi' : 'g');
             var match;
             while ((match = regex.exec(subject)) !== null)
             {
-                matches.push({start: match.index, end: match.index + match[0].length});
+                matches.push({start: match.index, end: match.index + match[0].length}); // @todo check pattern collisions
             }
         }
         return matches;
@@ -46,11 +46,10 @@
      */
     module.charsList = function(subject, options)
     {
-        // @todo test this function
         var regex_parts = [];
         if (options.customList !== '')
         {
-            regex_parts.push('[' + _quoteRegex(options.customList) + ']+');
+            regex_parts.push('[' + app.utils.string.quoteRegex(options.customList) + ']+');
         }
         if (options.alphabeticChars)
         {
@@ -73,7 +72,7 @@
         var match;
         while ((match = regex.exec(subject)) !== null)
         {
-            matches.push({start: match.index, end: match.index + match[0].length});
+            matches.push({start: match.index, end: match.index + match[0].length}); // @todo check pattern collisions
         }
         return matches;
     };
@@ -133,7 +132,7 @@
             var match;
             while ((match = regex.exec(subject)) !== null)
             {
-                matches.push({start: match.index, end: match.index + match[0].length});
+                matches.push({start: match.index, end: match.index + match[0].length}); // @todo check pattern collisions
                 if (!options.isGlobal)
                 {
                     break;
@@ -141,16 +140,6 @@
             }
         }
         return matches;
-    };
-
-    /**
-     * Quotes the given subject to be used in a regex
-     * @param subject
-     */
-    var _quoteRegex = function(subject)
-    {
-        var regex = new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]', 'g');
-        return subject.replace(regex, '\\$&');
     };
 
     app.models.search = module;
