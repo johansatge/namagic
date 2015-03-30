@@ -46,7 +46,7 @@
         this.lockInterface = function(is_locked)
         {
             $ui.add.attr('disabled', is_locked ? 'disabled' : null);
-            $ui.remove.attr('disabled', is_locked ? 'disabled' : null);
+            $ui.remove.attr('disabled', is_locked || $ui.list.children().filter('.js-active').length === 0 ? 'disabled' : null);
             (is_locked ? $ui.window.off : $ui.window.on).apply($ui.window, ['keydown keyup', $.proxy(_onRecordKey, this)]);
             (is_locked ? $ui.panel.off : $ui.panel.on).apply($ui.panel, ['dragenter dragleave', $.proxy(_onPlaceholderDrag, this)]);
             (is_locked ? $ui.panel.off : $ui.panel.on).apply($ui.panel, ['drop', $.proxy(_onAddFilesFromDrop, this)]);
