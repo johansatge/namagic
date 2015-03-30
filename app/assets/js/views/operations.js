@@ -78,6 +78,7 @@
                 axis: 'y',
                 placeholder: 'js-operation-placeholder',
                 zIndex: 40,
+                handle: '.js-handle',
                 stop: $.proxy(_onEditOperations, this)
             });
             $ui.operations.on('change', '.js-select-search-type', $.proxy(_onSelectSearchType, this));
@@ -87,6 +88,7 @@
             $ui.operations.on('change keyup', 'input,select', $.proxy(_onEditOperations, this));
             $ui.operations.on('change', '.js-apply-to', $.proxy(_onEditOperations, this));
             $ui.operations.on('change', '.js-add-action', $.proxy(_onAddAction, this));
+            $ui.operations.on('click', '.js-delete-action', $.proxy(_onDeleteAction, this));
         };
 
         /**
@@ -100,6 +102,20 @@
             var $new_action = $(actionTemplates[$select.val()]);
             $select.val('');
             $operation.find('.js-actions').append($new_action).sortable('refresh');
+            $operation.find('.js-no-action').hide();
+            _onEditOperations.apply(this);
+        };
+
+        /**
+         * Deletes an action
+         * @param evt
+         */
+        var _onDeleteAction = function(evt)
+        {
+            var $button = $(evt.currentTarget);
+            var $operation = $button.closest('.js-operation');
+            $button.closest('.js-action').remove();
+            $operation.find('.js-no-action').toggle($operation.find('.js-action').length === 0);
             _onEditOperations.apply(this);
         };
 
@@ -188,6 +204,7 @@
                 axis: 'y',
                 stop: $.proxy(_onEditOperations, this)
             });
+            $new_operation.find('.js-select-search-type').trigger('change');
             $ui.placeholder.hide();
         };
 

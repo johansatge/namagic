@@ -54,11 +54,14 @@
             <div class="js-operations"></div>
             <script type="text/template" class="js-operation-template">
                 <div class="operation js-operation">
-                    <div class="operation-bar operation-buttons">
-                        <i class="type fa fa-search"></i>
+                    <div class="operation-subtitle">
+                        {{main.operations.subtitles.selection}}
+                        <div class="operation-helper operation-handle js-handle"><i class="fa fa-arrows"></i></div>
+                        <button class="operation-helper operation-delete js-delete-operation"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                    <div class="operation-bar">
                         <i class="chevron fa fa-chevron-down"></i>
                         <select class="js-select-search-type">
-                            <option value="">{{main.operations.search.none}}</option>
                             <option value="allText">{{main.operations.search.all_text.option}}</option>
                             <option value="freeText">{{main.operations.search.free_text.option}}</option>
                             <option value="charsList">{{main.operations.search.chars_list.option}}</option>
@@ -66,7 +69,6 @@
                             <option value="textRange">{{main.operations.search.text_range.option}}</option>
                             <option value="regex">{{main.operations.search.regex.option}}</option>
                         </select>
-                        <button class="delete js-delete-operation"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-search-fields" data-type="allText">
                         <label class="field">
@@ -125,20 +127,29 @@
                             <input type="checkbox" name="caseInsensitive">{{main.operations.search.regex.case_insensitive}}
                         </label>
                     </div>
-                    <div class="operation-actions js-actions"></div>
-                    <div class="operation-add-action">
-                        <i class="fa fa-plus-square"></i>
-                        <select class="js-add-action">
-                            <option value="">{{main.operations.actions.none}}</option>
-                            <option value="removeText">{{main.operations.actions.remove_text.option}}</option>
-                            <option value="freeText">{{main.operations.actions.free_text.option}}</option>
-                            <option value="digitsSequence">{{main.operations.actions.digits_sequence.option}}</option>
-                            <option value="dateAndTime">{{main.operations.actions.date_and_time.option}}</option>
-                            <option value="updateCase">{{main.operations.actions.update_case.option}}</option>
-                        </select>
+                    <div class="operation-subtitle">
+                        {{main.operations.subtitles.actions}}
+                        <div class="operation-helper add-action">
+                            <i class="fa fa-plus-square"></i>
+                            <select class="js-add-action">
+                                <option value="">{{main.operations.actions.none}}</option>
+                                <option value="removeText">{{main.operations.actions.remove_text.option}}</option>
+                                <option value="freeText">{{main.operations.actions.free_text.option}}</option>
+                                <option value="digitsSequence">{{main.operations.actions.digits_sequence.option}}</option>
+                                <option value="dateAndTime">{{main.operations.actions.date_and_time.option}}</option>
+                                <option value="updateCase">{{main.operations.actions.update_case.option}}</option>
+                            </select>
+                        </div>
                     </div>
-                    <div class="operation-bar">
-                        <i class="type fa fa-file-text-o"></i>
+                    <div class="operation-actions js-actions">
+                        <div class="no-action js-no-action">
+                            {{main.operations.actions.no_action}}
+                        </div>
+                    </div>
+                    <div class="operation-subtitle">
+                        {{main.operations.subtitles.apply_to}}
+                    </div>
+                    <div class="operation-bar closed">
                         <i class="chevron fa fa-chevron-down"></i>
                         <select class="js-apply-to">
                             <option value="filename">{{main.operations.apply_to.filename_only}}</option>
@@ -150,10 +161,10 @@
             </script>
             <script type="text/template" class="js-action-template" data-type="removeText">
                 <div class="operation-action js-action" data-type="removeText">
-                    <div class="heading js-action-handle">
-                        <i class="type fa fa-pencil"></i>
-                        <i class="chevron fa fa-chevron-down"></i>
+                    <div class="heading">
                         {{main.operations.actions.remove_text.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-fields">
                         <label class="field">
@@ -164,10 +175,10 @@
             </script>
             <script type="text/template" class="js-action-template" data-type="freeText">
                 <div class="operation-action js-action" data-type="freeText">
-                    <div class="heading js-action-handle">
-                        <i class="type fa fa-pencil"></i>
-                        <i class="chevron fa fa-chevron-down"></i>
+                    <div class="heading">
                         {{main.operations.actions.free_text.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-fields">
                         <label class="field">
@@ -179,10 +190,10 @@
             </script>
             <script type="text/template" class="js-action-template" data-type="digitsSequence">
                 <div class="operation-action js-action" data-type="digitsSequence">
-                    <div class="heading js-action-handle">
-                        <i class="type fa fa-pencil"></i>
-                        <i class="chevron fa fa-chevron-down"></i>
+                    <div class="heading">
                         {{main.operations.actions.digits_sequence.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-fields">
                         <label class="field">
@@ -198,10 +209,10 @@
             </script>
             <script type="text/template" class="js-action-template" data-type="dateAndTime">
                 <div class="operation-action js-action" data-type="dateAndTime">
-                    <div class="heading js-action-handle">
-                        <i class="type fa fa-pencil"></i>
-                        <i class="chevron fa fa-chevron-down"></i>
+                    <div class="heading">
                         {{main.operations.actions.date_and_time.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-fields">
                         <label class="field">
@@ -221,10 +232,10 @@
             </script>
             <script type="text/template" class="js-action-template" data-type="updateCase">
                 <div class="operation-action js-action" data-type="updateCase">
-                    <div class="heading js-action-handle">
-                        <i class="type fa fa-pencil"></i>
-                        <i class="chevron fa fa-chevron-down"></i>
+                    <div class="heading">
                         {{main.operations.actions.update_case.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-fields">
                         <label class="field">

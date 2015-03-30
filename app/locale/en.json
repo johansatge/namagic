@@ -19,11 +19,15 @@
     },
     "no_operation": "No action set",
     "operations": {
+      "subtitles": {
+        "selection": "Selection",
+        "actions": "Actions",
+        "apply_to": "Apply to"
+      },
       "search": {
-        "none": "Select a search pattern...",
         "all_text": {
           "option": "Select all text",
-          "no_options": "No option available."
+          "no_options": "No option available"
         },
         "free_text": {
           "option": "Search free text",
@@ -57,9 +61,10 @@
       },
       "actions": {
         "none": "Add action...",
+        "no_action": "No action",
         "remove_text": {
           "option": "Remove selected text",
-          "help": "No options available."
+          "help": "No options available"
         },
         "free_text": {
           "option": "Add free text",

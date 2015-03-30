@@ -250,9 +250,9 @@ html, body {
   top: 0;
   overflow-y: auto;
   background: radial-gradient(ellipse at center, #3f3f3f 0%, #242424 100%);
-  border-bottom: 1px solid #282828;
-  border-left: 1px solid #282828;
-  border-top: 1px solid #282828;
+  border-bottom: 1px solid #2c2c2c;
+  border-left: 1px solid #2c2c2c;
+  border-top: 1px solid #2c2c2c;
   box-shadow: inset 0 0 15px rgba(0, 0, 0, 0.2);
   -webkit-font-smoothing: antialiased;
 }
@@ -278,277 +278,176 @@ html, body {
   position: relative;
   z-index: 32;
   border-top: 1px solid #6a6a6a;
-  border-bottom: 1px solid #282828;
+  border-bottom: 1px solid #2c2c2c;
   box-shadow: 0 7px 16px -7px rgba(0, 0, 0, 0.2);
   background: #535353;
   padding: 0 0 12px 0;
 }
 
-/* line 48, ../sass/_operations.scss */
+/* line 47, ../sass/_operations.scss */
+.operation-subtitle {
+  position: relative;
+  font-size: 12px;
+  color: #282828;
+  font-weight: bold;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin: 10px 0 8px 0;
+  padding: 0 0 0 20px;
+  height: 10px;
+  line-height: 10px;
+  text-shadow: 0 1px 0 #696969;
+}
+
+/* line 62, ../sass/_operations.scss */
+.operation-helper {
+  color: #282828;
+  position: absolute;
+  width: 26px;
+  height: 26px;
+  font-size: 14px;
+  text-shadow: none;
+  background: transparent;
+}
+/* line 72, ../sass/_operations.scss */
+.operation-helper.operation-handle {
+  top: -8px;
+  right: 34px;
+}
+/* line 78, ../sass/_operations.scss */
+.operation-helper.operation-delete {
+  top: -8px;
+  right: 12px;
+}
+/* line 84, ../sass/_operations.scss */
+.operation-helper.action-handle {
+  top: 2px;
+  right: 34px;
+}
+/* line 90, ../sass/_operations.scss */
+.operation-helper.action-delete {
+  top: 2px;
+  right: 1px;
+}
+/* line 96, ../sass/_operations.scss */
+.operation-helper.add-action {
+  top: -8px;
+  right: 12px;
+}
+/* line 101, ../sass/_operations.scss */
+.operation-helper.add-action select {
+  -webkit-appearance: none;
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  opacity: 0;
+}
+/* line 112, ../sass/_operations.scss */
+.operation-helper i {
+  position: absolute;
+  left: 7px;
+  top: 5px;
+}
+
+/* line 120, ../sass/_operations.scss */
 .operation-bar {
   position: relative;
-  padding: 12px 0 0 0;
 }
-/* line 53, ../sass/_operations.scss */
-.operation-bar .type {
-  cursor: default;
-  position: absolute;
-  z-index: 35;
-  top: 21px;
-  left: 20px;
-  color: #b0b0b0;
-  font-size: 12px;
-}
-/* line 64, ../sass/_operations.scss */
+/* line 124, ../sass/_operations.scss */
 .operation-bar .chevron {
-  cursor: default;
   position: absolute;
   z-index: 35;
   color: #b0b0b0;
   font-size: 11px;
   right: 20px;
-  top: 21px;
+  top: 10px;
 }
-/* line 75, ../sass/_operations.scss */
-.operation-bar.operation-buttons .chevron {
-  right: 51px;
-}
-/* line 80, ../sass/_operations.scss */
-.operation-bar .delete {
-  cursor: default;
-  color: #282828;
-  position: absolute;
-  z-index: 34;
-  width: 29px;
-  height: 27px;
-  font-size: 14px;
-  background: linear-gradient(to bottom, #757575, #636363);
-  border-top-right-radius: 4px;
-  border-bottom-right-radius: 4px;
-  top: 14px;
-  right: 12px;
-  border-left: 1px dotted #282828;
-}
-/* line 97, ../sass/_operations.scss */
-.operation-bar .delete:active {
-  background: linear-gradient(to top, #757575, #636363);
-}
-/* line 102, ../sass/_operations.scss */
-.operation-bar .delete i {
-  position: absolute;
-  z-index: 35;
-  right: 9px;
-  top: 6px;
-  text-shadow: 0 1px 0 #696969;
-}
-/* line 111, ../sass/_operations.scss */
-.operation-bar .type.fa-pencil {
-  top: 21px;
-}
-/* line 116, ../sass/_operations.scss */
+/* line 134, ../sass/_operations.scss */
 .operation-bar select {
   -webkit-appearance: none;
-  cursor: default;
-  color: #ffffff;
-  text-shadow: 0 1px 0 #373737;
-  position: relative;
-  z-index: 34;
-  text-indent: 28px;
-  line-height: 14px;
-  width: 280px;
-  height: 30px;
-  margin: 0 0 0 10px;
-  background: linear-gradient(to bottom, #757575, #636363);
-  border: 1px solid #282828;
-  box-shadow: inset 0 1px 0 #909090, 0 1px 0 #696969;
-  border-radius: 4px;
-}
-
-/* line 137, ../sass/_operations.scss */
-.operation-actions {
-  margin: 12px 0 0 0;
-}
-/* line 141, ../sass/_operations.scss */
-.operation-actions .js-action-placeholder {
-  margin: 10px;
-  height: 50px;
-  border-radius: 8px;
-  border: 2px dashed #282828;
-}
-
-/* line 150, ../sass/_operations.scss */
-.operation-add-action {
-  position: relative;
-}
-/* line 154, ../sass/_operations.scss */
-.operation-add-action i {
-  cursor: default;
-  position: absolute;
-  z-index: 35;
-  color: #b0b0b0;
-  font-size: 14px;
-  right: 18px;
-  top: 8px;
-}
-/* line 165, ../sass/_operations.scss */
-.operation-add-action select {
-  -webkit-appearance: none;
-  cursor: default;
-  color: #ffffff;
+  color: #d2d2d2;
   text-shadow: 0 1px 0 #373737;
   position: relative;
   z-index: 34;
   text-indent: 10px;
   line-height: 14px;
-  width: 280px;
+  width: 279px;
   height: 30px;
   margin: 0 0 0 10px;
-  background: linear-gradient(to bottom, #757575, #636363);
-  border: 1px solid #282828;
-  box-shadow: inset 0 1px 0 #909090, 0 1px 0 #696969;
+  background: linear-gradient(to bottom, #535353, #454545);
+  border: 1px solid #2c2c2c;
+  border-radius: 4px 4px 0 0;
+  box-shadow: inset 0 1px 0 #6f6f6f;
+}
+/* line 152, ../sass/_operations.scss */
+.operation-bar.closed select {
+  box-shadow: inset 0 1px 0 #6f6f6f, 0 1px #696969;
   border-radius: 4px;
 }
 
-/* line 188, ../sass/_operations.scss */
-.operation-action .heading {
-  position: relative;
-  padding: 6px 0 0 0;
-  color: #ffffff;
+/* line 162, ../sass/_operations.scss */
+.operation-actions .js-action-placeholder {
+  margin: 10px;
+  height: 50px;
+  border-radius: 8px;
+  border: 2px dashed #ff99ff;
+}
+/* line 170, ../sass/_operations.scss */
+.operation-actions .no-action {
+  color: #d2d2d2;
   text-shadow: 0 1px 0 #373737;
-  text-indent: 28px;
-  background: linear-gradient(to bottom, #757575, #636363);
-  width: 280px;
-  height: 30px;
-  margin: 0 0 0 10px;
-  border: 1px solid #282828;
-  box-shadow: inset 0 1px 0 #909090, 0 1px 0 #696969;
-  border-radius: 4px;
-}
-/* line 203, ../sass/_operations.scss */
-.operation-action .heading .type {
-  cursor: default;
-  position: absolute;
-  z-index: 35;
-  top: 8px;
-  left: -18px;
-  color: #b0b0b0;
-  font-size: 12px;
-  text-shadow: none;
-}
-/* line 215, ../sass/_operations.scss */
-.operation-action .heading .chevron {
-  cursor: default;
-  position: absolute;
-  z-index: 35;
-  color: #b0b0b0;
-  font-size: 11px;
-  right: 10px;
-  top: 9px;
-  text-shadow: none;
-}
-
-/* line 229, ../sass/_operations.scss */
-.operation-fields {
-  color: #ffffff;
-  text-shadow: 0 1px 0 #373737;
-  position: relative;
   margin: 0 10px 0 10px;
   background: #4a4a4a;
   border-radius: 4px;
   box-shadow: inset 0 1px 2px #464646, 0 1px 0 #696969;
-  padding: 10px 10px 0 10px;
-  border: 1px solid #383838;
-    /*
-    & .sortable-input
-    {
-        width         : 100%;
-        color         : #ffffff;
-        border-radius : 3px;
-        box-shadow    : inset 0 1px 2px #373737, 0 1px 0 #5e5e5e;
-        min-height    : 26px;
-        padding       : 3px 25px 0 3px;
-        margin        : 6px 0 0 0;
-        transition    : border 150ms;
-        background    : #3a3a3a;
-        overflow      : hidden;
-
-        & .sortable-item
-        {
-
-            float         : left;
-            padding       : 2px 6px 4px 6px;
-            margin        : 0 3px 3px 0;
-            color         : #ffffff;
-            font-size     : 11px;
-            border        : 1px solid #282828;
-            box-shadow    : inset 0 1px 0 #666666;
-            border-radius : 3px;
-            background    : #4a4a4a;
-
-            & button
-            {
-                width      : 9px;
-                height     : 11px;
-                cursor     : default;
-                font-size  : 10px;
-                color      : #b0b0b0;
-                float      : right;
-                margin     : 0px 0 0 4px;
-                background : transparent;
-            }
-        }
-
-        & .js-item-placeholder
-        {
-            width         : 40px;
-            float         : left;
-            height        : 20px;
-            border-radius : 3px;
-            margin        : 0 3px 3px 0;
-            border        : 1px dashed #535353;
-        }
-
-        & .add-helper
-        {
-            width    : 26px;
-            height   : 26px;
-            position : absolute;
-            top      : 50%;
-            right    : 0;
-            margin   : -8px 0 0 0;
-
-            & i
-            {
-                font-size : 14px;
-                color     : #b0b0b0;
-                position  : absolute;
-                top       : 6px;
-                left      : 7px;
-            }
-
-            & select
-            {
-                width              : 100%;
-                height             : 100%;
-                opacity            : 0.5;
-                -webkit-appearance : none;
-                text-indent        : 100%;
-                background         : transparent;
-            }
-        }
-    }
-    */
+  padding: 10px;
+  border: 1px solid #2c2c2c;
 }
-/* line 242, ../sass/_operations.scss */
+
+/* line 183, ../sass/_operations.scss */
+.operation-action {
+  margin: 0 0 8px 0;
+}
+/* line 187, ../sass/_operations.scss */
+.operation-action .heading {
+  position: relative;
+  padding: 6px 0 0 0;
+  color: #d2d2d2;
+  text-shadow: 0 1px 0 #373737;
+  text-indent: 10px;
+  background: linear-gradient(to bottom, #535353, #454545);
+  width: 279px;
+  height: 30px;
+  margin: 0 0 0 10px;
+  border: 1px solid #2c2c2c;
+  box-shadow: inset 0 1px 0 #6f6f6f;
+  border-radius: 4px 4px 0 0;
+}
+
+/* line 204, ../sass/_operations.scss */
+.operation-fields {
+  color: #d2d2d2;
+  text-shadow: 0 1px 0 #373737;
+  position: relative;
+  margin: 0 10px 0 10px;
+  background: #4a4a4a;
+  border-radius: 0 0 4px 4px;
+  box-shadow: inset 0 1px 2px #464646, 0 1px 0 #696969;
+  padding: 10px 10px 0 10px;
+  border: 1px solid #2c2c2c;
+  border-top: 0;
+}
+/* line 217, ../sass/_operations.scss */
 .operation-fields .field {
   display: block;
   position: relative;
   padding: 0 0 10px 0;
 }
-/* line 248, ../sass/_operations.scss */
+/* line 223, ../sass/_operations.scss */
 .operation-fields .field input[type=text] {
   width: 100%;
-  color: #ffffff;
+  color: #d2d2d2;
   padding: 4px;
   border-radius: 3px;
   box-shadow: inset 0 1px 2px #373737, 0 1px 0 #5e5e5e;
@@ -558,12 +457,12 @@ html, body {
   background: #3a3a3a;
   text-indent: 2px;
 }
-/* line 262, ../sass/_operations.scss */
+/* line 237, ../sass/_operations.scss */
 .operation-fields .field input[type=text]:focus {
   border: 2px solid #3b99fc;
   text-indent: 0;
 }
-/* line 268, ../sass/_operations.scss */
+/* line 243, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox] {
   position: relative;
   float: left;
@@ -574,14 +473,14 @@ html, body {
   background: linear-gradient(to bottom, #757575, #636363);
   box-shadow: inset 0 1px 0 #909090, 0 1px 0 #696969;
   border-radius: 3px;
-  border: 1px solid #282828;
+  border: 1px solid #2c2c2c;
 }
-/* line 282, ../sass/_operations.scss */
+/* line 257, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked {
   background: #3b99fc;
   box-shadow: 0 1px 0 rgba(105, 105, 105, 0.7);
 }
-/* line 288, ../sass/_operations.scss */
+/* line 263, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked:after {
   font-family: "FontAwesome", sans-serif;
   position: absolute;
@@ -591,7 +490,7 @@ html, body {
   content: '\f00c';
   color: #ffffff;
 }
-/* line 299, ../sass/_operations.scss */
+/* line 274, ../sass/_operations.scss */
 .operation-fields .field input[type=radio] {
   position: relative;
   float: left;
@@ -602,14 +501,14 @@ html, body {
   background: linear-gradient(to bottom, #757575, #636363);
   box-shadow: inset 0 1px 0 #909090, 0 1px 0 #696969;
   border-radius: 50%;
-  border: 1px solid #282828;
+  border: 1px solid #2c2c2c;
 }
-/* line 313, ../sass/_operations.scss */
+/* line 288, ../sass/_operations.scss */
 .operation-fields .field input[type=radio]:checked {
   background: #3b99fc;
   box-shadow: 0 1px 0 rgba(105, 105, 105, 0.7);
 }
-/* line 319, ../sass/_operations.scss */
+/* line 294, ../sass/_operations.scss */
 .operation-fields .field input[type=radio]:checked:after {
   font-family: "FontAwesome", sans-serif;
   position: absolute;
