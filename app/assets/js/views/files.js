@@ -63,12 +63,9 @@
         this.addFiles = function(files)
         {
             newFiles = files;
-            if (newFiles.length > 0)
-            {
-                this.setProgress(0);
-                newFilesCount = newFiles.length;
-                _processNewFiles.apply(this);
-            }
+            this.setProgress(0);
+            newFilesCount = newFiles.length;
+            _processNewFiles.apply(this);
         };
 
         /**
