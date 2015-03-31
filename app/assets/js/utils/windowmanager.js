@@ -22,6 +22,7 @@
 
     /**
      * Sets the current window (used with the "Close" shortcut)
+     * @todo fix memory leak, 11 "move" events added
      * @param window
      */
     module.setCurrentWindow = function(window)
