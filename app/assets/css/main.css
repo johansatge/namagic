@@ -300,6 +300,17 @@ html, body {
 }
 
 /* line 62, ../sass/_operations.scss */
+.operation-separator {
+  width: 100%;
+  height: 1px;
+  border-top: 1px solid #2c2c2c;
+  box-shadow: inset 0 1px 0 #6a6a6a;
+  margin: 11px 0 0 0;
+  padding: 0 0 2px 0;
+  opacity: 0.6;
+}
+
+/* line 73, ../sass/_operations.scss */
 .operation-helper {
   color: #282828;
   position: absolute;
@@ -309,34 +320,34 @@ html, body {
   text-shadow: none;
   background: transparent;
 }
-/* line 72, ../sass/_operations.scss */
+/* line 83, ../sass/_operations.scss */
 .operation-helper.operation-handle {
   cursor: move;
   top: -8px;
   right: 34px;
 }
-/* line 79, ../sass/_operations.scss */
+/* line 90, ../sass/_operations.scss */
 .operation-helper.operation-delete {
   top: -8px;
   right: 12px;
 }
-/* line 85, ../sass/_operations.scss */
+/* line 96, ../sass/_operations.scss */
 .operation-helper.action-handle {
   cursor: move;
   top: 2px;
   right: 34px;
 }
-/* line 92, ../sass/_operations.scss */
+/* line 103, ../sass/_operations.scss */
 .operation-helper.action-delete {
   top: 2px;
   right: 1px;
 }
-/* line 98, ../sass/_operations.scss */
+/* line 109, ../sass/_operations.scss */
 .operation-helper.add-action {
   top: -8px;
   right: 12px;
 }
-/* line 103, ../sass/_operations.scss */
+/* line 114, ../sass/_operations.scss */
 .operation-helper.add-action select {
   -webkit-appearance: none;
   position: relative;
@@ -345,18 +356,18 @@ html, body {
   background: transparent;
   opacity: 0;
 }
-/* line 114, ../sass/_operations.scss */
+/* line 125, ../sass/_operations.scss */
 .operation-helper i {
   position: absolute;
   left: 7px;
   top: 5px;
 }
 
-/* line 122, ../sass/_operations.scss */
+/* line 133, ../sass/_operations.scss */
 .operation-bar {
   position: relative;
 }
-/* line 126, ../sass/_operations.scss */
+/* line 137, ../sass/_operations.scss */
 .operation-bar .chevron {
   position: absolute;
   z-index: 35;
@@ -366,7 +377,7 @@ html, body {
   top: 10px;
   text-shadow: 0 1px 0 #696969;
 }
-/* line 137, ../sass/_operations.scss */
+/* line 148, ../sass/_operations.scss */
 .operation-bar select {
   -webkit-appearance: none;
   color: #d2d2d2;
@@ -383,19 +394,19 @@ html, body {
   border-radius: 3px 3px 0 0;
   box-shadow: inset 0 1px 0 #6f6f6f;
 }
-/* line 155, ../sass/_operations.scss */
+/* line 166, ../sass/_operations.scss */
 .operation-bar.closed select {
   box-shadow: inset 0 1px 0 #6f6f6f, 0 1px #696969;
   border-radius: 3px;
 }
 
-/* line 165, ../sass/_operations.scss */
+/* line 176, ../sass/_operations.scss */
 .operation-actions .js-action-placeholder {
   margin: 10px;
   height: 40px;
   border: 2px dashed #282828;
 }
-/* line 172, ../sass/_operations.scss */
+/* line 183, ../sass/_operations.scss */
 .operation-actions .no-action {
   cursor: default;
   color: #d2d2d2;
@@ -408,11 +419,11 @@ html, body {
   border: 1px solid #2c2c2c;
 }
 
-/* line 186, ../sass/_operations.scss */
+/* line 197, ../sass/_operations.scss */
 .operation-action {
   margin: 0 0 8px 0;
 }
-/* line 190, ../sass/_operations.scss */
+/* line 201, ../sass/_operations.scss */
 .operation-action .heading {
   cursor: default;
   position: relative;
@@ -429,7 +440,7 @@ html, body {
   border-radius: 3px 3px 0 0;
 }
 
-/* line 208, ../sass/_operations.scss */
+/* line 219, ../sass/_operations.scss */
 .operation-fields {
   color: #d2d2d2;
   text-shadow: 0 1px 0 #373737;
@@ -442,13 +453,13 @@ html, body {
   border: 1px solid #2c2c2c;
   border-top: 0;
 }
-/* line 221, ../sass/_operations.scss */
+/* line 232, ../sass/_operations.scss */
 .operation-fields .field {
   display: block;
   position: relative;
   padding: 0 0 10px 0;
 }
-/* line 227, ../sass/_operations.scss */
+/* line 238, ../sass/_operations.scss */
 .operation-fields .field input[type=text] {
   width: 100%;
   color: #d2d2d2;
@@ -461,12 +472,12 @@ html, body {
   background: #3a3a3a;
   text-indent: 2px;
 }
-/* line 241, ../sass/_operations.scss */
+/* line 252, ../sass/_operations.scss */
 .operation-fields .field input[type=text]:focus {
   border: 2px solid #3b99fc;
   text-indent: 0;
 }
-/* line 247, ../sass/_operations.scss */
+/* line 258, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox] {
   position: relative;
   float: left;
@@ -479,12 +490,12 @@ html, body {
   border-radius: 3px;
   border: 1px solid #2c2c2c;
 }
-/* line 261, ../sass/_operations.scss */
+/* line 272, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked {
   background: #3b99fc;
   box-shadow: 0 1px 0 rgba(105, 105, 105, 0.7);
 }
-/* line 267, ../sass/_operations.scss */
+/* line 278, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked:after {
   font-family: "FontAwesome", sans-serif;
   position: absolute;
@@ -494,7 +505,7 @@ html, body {
   content: '\f00c';
   color: #ffffff;
 }
-/* line 278, ../sass/_operations.scss */
+/* line 289, ../sass/_operations.scss */
 .operation-fields .field input[type=radio] {
   position: relative;
   float: left;
@@ -507,12 +518,12 @@ html, body {
   border-radius: 50%;
   border: 1px solid #2c2c2c;
 }
-/* line 292, ../sass/_operations.scss */
+/* line 303, ../sass/_operations.scss */
 .operation-fields .field input[type=radio]:checked {
   background: #3b99fc;
   box-shadow: 0 1px 0 rgba(105, 105, 105, 0.7);
 }
-/* line 298, ../sass/_operations.scss */
+/* line 309, ../sass/_operations.scss */
 .operation-fields .field input[type=radio]:checked:after {
   font-family: "FontAwesome", sans-serif;
   position: absolute;
