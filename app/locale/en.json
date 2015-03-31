@@ -24,36 +24,36 @@
         "actions": "Actions",
         "apply_to": "Apply to"
       },
-      "search": {
+      "selection": {
         "all_text": {
-          "option": "Select all text",
+          "option": "All text",
           "no_options": "No option available"
         },
         "free_text": {
-          "option": "Search free text",
+          "option": "Free text",
           "text_to_find": "Text to find",
           "case_insensitive": "Case insensitive"
         },
         "chars_list": {
-          "option": "Search list of characters",
+          "option": "List of characters",
           "custom_list": "Custom list",
           "alpha_chars": "Alphabetic characters",
           "digits": "Digits",
           "special_chars": "Special characters"
         },
         "text_position": {
-          "option": "Select position in text",
+          "option": "Position in text",
           "index": "Index",
           "from_end": "Start from end"
         },
         "text_range": {
-          "option": "Select range of text",
+          "option": "Range of text",
           "index": "Start index",
           "from_end": "Start from end",
           "length": "Length"
         },
         "regex": {
-          "option": "Execute regular expression",
+          "option": "Regular expression",
           "expression": "Expression",
           "is_global": "Global",
           "case_insensitive": "Case insensitive"

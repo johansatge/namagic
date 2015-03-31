@@ -61,70 +61,70 @@
                     </div>
                     <div class="operation-bar">
                         <i class="chevron fa fa-chevron-down"></i>
-                        <select class="js-select-search-type">
-                            <option value="allText">{{main.operations.search.all_text.option}}</option>
-                            <option value="freeText">{{main.operations.search.free_text.option}}</option>
-                            <option value="charsList">{{main.operations.search.chars_list.option}}</option>
-                            <option value="textPosition">{{main.operations.search.text_position.option}}</option>
-                            <option value="textRange">{{main.operations.search.text_range.option}}</option>
-                            <option value="regex">{{main.operations.search.regex.option}}</option>
+                        <select class="js-select-selection-type">
+                            <option value="allText">{{main.operations.selection.all_text.option}}</option>
+                            <option value="freeText">{{main.operations.selection.free_text.option}}</option>
+                            <option value="charsList">{{main.operations.selection.chars_list.option}}</option>
+                            <option value="textPosition">{{main.operations.selection.text_position.option}}</option>
+                            <option value="textRange">{{main.operations.selection.text_range.option}}</option>
+                            <option value="regex">{{main.operations.selection.regex.option}}</option>
                         </select>
                     </div>
-                    <div class="operation-fields js-search-fields" data-type="allText">
+                    <div class="operation-fields js-selection-fields" data-type="allText">
                         <label class="field">
-                            {{main.operations.search.all_text.no_options}}
+                            {{main.operations.selection.all_text.no_options}}
                         </label>
                     </div>
-                    <div class="operation-fields js-search-fields" data-type="freeText">
+                    <div class="operation-fields js-selection-fields" data-type="freeText">
                         <label class="field">
-                            {{main.operations.search.free_text.text_to_find}}<input type="text" name="text">
+                            {{main.operations.selection.free_text.text_to_find}}<input type="text" name="text">
                         </label>
                         <label class="field">
-                            <input type="checkbox" name="caseInsensitive">{{main.operations.search.free_text.case_insensitive}}
-                        </label>
-                    </div>
-                    <div class="operation-fields js-search-fields" data-type="charsList">
-                        <label class="field">
-                            {{main.operations.search.chars_list.custom_list}}<input type="text" name="customList">
-                        </label>
-                        <label class="field">
-                            <input type="checkbox" name="alphabeticChars">{{main.operations.search.chars_list.alpha_chars}}
-                        </label>
-                        <label class="field">
-                            <input type="checkbox" name="digits">{{main.operations.search.chars_list.digits}}
-                        </label>
-                        <label class="field">
-                            <input type="checkbox" name="specialChars">{{main.operations.search.chars_list.special_chars}}
+                            <input type="checkbox" name="caseInsensitive">{{main.operations.selection.free_text.case_insensitive}}
                         </label>
                     </div>
-                    <div class="operation-fields js-search-fields" data-type="textPosition">
+                    <div class="operation-fields js-selection-fields" data-type="charsList">
                         <label class="field">
-                            {{main.operations.search.text_position.index}}<input type="text" name="index" value="0">
+                            {{main.operations.selection.chars_list.custom_list}}<input type="text" name="customList">
                         </label>
                         <label class="field">
-                            <input type="checkbox" name="fromEnd">{{main.operations.search.text_position.from_end}}
-                        </label>
-                    </div>
-                    <div class="operation-fields js-search-fields" data-type="textRange">
-                        <label class="field">
-                            {{main.operations.search.text_range.index}}<input type="text" name="index">
+                            <input type="checkbox" name="alphabeticChars">{{main.operations.selection.chars_list.alpha_chars}}
                         </label>
                         <label class="field">
-                            {{main.operations.search.text_range.length}}<input type="text" name="length">
+                            <input type="checkbox" name="digits">{{main.operations.selection.chars_list.digits}}
                         </label>
                         <label class="field">
-                            <input type="checkbox" name="fromEnd">{{main.operations.search.text_range.from_end}}
+                            <input type="checkbox" name="specialChars">{{main.operations.selection.chars_list.special_chars}}
                         </label>
                     </div>
-                    <div class="operation-fields js-search-fields" data-type="regex">
+                    <div class="operation-fields js-selection-fields" data-type="textPosition">
                         <label class="field">
-                            {{main.operations.search.regex.expression}}<input type="text" name="regex">
+                            {{main.operations.selection.text_position.index}}<input type="text" name="index" value="0">
                         </label>
                         <label class="field">
-                            <input type="checkbox" name="isGlobal">{{main.operations.search.regex.is_global}}
+                            <input type="checkbox" name="fromEnd">{{main.operations.selection.text_position.from_end}}
+                        </label>
+                    </div>
+                    <div class="operation-fields js-selection-fields" data-type="textRange">
+                        <label class="field">
+                            {{main.operations.selection.text_range.index}}<input type="text" name="index">
                         </label>
                         <label class="field">
-                            <input type="checkbox" name="caseInsensitive">{{main.operations.search.regex.case_insensitive}}
+                            {{main.operations.selection.text_range.length}}<input type="text" name="length">
+                        </label>
+                        <label class="field">
+                            <input type="checkbox" name="fromEnd">{{main.operations.selection.text_range.from_end}}
+                        </label>
+                    </div>
+                    <div class="operation-fields js-selection-fields" data-type="regex">
+                        <label class="field">
+                            {{main.operations.selection.regex.expression}}<input type="text" name="regex">
+                        </label>
+                        <label class="field">
+                            <input type="checkbox" name="isGlobal">{{main.operations.selection.regex.is_global}}
+                        </label>
+                        <label class="field">
+                            <input type="checkbox" name="caseInsensitive">{{main.operations.selection.regex.case_insensitive}}
                         </label>
                     </div>
                     <div class="operation-subtitle">
@@ -253,78 +253,6 @@
                     </div>
                 </div>
             </script>
-
-            <!--<div class="operation-fields js-fields" data-type="dateAndTime">
-                <label class="field">
-                    {{main.operations.actions.date_and_time.creation_date}}
-                    <input type="radio" name="type" value="creation">
-                </label>
-                <label class="field">
-                    {{main.operations.actions.date_and_time.modification_date}}
-                    <input type="radio" name="type" value="modification">
-                </label>
-                <label class="field">
-                    {{main.operations.actions.date_and_time.today_date}}
-                    <input type="radio" name="type" value="today">
-                </label>
-                <label class="field">
-                    {{main.operations.actions.date_and_time.date_format}}
-                    <div class="sortable-input js-sortable-input">
-                        <div class="add-helper">
-                            <i class="fa fa-plus-square"></i>
-                            <select class="js-add-item">
-                                <option value="">
-                                    {{main.operations.actions.date_and_time.add}}
-                                </option>
-                                <optgroup label="{{main.operations.actions.date_and_time.date_parts}}">
-                                    <option data-value="d" data-label="{{main.operations.actions.date_and_time.day}}">
-                                        {{main.operations.actions.date_and_time.day}}
-                                    </option>
-                                    <option data-value="m" data-label="{{main.operations.actions.date_and_time.month}}">
-                                        {{main.operations.actions.date_and_time.month}}
-                                    </option>
-                                    <option data-value="y" data-label="{{main.operations.actions.date_and_time.year}}">
-                                        {{main.operations.actions.date_and_time.year}}
-                                    </option>
-                                    <option data-value="h" data-label="{{main.operations.actions.date_and_time.hours}}">
-                                        {{main.operations.actions.date_and_time.hours}}
-                                    </option>
-                                    <option data-value="i" data-label="{{main.operations.actions.date_and_time.minutes}}">
-                                        {{main.operations.actions.date_and_time.minutes}}
-                                    </option>
-                                    <option data-value="s" data-label="{{main.operations.actions.date_and_time.seconds}}">
-                                        {{main.operations.actions.date_and_time.seconds}}
-                                    </option>
-                                </optgroup>
-                                <optgroup label="{{main.operations.actions.date_and_time.separators}}">
-                                    <option data-value="/" data-label="/">
-                                        {{main.operations.actions.date_and_time.slash}}
-                                    </option>
-                                    <option data-value="." data-label=".">
-                                        {{main.operations.actions.date_and_time.dot}}
-                                    </option>
-                                    <option data-value="-" data-label="-">
-                                        {{main.operations.actions.date_and_time.dash}}
-                                    </option>
-                                    <option data-value=":" data-label=":">
-                                        {{main.operations.actions.date_and_time.colon}}
-                                    </option>
-                                </optgroup>
-                            </select>
-                        </div>
-                        <input type="hidden" name="format" class="js-value">
-                    </div>
-                </label>
-            </div>
-            -->
-
-            <!--
-            <script type="text/template" class="js-sortable-input-template">
-                <div class="sortable-item js-sortable-item" data-value="{{value}}">
-                    {{label}}<button class="js-delete-item"><i class="fa fa-times"></i></button>
-                </div>
-            </script>
-            -->
             <div class="actions">
                 <button class="primary right js-operation-apply">
                     <i class="fa fa-check"></i>

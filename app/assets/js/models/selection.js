@@ -1,5 +1,5 @@
 /**
- * Search model
+ * selection model
  */
 (function(app)
 {
@@ -142,6 +142,6 @@
         return matches;
     };
 
-    app.models.search = module;
+    app.models.selection = module;
 
 })(window.App);

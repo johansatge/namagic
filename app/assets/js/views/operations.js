@@ -13,7 +13,6 @@
         var $ui = {};
         var operationTemplate;
         var actionTemplates = {};
-        //var sortableInputTemplate;
 
         /**
          * Attaches an event
@@ -58,7 +57,6 @@
             $ui.apply = $dom.find('.js-operation-apply');
             $ui.operations = $dom.find('.js-operations');
             operationTemplate = $dom.find('.js-operation-template').html();
-            //sortableInputTemplate = $dom.find('.js-sortable-input-template').html();
             $dom.find('.js-action-template').each(function()
             {
                 var $template = $(this);
@@ -81,10 +79,8 @@
                 handle: '.js-handle',
                 stop: $.proxy(_onEditOperations, this)
             });
-            $ui.operations.on('change', '.js-select-search-type', $.proxy(_onSelectSearchType, this));
+            $ui.operations.on('change', '.js-select-selection-type', $.proxy(_onSelectselectionType, this));
             $ui.operations.on('click', '.js-delete-operation', $.proxy(_onDeleteOperation, this));
-            //$ui.operations.on('click', '.js-delete-item', $.proxy(_onDeleteInputItem, this));
-            //$ui.operations.on('change', '.js-add-item', $.proxy(_onAddInputItem, this));
             $ui.operations.on('change keyup', 'input,select', $.proxy(_onEditOperations, this));
             $ui.operations.on('change', '.js-apply-to', $.proxy(_onEditOperations, this));
             $ui.operations.on('change', '.js-add-action', $.proxy(_onAddAction, this));
@@ -130,7 +126,7 @@
             $operations.each(function()
             {
                 var $operation = $(this);
-                var $search = $operation.find('.js-search-fields:visible');
+                var $selection = $operation.find('.js-selection-fields:visible');
                 var $actions = $operation.find('.js-action');
                 var actions = [];
                 $actions.each(function()
@@ -138,7 +134,7 @@
                     actions.push(_parseOperationFieldsPanel($(this)));
                 });
                 var operation = {
-                    search: _parseOperationFieldsPanel.apply(this, [$search]),
+                    selection: _parseOperationFieldsPanel.apply(this, [$selection]),
                     actions: actions,
                     applyTo: $operation.find('.js-apply-to option:selected').val()
                 };
@@ -174,16 +170,16 @@
         };
 
         /**
-         * Select a search type in an operation box
+         * Select a selection type in an operation box
          * @param evt
          * @private
          */
-        var _onSelectSearchType = function(evt)
+        var _onSelectselectionType = function(evt)
         {
             var $type = $(evt.currentTarget);
             var $operation = $type.closest('.js-operation');
-            $operation.find('.js-search-fields').hide();
-            $operation.find('.js-search-fields[data-type="' + $type.val() + '"]').show();
+            $operation.find('.js-selection-fields').hide();
+            $operation.find('.js-selection-fields[data-type="' + $type.val() + '"]').show();
         };
 
         /**
@@ -196,7 +192,7 @@
             var $new_operation = $(operationTemplate);
             $ui.operations.append($new_operation);
             $ui.operations.sortable('refresh');
-            $new_operation.find('.js-search-fields').hide();
+            $new_operation.find('.js-selection-fields').hide();
             $new_operation.find('.js-actions').sortable({
                 items: '.js-action',
                 placeholder: 'js-action-placeholder',
@@ -204,64 +200,9 @@
                 axis: 'y',
                 stop: $.proxy(_onEditOperations, this)
             });
-            $new_operation.find('.js-select-search-type').trigger('change');
+            $new_operation.find('.js-select-selection-type').trigger('change');
             $ui.placeholder.hide();
         };
-
-        /**
-         * Deletes an item from a sortable input
-         * @param evt
-         *
-         var _onDeleteInputItem = function(evt)
-         {
-             var $item = $(evt.currentTarget);
-             var $field = $item.closest('.js-sortable-input');
-             $item.closest('.js-sortable-item').remove();
-             _updateInputWithItems.apply(this, [$field]);
-         };*/
-
-        /**
-         * Adds an item in a sortable input
-         * @param evt
-         * @private
-         *
-         var _onAddInputItem = function(evt)
-         {
-             var $select = $(evt.currentTarget);
-             var $option = $select.find('option:selected');
-             var $field = $select.closest('.js-sortable-input');
-             var template = app.utils.template.render(sortableInputTemplate, [{
-                 label: $option.data('label'),
-                 value: $option.data('value')
-             }]);
-             $field.append(template).sortable('refresh');
-             $select.val('');
-             _updateInputWithItems.apply(this, [$field]);
-         };*/
-
-        /**
-         * Sorts items in a sortable input
-         * @param evt
-         * @param ui
-         *
-         var _onSortInputItem = function(evt, ui)
-         {
-             _updateInputWithItems.apply(this, [ui.item.closest('.js-sortable-input')]);
-         };*/
-
-        /**
-         * Updates the value of a sortable field, depending on the current configuration
-         * @param $sortable_field
-         *
-         var _updateInputWithItems = function($sortable_field)
-         {
-             var value = [];
-             $sortable_field.find('.js-sortable-item').each(function()
-             {
-                 value.push($(this).data('value'));
-             });
-             $sortable_field.find('.js-value').val(value.join(''));
-         };*/
 
         /**
          * Deletes an operation
