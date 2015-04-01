@@ -104,9 +104,9 @@
         }
       },
       "apply_to": {
-        "filename_only": "Apply to filename only",
-        "extension_only": "Apply to extension only",
-        "filename_and_extension": "Apply to filename and extension"
+        "filename_only": "Filename only",
+        "extension_only": "Extension only",
+        "filename_and_extension": "Filename and extension"
       }
     }
   }
