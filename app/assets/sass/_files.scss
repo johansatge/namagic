@@ -15,12 +15,12 @@
         position : fixed;
         z-index  : 26;
         left     : 10px;
-        bottom   : 17px;
+        bottom   : 18px;
 
         & .bar
         {
-            width         : 200px;
-            height        : 12px;
+            width         : 250px;
+            height        : 10px;
             border-radius : 5px;
             background    : linear-gradient(to top, #f1f6f9, #d8d8d8);
             border        : 1px solid #a3a3a3;
@@ -31,7 +31,7 @@
                 position      : relative;
                 margin        : 1px 0 0 1px;
                 width         : 40%;
-                height        : 8px;
+                height        : 6px;
                 border-radius : 4px;
                 background    : linear-gradient(to bottom, #4a9de5, #0072d5);
             }
