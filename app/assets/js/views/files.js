@@ -15,8 +15,6 @@
         var fileTemplate;
         var $lastSelectedFile = false;
         var $files = {};
-        var newFiles = [];
-        var newFilesCount;
 
         /**
          * Attaches an event
@@ -62,10 +60,13 @@
          */
         this.addFiles = function(files)
         {
-            newFiles = files;
-            this.setProgress(0);
-            newFilesCount = newFiles.length;
-            _processNewFiles.apply(this);
+            for (var index in files)
+            {
+                var file = files[index];
+                $files[file.id] = {$row: $(app.utils.template.render(fileTemplate, [file]))};
+                $files[file.id].new_name = $files[file.id].$row.find('.js-new-name');
+                $ui.list.append($files[file.id].$row);
+            }
         };
 
         /**
@@ -100,30 +101,6 @@
                 $ui.remove.show();
                 $ui.progressbar.hide();
                 $ui.placeholder.toggle($ui.list.children().length === 0);
-            }
-        };
-
-        /**
-         * Processes a slice of new files and recursively calls itself while the queue is not empty
-         */
-        var _processNewFiles = function()
-        {
-            var files = newFiles.splice(0, 50);
-            for (var index in files)
-            {
-                var file = files[index];
-                $files[file.id] = {$row: $(app.utils.template.render(fileTemplate, [file]))};
-                $files[file.id].new_name = $files[file.id].$row.find('.js-new-name');
-                $ui.list.append($files[file.id].$row);
-            }
-            this.setProgress(newFiles.length > 0 ? ((newFilesCount - newFiles.length) * 100) / newFilesCount : 100);
-            if (newFiles.length > 0)
-            {
-                setTimeout($.proxy(_processNewFiles, this), 0);
-            }
-            else
-            {
-                events.emit('idle');
             }
         };
 

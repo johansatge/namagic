@@ -123,7 +123,6 @@
          */
         var _onEditOperations = function()
         {
-            app.utils.log('edit');
             var operations = [];
             var $operations = $ui.operations.children();
             $operations.each(function()

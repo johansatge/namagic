@@ -27,7 +27,9 @@
          */
         var _onViewLoaded = function()
         {
-            view.files.on('idle', $.proxy(_onIdle), this);
+            model.on('idle', $.proxy(_onModelIdle), this);
+            model.on('progress', $.proxy(_onModelProgress), this);
+            model.on('add_files', $.proxy(_onAddFilesFromModel), this);
             view.files.on('add_files', $.proxy(_onAddFilesFromView, this));
             view.files.on('remove_files', $.proxy(_onRemoveFilesFromView, this));
             view.operations.on('edit_operations', $.proxy(_onEditOperationsFromView, this));
@@ -54,7 +56,7 @@
         {
             view.files.lockInterface(true);
             view.operations.lockInterface(true);
-            view.files.addFiles(model.addFiles(files));
+            model.addFiles(files);
         };
 
         /**
@@ -76,10 +78,28 @@
         };
 
         /**
+         * Adds files to the view while the model is working
+         * @param files
+         */
+        var _onAddFilesFromModel = function(files)
+        {
+            view.files.addFiles(files);
+        };
+
+        /**
+         * Updates the file view while the model is working
+         * @param percentage
+         */
+        var _onModelProgress = function(percentage)
+        {
+            view.files.setProgress(percentage);
+        };
+
+        /**
          * Enables UI when a delayed operation has been finished
          * @private
          */
-        var _onIdle = function()
+        var _onModelIdle = function()
         {
             view.files.lockInterface(false);
             view.operations.lockInterface(false);

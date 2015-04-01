@@ -9,9 +9,22 @@
     var module = function()
     {
 
+        var events = new app.node.events.EventEmitter();
         var currentFiles = {};
         var currentFilesIndex = -1;
         var currentOperations = [];
+        var newFiles = [];
+        var newFilesCount;
+
+        /**
+         * Attaches an event
+         * @param event
+         * @param callback
+         */
+        this.on = function(event, callback)
+        {
+            events.on(event, callback);
+        };
 
         /**
          * Adds a list of files
@@ -19,8 +32,20 @@
          */
         this.addFiles = function(files)
         {
+            newFiles = files;
+            events.emit('progress', 0);
+            newFilesCount = newFiles.length;
+            _processNewFiles.apply(this);
+        };
+
+        /**
+         * Processes a slice of new files and recursively calls itself while the queue is not empty
+         */
+        var _processNewFiles = function()
+        {
+            var files = newFiles.splice(0, 50);
             var new_files = [];
-            for (var index in files)
+            for (var index = 0; index < files.length; index += 1)
             {
                 var file = app.node.path.parse(files[index]);
                 var id = app.node.crypto.createHash('md5').update(files[index]).digest('hex');
@@ -38,7 +63,16 @@
                     currentFiles[id] = new_file;
                 }
             }
-            return new_files;
+            events.emit('add_files', new_files);
+            events.emit('progress', newFiles.length > 0 ? ((newFilesCount - newFiles.length) * 100) / newFilesCount : 100);
+            if (newFiles.length > 0)
+            {
+                setTimeout($.proxy(_processNewFiles, this), 0);
+            }
+            else
+            {
+                events.emit('idle');
+            }
         };
 
         /**
@@ -74,6 +108,8 @@
         /**
          * Applies given operations on a filename
          * @param filename
+         * @param filepath
+         * @param index
          */
         var _applyOperationsOnFilename = function(filename, filepath, index)
         {
