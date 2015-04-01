@@ -86,14 +86,14 @@
     };
 
     /**
-     * Inserts modification date
+     * Inserts last modified date
      * @param subject
      * @param index
      * @param patterns
      * @param options
      * @param path
      */
-    module.modificationDate = function(subject, index, patterns, options, path)
+    module.lastModifiedDate = function(subject, index, patterns, options, path)
     {
         var stats = app.node.fs.statSync(path);
         var date = stats.mtime !== 'undefined' ? app.utils.string.formatDate(stats.mtime, options.format) : '/!\\';

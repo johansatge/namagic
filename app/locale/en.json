@@ -82,11 +82,27 @@
         },
         "creation_date": {
           "option": "Add creation date",
-          "format": "Format"
+          "format": "Format",
+          "help": {
+            "year": "Year",
+            "month": "Month",
+            "day": "Day",
+            "hours": "Hours",
+            "minutes": "Minutes",
+            "seconds": "Seconds"
+          }
         },
-        "modification_date": {
-          "option": "Add modification date",
-          "format": "Format"
+        "last_modified_date": {
+          "option": "Add last modified date",
+          "format": "Format",
+          "help": {
+            "year": "Year",
+            "month": "Month",
+            "day": "Day",
+            "hours": "Hours",
+            "minutes": "Minutes",
+            "seconds": "Seconds"
+          }
         },
         "file_size": {
           "option": "Add file size",

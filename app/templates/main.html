@@ -141,7 +141,7 @@
                                 </optgroup>
                                 <optgroup label="{{main.operations.actions.file_actions}}">
                                     <option value="creationDate">{{main.operations.actions.creation_date.option}}</option>
-                                    <option value="modificationDate">{{main.operations.actions.modification_date.option}}</option>
+                                    <option value="lastModifiedDate">{{main.operations.actions.last_modified_date.option}}</option>
                                     <option value="fileSize">{{main.operations.actions.file_size.option}}</option>
                                 </optgroup>
                             </select>
@@ -249,21 +249,43 @@
                         <label class="field">
                             {{main.operations.actions.creation_date.format}}
                             <input type="text" name="format">
+                            <div class="field-help">
+                                <i class="fa fa-question-circle"></i>
+                                <ul class="popin">
+                                    <li><span>YYYY</span>{{main.operations.actions.last_modified_date.help.year}}</li>
+                                    <li><span>MM</span>{{main.operations.actions.last_modified_date.help.month}}</li>
+                                    <li><span>DD</span>{{main.operations.actions.last_modified_date.help.day}}</li>
+                                    <li><span>hh</span>{{main.operations.actions.last_modified_date.help.hours}}</li>
+                                    <li><span>mm</span>{{main.operations.actions.last_modified_date.help.minutes}}</li>
+                                    <li><span>ss</span>{{main.operations.actions.last_modified_date.help.seconds}}</li>
+                                </ul>
+                            </div>
                         </label>
                     </div>
                 </div>
             </script>
-            <script type="text/template" class="js-action-template" data-type="modificationDate">
-                <div class="operation-action js-action" data-type="modificationDate">
+            <script type="text/template" class="js-action-template" data-type="lastModifiedDate">
+                <div class="operation-action js-action" data-type="lastModifiedDate">
                     <div class="heading">
-                        {{main.operations.actions.modification_date.option}}
+                        {{main.operations.actions.last_modified_date.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
                         <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-fields">
                         <label class="field">
-                            {{main.operations.actions.modification_date.format}}
+                            {{main.operations.actions.last_modified_date.format}}
                             <input type="text" name="format">
+                            <div class="field-help">
+                                <i class="fa fa-question-circle"></i>
+                                <ul class="popin">
+                                    <li><span>YYYY</span>{{main.operations.actions.last_modified_date.help.year}}</li>
+                                    <li><span>MM</span>{{main.operations.actions.last_modified_date.help.month}}</li>
+                                    <li><span>DD</span>{{main.operations.actions.last_modified_date.help.day}}</li>
+                                    <li><span>hh</span>{{main.operations.actions.last_modified_date.help.hours}}</li>
+                                    <li><span>mm</span>{{main.operations.actions.last_modified_date.help.minutes}}</li>
+                                    <li><span>ss</span>{{main.operations.actions.last_modified_date.help.seconds}}</li>
+                                </ul>
+                            </div>
                         </label>
                     </div>
                 </div>

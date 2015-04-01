@@ -1,5 +1,5 @@
 /* line 1, ../sass/_reset.scss */
-html, body, div, span, p, form, input, textarea, select, h1, h2, h3, table, tbody, tr, td, label, button {
+html, body, div, span, p, form, input, textarea, select, h1, h2, h3, table, tbody, tr, td, label, button, ul, li {
   margin: 0;
   padding: 0;
   border: 0;
@@ -460,12 +460,66 @@ html, body {
   border-top: 0;
 }
 /* line 238, ../sass/_operations.scss */
+.operation-fields .field-help {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+/* line 244, ../sass/_operations.scss */
+.operation-fields .field-help:hover i {
+  color: #3a3a3a;
+}
+/* line 249, ../sass/_operations.scss */
+.operation-fields .field-help i {
+  position: absolute;
+  top: -30px;
+  right: 6px;
+  font-size: 14px;
+  text-shadow: none;
+  z-index: 2;
+}
+/* line 259, ../sass/_operations.scss */
+.operation-fields .field-help:hover .popin {
+  display: block;
+}
+/* line 264, ../sass/_operations.scss */
+.operation-fields .field-help .popin {
+  display: none;
+  position: absolute;
+  bottom: 10px;
+  right: 0px;
+  z-index: 1;
+  width: 120px;
+  padding: 6px 24px 3px 3px;
+  background: rgba(0, 0, 0, 0.7);
+  text-shadow: none;
+  border-radius: 3px;
+  list-style-type: none;
+}
+/* line 278, ../sass/_operations.scss */
+.operation-fields .field-help .popin li {
+  font-size: 11px;
+  color: #a3a3a3;
+}
+/* line 284, ../sass/_operations.scss */
+.operation-fields .field-help .popin span {
+  font-size: 11px;
+  display: inline-block;
+  padding: 1px 0 1px 0;
+  margin: 0 3px 3px 0;
+  width: 36px;
+  border-radius: 2px;
+  background: #202020;
+  color: #d2d2d2;
+  text-align: center;
+}
+/* line 300, ../sass/_operations.scss */
 .operation-fields .field {
   display: block;
   position: relative;
   padding: 0 0 10px 0;
 }
-/* line 244, ../sass/_operations.scss */
+/* line 306, ../sass/_operations.scss */
 .operation-fields .field input[type=text] {
   width: 100%;
   color: #d2d2d2;
@@ -478,12 +532,12 @@ html, body {
   background: #3a3a3a;
   text-indent: 2px;
 }
-/* line 258, ../sass/_operations.scss */
+/* line 320, ../sass/_operations.scss */
 .operation-fields .field input[type=text]:focus {
   border: 2px solid #3b99fc;
   text-indent: 0;
 }
-/* line 264, ../sass/_operations.scss */
+/* line 326, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox] {
   position: relative;
   float: left;
@@ -496,12 +550,12 @@ html, body {
   border-radius: 3px;
   border: 1px solid #2c2c2c;
 }
-/* line 278, ../sass/_operations.scss */
+/* line 340, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked {
   background: #3b99fc;
   box-shadow: 0 1px 0 rgba(105, 105, 105, 0.7);
 }
-/* line 284, ../sass/_operations.scss */
+/* line 346, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked:after {
   font-family: "FontAwesome", sans-serif;
   position: absolute;
@@ -511,7 +565,7 @@ html, body {
   content: '\f00c';
   color: #ffffff;
 }
-/* line 295, ../sass/_operations.scss */
+/* line 357, ../sass/_operations.scss */
 .operation-fields .field input[type=radio] {
   position: relative;
   float: left;
@@ -524,12 +578,12 @@ html, body {
   border-radius: 50%;
   border: 1px solid #2c2c2c;
 }
-/* line 309, ../sass/_operations.scss */
+/* line 371, ../sass/_operations.scss */
 .operation-fields .field input[type=radio]:checked {
   background: #3b99fc;
   box-shadow: 0 1px 0 rgba(105, 105, 105, 0.7);
 }
-/* line 315, ../sass/_operations.scss */
+/* line 377, ../sass/_operations.scss */
 .operation-fields .field input[type=radio]:checked:after {
   font-family: "FontAwesome", sans-serif;
   position: absolute;

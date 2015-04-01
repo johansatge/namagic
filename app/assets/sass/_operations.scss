@@ -235,6 +235,68 @@
     border        : 1px solid #2c2c2c;
     border-top    : 0;
 
+    & .field-help
+    {
+        position : absolute;
+        right    : 0;
+        bottom   : 0;
+
+        &:hover i
+        {
+            color : #3a3a3a;
+        }
+
+        & i
+        {
+            position    : absolute;
+            top         : -30px;
+            right       : 6px;
+            font-size   : 14px;
+            text-shadow : none;
+            z-index     : 2;
+        }
+
+        &:hover .popin
+        {
+            display : block;
+        }
+
+        & .popin
+        {
+            display         : none;
+            position        : absolute;
+            bottom          : 10px;
+            right           : 0px;
+            z-index         : 1;
+            width           : 120px;
+            padding         : 6px 24px 3px 3px;
+            background      : rgba(0, 0, 0, 0.7);
+            text-shadow     : none;
+            border-radius   : 3px;
+            list-style-type : none;
+
+            & li
+            {
+                font-size : 11px;
+                color     : #a3a3a3;
+            }
+
+            & span
+            {
+                font-size     : 11px;
+                display       : inline-block;
+                padding       : 1px 0 1px 0;
+                margin        : 0 3px 3px 0;
+                width         : 36px;
+                border-radius : 2px;
+                background    : #202020;
+                color         : #d2d2d2;
+                text-align    : center;
+            }
+        }
+
+    }
+
     & .field
     {
         display  : block;
