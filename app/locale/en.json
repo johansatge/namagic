@@ -19,12 +19,8 @@
     },
     "no_operation": "No action set",
     "operations": {
-      "subtitles": {
-        "selection": "Selection",
-        "actions": "Actions",
-        "apply_to": "Apply to"
-      },
       "selection": {
+        "subtitle": "Selection",
         "all_text": {
           "option": "All text",
           "no_options": "No option available"
@@ -60,8 +56,11 @@
         }
       },
       "actions": {
-        "none": "Add action...",
+        "subtitle": "Actions",
+        "select": "Add action...",
         "no_action": "No action",
+        "text_actions": "Text",
+        "file_actions": "File informations",
         "remove_text": {
           "option": "Remove selected text",
           "help": "No options available"
@@ -75,35 +74,27 @@
           "start_index": "Start index",
           "step": "Step"
         },
-        "date_and_time": {
-          "option": "Add date and time",
-          "creation_date": "Creation date",
-          "modification_date": "Modification date",
-          "today_date": "Today date",
-          "date_format": "Date format",
-          "add": "Add...",
-          "presets": "Presets",
-          "date_parts": "Date parts",
-          "day": "Day",
-          "month": "Month",
-          "year": "Year",
-          "hours": "Hours",
-          "minutes": "Minutes",
-          "seconds": "Seconds",
-          "separators": "Separators",
-          "slash": "/",
-          "dot": ".",
-          "dash": "-",
-          "colon": ":"
-        },
         "update_case": {
           "option": "Update text case",
           "switch_uppercase": "Switch to uppercase",
           "switch_lowercase": "Switch to lowercase",
           "invert_case": "Invert case"
+        },
+        "creation_date": {
+          "option": "Add creation date",
+          "format": "Format"
+        },
+        "modification_date": {
+          "option": "Add modification date",
+          "format": "Format"
+        },
+        "file_size": {
+          "option": "Add file size",
+          "help": "No options available"
         }
       },
       "apply_to": {
+        "subtitle": "Apply to",
         "filename_only": "Filename only",
         "extension_only": "Extension only",
         "filename_and_extension": "Filename and extension"

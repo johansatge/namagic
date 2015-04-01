@@ -55,7 +55,7 @@
             <script type="text/template" class="js-operation-template">
                 <div class="operation js-operation">
                     <div class="operation-subtitle">
-                        {{main.operations.subtitles.selection}}
+                        {{main.operations.selection.subtitle}}
                         <div class="operation-helper operation-handle js-handle"><i class="fa fa-arrows"></i></div>
                         <button class="operation-helper operation-delete js-delete-operation"><i class="fa fa-trash-o"></i></button>
                     </div>
@@ -129,15 +129,21 @@
                     </div>
                     <div class="operation-separator"></div>
                     <div class="operation-subtitle">
-                        {{main.operations.subtitles.actions}}
+                        {{main.operations.actions.subtitle}}
                         <div class="operation-helper add-action">
                             <select class="js-add-action">
-                                <option value="">{{main.operations.actions.none}}</option>
-                                <option value="removeText">{{main.operations.actions.remove_text.option}}</option>
-                                <option value="freeText">{{main.operations.actions.free_text.option}}</option>
-                                <option value="digitsSequence">{{main.operations.actions.digits_sequence.option}}</option>
-                                <option value="dateAndTime">{{main.operations.actions.date_and_time.option}}</option>
-                                <option value="updateCase">{{main.operations.actions.update_case.option}}</option>
+                                <option value="">{{main.operations.actions.select}}</option>
+                                <optgroup label="{{main.operations.actions.text_actions}}">
+                                    <option value="removeText">{{main.operations.actions.remove_text.option}}</option>
+                                    <option value="freeText">{{main.operations.actions.free_text.option}}</option>
+                                    <option value="digitsSequence">{{main.operations.actions.digits_sequence.option}}</option>
+                                    <option value="updateCase">{{main.operations.actions.update_case.option}}</option>
+                                </optgroup>
+                                <optgroup label="{{main.operations.actions.file_actions}}">
+                                    <option value="creationDate">{{main.operations.actions.creation_date.option}}</option>
+                                    <option value="modificationDate">{{main.operations.actions.modification_date.option}}</option>
+                                    <option value="fileSize">{{main.operations.actions.file_size.option}}</option>
+                                </optgroup>
                             </select>
                             <i class="fa fa-plus-square"></i>
                         </div>
@@ -149,7 +155,7 @@
                     </div>
                     <div class="operation-separator"></div>
                     <div class="operation-subtitle">
-                        {{main.operations.subtitles.apply_to}}
+                        {{main.operations.apply_to.subtitle}}
                     </div>
                     <div class="operation-bar closed">
                         <i class="chevron fa fa-chevron-down"></i>
@@ -209,29 +215,6 @@
                     </div>
                 </div>
             </script>
-            <script type="text/template" class="js-action-template" data-type="dateAndTime">
-                <div class="operation-action js-action" data-type="dateAndTime">
-                    <div class="heading">
-                        {{main.operations.actions.date_and_time.option}}
-                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
-                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
-                    </div>
-                    <div class="operation-fields js-fields">
-                        <label class="field">
-                            {{main.operations.actions.date_and_time.creation_date}}
-                            <input type="radio" name="type" value="creation">
-                        </label>
-                        <label class="field">
-                            {{main.operations.actions.date_and_time.modification_date}}
-                            <input type="radio" name="type" value="modification">
-                        </label>
-                        <label class="field">
-                            {{main.operations.actions.date_and_time.today_date}}
-                            <input type="radio" name="type" value="today">
-                        </label>
-                    </div>
-                </div>
-            </script>
             <script type="text/template" class="js-action-template" data-type="updateCase">
                 <div class="operation-action js-action" data-type="updateCase">
                     <div class="heading">
@@ -251,6 +234,50 @@
                         <label class="field">
                             {{main.operations.actions.update_case.invert_case}}
                             <input type="radio" name="type" value="invert">
+                        </label>
+                    </div>
+                </div>
+            </script>
+            <script type="text/template" class="js-action-template" data-type="creationDate">
+                <div class="operation-action js-action" data-type="creationDate">
+                    <div class="heading">
+                        {{main.operations.actions.creation_date.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                    <div class="operation-fields js-fields">
+                        <label class="field">
+                            {{main.operations.actions.creation_date.format}}
+                            <input type="text" name="format">
+                        </label>
+                    </div>
+                </div>
+            </script>
+            <script type="text/template" class="js-action-template" data-type="modificationDate">
+                <div class="operation-action js-action" data-type="modificationDate">
+                    <div class="heading">
+                        {{main.operations.actions.modification_date.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                    <div class="operation-fields js-fields">
+                        <label class="field">
+                            {{main.operations.actions.modification_date.format}}
+                            <input type="text" name="format">
+                        </label>
+                    </div>
+                </div>
+            </script>
+            <script type="text/template" class="js-action-template" data-type="fileSize">
+                <div class="operation-action js-action" data-type="fileSize">
+                    <div class="heading">
+                        {{main.operations.actions.file_size.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                    <div class="operation-fields js-fields">
+                        <label class="field">
+                            {{main.operations.actions.file_size.help}}
                         </label>
                     </div>
                 </div>

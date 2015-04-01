@@ -120,8 +120,8 @@
                 for (var index = 0; index < actions.length; index += 1)
                 {
                     var action = actions[index];
-                    var new_text = app.models.action[action.type](text, index, patterns, action.options, filepath);
-                    updated_text = new_text !== false ? updated_text + new_text : '';
+                    var new_text = app.models.action[action.type](updated_text, index, patterns, action.options, filepath);
+                    updated_text = new_text.type === 'remove' ? '' : (new_text.type === 'add' ? updated_text + new_text.text : new_text.text);
                 }
                 return updated_text;
             }]);
