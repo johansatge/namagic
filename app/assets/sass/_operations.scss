@@ -33,6 +33,11 @@
     }
 }
 
+.js-disabled .operation
+{
+    opacity : 0.7;
+}
+
 .operation
 {
     position      : relative;
@@ -121,6 +126,7 @@
             height             : 100%;
             background         : transparent;
             opacity            : 0;
+            text-indent        : 20px;
         }
     }
 

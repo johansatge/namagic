@@ -43,6 +43,9 @@
             $ui.add.attr('disabled', is_locked ? 'disabled' : null);
             $ui.apply.attr('disabled', is_locked ? 'disabled' : null);
             $ui.operations.find('input,select,button').attr('disabled', is_locked ? 'disabled' : null);
+            $ui.operations.sortable(is_locked ? 'disable' : 'enable');
+            $ui.operations.find('.js-actions').sortable(is_locked ? 'disable' : 'enable');
+            $ui.panel.toggleClass('js-disabled', is_locked);
         };
 
         /**
@@ -224,7 +227,7 @@
         var _onApplyOperations = function(evt)
         {
             evt.preventDefault();
-            console.log('apply @todo')
+            events.emit('apply_operations');
         };
 
     };

@@ -28,6 +28,11 @@
         margin : 0 10px 0 0;
     }
 
+    & button[disabled=disabled]
+    {
+        opacity : 0.5;
+    }
+
     & button
     {
         border-radius : 4px;
