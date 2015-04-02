@@ -9,6 +9,15 @@
     var module = {};
 
     /**
+     * Escapes a string to be used in CLI commands
+     * @param text
+     */
+    module.escapeForCLI = function(text)
+    {
+        return text.replace(/ /g, '\\ ');
+    };
+
+    /**
      * Inverses the case of the given text
      * @param text
      */

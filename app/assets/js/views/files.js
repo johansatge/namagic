@@ -96,6 +96,18 @@
         };
 
         /**
+         * Adds an error status to the needed files
+         * @param ids
+         */
+        this.setErrorFiles = function(ids)
+        {
+            for (var index = 0; index < ids.length; index += 1)
+            {
+                $files[ids[index]].$row.addClass('js-error');
+            }
+        };
+
+        /**
          * Updates files
          * @param files
          */

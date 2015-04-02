@@ -83,25 +83,28 @@
         {
             var files = pendingFiles.splice(0, 50);
             var updated_ids = [];
+            var error_ids = [];
             for (var index = 0; index < files.length; index += 1)
             {
                 var file = files[index];
-                if (file.dir !== destinationDir)
+                var source_path = app.utils.string.escapeForCLI(file.dir + '/' + file.name);
+                var destination_path = app.utils.string.escapeForCLI(destinationDir + '/' + file.updated_name);
+                try
                 {
-                    app.utils.log('@todo cp ' + file.dir + '/' + file.name + ' ' + destinationDir + '/' + file.updated_name);
-                }
-                else
-                {
-                    app.utils.log('@todo mv ' + file.dir + '/' + file.name + ' ' + destinationDir + '/' + file.updated_name);
-                }
-                if (true) // @todo check if CLI was ok
-                {
+                    var stdout = app.node.execSync((file.dir !== destinationDir ? 'cp ' : 'mv ') + source_path + ' ' + destination_path);
                     updated_ids.push(file.id);
                     currentFiles.splice(currentFilesIndexes[file.id], 1);
                     delete currentFilesIndexes[file.id];
+                    app.utils.log(typeof stdout === 'string' ? stdout : stdout.toString()); // @todo TMP
+                }
+                catch (error)
+                {
+                    error_ids.push(file.id);
+                    app.utils.log(error.message); // @todo TMP
                 }
             }
             events.emit('remove_files', updated_ids);
+            events.emit('error_files', error_ids);
             events.emit('progress', pendingFiles.length > 0 ? ((pendingFilesCount - pendingFiles.length) * 100) / pendingFilesCount : 100);
             if (pendingFiles.length > 0)
             {
@@ -191,6 +194,7 @@
          */
         var _processOperationsOnFilename = function(filename, filepath, index)
         {
+            // @todo check if filepath exists, return error otherwise
             for (var num in currentOperations)
             {
                 var operation = currentOperations[num];

@@ -76,11 +76,20 @@
             border : 2px dashed #8896a1;
         }
     }
-
 }
 
 .files-list
 {
+    & tr.js-error td
+    {
+        color : rgb(237, 0, 0);
+
+        & i
+        {
+            color : rgb(237, 0, 0);
+        }
+    }
+
     & tr td
     {
         cursor  : default;
