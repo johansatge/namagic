@@ -61,6 +61,7 @@
          */
         this.applyOperations = function(destination_path)
         {
+            events.emit('progress', 0);
 
             // @todo apply operations
 
@@ -119,6 +120,7 @@
                 delete currentFiles[ids[index]];
                 currentFilesIndex -= 1;
             }
+            return ids;
         };
 
         /**

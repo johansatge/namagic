@@ -74,9 +74,25 @@
             {
                 var file = files[index];
                 $files[file.id] = {$row: $(app.utils.template.render(fileTemplate, [file]))};
-                $files[file.id].new_name = $files[file.id].$row.find('.js-new-name');
+                $files[file.id].$new_name = $files[file.id].$row.find('.js-new-name');
                 $ui.list.append($files[file.id].$row);
             }
+        };
+
+        /**
+         * Removes files from the model
+         * @param ids
+         */
+        this.removeFiles = function(ids)
+        {
+            for (var index = 0; index < ids.length; index += 1)
+            {
+                $files[ids[index]].$row.remove();
+                delete $files[ids[index]];
+            }
+            $lastSelectedFile = false;
+            $ui.remove.attr('disabled', 'disabled');
+            $ui.placeholder.toggle($ui.list.children().length === 0);
         };
 
         /**
@@ -87,7 +103,7 @@
         {
             for (var index in files)
             {
-                $files[index].new_name.text(files[index].updated_name);
+                $files[index].$new_name.text(files[index].updated_name);
             }
         };
 
@@ -240,14 +256,9 @@
             $items.each(function()
             {
                 var id = $(this).data('id');
-                $files[id].$row.remove();
-                delete $files[id];
                 ids.push(id);
             });
             events.emit('remove_files', ids);
-            $lastSelectedFile = false;
-            $ui.remove.attr('disabled', 'disabled');
-            $ui.placeholder.toggle($ui.list.children().length === 0);
         };
 
         /**

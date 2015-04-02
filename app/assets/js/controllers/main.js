@@ -77,7 +77,7 @@
          */
         var _onRemoveFilesFromView = function(ids)
         {
-            model.removeFiles(ids);
+            view.files.removeFiles(model.removeFiles(ids));
         };
 
         /**
