@@ -42,7 +42,11 @@
          */
         var _onApplyOperationFromView = function()
         {
-            view.files.getDestinationDir('/Users/johan/Desktop/_dev'); // @todo get dir from model
+            if (model.hasFiles())
+            {
+                var destination_path = model.getDefaultDestinationPath();
+                view.files.getDestinationDir(destination_path);
+            }
         };
 
         /**

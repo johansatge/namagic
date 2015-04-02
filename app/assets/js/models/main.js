@@ -15,6 +15,7 @@
         var currentOperations = [];
         var newFiles = [];
         var newFilesCount;
+        var defaultDestinationPath;
 
         /**
          * Attaches an event
@@ -24,6 +25,22 @@
         this.on = function(event, callback)
         {
             events.on(event, callback);
+        };
+
+        /**
+         * Checks if has files
+         */
+        this.hasFiles = function()
+        {
+            return currentFilesIndex >= 0;
+        };
+
+        /**
+         * Returns the default destination path
+         */
+        this.getDefaultDestinationPath = function()
+        {
+            return defaultDestinationPath;
         };
 
         /**
@@ -83,6 +100,10 @@
             }
             else
             {
+                if (typeof new_file !== 'undefined')
+                {
+                    defaultDestinationPath = new_file.dir;
+                }
                 events.emit('idle');
             }
         };
