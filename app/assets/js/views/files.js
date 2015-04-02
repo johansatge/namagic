@@ -38,6 +38,15 @@
         };
 
         /**
+         * Opens the "Choose destination dir" dir
+         * @param default_dir
+         */
+        this.getDestinationDir = function(default_dir)
+        {
+            $ui.destinationInput.attr('nwworkingdir', default_dir).trigger('click');
+        };
+
+        /**
          * Locks the UI by updating buttons and events
          * @param is_locked
          */
@@ -51,7 +60,8 @@
             (is_locked ? $ui.list.off : $ui.list.on).apply($ui.list, ['click', '.js-file', $.proxy(_onFileClick, this)]);
             (is_locked ? $ui.add.off : $ui.add.on).apply($ui.add, ['click', $.proxy(_onAddFilesFromButton, this)]);
             (is_locked ? $ui.remove.off : $ui.remove.on).apply($ui.remove, ['click', $.proxy(_onRemoveActiveFiles, this)]);
-            (is_locked ? $ui.input.off : $ui.input.on).apply($ui.input, ['change', $.proxy(_onAddFilesFromUploader, this)]);
+            (is_locked ? $ui.filesInput.off : $ui.filesInput.on).apply($ui.filesInput, ['change', $.proxy(_onAddFilesFromUploader, this)]);
+            (is_locked ? $ui.destinationInput.off : $ui.destinationInput.on).apply($ui.destinationInput, ['change', $.proxy(_onSelectDestination, this)]);
         };
 
         /**
@@ -114,7 +124,8 @@
             $ui.window = $window;
             $ui.panel = $dom;
             $ui.placeholder = $dom.find('.js-placeholder');
-            $ui.input = $dom.find('.js-upload');
+            $ui.filesInput = $dom.find('.js-files-input');
+            $ui.destinationInput = $dom.find('.js-dest-input');
             $ui.add = $dom.find('.js-files-add');
             $ui.remove = $dom.find('.js-files-remove');
             $ui.list = $dom.find('.js-files-list');
@@ -173,7 +184,18 @@
         var _onAddFilesFromButton = function(evt)
         {
             evt.preventDefault();
-            $ui.input.trigger('click');
+            $ui.filesInput.trigger('click');
+        };
+
+        /**
+         * Selects the destination dir from the file dialog
+         * @param evt
+         */
+        var _onSelectDestination = function(evt)
+        {
+            evt.preventDefault();
+            var dir = evt.target.files.length > 0 ? evt.target.files[0].path : false;
+            events.emit('set_destination', dir);
         };
 
         /**

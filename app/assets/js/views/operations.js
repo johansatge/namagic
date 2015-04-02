@@ -73,7 +73,7 @@
         var _initEvents = function()
         {
             $ui.add.on('click', $.proxy(_onAddOperation, this));
-            $ui.apply.on('click', $.proxy(_onApplyOperations, this));
+            $ui.apply.on('click', $.proxy(_onProcessOperations, this));
             $ui.operations.sortable({
                 items: '.js-operation',
                 axis: 'y',
@@ -223,7 +223,7 @@
          * Applies operations
          * @param evt
          */
-        var _onApplyOperations = function(evt)
+        var _onProcessOperations = function(evt)
         {
             evt.preventDefault();
             events.emit('apply_operations');

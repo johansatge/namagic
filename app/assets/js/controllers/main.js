@@ -32,20 +32,28 @@
             model.on('add_files', $.proxy(_onAddFilesFromModel), this);
             view.files.on('add_files', $.proxy(_onAddFilesFromView, this));
             view.files.on('remove_files', $.proxy(_onRemoveFilesFromView, this));
+            view.files.on('set_destination', $.proxy(_onSetDestinationFromView), this);
             view.operations.on('edit_operations', $.proxy(_onEditOperationsFromView, this));
-            view.operations.on('apply_operations', $.proxy(_onApplyOperationsFromView, this));
+            view.operations.on('apply_operations', $.proxy(_onApplyOperationFromView, this));
         };
 
         /**
          * Starts applying operations on current files
          */
-        var _onApplyOperationsFromView = function()
+        var _onApplyOperationFromView = function()
+        {
+            view.files.getDestinationDir('/Users/johan/Desktop/_dev'); // @todo get dir from model
+        };
+
+        /**
+         * Start applying operations when the user has selected a destination dir
+         * @param destination_path
+         */
+        var _onSetDestinationFromView = function(destination_path)
         {
             view.files.lockInterface(true);
             view.operations.lockInterface(true);
-
-            // @todo ask model to apply operations
-
+            model.applyOperations(destination_path);
         };
 
         /**
@@ -74,7 +82,7 @@
          */
         var _onEditOperationsFromView = function(operations)
         {
-            view.files.updateFiles(model.applyOperations(operations));
+            view.files.updateFiles(model.processOperations(operations));
         };
 
         /**

@@ -39,6 +39,18 @@
         };
 
         /**
+         * Applies operations on files
+         * @param destination_path
+         */
+        this.applyOperations = function(destination_path)
+        {
+
+            // @todo apply operations
+
+            app.utils.log('@todo apply: ' + destination_path);
+        };
+
+        /**
          * Processes a slice of new files and recursively calls itself while the queue is not empty
          */
         var _processNewFiles = function()
@@ -57,7 +69,7 @@
                         id: id,
                         dir: file.dir,
                         name: name,
-                        updated_name: _applyOperationsOnFilename.apply(this, [name, file.dir + '/' + name, currentFilesIndex])
+                        updated_name: _processOperationsOnFilename.apply(this, [name, file.dir + '/' + name, currentFilesIndex])
                     };
                     new_files.push(new_file);
                     currentFiles[id] = new_file;
@@ -92,14 +104,14 @@
          * Applies given operations on the current list of files and returns it
          * @param operations
          */
-        this.applyOperations = function(operations)
+        this.processOperations = function(operations)
         {
             currentOperations = operations;
             var index = 0;
             for (var id in currentFiles)
             {
                 var file = currentFiles[id];
-                currentFiles[id].updated_name = _applyOperationsOnFilename.apply(this, [file.name, file.dir + '/' + file.name, index]);
+                currentFiles[id].updated_name = _processOperationsOnFilename.apply(this, [file.name, file.dir + '/' + file.name, index]);
                 index += 1;
             }
             return currentFiles;
@@ -111,7 +123,7 @@
          * @param filepath
          * @param index
          */
-        var _applyOperationsOnFilename = function(filename, filepath, index)
+        var _processOperationsOnFilename = function(filename, filepath, index)
         {
             for (var num in currentOperations)
             {
@@ -120,15 +132,15 @@
                 var ext = filename.substring(filename.lastIndexOf('.'));
                 if (operation.applyTo === 'filename')
                 {
-                    filename = _applyOperation.apply(this, [name, operation.selection, operation.actions, index, filepath]) + ext;
+                    filename = _processOperation.apply(this, [name, operation.selection, operation.actions, index, filepath]) + ext;
                 }
                 if (operation.applyTo === 'extension')
                 {
-                    filename = name + _applyOperation.apply(this, [ext, operation.selection, operation.actions, index, filepath]);
+                    filename = name + _processOperation.apply(this, [ext, operation.selection, operation.actions, index, filepath]);
                 }
                 if (operation.applyTo === 'both')
                 {
-                    filename = _applyOperation.apply(this, [filename, operation.selection, operation.actions, index, filepath]);
+                    filename = _processOperation.apply(this, [filename, operation.selection, operation.actions, index, filepath]);
                 }
             }
             return filename;
@@ -142,7 +154,7 @@
          * @param index
          * @param filepath
          */
-        var _applyOperation = function(subject, selection, actions, index, filepath)
+        var _processOperation = function(subject, selection, actions, index, filepath)
         {
             if (selection === false || actions.length === 0)
             {
