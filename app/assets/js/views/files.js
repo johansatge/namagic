@@ -70,11 +70,11 @@
          */
         this.addFiles = function(files)
         {
-            for (var index in files)
+            for (var index = 0; index < files.length; index += 1)
             {
                 var file = files[index];
                 $files[file.id] = {$row: $(app.utils.template.render(fileTemplate, [file]))};
-                $files[file.id].$new_name = $files[file.id].$row.find('.js-new-name');
+                $files[file.id].$updated_name = $files[file.id].$row.find('.js-new-name');
                 $ui.list.append($files[file.id].$row);
             }
         };
@@ -101,9 +101,9 @@
          */
         this.updateFiles = function(files)
         {
-            for (var index in files)
+            for (var index = 0; index < files.length; index += 1)
             {
-                $files[index].$new_name.text(files[index].updated_name);
+                $files[files[index].id].$updated_name.text(files[index].updated_name);
             }
         };
 

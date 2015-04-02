@@ -10,12 +10,19 @@
     {
 
         var events = new app.node.events.EventEmitter();
-        var currentFiles = {};
-        var currentFilesIndex = -1;
+
+        var currentFiles = [];
+        var currentFilesIndexes = {};
         var currentOperations = [];
+
         var newFiles = [];
         var newFilesCount;
-        var defaultDestinationPath;
+
+        var pendingFiles = [];
+        var pendingFilesCount;
+
+        var defaultdestinationDir;
+        var destinationDir;
 
         /**
          * Attaches an event
@@ -32,15 +39,15 @@
          */
         this.hasFiles = function()
         {
-            return currentFilesIndex >= 0;
+            return currentFiles.length > 0;
         };
 
         /**
          * Returns the default destination path
          */
-        this.getDefaultDestinationPath = function()
+        this.getDefaultdestinationDir = function()
         {
-            return defaultDestinationPath;
+            return defaultdestinationDir;
         };
 
         /**
@@ -52,26 +59,64 @@
             newFiles = files;
             events.emit('progress', 0);
             newFilesCount = newFiles.length;
-            _processNewFiles.apply(this);
+            _asyncProcessNewFiles.apply(this);
         };
 
         /**
          * Applies operations on files
-         * @param destination_path
+         * @param destination_dir
          */
-        this.applyOperations = function(destination_path)
+        this.applyOperations = function(destination_dir)
         {
+            destinationDir = destination_dir;
+            pendingFiles = currentFiles;
+            pendingFilesCount = currentFiles.length;
             events.emit('progress', 0);
+            _asyncApplyOperations.apply(this);
+        };
 
-            // @todo apply operations
-
-            app.utils.log('@todo apply: ' + destination_path);
+        /**
+         * Processes a slice of files when applying operations and recursively calls itself while the queue is not empty
+         * @private
+         */
+        var _asyncApplyOperations = function()
+        {
+            var files = pendingFiles.splice(0, 50);
+            var updated_ids = [];
+            for (var index = 0; index < files.length; index += 1)
+            {
+                var file = files[index];
+                if (file.dir !== destinationDir)
+                {
+                    app.utils.log('@todo cp ' + file.dir + '/' + file.name + ' ' + destinationDir + '/' + file.updated_name);
+                }
+                else
+                {
+                    app.utils.log('@todo mv ' + file.dir + '/' + file.name + ' ' + destinationDir + '/' + file.updated_name);
+                }
+                if (true) // @todo check if CLI was ok
+                {
+                    updated_ids.push(file.id);
+                    currentFiles.splice(currentFilesIndexes[file.id], 1);
+                    delete currentFilesIndexes[file.id];
+                }
+            }
+            events.emit('remove_files', updated_ids);
+            events.emit('progress', pendingFiles.length > 0 ? ((pendingFilesCount - pendingFiles.length) * 100) / pendingFilesCount : 100);
+            if (pendingFiles.length > 0)
+            {
+                setTimeout($.proxy(_asyncApplyOperations, this), 0);
+            }
+            else
+            {
+                events.emit('idle');
+            }
         };
 
         /**
          * Processes a slice of new files and recursively calls itself while the queue is not empty
          */
-        var _processNewFiles = function()
+        var _asyncProcessNewFiles = function()
         {
             var files = newFiles.splice(0, 50);
             var new_files = [];
@@ -79,31 +124,31 @@
             {
                 var file = app.node.path.parse(files[index]);
                 var id = app.node.crypto.createHash('md5').update(files[index]).digest('hex');
-                if (typeof currentFiles[id] === 'undefined')
+                if (typeof currentFilesIndexes[id] === 'undefined')
                 {
-                    currentFilesIndex += 1;
+                    currentFilesIndexes[id] = currentFiles.length;
                     var name = file.name + file.ext;
                     var new_file = {
                         id: id,
                         dir: file.dir,
                         name: name,
-                        updated_name: _processOperationsOnFilename.apply(this, [name, file.dir + '/' + name, currentFilesIndex])
+                        updated_name: _processOperationsOnFilename.apply(this, [name, file.dir + '/' + name, currentFiles.length])
                     };
                     new_files.push(new_file);
-                    currentFiles[id] = new_file;
+                    currentFiles.push(new_file);
                 }
             }
             events.emit('add_files', new_files);
             events.emit('progress', newFiles.length > 0 ? ((newFilesCount - newFiles.length) * 100) / newFilesCount : 100);
             if (newFiles.length > 0)
             {
-                setTimeout($.proxy(_processNewFiles, this), 0);
+                setTimeout($.proxy(_asyncProcessNewFiles, this), 0);
             }
             else
             {
                 if (typeof new_file !== 'undefined')
                 {
-                    defaultDestinationPath = new_file.dir;
+                    defaultdestinationDir = new_file.dir;
                 }
                 events.emit('idle');
             }
@@ -117,10 +162,10 @@
         {
             for (var index = 0; index < ids.length; index += 1)
             {
-                delete currentFiles[ids[index]];
-                currentFilesIndex -= 1;
+                currentFiles.splice(currentFilesIndexes[ids[index]], 1);
+                delete currentFilesIndexes[ids[index]];
             }
-            return ids;
+            events.emit('remove_files', ids);
         };
 
         /**
@@ -130,12 +175,10 @@
         this.processOperations = function(operations)
         {
             currentOperations = operations;
-            var index = 0;
-            for (var id in currentFiles)
+            for (var index = 0; index < currentFiles.length; index += 1)
             {
-                var file = currentFiles[id];
-                currentFiles[id].updated_name = _processOperationsOnFilename.apply(this, [file.name, file.dir + '/' + file.name, index]);
-                index += 1;
+                var file = currentFiles[index];
+                currentFiles[index].updated_name = _processOperationsOnFilename.apply(this, [file.name, file.dir + '/' + file.name, index]);
             }
             return currentFiles;
         };

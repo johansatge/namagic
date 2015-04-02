@@ -30,6 +30,7 @@
             model.on('idle', $.proxy(_onModelIdle), this);
             model.on('progress', $.proxy(_onModelProgress), this);
             model.on('add_files', $.proxy(_onAddFilesFromModel), this);
+            model.on('remove_files', $.proxy(_onRemoveFilesFromModel), this);
             view.files.on('add_files', $.proxy(_onAddFilesFromView, this));
             view.files.on('remove_files', $.proxy(_onRemoveFilesFromView, this));
             view.files.on('set_destination', $.proxy(_onSetDestinationFromView), this);
@@ -44,20 +45,20 @@
         {
             if (model.hasFiles())
             {
-                var destination_path = model.getDefaultDestinationPath();
-                view.files.getDestinationDir(destination_path);
+                var destination_dir = model.getDefaultdestinationDir();
+                view.files.getDestinationDir(destination_dir);
             }
         };
 
         /**
          * Start applying operations when the user has selected a destination dir
-         * @param destination_path
+         * @param destination_dir
          */
-        var _onSetDestinationFromView = function(destination_path)
+        var _onSetDestinationFromView = function(destination_dir)
         {
             view.files.lockInterface(true);
             view.operations.lockInterface(true);
-            model.applyOperations(destination_path);
+            model.applyOperations(destination_dir);
         };
 
         /**
@@ -77,7 +78,16 @@
          */
         var _onRemoveFilesFromView = function(ids)
         {
-            view.files.removeFiles(model.removeFiles(ids));
+            model.removeFiles(ids);
+        };
+
+        /**
+         * Removes files from the model
+         * @param ids
+         */
+        var _onRemoveFilesFromModel = function(ids)
+        {
+            view.files.removeFiles(ids);
         };
 
         /**
