@@ -92,7 +92,7 @@
                     continue;
                 }
                 var source_path = app.utils.string.escapeForCLI(file.getDirectory() + '/' + file.getName());
-                var destination_path = app.utils.string.escapeForCLI(destinationDir + '/' + file.updatedName);
+                var destination_path = app.utils.string.escapeForCLI(destinationDir + '/' + file.getUpdatedName());
                 try
                 {
                     app.node.execSync((file.getDirectory() !== destinationDir ? 'cp ' : 'mv ') + source_path + ' ' + destination_path);

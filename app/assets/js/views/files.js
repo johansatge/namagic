@@ -99,7 +99,7 @@
                     $files[file.getID()].$row.data('id', file.getID());
                     $files[file.getID()].$row.find('.js-name').html(file.getName());
                 }
-                $files[file.getID()].$updatedName.text(file.updatedName);
+                $files[file.getID()].$updatedName.text(file.getUpdatedName());
                 $files[file.getID()].$row.toggleClass('js-error', file.hasError());
                 $files[file.getID()].$status.html(file.getMessage());
             }

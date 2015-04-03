@@ -14,8 +14,7 @@
         var directory = _dir;
         var hasError = false;
         var message = '';
-
-        this.updatedName = '';
+        var updatedName = '';
 
         /**
          * Applies given operations on the file
@@ -24,8 +23,8 @@
          */
         this.processOperations = function(operations, index)
         {
-            this.updatedName = this.getName();
-            var filepath = this.getDirectory() + '/' + this.getName();
+            updatedName = name;
+            var filepath = directory + '/' + name;
             for (var num = 0; num < operations.length; num += 1)
             {
                 _processOperationOnFile.apply(this, [operations[num], index, filepath]);
@@ -41,8 +40,8 @@
          */
         var _processOperationOnFile = function(operation, fileindex, filepath)
         {
-            var name = this.updatedName.substring(0, this.updatedName.lastIndexOf('.'));
-            var ext = this.updatedName.substring(this.updatedName.lastIndexOf('.'));
+            var name = updatedName.substring(0, updatedName.lastIndexOf('.'));
+            var ext = updatedName.substring(updatedName.lastIndexOf('.'));
             var subject;
             if (operation.applyTo === 'filename')
             {
@@ -54,7 +53,7 @@
             }
             if (operation.applyTo === 'both')
             {
-                subject = this.updatedName;
+                subject = updatedName;
             }
             if (operation.selection === false || operation.actions.length === 0)
             {
@@ -75,15 +74,15 @@
             }]);
             if (operation.applyTo === 'filename')
             {
-                this.updatedName = updated_subject + ext;
+                updatedName = updated_subject + ext;
             }
             if (operation.applyTo === 'extension')
             {
-                this.updatedName = name + updated_subject;
+                updatedName = name + updated_subject;
             }
             if (operation.applyTo === 'both')
             {
-                this.updatedName = updated_subject;
+                updatedName = updated_subject;
             }
 
             // @todo check if filepath exists when doing a stats() in an action; set error otherwise
@@ -126,6 +125,11 @@
         this.getName = function()
         {
             return name;
+        };
+
+        this.getUpdatedName = function()
+        {
+            return updatedName;
         };
 
         /**
