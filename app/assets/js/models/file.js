@@ -12,10 +12,10 @@
         var name = _name;
         var directory = _dir;
         var hasError = false;
+        var message = '';
 
         this.id = _id;
         this.name = _name;
-        this.message = '';
         this.updatedName = '';
 
         /**
@@ -26,7 +26,7 @@
         this.setError = function(has_error, text)
         {
             hasError = has_error;
-            this.message = text;
+            message = text;
         };
 
         /**
@@ -51,6 +51,14 @@
         this.getName = function()
         {
             return name;
+        };
+
+        /**
+         * Returns the message of the file
+         */
+        this.getMessage = function()
+        {
+            return message;
         };
 
     };

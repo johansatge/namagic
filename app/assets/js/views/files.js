@@ -99,7 +99,7 @@
                 }
                 $files[file.id].$updatedName.text(file.updatedName);
                 $files[file.id].$row.toggleClass('js-error', file.hasError());
-                $files[file.id].$status.html(file.message);
+                $files[file.id].$status.html(file.getMessage());
             }
         };
 
