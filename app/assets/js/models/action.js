@@ -59,15 +59,19 @@
      */
     module.updateCase = function(subject, index, patterns, options, path)
     {
-        if (typeof options.type === 'undefined' || options.type === '')
+        if (options.type === 'uppercase')
         {
-            return subject;
+            subject = subject.toUpperCase();
         }
-        var type = options.type;
-        return {
-            type: 'replace',
-            text: type === 'uppercase' ? subject.toUpperCase() : (type === 'lowercase' ? subject.toLowerCase() : app.utils.string.inverseCase(subject))
-        };
+        if (options.type === 'lowercase')
+        {
+            subject = subject.toLowerCase();
+        }
+        if (options.type === 'invert')
+        {
+            subject = app.utils.string.inverseCase(subject);
+        }
+        return {type: 'replace', text: subject};
     };
 
     /**
