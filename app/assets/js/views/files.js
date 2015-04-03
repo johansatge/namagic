@@ -93,11 +93,11 @@
                 if (add)
                 {
                     $files[file.id] = {$row: $(app.utils.template.render(fileTemplate, [file]))};
-                    $files[file.id].$updated_name = $files[file.id].$row.find('.js-new-name');
+                    $files[file.id].$updatedName = $files[file.id].$row.find('.js-new-name');
                     $files[file.id].$status = $files[file.id].$row.find('.js-status-message');
                     $ui.list.append($files[file.id].$row);
                 }
-                $files[file.id].$updated_name.text(file.updated_name);
+                $files[file.id].$updatedName.text(file.updatedName);
                 $files[file.id].$row.toggleClass('js-error', file.hasError);
                 $files[file.id].$status.html(file.message);
             }

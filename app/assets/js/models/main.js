@@ -92,7 +92,7 @@
                     continue;
                 }
                 var source_path = app.utils.string.escapeForCLI(file.dir + '/' + file.name);
-                var destination_path = app.utils.string.escapeForCLI(destinationDir + '/' + file.updated_name);
+                var destination_path = app.utils.string.escapeForCLI(destinationDir + '/' + file.updatedName);
                 try
                 {
                     app.node.execSync((file.dir !== destinationDir ? 'cp ' : 'mv ') + source_path + ' ' + destination_path);
@@ -137,8 +137,8 @@
                 if (typeof currentFilesIndexes[id] === 'undefined')
                 {
                     currentFilesIndexes[id] = currentFiles.length;
-                    var new_file = {id: id, dir: file.dir, name: file.name + file.ext, hasError: false, message: ''};
-                    new_file = _processOperationsOnFile.apply(this, [new_file, currentFiles.length]);
+                    var new_file = new app.models.file(id, file.dir, file.name + file.ext);
+                    _processOperationsOnFile.apply(this, [new_file, currentFiles.length]);
                     new_files.push(new_file);
                     currentFiles.push(new_file);
                 }
@@ -199,13 +199,12 @@
          */
         var _processOperationsOnFile = function(file, index)
         {
-            file.updated_name = file.name;
+            file.updatedName = file.name;
             var filepath = file.dir + '/' + file.name;
             for (var num = 0; num < currentOperations.length; num += 1)
             {
                 _processOperationOnFile.apply(this, [file, currentOperations[num], index, filepath]);
             }
-            return file;
         };
 
         /**
@@ -218,8 +217,8 @@
          */
         var _processOperationOnFile = function(file, operation, fileindex, filepath)
         {
-            var name = file.updated_name.substring(0, file.updated_name.lastIndexOf('.'));
-            var ext = file.updated_name.substring(file.updated_name.lastIndexOf('.'));
+            var name = file.updatedName.substring(0, file.updatedName.lastIndexOf('.'));
+            var ext = file.updatedName.substring(file.updatedName.lastIndexOf('.'));
             var subject;
             if (operation.applyTo === 'filename')
             {
@@ -231,7 +230,7 @@
             }
             if (operation.applyTo === 'both')
             {
-                subject = file.updated_name;
+                subject = file.updatedName;
             }
             if (operation.selection === false || operation.actions.length === 0)
             {
@@ -252,15 +251,15 @@
             }]);
             if (operation.applyTo === 'filename')
             {
-                file.updated_name = updated_subject + ext;
+                file.updatedName = updated_subject + ext;
             }
             if (operation.applyTo === 'extension')
             {
-                file.updated_name = name + updated_subject;
+                file.updatedName = name + updated_subject;
             }
             if (operation.applyTo === 'both')
             {
-                file.updated_name = updated_subject;
+                file.updatedName = updated_subject;
             }
 
             // @todo check if filepath exists when doing a stats() in an action; set error otherwise
