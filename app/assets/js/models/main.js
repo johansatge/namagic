@@ -81,19 +81,22 @@
          */
         var _asyncApplyOperations = function()
         {
-            // @todo check if the file has an error; if so, do not process the file
             var files = pendingFiles.splice(0, 50);
-            var updated_ids = [];
-            var statuses = [];
+            var processed_ids = [];
+            var updated_files = [];
             for (var index = 0; index < files.length; index += 1)
             {
                 var file = files[index];
+                if (file.hasError)
+                {
+                    continue;
+                }
                 var source_path = app.utils.string.escapeForCLI(file.dir + '/' + file.name);
                 var destination_path = app.utils.string.escapeForCLI(destinationDir + '/' + file.updated_name);
                 try
                 {
                     app.node.execSync((file.dir !== destinationDir ? 'cp ' : 'mv ') + source_path + ' ' + destination_path);
-                    updated_ids.push(file.id);
+                    processed_ids.push(file.id);
                     currentFiles.splice(currentFilesIndexes[file.id], 1);
                     delete currentFilesIndexes[file.id];
                 }
@@ -101,13 +104,13 @@
                 {
                     currentFiles[currentFilesIndexes[file.id]].hasError = true;
                     currentFiles[currentFilesIndexes[file.id]].message = error.message;
-                    statuses.push(currentFiles[currentFilesIndexes[file.id]]);
+                    updated_files.push(currentFiles[currentFilesIndexes[file.id]]);
                 }
             }
-            events.emit('remove_files', updated_ids);
-            if (statuses.length > 0)
+            events.emit('remove_files', processed_ids);
+            if (updated_files.length > 0)
             {
-                events.emit('update_files', statuses);
+                events.emit('update_files', updated_files);
             }
             events.emit('progress', pendingFiles.length > 0 ? ((pendingFilesCount - pendingFiles.length) * 100) / pendingFilesCount : 100);
             if (pendingFiles.length > 0)
@@ -179,10 +182,12 @@
             currentOperations = operations;
             for (var index = 0; index < currentFiles.length; index += 1)
             {
-                currentFiles[index] = _processOperationsOnFile.apply(this, [currentFiles[index], index]);
+                var file = currentFiles[index];
+                _processOperationsOnFile.apply(this, [file, index]);
             }
 
-            // @todo for each file, store its filename; the next ones check that their name does not exist, otherwise set an error in the object
+            // @todo for each file without error, store its filename;
+            // the next ones check that their name does not exist, otherwise set an error in the object
 
             events.emit('update_files', currentFiles);
         };
@@ -194,64 +199,74 @@
          */
         var _processOperationsOnFile = function(file, index)
         {
-            var filename = file.name;
+            file.updated_name = file.name;
             var filepath = file.dir + '/' + file.name;
-            for (var num in currentOperations)
+            for (var num = 0; num < currentOperations.length; num += 1)
             {
-                var operation = currentOperations[num];
-                var name = filename.substring(0, filename.lastIndexOf('.'));
-                var ext = filename.substring(filename.lastIndexOf('.'));
-                if (operation.applyTo === 'filename')
-                {
-                    filename = _processOperation.apply(this, [name, operation.selection, operation.actions, index, filepath]) + ext;
-                }
-                if (operation.applyTo === 'extension')
-                {
-                    filename = name + _processOperation.apply(this, [ext, operation.selection, operation.actions, index, filepath]);
-                }
-                if (operation.applyTo === 'both')
-                {
-                    filename = _processOperation.apply(this, [filename, operation.selection, operation.actions, index, filepath]);
-                }
+                _processOperationOnFile.apply(this, [file, currentOperations[num], index, filepath]);
             }
-            file.updated_name = filename;
-
-
-            // @todo check if filepath exists, set error in file.hasError and file.message otherwise
-            file.message = '@todo';
-            file.hasError = true;
-
-
             return file;
         };
 
         /**
          * Searches pattern in the given subject and applies action on it
-         * @param subject
-         * @param selection
-         * @param actions
+         * @todo refactor this
+         * @param file
+         * @param operation
          * @param fileindex
          * @param filepath
          */
-        var _processOperation = function(subject, selection, actions, fileindex, filepath)
+        var _processOperationOnFile = function(file, operation, fileindex, filepath)
         {
-            if (selection === false || actions.length === 0)
+            var name = file.updated_name.substring(0, file.updated_name.lastIndexOf('.'));
+            var ext = file.updated_name.substring(file.updated_name.lastIndexOf('.'));
+            var subject;
+            if (operation.applyTo === 'filename')
+            {
+                subject = name;
+            }
+            if (operation.applyTo === 'extension')
+            {
+                subject = ext;
+            }
+            if (operation.applyTo === 'both')
+            {
+                subject = file.updated_name;
+            }
+            if (operation.selection === false || operation.actions.length === 0)
             {
                 return subject;
             }
-            var selection_callable = app.models.selection[selection.type];
-            var patterns = selection_callable(subject, selection.options);
-            return _applyPatternsOnSubject.apply(this, [patterns, subject, function(text)
+            var selection_callable = app.models.selection[operation.selection.type];
+            var patterns = selection_callable(subject, operation.selection.options);
+            var updated_subject = _applyPatternsOnSubject.apply(this, [patterns, subject, function(text)
             {
                 var updated_text = text;
-                for (var index = 0; index < actions.length; index += 1)
+                for (var index = 0; index < operation.actions.length; index += 1)
                 {
-                    var action = actions[index];
+                    var action = operation.actions[index];
                     var new_text = app.models.action[action.type](updated_text, fileindex, patterns, action.options, filepath);
                     updated_text = new_text.type === 'remove' ? '' : (new_text.type === 'add' ? updated_text + new_text.text : new_text.text);
                 }
                 return updated_text;
             }]);
+            if (operation.applyTo === 'filename')
+            {
+                file.updated_name = updated_subject + ext;
+            }
+            if (operation.applyTo === 'extension')
+            {
+                file.updated_name = name + updated_subject;
+            }
+            if (operation.applyTo === 'both')
+            {
+                file.updated_name = updated_subject;
+            }
+
+            // @todo check if filepath exists when doing a stats() in an action; set error otherwise
+            file.message = '@todo';
+            file.hasError = true;
+
         };
 
         /**
