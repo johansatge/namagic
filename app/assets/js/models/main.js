@@ -83,7 +83,7 @@
         {
             var files = pendingFiles.splice(0, 50);
             var updated_ids = [];
-            var error_ids = [];
+            var statuses = [];
             for (var index = 0; index < files.length; index += 1)
             {
                 var file = files[index];
@@ -99,12 +99,14 @@
                 }
                 catch (error)
                 {
-                    error_ids.push(file.id);
-                    app.utils.log(error.message); // @todo TMP
+                    statuses.push({id: file.id, error: true, message: error.message});
                 }
             }
             events.emit('remove_files', updated_ids);
-            events.emit('status_files', error_ids);
+            if (statuses.length > 0)
+            {
+                events.emit('status_files', statuses);
+            }
             events.emit('progress', pendingFiles.length > 0 ? ((pendingFilesCount - pendingFiles.length) * 100) / pendingFilesCount : 100);
             if (pendingFiles.length > 0)
             {

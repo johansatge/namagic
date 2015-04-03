@@ -80,15 +80,9 @@
 
 .files-list
 {
-    & tr.js-error td
+    & tr.js-error td span
     {
         color : #ed0000;
-
-        & i,
-        & span
-        {
-            color : #ed0000;
-        }
     }
 
     & tr td
@@ -150,7 +144,8 @@
     }
 
     & tr.js-active td .dir,
-    & tr.js-active td i
+    & tr.js-active td i,
+    & tr.js-active td span
     {
         color : #ffffff !important;
     }

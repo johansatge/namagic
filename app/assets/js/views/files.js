@@ -75,7 +75,7 @@
                 var file = files[index];
                 $files[file.id] = {$row: $(app.utils.template.render(fileTemplate, [file]))};
                 $files[file.id].$updated_name = $files[file.id].$row.find('.js-new-name');
-                $files[file.id].$error = $files[file.id].$row.find('.js-error-message');
+                $files[file.id].$status = $files[file.id].$row.find('.js-status-message');
                 $ui.list.append($files[file.id].$row);
             }
         };
@@ -98,13 +98,15 @@
 
         /**
          * Displays a custom status on the needed files
-         * @param ids
+         * @param statuses
          */
-        this.setFilesStatus = function(ids)
+        this.setFilesStatus = function(statuses)
         {
-            for (var index = 0; index < ids.length; index += 1)
+            for (var index = 0; index < statuses.length; index += 1)
             {
-                $files[ids[index]].$row.addClass('js-error');
+                var status = statuses[index];
+                $files[status.id].$row.toggleClass('js-error', status.error);
+                $files[status.id].$status.html(status.message);
             }
         };
 
