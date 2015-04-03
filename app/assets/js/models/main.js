@@ -137,7 +137,7 @@
                 {
                     currentFilesIndexes[id] = currentFiles.length;
                     var new_file = new app.models.file(id, fileinfo.dir, fileinfo.name + fileinfo.ext);
-                    _processOperationsOnFile.apply(this, [new_file, currentFiles.length]);
+                    new_file.processOperations(currentOperations, currentFiles.length);
                     new_files.push(new_file);
                     currentFiles.push(new_file);
                 }
@@ -182,7 +182,7 @@
             for (var index = 0; index < currentFiles.length; index += 1)
             {
                 var file = currentFiles[index];
-                _processOperationsOnFile.apply(this, [file, index]);
+                file.processOperations(currentOperations, index);
             }
 
             // @todo for each file without error, store its filename;
@@ -190,103 +190,6 @@
 
             events.emit('update_files', currentFiles);
         };
-
-        /**
-         * Applies given operations on a file
-         * @param file
-         * @param index
-         */
-        var _processOperationsOnFile = function(file, index)
-        {
-            file.updatedName = file.getName();
-            var filepath = file.getDirectory() + '/' + file.getName();
-            for (var num = 0; num < currentOperations.length; num += 1)
-            {
-                _processOperationOnFile.apply(this, [file, currentOperations[num], index, filepath]);
-            }
-        };
-
-        /**
-         * Searches pattern in the given subject and applies action on it
-         * @todo refactor this
-         * @param file
-         * @param operation
-         * @param fileindex
-         * @param filepath
-         */
-        var _processOperationOnFile = function(file, operation, fileindex, filepath)
-        {
-            var name = file.updatedName.substring(0, file.updatedName.lastIndexOf('.'));
-            var ext = file.updatedName.substring(file.updatedName.lastIndexOf('.'));
-            var subject;
-            if (operation.applyTo === 'filename')
-            {
-                subject = name;
-            }
-            if (operation.applyTo === 'extension')
-            {
-                subject = ext;
-            }
-            if (operation.applyTo === 'both')
-            {
-                subject = file.updatedName;
-            }
-            if (operation.selection === false || operation.actions.length === 0)
-            {
-                return subject;
-            }
-            var selection_callable = app.models.selection[operation.selection.type];
-            var patterns = selection_callable(subject, operation.selection.options);
-            var updated_subject = _applyPatternsOnSubject.apply(this, [patterns, subject, function(text)
-            {
-                var updated_text = text;
-                for (var index = 0; index < operation.actions.length; index += 1)
-                {
-                    var action = operation.actions[index];
-                    var new_text = app.models.action[action.type](updated_text, fileindex, patterns, action.options, filepath);
-                    updated_text = new_text.type === 'remove' ? '' : (new_text.type === 'add' ? updated_text + new_text.text : new_text.text);
-                }
-                return updated_text;
-            }]);
-            if (operation.applyTo === 'filename')
-            {
-                file.updatedName = updated_subject + ext;
-            }
-            if (operation.applyTo === 'extension')
-            {
-                file.updatedName = name + updated_subject;
-            }
-            if (operation.applyTo === 'both')
-            {
-                file.updatedName = updated_subject;
-            }
-
-            // @todo check if filepath exists when doing a stats() in an action; set error otherwise
-            file.setError(true, '@todo');
-
-        };
-
-        /**
-         * Applies patterns on the given subject by using the required callable
-         * @param patterns
-         * @param subject
-         * @param callable
-         */
-        var _applyPatternsOnSubject = function(patterns, subject, callable)
-        {
-            var updated_subject = '';
-            var previous_pattern = false;
-            var pattern = false;
-            for (var index = 0; index < patterns.length; index += 1)
-            {
-                pattern = patterns[index];
-                updated_subject += subject.substring(previous_pattern !== false ? previous_pattern.end : 0, pattern.start);
-                updated_subject += callable(subject.substring(pattern.start, pattern.end));
-                previous_pattern = pattern;
-            }
-            return pattern !== false ? updated_subject + subject.substring(previous_pattern.end) : subject;
-        };
-
     };
 
     app.models.main = module;
