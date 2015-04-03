@@ -91,7 +91,7 @@
                 {
                     continue;
                 }
-                var source_path = app.utils.string.escapeForCLI(file.getDirectory() + '/' + file.name);
+                var source_path = app.utils.string.escapeForCLI(file.getDirectory() + '/' + file.getName());
                 var destination_path = app.utils.string.escapeForCLI(destinationDir + '/' + file.updatedName);
                 try
                 {
@@ -198,8 +198,8 @@
          */
         var _processOperationsOnFile = function(file, index)
         {
-            file.updatedName = file.name;
-            var filepath = file.getDirectory() + '/' + file.name;
+            file.updatedName = file.getName();
+            var filepath = file.getDirectory() + '/' + file.getName();
             for (var num = 0; num < currentOperations.length; num += 1)
             {
                 _processOperationOnFile.apply(this, [file, currentOperations[num], index, filepath]);

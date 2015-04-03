@@ -9,6 +9,7 @@
     var module = function(_id, _dir, _name)
     {
 
+        var name = _name;
         var directory = _dir;
         var hasError = false;
 
@@ -42,6 +43,14 @@
         this.getDirectory = function()
         {
             return directory;
+        };
+
+        /**
+         * Returns the name of the file
+         */
+        this.getName = function()
+        {
+            return name;
         };
 
     };
