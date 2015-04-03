@@ -91,11 +91,11 @@
                 {
                     continue;
                 }
-                var source_path = app.utils.string.escapeForCLI(file.dir + '/' + file.name);
+                var source_path = app.utils.string.escapeForCLI(file.getDirectory() + '/' + file.name);
                 var destination_path = app.utils.string.escapeForCLI(destinationDir + '/' + file.updatedName);
                 try
                 {
-                    app.node.execSync((file.dir !== destinationDir ? 'cp ' : 'mv ') + source_path + ' ' + destination_path);
+                    app.node.execSync((file.getDirectory() !== destinationDir ? 'cp ' : 'mv ') + source_path + ' ' + destination_path);
                     processed_ids.push(file.id);
                     currentFiles.splice(currentFilesIndexes[file.id], 1);
                     delete currentFilesIndexes[file.id];
@@ -131,12 +131,12 @@
             var new_files = [];
             for (var index = 0; index < files.length; index += 1)
             {
-                var file = app.node.path.parse(files[index]);
+                var fileinfo = app.node.path.parse(files[index]);
                 var id = app.node.crypto.createHash('md5').update(files[index]).digest('hex');
                 if (typeof currentFilesIndexes[id] === 'undefined')
                 {
                     currentFilesIndexes[id] = currentFiles.length;
-                    var new_file = new app.models.file(id, file.dir, file.name + file.ext);
+                    var new_file = new app.models.file(id, fileinfo.dir, fileinfo.name + fileinfo.ext);
                     _processOperationsOnFile.apply(this, [new_file, currentFiles.length]);
                     new_files.push(new_file);
                     currentFiles.push(new_file);
@@ -152,7 +152,7 @@
             {
                 if (typeof new_file !== 'undefined')
                 {
-                    defaultdestinationDir = new_file.dir;
+                    defaultdestinationDir = new_file.getDirectory();
                 }
                 events.emit('idle');
             }
@@ -199,7 +199,7 @@
         var _processOperationsOnFile = function(file, index)
         {
             file.updatedName = file.name;
-            var filepath = file.dir + '/' + file.name;
+            var filepath = file.getDirectory() + '/' + file.name;
             for (var num = 0; num < currentOperations.length; num += 1)
             {
                 _processOperationOnFile.apply(this, [file, currentOperations[num], index, filepath]);

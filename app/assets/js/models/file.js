@@ -9,10 +9,10 @@
     var module = function(_id, _dir, _name)
     {
 
+        var directory = _dir;
         var hasError = false;
 
         this.id = _id;
-        this.dir = _dir;
         this.name = _name;
         this.message = '';
         this.updatedName = '';
@@ -34,7 +34,15 @@
         this.hasError = function()
         {
             return hasError;
-        }
+        };
+
+        /**
+         * Returns the directory of the file
+         */
+        this.getDirectory = function()
+        {
+            return directory;
+        };
 
     };
 
