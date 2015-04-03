@@ -87,7 +87,7 @@
             for (var index = 0; index < files.length; index += 1)
             {
                 var file = files[index];
-                if (file.hasError)
+                if (file.hasError())
                 {
                     continue;
                 }
@@ -102,8 +102,7 @@
                 }
                 catch (error)
                 {
-                    currentFiles[currentFilesIndexes[file.id]].hasError = true;
-                    currentFiles[currentFilesIndexes[file.id]].message = error.message;
+                    currentFiles[currentFilesIndexes[file.id]].setError(true, error.message);
                     updated_files.push(currentFiles[currentFilesIndexes[file.id]]);
                 }
             }
@@ -263,8 +262,7 @@
             }
 
             // @todo check if filepath exists when doing a stats() in an action; set error otherwise
-            file.message = '@todo';
-            file.hasError = true;
+            file.setError(true, '@todo');
 
         };
 

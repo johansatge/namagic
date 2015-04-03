@@ -98,7 +98,7 @@
                     $ui.list.append($files[file.id].$row);
                 }
                 $files[file.id].$updatedName.text(file.updatedName);
-                $files[file.id].$row.toggleClass('js-error', file.hasError);
+                $files[file.id].$row.toggleClass('js-error', file.hasError());
                 $files[file.id].$status.html(file.message);
             }
         };
