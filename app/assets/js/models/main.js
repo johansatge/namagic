@@ -227,10 +227,10 @@
          * @param subject
          * @param selection
          * @param actions
-         * @param index
+         * @param fileindex
          * @param filepath
          */
-        var _processOperation = function(subject, selection, actions, index, filepath)
+        var _processOperation = function(subject, selection, actions, fileindex, filepath)
         {
             if (selection === false || actions.length === 0)
             {
@@ -244,7 +244,7 @@
                 for (var index = 0; index < actions.length; index += 1)
                 {
                     var action = actions[index];
-                    var new_text = app.models.action[action.type](updated_text, index, patterns, action.options, filepath);
+                    var new_text = app.models.action[action.type](updated_text, fileindex, patterns, action.options, filepath);
                     updated_text = new_text.type === 'remove' ? '' : (new_text.type === 'add' ? updated_text + new_text.text : new_text.text);
                 }
                 return updated_text;

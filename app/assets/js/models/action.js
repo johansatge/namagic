@@ -46,7 +46,7 @@
     {
         var start_index = !isNaN(parseInt(options.startIndex)) ? parseInt(options.startIndex) : 0;
         var step = !isNaN(parseInt(options.step)) ? parseInt(options.step) : 1;
-        return {typ: 'add', text: start_index + (index * step)};
+        return {type: 'add', text: start_index + (index * step)};
     };
 
     /**
