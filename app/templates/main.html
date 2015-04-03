@@ -18,14 +18,11 @@
             </table>
             <script type="text/template" class="js-file-template">
                 <tr class="js-file" data-id="{{id}}">
+                    <td>{{name}}</td>
+                    <td><i class="fa fa-arrow-right"></i></td>
                     <td>
-                        {{name}}
-                    </td>
-                    <td>
-                        <i class="fa fa-arrow-right"></i>
-                    </td>
-                    <td class="js-new-name">
-                        {{updated_name}}
+                        <em class="js-new-name">{{updated_name}}</em>
+                        <span class="js-error-message"></span>
                     </td>
                 </tr>
             </script>

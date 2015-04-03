@@ -31,7 +31,7 @@
             model.on('progress', $.proxy(_onModelProgress), this);
             model.on('add_files', $.proxy(_onAddFilesFromModel), this);
             model.on('remove_files', $.proxy(_onRemoveFilesFromModel), this);
-            model.on('error_files', $.proxy(_onErrorFilesFromModel), this);
+            model.on('status_files', $.proxy(_onStatusFilesFromModel), this);
             view.files.on('add_files', $.proxy(_onAddFilesFromView, this));
             view.files.on('remove_files', $.proxy(_onRemoveFilesFromView, this));
             view.files.on('set_destination', $.proxy(_onSetDestinationFromView), this);
@@ -92,14 +92,14 @@
         };
 
         /**
-         * Set errors on files from the model
+         * Set status on files from the model
          * @param ids
          */
-        var _onErrorFilesFromModel = function(ids)
+        var _onStatusFilesFromModel = function(ids)
         {
             if (ids.length > 0)
             {
-                view.files.setErrorFiles(ids);
+                view.files.setFilesStatus(ids);
             }
         };
 

@@ -104,7 +104,7 @@
                 }
             }
             events.emit('remove_files', updated_ids);
-            events.emit('error_files', error_ids);
+            events.emit('status_files', error_ids);
             events.emit('progress', pendingFiles.length > 0 ? ((pendingFilesCount - pendingFiles.length) * 100) / pendingFilesCount : 100);
             if (pendingFiles.length > 0)
             {

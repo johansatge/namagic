@@ -82,11 +82,12 @@
 {
     & tr.js-error td
     {
-        color : rgb(237, 0, 0);
+        color : #ed0000;
 
-        & i
+        & i,
+        & span
         {
-            color : rgb(237, 0, 0);
+            color : #ed0000;
         }
     }
 
@@ -116,6 +117,18 @@
         {
             display : none;
             color   : #a0a0a0;
+        }
+
+        & span
+        {
+            display   : block;
+            font-size : 11px;
+            margin    : 2px 0 0 0;
+        }
+
+        & em
+        {
+            font-style : normal;
         }
     }
 
