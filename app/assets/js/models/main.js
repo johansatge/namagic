@@ -77,7 +77,7 @@
 
         /**
          * Processes a slice of files when applying operations and recursively calls itself while the queue is not empty
-         * @private
+         * Processed files are removed from currentFiles and the UI, others show a message
          */
         var _asyncApplyOperations = function()
         {
@@ -186,8 +186,8 @@
             for (var index = 0; index < currentFiles.length; index += 1)
             {
                 var file = currentFiles[index];
-                // @todo here, send and return the entire file object (if errors, conflicts etc, update .hasError and .message)
                 currentFiles[index].updated_name = _processOperationsOnFilename.apply(this, [file.name, file.dir + '/' + file.name, index]);
+                // @todo here, send and return the entire file object (if errors, conflicts etc, update file.hasError and file.message)
             }
             return currentFiles;
         };
