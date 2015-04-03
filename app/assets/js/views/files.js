@@ -92,14 +92,16 @@
                 var file = files[index];
                 if (add)
                 {
-                    $files[file.id] = {$row: $(app.utils.template.render(fileTemplate, [file]))};
-                    $files[file.id].$updatedName = $files[file.id].$row.find('.js-new-name');
-                    $files[file.id].$status = $files[file.id].$row.find('.js-status-message');
-                    $ui.list.append($files[file.id].$row);
+                    $files[file.getID()] = {$row: $(app.utils.template.render(fileTemplate, [file]))};
+                    $files[file.getID()].$updatedName = $files[file.getID()].$row.find('.js-new-name');
+                    $files[file.getID()].$status = $files[file.getID()].$row.find('.js-status-message');
+                    $ui.list.append($files[file.getID()].$row);
+                    $files[file.getID()].$row.data('id', file.getID());
+                    $files[file.getID()].$row.find('.js-name').html(file.getName());
                 }
-                $files[file.id].$updatedName.text(file.updatedName);
-                $files[file.id].$row.toggleClass('js-error', file.hasError());
-                $files[file.id].$status.html(file.getMessage());
+                $files[file.getID()].$updatedName.text(file.updatedName);
+                $files[file.getID()].$row.toggleClass('js-error', file.hasError());
+                $files[file.getID()].$status.html(file.getMessage());
             }
         };
 

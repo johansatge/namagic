@@ -9,32 +9,28 @@
     var module = function(_id, _dir, _name)
     {
 
+        var id = _id;
         var name = _name;
         var directory = _dir;
         var hasError = false;
         var message = '';
 
-        this.id = _id;
-        this.name = _name;
         this.updatedName = '';
 
         /**
-         * Sets the error status of the file
-         * @param has_error
-         * @param text
+         * Returns the ID of the file
          */
-        this.setError = function(has_error, text)
+        this.getID = function()
         {
-            hasError = has_error;
-            message = text;
+            return id;
         };
 
         /**
-         * Checks if the file has an error status
+         * Returns the name of the file
          */
-        this.hasError = function()
+        this.getName = function()
         {
-            return hasError;
+            return name;
         };
 
         /**
@@ -46,11 +42,22 @@
         };
 
         /**
-         * Returns the name of the file
+         * Checks if the file has an error status
          */
-        this.getName = function()
+        this.hasError = function()
         {
-            return name;
+            return hasError;
+        };
+
+        /**
+         * Sets the error status of the file
+         * @param has_error
+         * @param text
+         */
+        this.setError = function(has_error, text)
+        {
+            hasError = has_error;
+            message = text;
         };
 
         /**

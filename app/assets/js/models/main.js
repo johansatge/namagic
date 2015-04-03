@@ -96,14 +96,14 @@
                 try
                 {
                     app.node.execSync((file.getDirectory() !== destinationDir ? 'cp ' : 'mv ') + source_path + ' ' + destination_path);
-                    processed_ids.push(file.id);
-                    currentFiles.splice(currentFilesIndexes[file.id], 1);
-                    delete currentFilesIndexes[file.id];
+                    processed_ids.push(file.getID());
+                    currentFiles.splice(currentFilesIndexes[file.getID()], 1);
+                    delete currentFilesIndexes[file.getID()];
                 }
                 catch (error)
                 {
-                    currentFiles[currentFilesIndexes[file.id]].setError(true, error.message);
-                    updated_files.push(currentFiles[currentFilesIndexes[file.id]]);
+                    currentFiles[currentFilesIndexes[file.getID()]].setError(true, error.message);
+                    updated_files.push(currentFiles[currentFilesIndexes[file.getID()]]);
                 }
             }
             events.emit('remove_files', processed_ids);
