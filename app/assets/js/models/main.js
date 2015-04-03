@@ -56,8 +56,8 @@
          */
         this.addFiles = function(files)
         {
-            newFiles = files;
             events.emit('progress', 0);
+            newFiles = files;
             newFilesCount = newFiles.length;
             _asyncProcessNewFiles.apply(this);
         };
@@ -68,16 +68,16 @@
          */
         this.applyOperations = function(destination_dir)
         {
+            events.emit('progress', 0);
             destinationDir = destination_dir;
             pendingFiles = currentFiles.slice(0);
             pendingFilesCount = currentFiles.length;
-            events.emit('progress', 0);
             _asyncApplyOperations.apply(this);
         };
 
         /**
          * Processes a slice of files when applying operations and recursively calls itself while the queue is not empty
-         * Processed files are removed from currentFiles and the UI, others show a message
+         * Processed files are removed from currentFiles and the UI, remaining ones show a message
          */
         var _asyncApplyOperations = function()
         {

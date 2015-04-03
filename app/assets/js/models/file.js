@@ -19,96 +19,72 @@
         /**
          * Applies given operations on the file
          * @param operations
-         * @param index
+         * @param file_index
          */
-        this.processOperations = function(operations, index)
+        this.processOperations = function(operations, file_index)
         {
             updatedName = name;
-            var filepath = directory + '/' + name;
-            for (var num = 0; num < operations.length; num += 1)
+            var file_path = directory + '/' + name;
+            for (var op_index = 0; op_index < operations.length; op_index += 1)
             {
-                _processOperationOnFile.apply(this, [operations[num], index, filepath]);
-            }
-        };
-
-        /**
-         * Searches pattern in the given subject and applies action on it
-         * @todo refactor this
-         * @param operation
-         * @param fileindex
-         * @param filepath
-         */
-        var _processOperationOnFile = function(operation, fileindex, filepath)
-        {
-            var name = updatedName.substring(0, updatedName.lastIndexOf('.'));
-            var ext = updatedName.substring(updatedName.lastIndexOf('.'));
-            var subject;
-            if (operation.applyTo === 'filename')
-            {
-                subject = name;
-            }
-            if (operation.applyTo === 'extension')
-            {
-                subject = ext;
-            }
-            if (operation.applyTo === 'both')
-            {
-                subject = updatedName;
-            }
-            if (operation.selection === false || operation.actions.length === 0)
-            {
-                return subject;
-            }
-            var selection_callable = app.models.selection[operation.selection.type];
-            var patterns = selection_callable(subject, operation.selection.options);
-            var updated_subject = _applyPatternsOnSubject.apply(this, [patterns, subject, function(text)
-            {
-                var updated_text = text;
-                for (var index = 0; index < operation.actions.length; index += 1)
+                var op = operations[op_index];
+                if (op.selection === false || op.actions.length === 0)
                 {
-                    var action = operation.actions[index];
-                    var new_text = app.models.action[action.type](updated_text, fileindex, patterns, action.options, filepath);
-                    updated_text = new_text.type === 'remove' ? '' : (new_text.type === 'add' ? updated_text + new_text.text : new_text.text);
+                    continue;
                 }
-                return updated_text;
-            }]);
-            if (operation.applyTo === 'filename')
-            {
-                updatedName = updated_subject + ext;
-            }
-            if (operation.applyTo === 'extension')
-            {
-                updatedName = name + updated_subject;
-            }
-            if (operation.applyTo === 'both')
-            {
-                updatedName = updated_subject;
+                var name_part = updatedName.substring(0, updatedName.lastIndexOf('.'));
+                var extension_part = updatedName.substring(updatedName.lastIndexOf('.'));
+                if (op.applyTo === 'filename')
+                {
+                    updatedName = _processText.apply(this, [name_part, op.selection, op.actions, file_index, file_path]) + extension_part;
+                }
+                if (op.applyTo === 'extension')
+                {
+                    updatedName = name_part + _processText.apply(this, [extension_part, op.selection, op.actions, file_index, file_path]);
+                }
+                if (op.applyTo === 'both')
+                {
+                    updatedName = _processText.apply(this, [updatedName, op.selection, op.actions, file_index, file_path]);
+                }
             }
 
-            // @todo check if filepath exists when doing a stats() in an action; set error otherwise
+            // @todo check if file_path exists when doing a stats() in an action; set error otherwise
             this.setError(true, '@todo');
-
         };
 
         /**
-         * Applies patterns on the given subject by using the required callable
-         * @param patterns
+         * Searches for ranges of text in the given subject and applies actions on each one
+         * For each range:
+         * - Adds the text that comes before (after the end of the previous range or from 0)
+         * - Applies the actions (an action adds text or replaces the existing one)
+         * - Appends the remaining text
          * @param subject
-         * @param callable
+         * @param selection
+         * @param actions
+         * @param file_index
+         * @param file_path
          */
-        var _applyPatternsOnSubject = function(patterns, subject, callable)
+        var _processText = function(subject, selection, actions, file_index, file_path)
         {
+            var ranges = app.models.selection[selection.type](subject, selection.options);
             var updated_subject = '';
-            var previous_pattern = false;
-            var pattern = false;
-            for (var index = 0; index < patterns.length; index += 1)
+            var previous_range = false;
+            var range = false;
+            for (var range_index = 0; range_index < ranges.length; range_index += 1)
             {
-                pattern = patterns[index];
-                updated_subject += subject.substring(previous_pattern !== false ? previous_pattern.end : 0, pattern.start);
-                updated_subject += callable(subject.substring(pattern.start, pattern.end));
-                previous_pattern = pattern;
+                range = ranges[range_index];
+                updated_subject += subject.substring(previous_range !== false ? previous_range.end : 0, range.start);
+                var updated_subject_part = subject.substring(range.start, range.end);
+                for (var act_index = 0; act_index < actions.length; act_index += 1)
+                {
+                    var action_callable = app.models.action[actions[act_index].type];
+                    var new_text = action_callable(updated_subject_part, actions[act_index].options, file_index, file_path);
+                    updated_subject_part = new_text.type === 'add' ? updated_subject_part + new_text.text : new_text.text;
+                }
+                updated_subject += updated_subject_part;
+                previous_range = range;
             }
-            return pattern !== false ? updated_subject + subject.substring(previous_pattern.end) : subject;
+            return range !== false ? updated_subject + subject.substring(range.end) : subject;
         };
 
         /**
