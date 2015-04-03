@@ -98,15 +98,15 @@
 
         /**
          * Displays a custom status on the needed files
-         * @param statuses
+         * @param files
          */
-        this.setFilesStatus = function(statuses)
+        this.setFilesStatus = function(files)
         {
-            for (var index = 0; index < statuses.length; index += 1)
+            for (var index = 0; index < files.length; index += 1)
             {
-                var status = statuses[index];
-                $files[status.id].$row.toggleClass('js-error', status.error);
-                $files[status.id].$status.html(status.message);
+                var file = files[index];
+                $files[file.id].$row.toggleClass('js-error', file.hasError);
+                $files[file.id].$status.html(file.message);
             }
         };
 

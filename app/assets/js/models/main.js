@@ -69,7 +69,7 @@
         this.applyOperations = function(destination_dir)
         {
             destinationDir = destination_dir;
-            pendingFiles = currentFiles;
+            pendingFiles = currentFiles.slice(0);
             pendingFilesCount = currentFiles.length;
             events.emit('progress', 0);
             _asyncApplyOperations.apply(this);
@@ -91,15 +91,16 @@
                 var destination_path = app.utils.string.escapeForCLI(destinationDir + '/' + file.updated_name);
                 try
                 {
-                    var stdout = app.node.execSync((file.dir !== destinationDir ? 'cp ' : 'mv ') + source_path + ' ' + destination_path);
+                    app.node.execSync((file.dir !== destinationDir ? 'cp ' : 'mv ') + source_path + ' ' + destination_path);
                     updated_ids.push(file.id);
                     currentFiles.splice(currentFilesIndexes[file.id], 1);
                     delete currentFilesIndexes[file.id];
-                    app.utils.log(typeof stdout === 'string' ? stdout : stdout.toString()); // @todo TMP
                 }
                 catch (error)
                 {
-                    statuses.push({id: file.id, error: true, message: error.message});
+                    currentFiles[currentFilesIndexes[file.id]].hasError = true;
+                    currentFiles[currentFilesIndexes[file.id]].message = error.message;
+                    statuses.push(currentFiles[currentFilesIndexes[file.id]]);
                 }
             }
             events.emit('remove_files', updated_ids);
@@ -137,7 +138,9 @@
                         id: id,
                         dir: file.dir,
                         name: name,
-                        updated_name: _processOperationsOnFilename.apply(this, [name, file.dir + '/' + name, currentFiles.length])
+                        updated_name: _processOperationsOnFilename.apply(this, [name, file.dir + '/' + name, currentFiles.length]),
+                        hasError: false,
+                        message: ''
                     };
                     new_files.push(new_file);
                     currentFiles.push(new_file);
@@ -183,6 +186,7 @@
             for (var index = 0; index < currentFiles.length; index += 1)
             {
                 var file = currentFiles[index];
+                // @todo here, send and return the entire file object (if errors, conflicts etc, update .hasError and .message)
                 currentFiles[index].updated_name = _processOperationsOnFilename.apply(this, [file.name, file.dir + '/' + file.name, index]);
             }
             return currentFiles;

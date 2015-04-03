@@ -93,11 +93,11 @@
 
         /**
          * Set status on files from the model
-         * @param statuses
+         * @param files
          */
-        var _onStatusFilesFromModel = function(statuses)
+        var _onStatusFilesFromModel = function(files)
         {
-            view.files.setFilesStatus(statuses);
+            view.files.setFilesStatus(files);
         };
 
         /**
