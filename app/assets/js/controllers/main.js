@@ -27,11 +27,11 @@
          */
         var _onViewLoaded = function()
         {
-            model.on('idle', $.proxy(_onModelIdle), this);
             model.on('progress', $.proxy(_onModelProgress), this);
+            model.on('idle', $.proxy(_onModelIdle), this);
             model.on('add_files', $.proxy(_onAddFilesFromModel), this);
             model.on('remove_files', $.proxy(_onRemoveFilesFromModel), this);
-            model.on('status_files', $.proxy(_onStatusFilesFromModel), this);
+            model.on('update_files', $.proxy(_onUpdateFilesFromModel), this);
             view.files.on('add_files', $.proxy(_onAddFilesFromView, this));
             view.files.on('remove_files', $.proxy(_onRemoveFilesFromView, this));
             view.files.on('set_destination', $.proxy(_onSetDestinationFromView), this);
@@ -95,9 +95,9 @@
          * Set status on files from the model
          * @param files
          */
-        var _onStatusFilesFromModel = function(files)
+        var _onUpdateFilesFromModel = function(files)
         {
-            view.files.setFilesStatus(files);
+            view.files.updateFiles(files);
         };
 
         /**
@@ -106,7 +106,7 @@
          */
         var _onEditOperationsFromView = function(operations)
         {
-            view.files.updateFiles(model.processOperations(operations));
+            model.processOperations(operations);
         };
 
         /**
@@ -115,7 +115,7 @@
          */
         var _onAddFilesFromModel = function(files)
         {
-            view.files.addFiles(files);
+            view.files.updateFiles(files, true);
         };
 
         /**

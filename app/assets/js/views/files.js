@@ -65,22 +65,6 @@
         };
 
         /**
-         * Adds files from the model to the files queue
-         * @param files
-         */
-        this.addFiles = function(files)
-        {
-            for (var index = 0; index < files.length; index += 1)
-            {
-                var file = files[index];
-                $files[file.id] = {$row: $(app.utils.template.render(fileTemplate, [file]))};
-                $files[file.id].$updated_name = $files[file.id].$row.find('.js-new-name');
-                $files[file.id].$status = $files[file.id].$row.find('.js-status-message');
-                $ui.list.append($files[file.id].$row);
-            }
-        };
-
-        /**
          * Removes files from the model
          * @param ids
          */
@@ -97,28 +81,25 @@
         };
 
         /**
-         * Displays a custom status on the needed files
+         * Updates or add files
          * @param files
+         * @param add
          */
-        this.setFilesStatus = function(files)
+        this.updateFiles = function(files, add)
         {
             for (var index = 0; index < files.length; index += 1)
             {
                 var file = files[index];
+                if (add)
+                {
+                    $files[file.id] = {$row: $(app.utils.template.render(fileTemplate, [file]))};
+                    $files[file.id].$updated_name = $files[file.id].$row.find('.js-new-name');
+                    $files[file.id].$status = $files[file.id].$row.find('.js-status-message');
+                    $ui.list.append($files[file.id].$row);
+                }
+                $files[file.id].$updated_name.text(file.updated_name);
                 $files[file.id].$row.toggleClass('js-error', file.hasError);
                 $files[file.id].$status.html(file.message);
-            }
-        };
-
-        /**
-         * Updates files
-         * @param files
-         */
-        this.updateFiles = function(files)
-        {
-            for (var index = 0; index < files.length; index += 1)
-            {
-                $files[files[index].id].$updated_name.text(files[index].updated_name);
             }
         };
 

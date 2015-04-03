@@ -81,6 +81,7 @@
          */
         var _asyncApplyOperations = function()
         {
+            // @todo check if the file has an error; if so, do not process the file
             var files = pendingFiles.splice(0, 50);
             var updated_ids = [];
             var statuses = [];
@@ -106,7 +107,7 @@
             events.emit('remove_files', updated_ids);
             if (statuses.length > 0)
             {
-                events.emit('status_files', statuses);
+                events.emit('update_files', statuses);
             }
             events.emit('progress', pendingFiles.length > 0 ? ((pendingFilesCount - pendingFiles.length) * 100) / pendingFilesCount : 100);
             if (pendingFiles.length > 0)
@@ -133,15 +134,8 @@
                 if (typeof currentFilesIndexes[id] === 'undefined')
                 {
                     currentFilesIndexes[id] = currentFiles.length;
-                    var name = file.name + file.ext;
-                    var new_file = {
-                        id: id,
-                        dir: file.dir,
-                        name: name,
-                        updated_name: _processOperationsOnFilename.apply(this, [name, file.dir + '/' + name, currentFiles.length]),
-                        hasError: false,
-                        message: ''
-                    };
+                    var new_file = {id: id, dir: file.dir, name: file.name + file.ext, hasError: false, message: ''};
+                    new_file = _processOperationsOnFile.apply(this, [new_file, currentFiles.length]);
                     new_files.push(new_file);
                     currentFiles.push(new_file);
                 }
@@ -185,22 +179,23 @@
             currentOperations = operations;
             for (var index = 0; index < currentFiles.length; index += 1)
             {
-                var file = currentFiles[index];
-                currentFiles[index].updated_name = _processOperationsOnFilename.apply(this, [file.name, file.dir + '/' + file.name, index]);
-                // @todo here, send and return the entire file object (if errors, conflicts etc, update file.hasError and file.message)
+                currentFiles[index] = _processOperationsOnFile.apply(this, [currentFiles[index], index]);
             }
-            return currentFiles;
+
+            // @todo for each file, store its filename; the next ones check that their name does not exist, otherwise set an error in the object
+
+            events.emit('update_files', currentFiles);
         };
 
         /**
-         * Applies given operations on a filename
-         * @param filename
-         * @param filepath
+         * Applies given operations on a file
+         * @param file
          * @param index
          */
-        var _processOperationsOnFilename = function(filename, filepath, index)
+        var _processOperationsOnFile = function(file, index)
         {
-            // @todo check if filepath exists, return error otherwise
+            var filename = file.name;
+            var filepath = file.dir + '/' + file.name;
             for (var num in currentOperations)
             {
                 var operation = currentOperations[num];
@@ -219,7 +214,15 @@
                     filename = _processOperation.apply(this, [filename, operation.selection, operation.actions, index, filepath]);
                 }
             }
-            return filename;
+            file.updated_name = filename;
+
+
+            // @todo check if filepath exists, set error in file.hasError and file.message otherwise
+            file.message = '@todo';
+            file.hasError = true;
+
+
+            return file;
         };
 
         /**
