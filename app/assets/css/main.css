@@ -106,9 +106,8 @@ html, body {
   margin: -65px 0 0 -150px;
   border: 3px dashed transparent;
   border-radius: 8px;
-  transition: color 300ms, border 300ms;
 }
-/* line 21, ../sass/_placeholders.scss */
+/* line 20, ../sass/_placeholders.scss */
 .placeholder .text div {
   cursor: default;
   position: relative;
@@ -119,7 +118,7 @@ html, body {
   font-weight: bold;
   -webkit-font-smoothing: antialiased;
 }
-/* line 33, ../sass/_placeholders.scss */
+/* line 32, ../sass/_placeholders.scss */
 .placeholder .text i {
   position: relative;
   left: 50%;
@@ -139,6 +138,17 @@ html, body {
   background: #d8dfe7;
 }
 /* line 12, ../sass/_files.scss */
+.panel.files .drag-overlay {
+  display: none;
+  z-index: 24;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 3px solid #3b99fc;
+}
+/* line 24, ../sass/_files.scss */
 .panel.files .progressbar {
   display: none;
   position: fixed;
@@ -146,7 +156,7 @@ html, body {
   left: 10px;
   bottom: 18px;
 }
-/* line 20, ../sass/_files.scss */
+/* line 32, ../sass/_files.scss */
 .panel.files .progressbar .bar {
   width: 250px;
   height: 10px;
@@ -155,7 +165,7 @@ html, body {
   border: 1px solid #a3a3a3;
   box-shadow: inset 0 1px 0 #ffffff, 0 1px 0 #f1f6f9;
 }
-/* line 29, ../sass/_files.scss */
+/* line 41, ../sass/_files.scss */
 .panel.files .progressbar .bar .progress {
   position: relative;
   margin: 1px 0 0 1px;
@@ -164,92 +174,92 @@ html, body {
   border-radius: 4px;
   background: linear-gradient(to bottom, #4a9de5, #0072d5);
 }
-/* line 41, ../sass/_files.scss */
+/* line 53, ../sass/_files.scss */
 .panel.files input[type=file] {
   display: none;
 }
-/* line 46, ../sass/_files.scss */
+/* line 58, ../sass/_files.scss */
 .panel.files table {
   width: 100%;
   position: relative;
   z-index: 23;
 }
-/* line 53, ../sass/_files.scss */
+/* line 65, ../sass/_files.scss */
 .panel.files.files .actions {
   width: 500px;
 }
-/* line 58, ../sass/_files.scss */
+/* line 70, ../sass/_files.scss */
 .panel.files .placeholder {
   color: #aabcca;
 }
-/* line 62, ../sass/_files.scss */
+/* line 74, ../sass/_files.scss */
 .panel.files .placeholder.bordered .text {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   border: 2px dashed #aabcca;
 }
-/* line 69, ../sass/_files.scss */
+/* line 81, ../sass/_files.scss */
 .panel.files.js-drag .placeholder {
   cursor: copy;
 }
-/* line 73, ../sass/_files.scss */
+/* line 85, ../sass/_files.scss */
 .panel.files.js-drag .placeholder .text {
   color: #8896a1;
   border: 2px dashed #8896a1;
 }
 
-/* line 83, ../sass/_files.scss */
+/* line 95, ../sass/_files.scss */
 .files-list tr.js-error td span {
   color: #ed0000;
 }
-/* line 88, ../sass/_files.scss */
+/* line 100, ../sass/_files.scss */
 .files-list tr td {
   cursor: default;
   color: #333333;
   padding: 6px 8px 6px 8px;
 }
-/* line 94, ../sass/_files.scss */
+/* line 106, ../sass/_files.scss */
 .files-list tr td:nth-child(1) {
   width: 50%;
 }
-/* line 99, ../sass/_files.scss */
+/* line 111, ../sass/_files.scss */
 .files-list tr td:nth-child(2) {
   width: 10px;
 }
-/* line 104, ../sass/_files.scss */
+/* line 116, ../sass/_files.scss */
 .files-list tr td i {
   color: #999999;
   font-size: 11px;
 }
-/* line 110, ../sass/_files.scss */
+/* line 122, ../sass/_files.scss */
 .files-list tr td .dir {
   display: none;
   color: #a0a0a0;
 }
-/* line 116, ../sass/_files.scss */
+/* line 128, ../sass/_files.scss */
 .files-list tr td span {
   display: block;
   font-size: 11px;
   margin: 2px 0 0 0;
 }
-/* line 123, ../sass/_files.scss */
+/* line 135, ../sass/_files.scss */
 .files-list tr td em {
   font-style: normal;
 }
-/* line 129, ../sass/_files.scss */
+/* line 141, ../sass/_files.scss */
 .files-list tr:nth-child(odd) td {
   background: #ffffff;
 }
-/* line 134, ../sass/_files.scss */
+/* line 146, ../sass/_files.scss */
 .files-list tr:nth-child(even) td {
   background: #f3f6fa;
 }
-/* line 139, ../sass/_files.scss */
+/* line 151, ../sass/_files.scss */
 .files-list tr.js-active td {
   background: #0072d5 !important;
   color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
 }
-/* line 146, ../sass/_files.scss */
+/* line 158, ../sass/_files.scss */
 .files-list tr.js-active td .dir, .files-list tr.js-active td i, .files-list tr.js-active td span {
   color: #ffffff !important;
 }

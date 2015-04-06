@@ -120,7 +120,7 @@
             var win_height = $ui.window.height();
             var options_height = $ui.optionsPanel.height();
             $ui.filesPanel.css({
-                width: (win_width - $ui.operationsPanel.width()) + 'px',
+                width: (win_width - $ui.operationsPanel.width() - 1) + 'px',
                 height: (win_height - options_height) + 'px'
             });
             $ui.operationsPanel.css({height: (win_height - options_height) + 'px'});

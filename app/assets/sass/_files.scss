@@ -9,6 +9,18 @@
     border-bottom : 1px solid #a3a3a3;
     background    : #d8dfe7;
 
+    & .drag-overlay
+    {
+        display  : none;
+        z-index  : 24;
+        position : absolute;
+        top      : 0;
+        left     : 0;
+        width    : 100%;
+        height   : 100%;
+        border   : 3px solid #3b99fc;
+    }
+
     & .progressbar
     {
         display  : none;

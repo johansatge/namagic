@@ -55,7 +55,8 @@
             $ui.add.attr('disabled', is_locked ? 'disabled' : null);
             $ui.remove.attr('disabled', is_locked || $ui.list.children().filter('.js-active').length === 0 ? 'disabled' : null);
             (is_locked ? $ui.window.off : $ui.window.on).apply($ui.window, ['keydown keyup', $.proxy(_onRecordKey, this)]);
-            (is_locked ? $ui.panel.off : $ui.panel.on).apply($ui.panel, ['dragenter dragleave', $.proxy(_onPlaceholderDrag, this)]);
+            (is_locked ? $ui.panel.off : $ui.panel.on).apply($ui.panel, ['dragenter', $.proxy(_onDragEnter, this)]);
+            (is_locked ? $ui.dragOverlay.off : $ui.dragOverlay.on).apply($ui.dragOverlay, ['dragleave', $.proxy(_onDragLeave, this)]);
             (is_locked ? $ui.panel.off : $ui.panel.on).apply($ui.panel, ['drop', $.proxy(_onAddFilesFromDrop, this)]);
             (is_locked ? $ui.list.off : $ui.list.on).apply($ui.list, ['click', '.js-file', $.proxy(_onFileClick, this)]);
             (is_locked ? $ui.add.off : $ui.add.on).apply($ui.add, ['click', $.proxy(_onAddFilesFromButton, this)]);
@@ -137,6 +138,7 @@
         {
             $ui.window = $window;
             $ui.panel = $dom;
+            $ui.dragOverlay = $dom.find('.js-drag-overlay');
             $ui.placeholder = $dom.find('.js-placeholder');
             $ui.filesInput = $dom.find('.js-files-input');
             $ui.destinationInput = $dom.find('.js-dest-input');
@@ -165,12 +167,19 @@
         };
 
         /**
-         * Drags stuff over the panel
-         * @param evt
+         * Drags files on the panel
          */
-        var _onPlaceholderDrag = function(evt)
+        var _onDragEnter = function()
         {
-            $ui.panel.toggleClass('js-drag', evt.type === 'dragenter');
+            $ui.dragOverlay.stop().fadeIn(150);
+        };
+
+        /**
+         * Drags out
+         */
+        var _onDragLeave = function()
+        {
+            $ui.dragOverlay.stop().fadeOut(150);
         };
 
         /**
@@ -179,7 +188,7 @@
          */
         var _onAddFilesFromDrop = function(evt)
         {
-            _onPlaceholderDrag({type: 'dragleave'});
+            _onDragLeave();
             events.emit('add_files', _cleanSelectedFiles.apply(this, [evt.originalEvent.dataTransfer.files]));
         };
 
