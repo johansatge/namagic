@@ -23,6 +23,7 @@
          */
         this.processOperations = function(operations, file_index)
         {
+            this.setError(false, '');
             updatedName = name;
             var file_path = directory + '/' + name;
             for (var op_index = 0; op_index < operations.length; op_index += 1)
@@ -49,7 +50,6 @@
             }
 
             // @todo check if file_path exists when doing a stats() in an action; set error otherwise
-            this.setError(true, '@todo');
         };
 
         /**

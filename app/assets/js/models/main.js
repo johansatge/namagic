@@ -179,15 +179,21 @@
         this.processOperations = function(operations)
         {
             currentOperations = operations;
+            var processed_filenames = [];
             for (var index = 0; index < currentFiles.length; index += 1)
             {
                 var file = currentFiles[index];
                 file.processOperations(currentOperations, index);
+                var name = file.getUpdatedName();
+                if (processed_filenames.indexOf(name) === -1)
+                {
+                    processed_filenames.push(name);
+                }
+                else
+                {
+                    file.setError(true, app.utils.locale.get('main.errors.duplicate_filename'));
+                }
             }
-
-            // @todo for each file without error, store its filename;
-            // the next ones check that their name does not exist, otherwise set an error in the object
-
             events.emit('update_files', currentFiles);
         };
     };

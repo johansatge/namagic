@@ -28,10 +28,10 @@
             </script>
             <div class="actions">
                 <button class="secondary left js-files-add">
-                    <i class="fa fa-plus-circle"></i>{{main.actions.add_files}}
+                    <i class="fa fa-plus-circle"></i>{{main.toolbar.add_files}}
                 </button>
                 <button class="secondary left js-files-remove">
-                    <i class="fa fa-trash-o"></i>{{main.actions.remove_files}}
+                    <i class="fa fa-trash-o"></i>{{main.toolbar.remove_files}}
                 </button>
                 <input type="file" class="js-files-input" multiple>
                 <input type="file" class="js-dest-input" nwdirectory>
@@ -46,7 +46,7 @@
             <div class="placeholder js-placeholder">
                 <div class="text">
                     <i class="fa fa-cogs"></i>
-                    <div>{{main.no_operation}}</div>
+                    <div>{{main.operations.no_operation}}</div>
                 </div>
             </div>
             <div class="js-operations"></div>
@@ -305,11 +305,11 @@
             <div class="actions">
                 <button class="primary right js-operation-apply">
                     <i class="fa fa-check"></i>
-                    {{main.actions.apply}}
+                    {{main.toolbar.apply}}
                 </button>
                 <button class="secondary right js-operation-add">
                     <i class="fa fa-cog"></i>
-                    {{main.actions.add_operation}}
+                    {{main.toolbar.add_operation}}
                 </button>
             </div>
         </div>

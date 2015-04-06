@@ -11,14 +11,17 @@
   },
   "main": {
     "drop": "Drop files here",
-    "actions": {
+    "errors": {
+      "duplicate_filename": "Duplicate filename"
+    },
+    "toolbar": {
       "add_operation": "Add operation",
       "add_files": "Add files...",
       "remove_files": "Remove",
       "apply": "Apply"
     },
-    "no_operation": "No action set",
     "operations": {
+      "no_operation": "No operation set",
       "selection": {
         "subtitle": "Selection",
         "all_text": {
