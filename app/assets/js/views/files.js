@@ -105,7 +105,8 @@
                 }
                 $files[file_id].updatedName.innerHTML = file.getUpdatedName();
                 $files[file_id].status.innerHTML = file.getMessage();
-                $files[file_id].$row.toggleClass('js-error', file.hasError());
+                app.utils.dom.toggleClass($files[file_id].$row.get(0), 'js-error', file.hasError());
+
             }
         };
 
