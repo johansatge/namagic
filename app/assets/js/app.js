@@ -14,7 +14,6 @@
 
     /**
      * Inits
-     * @todo support multiple languages
      */
     app.init = function(modules)
     {

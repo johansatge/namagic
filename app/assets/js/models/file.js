@@ -48,8 +48,6 @@
                     updatedName = _processText.apply(this, [updatedName, op.selection, op.actions, file_index, file_path]);
                 }
             }
-
-            // @todo check if file_path exists when doing a stats() in an action; set error otherwise
         };
 
         /**
