@@ -73,6 +73,42 @@
         };
 
         /**
+         * Processes a slice of new files and recursively calls itself while the queue is not empty
+         */
+        var _asyncProcessNewFiles = function()
+        {
+            var files = newFiles.splice(0, 50);
+            var new_files = [];
+            for (var index = 0; index < files.length; index += 1)
+            {
+                var fileinfo = app.node.path.parse(files[index]);
+                var id = app.node.crypto.createHash('md5').update(files[index]).digest('hex');
+                if (typeof currentFilesIndexes[id] === 'undefined')
+                {
+                    currentFilesIndexes[id] = currentFiles.length;
+                    var new_file = new app.models.file(id, fileinfo.dir, fileinfo.name + fileinfo.ext);
+                    new_file.processOperations(currentOperations, currentFiles.length);
+                    new_files.push(new_file);
+                    currentFiles.push(new_file);
+                }
+            }
+            events.emit('add_files', new_files);
+            events.emit('progress', newFiles.length > 0 ? ((newFilesCount - newFiles.length) * 100) / newFilesCount : 100);
+            if (newFiles.length > 0)
+            {
+                setTimeout($.proxy(_asyncProcessNewFiles, this), 0);
+            }
+            else
+            {
+                if (typeof new_file !== 'undefined')
+                {
+                    defaultDestinationDir = new_file.getDirectory();
+                }
+                events.emit('idle');
+            }
+        };
+
+        /**
          * Applies operations on files
          * @param destination_dir
          */
@@ -122,42 +158,6 @@
             }
             else
             {
-                events.emit('idle');
-            }
-        };
-
-        /**
-         * Processes a slice of new files and recursively calls itself while the queue is not empty
-         */
-        var _asyncProcessNewFiles = function()
-        {
-            var files = newFiles.splice(0, 50);
-            var new_files = [];
-            for (var index = 0; index < files.length; index += 1)
-            {
-                var fileinfo = app.node.path.parse(files[index]);
-                var id = app.node.crypto.createHash('md5').update(files[index]).digest('hex');
-                if (typeof currentFilesIndexes[id] === 'undefined')
-                {
-                    currentFilesIndexes[id] = currentFiles.length;
-                    var new_file = new app.models.file(id, fileinfo.dir, fileinfo.name + fileinfo.ext);
-                    new_file.processOperations(currentOperations, currentFiles.length);
-                    new_files.push(new_file);
-                    currentFiles.push(new_file);
-                }
-            }
-            events.emit('add_files', new_files);
-            events.emit('progress', newFiles.length > 0 ? ((newFilesCount - newFiles.length) * 100) / newFilesCount : 100);
-            if (newFiles.length > 0)
-            {
-                setTimeout($.proxy(_asyncProcessNewFiles, this), 0);
-            }
-            else
-            {
-                if (typeof new_file !== 'undefined')
-                {
-                    defaultDestinationDir = new_file.getDirectory();
-                }
                 events.emit('idle');
             }
         };
