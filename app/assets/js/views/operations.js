@@ -63,7 +63,7 @@
             $dom.find('.js-action-template').each(function()
             {
                 var $template = $(this);
-                actionTemplates[$template.data('type')] = $template.html();
+                actionTemplates[$template.attr('rel')] = $template.html();
             });
         };
 
@@ -82,7 +82,7 @@
                 handle: '.js-handle',
                 stop: $.proxy(_onEditOperations, this)
             });
-            $ui.operations.on('change', '.js-select-selection-type', $.proxy(_onSelectselectionType, this));
+            $ui.operations.on('change', '.js-select-selection-type', $.proxy(_onTypeSelection, this));
             $ui.operations.on('click', '.js-delete-operation', $.proxy(_onDeleteOperation, this));
             $ui.operations.on('change keyup', 'input,select', $.proxy(_onEditOperations, this));
             $ui.operations.on('change', '.js-apply-to', $.proxy(_onEditOperations, this));
@@ -123,52 +123,40 @@
          */
         var _onEditOperations = function()
         {
-            var operations = [];
-            var $operations = $ui.operations.children();
-            $operations.each(function()
+            var operations_list = [];
+            var operations = $ui.operations.get(0).childNodes;
+            for (var op_index = 0; op_index < operations.length; op_index += 1)
             {
-                var $operation = $(this);
-                var $selection = $operation.find('.js-selection-fields:visible');
-                var $actions = $operation.find('.js-action');
-                var actions = [];
-                $actions.each(function()
+                var operation = operations[op_index];
+                var actions = operation.querySelectorAll('.js-action');
+                var actions_list = [];
+                for (var index = 0; index < actions.length; index += 1)
                 {
-                    actions.push(_parseOperationFieldsPanel($(this)));
+                    actions_list.push(_parseOperationFieldsPanel(actions[index]));
+                }
+                operations_list.push({
+                    selection: _parseOperationFieldsPanel.apply(this, [operation.querySelector('.js-current-selection-fields')]),
+                    actions: actions_list,
+                    applyTo: operation.querySelector('.js-apply-to').value
                 });
-                var operation = {
-                    selection: _parseOperationFieldsPanel.apply(this, [$selection]),
-                    actions: actions,
-                    applyTo: $operation.find('.js-apply-to option:selected').val()
-                };
-                operations.push(operation);
-            });
-            events.emit('edit_operations', operations);
+            }
+            events.emit('edit_operations', operations_list);
         };
 
         /**
          * Reads a panel of fields and returns its options
-         * @param $fields_panel
+         * @param fields
          */
-        var _parseOperationFieldsPanel = function($fields_panel)
+        var _parseOperationFieldsPanel = function(fields)
         {
-            if ($fields_panel.length === 0)
+            var data = {type: fields.getAttribute('rel'), options: {}};
+            var inputs = fields.querySelectorAll('input[type="text"],input[type="radio"]:checked,input[type="hidden"],input[type="checkbox"]');
+            for (var index = 0; index < inputs.length; index += 1)
             {
-                return false;
+                var input = inputs[index];
+                data.options[input.getAttribute('name')] = input.getAttribute('type') === 'checkbox' ? input.checked : input.value;
             }
-            var fields_panel = {type: $fields_panel.data('type'), options: {}};
-            var $inputs = $fields_panel.find('input[type="text"],input[type="radio"]:checked,input[type="hidden"]');
-            $inputs.each(function()
-            {
-                var $option = $(this);
-                fields_panel.options[$option.attr('name')] = $option.val();
-            });
-            var $checkboxes = $fields_panel.find('input[type="checkbox"]');
-            $checkboxes.each(function()
-            {
-                var $option = $(this);
-                fields_panel.options[$option.attr('name')] = $option.is(':checked');
-            });
-            return fields_panel;
+            return data;
         };
 
         /**
@@ -176,12 +164,12 @@
          * @param evt
          * @private
          */
-        var _onSelectselectionType = function(evt)
+        var _onTypeSelection = function(evt)
         {
             var $type = $(evt.currentTarget);
             var $operation = $type.closest('.js-operation');
-            $operation.find('.js-selection-fields').hide();
-            $operation.find('.js-selection-fields[data-type="' + $type.val() + '"]').show();
+            $operation.find('.js-selection-fields').hide().removeClass('js-current-selection-fields');
+            $operation.find('.js-selection-fields[rel="' + $type.val() + '"]').show().addClass('js-current-selection-fields');
         };
 
         /**

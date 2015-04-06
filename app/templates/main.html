@@ -76,12 +76,12 @@
                             </optgroup>
                         </select>
                     </div>
-                    <div class="operation-fields js-selection-fields" data-type="allText">
+                    <div class="operation-fields js-selection-fields" rel="allText">
                         <label class="field">
                             {{main.operations.selection.all_text.no_options}}
                         </label>
                     </div>
-                    <div class="operation-fields js-selection-fields" data-type="freeText">
+                    <div class="operation-fields js-selection-fields" rel="freeText">
                         <label class="field">
                             {{main.operations.selection.free_text.text_to_find}}<input type="text" name="text">
                         </label>
@@ -89,7 +89,7 @@
                             <input type="checkbox" name="caseInsensitive">{{main.operations.selection.free_text.case_insensitive}}
                         </label>
                     </div>
-                    <div class="operation-fields js-selection-fields" data-type="charsList">
+                    <div class="operation-fields js-selection-fields" rel="charsList">
                         <label class="field">
                             {{main.operations.selection.chars_list.custom_list}}<input type="text" name="customList">
                         </label>
@@ -103,7 +103,7 @@
                             <input type="checkbox" name="specialChars">{{main.operations.selection.chars_list.special_chars}}
                         </label>
                     </div>
-                    <div class="operation-fields js-selection-fields" data-type="textPosition">
+                    <div class="operation-fields js-selection-fields" rel="textPosition">
                         <label class="field">
                             {{main.operations.selection.text_position.index}}<input type="text" name="index" value="0">
                         </label>
@@ -111,7 +111,7 @@
                             <input type="checkbox" name="fromEnd">{{main.operations.selection.text_position.from_end}}
                         </label>
                     </div>
-                    <div class="operation-fields js-selection-fields" data-type="textRange">
+                    <div class="operation-fields js-selection-fields" rel="textRange">
                         <label class="field">
                             {{main.operations.selection.text_range.index}}<input type="text" name="index">
                         </label>
@@ -122,7 +122,7 @@
                             <input type="checkbox" name="fromEnd">{{main.operations.selection.text_range.from_end}}
                         </label>
                     </div>
-                    <div class="operation-fields js-selection-fields" data-type="regex">
+                    <div class="operation-fields js-selection-fields" rel="regex">
                         <label class="field">
                             {{main.operations.selection.regex.expression}}<input type="text" name="regex">
                         </label>
@@ -173,8 +173,8 @@
                     </div>
                 </div>
             </script>
-            <script type="text/template" class="js-action-template" data-type="removeText">
-                <div class="operation-action js-action" data-type="removeText">
+            <script type="text/template" class="js-action-template" rel="removeText">
+                <div class="operation-action js-action" rel="removeText">
                     <div class="heading">
                         {{main.operations.actions.remove_text.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
@@ -187,8 +187,8 @@
                     </div>
                 </div>
             </script>
-            <script type="text/template" class="js-action-template" data-type="freeText">
-                <div class="operation-action js-action" data-type="freeText">
+            <script type="text/template" class="js-action-template" rel="freeText">
+                <div class="operation-action js-action" rel="freeText">
                     <div class="heading">
                         {{main.operations.actions.free_text.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
@@ -202,8 +202,8 @@
                     </div>
                 </div>
             </script>
-            <script type="text/template" class="js-action-template" data-type="digitsSequence">
-                <div class="operation-action js-action" data-type="digitsSequence">
+            <script type="text/template" class="js-action-template" rel="digitsSequence">
+                <div class="operation-action js-action" rel="digitsSequence">
                     <div class="heading">
                         {{main.operations.actions.digits_sequence.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
@@ -221,8 +221,8 @@
                     </div>
                 </div>
             </script>
-            <script type="text/template" class="js-action-template" data-type="updateCase">
-                <div class="operation-action js-action" data-type="updateCase">
+            <script type="text/template" class="js-action-template" rel="updateCase">
+                <div class="operation-action js-action" rel="updateCase">
                     <div class="heading">
                         {{main.operations.actions.update_case.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
@@ -244,8 +244,8 @@
                     </div>
                 </div>
             </script>
-            <script type="text/template" class="js-action-template" data-type="creationDate">
-                <div class="operation-action js-action" data-type="creationDate">
+            <script type="text/template" class="js-action-template" rel="creationDate">
+                <div class="operation-action js-action" rel="creationDate">
                     <div class="heading">
                         {{main.operations.actions.creation_date.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
@@ -270,8 +270,8 @@
                     </div>
                 </div>
             </script>
-            <script type="text/template" class="js-action-template" data-type="lastModifiedDate">
-                <div class="operation-action js-action" data-type="lastModifiedDate">
+            <script type="text/template" class="js-action-template" rel="lastModifiedDate">
+                <div class="operation-action js-action" rel="lastModifiedDate">
                     <div class="heading">
                         {{main.operations.actions.last_modified_date.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
@@ -296,8 +296,8 @@
                     </div>
                 </div>
             </script>
-            <script type="text/template" class="js-action-template" data-type="fileSize">
-                <div class="operation-action js-action" data-type="fileSize">
+            <script type="text/template" class="js-action-template" rel="fileSize">
+                <div class="operation-action js-action" rel="fileSize">
                     <div class="heading">
                         {{main.operations.actions.file_size.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>

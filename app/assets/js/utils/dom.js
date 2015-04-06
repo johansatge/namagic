@@ -16,15 +16,15 @@
      */
     module.toggleClass = function(element, class_name, add_class)
     {
-        var has_class = element.class_name.search(new RegExp('[ ^]' + class_name + '[ "]', 'g')) === -1;
+        var has_class = element.className.search(new RegExp('[ ^]' + class_name + '[ "]', 'g')) === -1;
         add_class = add_class !== undefined ? add_class : !has_class;
         if (add_class && !has_class)
         {
-            element.class_name += !class_name;
+            element.className += !class_name;
         }
         if (!add_class)
         {
-            element.class_name = element.class_name.replace(new RegExp(class_name, 'g'), '');
+            element.className = element.className.replace(new RegExp(class_name, 'g'), '');
         }
     };
 
