@@ -191,7 +191,10 @@
                 }
                 else
                 {
-                    file.setError(true, app.utils.locale.get('main.errors.duplicate_filename'));
+                    if (!file.hasError())
+                    {
+                        file.setError(true, app.utils.locale.get('main.errors.duplicate_filename'));
+                    }
                 }
             }
             events.emit('update_files', currentFiles);
