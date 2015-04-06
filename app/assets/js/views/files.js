@@ -92,18 +92,20 @@
             for (var index = 0; index < files.length; index += 1)
             {
                 var file = files[index];
+                var file_id = file.getID();
                 if (add)
                 {
-                    $files[file.getID()] = {$row: $(app.utils.template.render(fileTemplate, [file]))};
-                    $files[file.getID()].$updatedName = $files[file.getID()].$row.find('.js-new-name');
-                    $files[file.getID()].$status = $files[file.getID()].$row.find('.js-status-message');
-                    $ui.list.append($files[file.getID()].$row);
-                    $files[file.getID()].$row.data('id', file.getID());
-                    $files[file.getID()].$row.find('.js-name').html(file.getName());
+                    var $row = $(app.utils.template.render(fileTemplate, [file]));
+                    $files[file_id] = {$row: $row};
+                    $files[file_id].updatedName = $row.get(0).querySelector('.js-new-name');
+                    $files[file_id].status = $row.get(0).querySelector('.js-status-message');
+                    $ui.list.append($row);
+                    $row.data('id', file_id);
+                    $row.get(0).querySelector('.js-name').innerHTML = file.getName();
                 }
-                $files[file.getID()].$updatedName.text(file.getUpdatedName());
-                $files[file.getID()].$row.toggleClass('js-error', file.hasError());
-                $files[file.getID()].$status.html(file.getMessage());
+                $files[file_id].updatedName.innerHTML = file.getUpdatedName();
+                $files[file_id].status.innerHTML = file.getMessage();
+                $files[file_id].$row.toggleClass('js-error', file.hasError());
             }
         };
 
