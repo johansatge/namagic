@@ -96,17 +96,16 @@
                 if (add)
                 {
                     var $row = $(app.utils.template.render(fileTemplate, [file]));
+                    $ui.list.append($row);
                     $files[file_id] = {$row: $row};
                     $files[file_id].updatedName = $row.get(0).querySelector('.js-new-name');
                     $files[file_id].status = $row.get(0).querySelector('.js-status-message');
-                    $ui.list.append($row);
                     $row.data('id', file_id);
                     $row.get(0).querySelector('.js-name').innerHTML = file.getName();
                 }
                 $files[file_id].updatedName.innerHTML = file.getUpdatedName();
                 $files[file_id].status.innerHTML = file.getMessage();
                 app.utils.dom.toggleClass($files[file_id].$row.get(0), 'js-error', file.hasError());
-
             }
         };
 
