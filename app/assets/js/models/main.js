@@ -93,16 +93,36 @@
                 }
                 var source_path = app.utils.string.escapeForCLI(file.getDirectory() + '/' + file.getName());
                 var destination_path = app.utils.string.escapeForCLI(destinationDir + '/' + file.getUpdatedName());
+                var command = file.getDirectory() !== destinationDir ? 'cp' : 'mv';
+                var destination_exists;
                 try
                 {
-                    app.node.execSync((file.getDirectory() !== destinationDir ? 'cp ' : 'mv ') + source_path + ' ' + destination_path);
-                    processed_ids.push(file.getID());
-                    currentFiles.splice(currentFilesIndexes[file.getID()], 1);
-                    delete currentFilesIndexes[file.getID()];
+                    app.node.fs.accessSync(destinationDir + '/' + file.getUpdatedName(), app.node.fs.R_OK);
+                    destination_exists = command === 'cp';
                 }
-                catch (error)
+                catch (err)
                 {
-                    currentFiles[currentFilesIndexes[file.getID()]].setError(true, error.message);
+                    app.utils.log(err);
+                    destination_exists = false;
+                }
+                if (!destination_exists)
+                {
+                    try
+                    {
+                        app.node.execSync(command + ' ' + source_path + ' ' + destination_path);
+                        processed_ids.push(file.getID());
+                        currentFiles.splice(currentFilesIndexes[file.getID()], 1);
+                        delete currentFilesIndexes[file.getID()];
+                    }
+                    catch (error)
+                    {
+                        currentFiles[currentFilesIndexes[file.getID()]].setError(true, error.message);
+                        updated_files.push(currentFiles[currentFilesIndexes[file.getID()]]);
+                    }
+                }
+                else
+                {
+                    currentFiles[currentFilesIndexes[file.getID()]].setError(true, app.utils.locale.get('main.errors.file_exists'));
                     updated_files.push(currentFiles[currentFilesIndexes[file.getID()]]);
                 }
             }

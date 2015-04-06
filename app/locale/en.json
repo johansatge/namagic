@@ -14,7 +14,8 @@
     "errors": {
       "duplicate_filename": "Duplicate filename",
       "stat_not_found": "File information not found",
-      "error": "error"
+      "error": "error",
+      "file_exists": "File already exists"
     },
     "toolbar": {
       "add_operation": "Add operation",
