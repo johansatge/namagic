@@ -11,18 +11,20 @@
     /**
      * Toggles a class
      * @param element
-     * @param classname
-     * @param condition
+     * @param class_name
+     * @param add_class
      */
-    module.toggleClass = function(element, classname, condition)
+    module.toggleClass = function(element, class_name, add_class)
     {
-        if (condition)
+        var has_class = element.class_name.search(new RegExp('[ ^]' + class_name + '[ "]', 'g')) === -1;
+        add_class = add_class !== undefined ? add_class : !has_class;
+        if (add_class && !has_class)
         {
-            element.className += element.className.search(new RegExp('[ ^]' + classname + '[ "]', 'g')) === -1 ? ' ' + classname : '';
+            element.class_name += !class_name;
         }
-        else
+        if (!add_class)
         {
-            element.className = element.className.replace(new RegExp(classname, 'g'), '');
+            element.class_name = element.class_name.replace(new RegExp(class_name, 'g'), '');
         }
     };
 
