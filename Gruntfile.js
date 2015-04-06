@@ -55,7 +55,7 @@ module.exports = function(grunt)
             grunt.log.ok('Build done.');
             if (grunt.option('launch'))
             {
-                exec('./build/Namage/osx/Namage.app/Contents/MacOS/nwjs');
+                exec('./build/Namagik/osx/Namagik.app/Contents/MacOS/nwjs');
             }
             done();
         }).catch(function(error)
