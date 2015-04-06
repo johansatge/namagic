@@ -27,6 +27,9 @@
       "no_operation": "No operation set",
       "selection": {
         "subtitle": "Selection",
+        "text_selections": "Text",
+        "position_selections": "Position",
+        "advanced_selections": "Advanced",
         "all_text": {
           "option": "All text",
           "no_options": "No option available"

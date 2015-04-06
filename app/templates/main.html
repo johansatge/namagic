@@ -61,12 +61,18 @@
                     <div class="operation-bar">
                         <i class="chevron fa fa-chevron-down"></i>
                         <select class="js-select-selection-type">
-                            <option value="allText">{{main.operations.selection.all_text.option}}</option>
-                            <option value="freeText">{{main.operations.selection.free_text.option}}</option>
-                            <option value="charsList">{{main.operations.selection.chars_list.option}}</option>
-                            <option value="textPosition">{{main.operations.selection.text_position.option}}</option>
-                            <option value="textRange">{{main.operations.selection.text_range.option}}</option>
-                            <option value="regex">{{main.operations.selection.regex.option}}</option>
+                            <optgroup label="{{main.operations.selection.text_selections}}">
+                                <option value="allText">{{main.operations.selection.all_text.option}}</option>
+                                <option value="freeText">{{main.operations.selection.free_text.option}}</option>
+                                <option value="charsList">{{main.operations.selection.chars_list.option}}</option>
+                            </optgroup>
+                            <optgroup label="{{main.operations.selection.position_selections}}">
+                                <option value="textPosition">{{main.operations.selection.text_position.option}}</option>
+                                <option value="textRange">{{main.operations.selection.text_range.option}}</option>
+                            </optgroup>
+                            <optgroup label="{{main.operations.selection.advanced_selections}}">
+                                <option value="regex">{{main.operations.selection.regex.option}}</option>
+                            </optgroup>
                         </select>
                     </div>
                     <div class="operation-fields js-selection-fields" data-type="allText">
