@@ -48,6 +48,21 @@
                 background    : linear-gradient(to bottom, #4a9de5, #0072d5);
             }
         }
+
+        & .cancel
+        {
+            position   : absolute;
+            right      : -23px;
+            top        : -5px;
+            background : transparent;
+            font-size  : 21px;
+            color      : #a3a3a3;
+        }
+
+        & .cancel:active
+        {
+            color : #616161;
+        }
     }
 
     & input[type=file]

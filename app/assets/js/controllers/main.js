@@ -35,8 +35,17 @@
             view.files.on('add_files', $.proxy(_onAddFilesFromView, this));
             view.files.on('remove_files', $.proxy(_onRemoveFilesFromView, this));
             view.files.on('set_destination', $.proxy(_onSetDestinationFromView), this);
+            view.files.on('cancel', $.proxy(_onCancelCurrentWork), this);
             view.operations.on('edit_operations', $.proxy(_onEditOperationsFromView, this));
             view.operations.on('apply_operations', $.proxy(_onApplyOperationFromView, this));
+        };
+
+        /**
+         * Cancels the current work
+         */
+        var _onCancelCurrentWork = function()
+        {
+            model.cancelCurrentWork();
         };
 
         /**

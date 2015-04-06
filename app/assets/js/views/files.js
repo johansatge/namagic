@@ -34,6 +34,7 @@
         this.init = function($window, $dom)
         {
             _initUI.apply(this, [$window, $dom]);
+            $ui.cancelAsync.on('click', $.proxy(_onCancelAsync, this));
             this.lockInterface(false);
         };
 
@@ -130,6 +131,14 @@
         };
 
         /**
+         * Asks to cancel the current operation
+         */
+        var _onCancelAsync = function()
+        {
+            events.emit('cancel');
+        };
+
+        /**
          * Inits UI
          * @param $window
          * @param $dom
@@ -138,6 +147,7 @@
         {
             $ui.window = $window;
             $ui.panel = $dom;
+            $ui.cancelAsync = $dom.find('.js-cancel');
             $ui.dragOverlay = $dom.find('.js-drag-overlay');
             $ui.placeholder = $dom.find('.js-placeholder');
             $ui.filesInput = $dom.find('.js-files-input');

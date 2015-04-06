@@ -35,6 +35,15 @@
         };
 
         /**
+         * Cancels the current work
+         */
+        this.cancelCurrentWork = function()
+        {
+            pendingFiles = [];
+            newFiles = [];
+        };
+
+        /**
          * Checks if has files
          */
         this.hasFiles = function()
