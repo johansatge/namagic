@@ -37,7 +37,7 @@
             view.files.on('set_destination', $.proxy(_onSetDestinationFromView), this);
             view.files.on('cancel', $.proxy(_onCancelCurrentWork), this);
             view.operations.on('edit_operations', $.proxy(_onEditOperationsFromView, this));
-            view.operations.on('apply_operations', $.proxy(_onApplyOperationFromView, this));
+            view.operations.on('apply_operations', $.proxy(_onApplyOperationsFromView, this));
         };
 
         /**
@@ -51,7 +51,7 @@
         /**
          * Starts applying operations on current files
          */
-        var _onApplyOperationFromView = function()
+        var _onApplyOperationsFromView = function()
         {
             if (model.hasFiles())
             {
@@ -68,7 +68,7 @@
         {
             view.files.lockInterface(true);
             view.operations.lockInterface(true);
-            model.applyOperations(destination_dir);
+            model.applyOperationsOnFiles(destination_dir);
         };
 
         /**
@@ -115,7 +115,7 @@
          */
         var _onEditOperationsFromView = function(operations)
         {
-            model.processOperations(operations);
+            model.storeAndProcessOperations(operations);
         };
 
         /**

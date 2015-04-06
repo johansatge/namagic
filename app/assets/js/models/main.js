@@ -19,8 +19,9 @@
         var newFilesCount;
 
         var pendingFilesBaseCount;
-        var pendingIndex;
         var pendingFilesDoneCount;
+        var pendingIndex;
+        var pendingDeletedFiles;
 
         var defaultDestinationDir;
         var destinationDir;
@@ -112,13 +113,14 @@
          * Applies operations on files
          * @param destination_dir
          */
-        this.applyOperations = function(destination_dir)
+        this.applyOperationsOnFiles = function(destination_dir)
         {
             events.emit('progress', 0);
             destinationDir = destination_dir;
             pendingIndex = 0;
             pendingFilesDoneCount = 0;
             pendingFilesBaseCount = currentFiles.length;
+            pendingDeletedFiles = [];
             _asyncApplyOperations.apply(this);
         };
 
@@ -142,7 +144,7 @@
             pendingFilesDoneCount += 1;
             if (success)
             {
-                events.emit('remove_files', [file.getID()]);
+                pendingDeletedFiles.push(file.getID());
                 currentFiles.shift();
                 delete currentFilesIndexes[file.getID()];
             }
@@ -158,6 +160,7 @@
             }
             else
             {
+                events.emit('remove_files', pendingDeletedFiles);
                 events.emit('idle');
             }
         };
@@ -180,7 +183,7 @@
          * Applies given operations on the current list of files and returns it
          * @param operations
          */
-        this.processOperations = function(operations)
+        this.storeAndProcessOperations = function(operations)
         {
             currentOperations = operations;
             var processed_filenames = [];
