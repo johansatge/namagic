@@ -1,5 +1,5 @@
 /**
- * About view
+ * Help view
  */
 (function(app, $)
 {
@@ -11,6 +11,7 @@
 
         var window = null;
         var events = new app.node.events.EventEmitter();
+        var $ui = {};
 
         /**
          * Attaches an event
@@ -23,21 +24,24 @@
         };
 
         /**
-         * Inits the main window and waits for its content to be loaded
+         * Show main window & inits events
          */
         this.show = function()
         {
-            var bootstrap = new app.utils.windowbootstrap('templates/about.html', {
-                title: '',
+            var bootstrap = new app.utils.windowbootstrap('templates/help.html', {
                 toolbar: false,
                 frame: true,
-                resizable: false,
+                width: 350,
+                height: 600,
+                min_width: 350,
+                min_height: 600,
+                position: 'mouse',
+                resizable: true,
                 show: false,
-                width: 200,
-                height: 210
+                title: ''
             });
-            bootstrap.on('loaded', _onWindowLoaded);
-            bootstrap.on('close', _onWindowClose);
+            bootstrap.on('loaded', $.proxy(_onWindowLoaded, this));
+            bootstrap.on('close', $.proxy(_onWindowClose, this));
             window = bootstrap.initAndShow();
         };
 
@@ -50,6 +54,17 @@
         };
 
         /**
+         * Loads the template when the view is ready
+         * @param $window
+         * @param $body
+         */
+        var _onWindowLoaded = function($window, $body)
+        {
+            $ui.window = $window;
+            $ui.body = $body;
+        };
+
+        /**
          * Tells the controller that the view has been closed
          */
         var _onWindowClose = function()
@@ -57,28 +72,8 @@
             events.emit('close');
         };
 
-        /**
-         * Triggered when the window content has been loaded (DOM and assets)
-         * @param $window
-         * @param $body
-         */
-        var _onWindowLoaded = function($window, $body)
-        {
-            $body.find('a').on('click', $.proxy(_onLinkClick, this));
-        };
-
-        /**
-         * Opens an external link
-         * @param evt
-         */
-        var _onLinkClick = function(evt)
-        {
-            evt.preventDefault();
-            app.node.gui.Shell.openExternal($(evt.currentTarget).attr('href'));
-        };
-
     };
 
-    app.views.about = module;
+    app.views.help = module;
 
 })(window.App, jQuery);

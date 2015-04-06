@@ -2,12 +2,14 @@
   "about": {
     "copyright": "© Johan Satgé 2015",
     "website": "Website",
-    "website_url": "https://johansatge.github.io/namage"
+    "website_url": "https://johansatge.github.io/@todo"
   },
   "menu": {
     "file": "File",
     "about": "About",
-    "new": "New..."
+    "new": "New...",
+    "help": "Help",
+    "view_help": "View help"
   },
   "main": {
     "drop": "Drop files here",

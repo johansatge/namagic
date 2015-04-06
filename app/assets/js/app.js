@@ -24,6 +24,7 @@
         app.utils.menubar.on('new', _onNew);
         app.utils.menubar.on('close', _onClose);
         app.utils.menubar.on('about', _onAbout);
+        app.utils.menubar.on('help', _onHelp);
         app.utils.menubar.on('quit', _onQuit);
         _onNew();
     };
@@ -46,12 +47,21 @@
     };
 
     /**
-     * Request the "About..." page
+     * Requests the "About..." page
      */
     var _onAbout = function()
     {
         var about = new app.controllers.about();
         about.init();
+    };
+
+    /**
+     * Requests the "Help" page
+     */
+    var _onHelp = function()
+    {
+        var help = new app.controllers.help();
+        help.init();
     };
 
     /**

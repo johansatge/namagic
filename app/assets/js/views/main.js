@@ -1,5 +1,5 @@
 /**
- * Editor view
+ * Main view
  */
 (function(app, $)
 {
@@ -103,8 +103,7 @@
         };
 
         /**
-         * Tell the controller that the view has been closed
-         * @param evt
+         * Tells the controller that the view has been closed
          */
         var _onWindowClose = function()
         {
