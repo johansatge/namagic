@@ -55,7 +55,7 @@
         {
             if (model.hasFiles())
             {
-                var destination_dir = model.getDefaultdestinationDir();
+                var destination_dir = model.getDefaultDestinationDir();
                 view.files.getDestinationDir(destination_dir);
             }
         };

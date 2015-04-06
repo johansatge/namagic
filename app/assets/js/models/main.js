@@ -18,10 +18,11 @@
         var newFiles = [];
         var newFilesCount;
 
-        var pendingFiles = [];
-        var pendingFilesCount;
+        var pendingFilesBaseCount;
+        var pendingIndex;
+        var pendingFilesDoneCount;
 
-        var defaultdestinationDir;
+        var defaultDestinationDir;
         var destinationDir;
 
         /**
@@ -39,7 +40,7 @@
          */
         this.cancelCurrentWork = function()
         {
-            pendingFiles = [];
+            pendingIndex = currentFiles.length;
             newFiles = [];
         };
 
@@ -54,9 +55,9 @@
         /**
          * Returns the default destination path
          */
-        this.getDefaultdestinationDir = function()
+        this.getDefaultDestinationDir = function()
         {
-            return defaultdestinationDir;
+            return defaultDestinationDir;
         };
 
         /**
@@ -79,8 +80,9 @@
         {
             events.emit('progress', 0);
             destinationDir = destination_dir;
-            pendingFiles = currentFiles.slice(0);
-            pendingFilesCount = currentFiles.length;
+            pendingIndex = 0;
+            pendingFilesDoneCount = 0;
+            pendingFilesBaseCount = currentFiles.length;
             _asyncApplyOperations.apply(this);
         };
 
@@ -90,7 +92,7 @@
          */
         var _asyncApplyOperations = function()
         {
-            var file = pendingFiles.shift();
+            var file = currentFiles[pendingIndex];
             file.applyUpdatedName(destinationDir, $.proxy(_onFileApplied, this));
         };
 
@@ -101,18 +103,20 @@
          */
         var _onFileApplied = function(file, success)
         {
+            pendingFilesDoneCount += 1;
             if (success)
             {
                 events.emit('remove_files', [file.getID()]);
-                currentFiles.splice(currentFilesIndexes[file.getID()], 1);
+                currentFiles.shift();
                 delete currentFilesIndexes[file.getID()];
             }
             else
             {
+                pendingIndex += 1;
                 events.emit('update_files', [file]);
             }
-            events.emit('progress', pendingFiles.length > 0 ? ((pendingFilesCount - pendingFiles.length) * 100) / pendingFilesCount : 100);
-            if (pendingFiles.length > 0)
+            events.emit('progress', pendingIndex < currentFiles.length ? (pendingFilesDoneCount * 100) / pendingFilesBaseCount : 100);
+            if (pendingIndex < currentFiles.length)
             {
                 _asyncApplyOperations.apply(this);
             }
@@ -152,7 +156,7 @@
             {
                 if (typeof new_file !== 'undefined')
                 {
-                    defaultdestinationDir = new_file.getDirectory();
+                    defaultDestinationDir = new_file.getDirectory();
                 }
                 events.emit('idle');
             }
