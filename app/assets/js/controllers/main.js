@@ -106,7 +106,7 @@
          */
         var _onUpdateFilesFromModel = function(files)
         {
-            view.files.updateFiles(files);
+            view.files.updateFiles(files, false);
         };
 
         /**

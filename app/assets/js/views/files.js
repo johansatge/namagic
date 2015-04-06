@@ -74,7 +74,7 @@
         {
             for (var index = 0; index < ids.length; index += 1)
             {
-                $files[ids[index]].$row.remove();
+                $files[ids[index]].row.parentNode.removeChild($files[ids[index]].row);
                 delete $files[ids[index]];
             }
             $lastSelectedFile = false;
@@ -97,15 +97,18 @@
                 {
                     var $row = $(app.utils.template.render(fileTemplate, [file]));
                     $ui.list.append($row);
-                    $files[file_id] = {$row: $row};
-                    $files[file_id].updatedName = $row.get(0).querySelector('.js-new-name');
-                    $files[file_id].status = $row.get(0).querySelector('.js-status-message');
-                    $row.data('id', file_id);
-                    $row.get(0).querySelector('.js-name').innerHTML = file.getName();
+                    var row = $row.get(0);
+                    $files[file_id] = {
+                        row: row,
+                        updatedName: row.querySelector('.js-new-name'),
+                        status: row.querySelector('.js-status-message')
+                    };
+                    row.setAttribute('id', file_id);
+                    row.querySelector('.js-name').innerHTML = file.getName();
                 }
                 $files[file_id].updatedName.innerHTML = file.getUpdatedName();
                 $files[file_id].status.innerHTML = file.getMessage();
-                app.utils.dom.toggleClass($files[file_id].$row.get(0), 'js-error', file.hasError());
+                app.utils.dom.toggleClass($files[file_id].row, 'js-error', file.hasError());
             }
         };
 
@@ -274,8 +277,7 @@
             var ids = [];
             $items.each(function()
             {
-                var id = $(this).data('id');
-                ids.push(id);
+                ids.push($(this).attr('id'));
             });
             events.emit('remove_files', ids);
         };
