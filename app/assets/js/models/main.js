@@ -91,39 +91,16 @@
                 {
                     continue;
                 }
-                var source_path = app.utils.string.escapeForCLI(file.getDirectory() + '/' + file.getName());
-                var destination_path = app.utils.string.escapeForCLI(destinationDir + '/' + file.getUpdatedName());
-                var command = file.getDirectory() !== destinationDir ? 'cp' : 'mv';
-                var destination_exists;
-                try
+                var applied = file.applyUpdatedName(destinationDir);
+                if (applied)
                 {
-                    app.node.fs.accessSync(destinationDir + '/' + file.getUpdatedName(), app.node.fs.R_OK);
-                    destination_exists = command === 'cp';
-                }
-                catch (err)
-                {
-                    app.utils.log(err);
-                    destination_exists = false;
-                }
-                if (!destination_exists)
-                {
-                    try
-                    {
-                        app.node.execSync(command + ' ' + source_path + ' ' + destination_path);
-                        processed_ids.push(file.getID());
-                        currentFiles.splice(currentFilesIndexes[file.getID()], 1);
-                        delete currentFilesIndexes[file.getID()];
-                    }
-                    catch (error)
-                    {
-                        currentFiles[currentFilesIndexes[file.getID()]].setError(true, error.message);
-                        updated_files.push(currentFiles[currentFilesIndexes[file.getID()]]);
-                    }
+                    processed_ids.push(file.getID());
+                    currentFiles.splice(currentFilesIndexes[file.getID()], 1);
+                    delete currentFilesIndexes[file.getID()];
                 }
                 else
                 {
-                    currentFiles[currentFilesIndexes[file.getID()]].setError(true, app.utils.locale.get('main.errors.file_exists'));
-                    updated_files.push(currentFiles[currentFilesIndexes[file.getID()]]);
+                    updated_files.push(file);
                 }
             }
             events.emit('remove_files', processed_ids);
