@@ -151,6 +151,7 @@
          */
         var _onViewClose = function()
         {
+            model.cancelCurrentWork();
             view.close();
         };
 
