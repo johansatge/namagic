@@ -9,6 +9,8 @@
     var module = function(_id, _dir, _name)
     {
 
+        var applyCallback;
+
         var id = _id;
         var name = _name;
         var directory = _dir;
@@ -17,41 +19,33 @@
         var updatedName = '';
 
         /**
-         * Applies the updated name on the file
+         * Asynchronously applies the updated name on the file
          * @param destination_dir
+         * @param callback
          */
-        this.applyUpdatedName = function(destination_dir)
+        this.applyUpdatedName = function(destination_dir, callback)
         {
-            var source_path = app.utils.string.escapeForCLI(directory + '/' + name);
-            var destination_path = app.utils.string.escapeForCLI(destination_dir + '/' + updatedName);
-            var command = directory !== destination_dir ? 'cp' : 'mv';
-            var destination_exists;
-            try
+            if (this.hasError())
             {
-                app.node.fs.accessSync(destination_dir + '/' + updatedName, app.node.fs.R_OK);
-                destination_exists = command === 'cp';
+                applyCallback(this, false);
             }
-            catch (err)
+            applyCallback = callback;
+            var source_path = directory + '/' + name;
+            var destination_path = destination_dir + '/' + updatedName;
+            app.node.fs.rename(source_path, destination_path, $.proxy(_updatedNameApplied, this));
+        };
+
+        /**
+         * Triggers the needed callback when the file has been modified
+         * @param error
+         */
+        var _updatedNameApplied = function(error)
+        {
+            if (error)
             {
-                destination_exists = false;
+                this.setError(true, error.message);
             }
-            if (!destination_exists)
-            {
-                try
-                {
-                    app.node.execSync(command + ' ' + source_path + ' ' + destination_path);
-                    return true;
-                }
-                catch (error)
-                {
-                    this.setError(true, error.message);
-                }
-            }
-            else
-            {
-                this.setError(true, app.utils.locale.get('main.errors.file_exists'));
-            }
-            return false;
+            applyCallback(this, error ? false : true);
         };
 
         /**

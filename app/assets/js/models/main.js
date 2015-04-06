@@ -90,37 +90,31 @@
          */
         var _asyncApplyOperations = function()
         {
-            var files = pendingFiles.splice(0, 50);
-            var processed_ids = [];
-            var updated_files = [];
-            for (var index = 0; index < files.length; index += 1)
+            var file = pendingFiles.shift();
+            file.applyUpdatedName(destinationDir, $.proxy(_onFileApplied, this));
+        };
+
+        /**
+         * Triggered when a file has been modified by using the current operations
+         * @param file
+         * @param success
+         */
+        var _onFileApplied = function(file, success)
+        {
+            if (success)
             {
-                var file = files[index];
-                if (file.hasError())
-                {
-                    continue;
-                }
-                var applied = file.applyUpdatedName(destinationDir);
-                if (applied)
-                {
-                    processed_ids.push(file.getID());
-                    currentFiles.splice(currentFilesIndexes[file.getID()], 1);
-                    delete currentFilesIndexes[file.getID()];
-                }
-                else
-                {
-                    updated_files.push(file);
-                }
+                events.emit('remove_files', [file.getID()]);
+                currentFiles.splice(currentFilesIndexes[file.getID()], 1);
+                delete currentFilesIndexes[file.getID()];
             }
-            events.emit('remove_files', processed_ids);
-            if (updated_files.length > 0)
+            else
             {
-                events.emit('update_files', updated_files);
+                events.emit('update_files', [file]);
             }
             events.emit('progress', pendingFiles.length > 0 ? ((pendingFilesCount - pendingFiles.length) * 100) / pendingFilesCount : 100);
             if (pendingFiles.length > 0)
             {
-                setTimeout($.proxy(_asyncApplyOperations, this), 0);
+                _asyncApplyOperations.apply(this);
             }
             else
             {
