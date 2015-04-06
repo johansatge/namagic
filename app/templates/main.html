@@ -28,10 +28,10 @@
                 </tr>
             </script>
             <div class="actions">
-                <button class="secondary left js-files-add">
+                <button tabindex="-1" class="secondary left js-files-add">
                     <i class="fa fa-plus-circle"></i>{{main.toolbar.add_files}}
                 </button>
-                <button class="secondary left js-files-remove">
+                <button tabindex="-1" class="secondary left js-files-remove">
                     <i class="fa fa-trash-o"></i>{{main.toolbar.remove_files}}
                 </button>
                 <input type="file" class="js-files-input" multiple>
@@ -56,11 +56,11 @@
                     <div class="operation-subtitle">
                         {{main.operations.selection.subtitle}}
                         <div class="operation-helper operation-handle js-handle"><i class="fa fa-arrows"></i></div>
-                        <button class="operation-helper operation-delete js-delete-operation"><i class="fa fa-trash-o"></i></button>
+                        <button tabindex="-1" class="operation-helper operation-delete js-delete-operation"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-bar">
                         <i class="chevron fa fa-chevron-down"></i>
-                        <select class="js-select-selection-type">
+                        <select tabindex="-1" class="js-select-selection-type">
                             <optgroup label="{{main.operations.selection.text_selections}}">
                                 <option value="allText">{{main.operations.selection.all_text.option}}</option>
                                 <option value="freeText">{{main.operations.selection.free_text.option}}</option>
@@ -136,7 +136,7 @@
                     <div class="operation-subtitle">
                         {{main.operations.actions.subtitle}}
                         <div class="operation-helper add-action">
-                            <select class="js-add-action">
+                            <select tabindex="-1" class="js-add-action">
                                 <option value="">{{main.operations.actions.select}}</option>
                                 <optgroup label="{{main.operations.actions.text_actions}}">
                                     <option value="removeText">{{main.operations.actions.remove_text.option}}</option>
@@ -164,7 +164,7 @@
                     </div>
                     <div class="operation-bar closed">
                         <i class="chevron fa fa-chevron-down"></i>
-                        <select class="js-apply-to">
+                        <select tabindex="-1" class="js-apply-to">
                             <option value="filename">{{main.operations.apply_to.filename_only}}</option>
                             <option value="extension">{{main.operations.apply_to.extension_only}}</option>
                             <option value="both">{{main.operations.apply_to.filename_and_extension}}</option>
@@ -177,7 +177,7 @@
                     <div class="heading">
                         {{main.operations.actions.remove_text.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
-                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-fields">
                         <label class="field">
@@ -191,7 +191,7 @@
                     <div class="heading">
                         {{main.operations.actions.free_text.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
-                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-fields">
                         <label class="field">
@@ -206,7 +206,7 @@
                     <div class="heading">
                         {{main.operations.actions.digits_sequence.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
-                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-fields">
                         <label class="field">
@@ -225,7 +225,7 @@
                     <div class="heading">
                         {{main.operations.actions.update_case.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
-                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-fields">
                         <label class="field">
@@ -248,7 +248,7 @@
                     <div class="heading">
                         {{main.operations.actions.creation_date.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
-                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-fields">
                         <label class="field">
@@ -274,7 +274,7 @@
                     <div class="heading">
                         {{main.operations.actions.last_modified_date.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
-                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-fields">
                         <label class="field">
@@ -300,7 +300,7 @@
                     <div class="heading">
                         {{main.operations.actions.file_size.option}}
                         <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
-                        <button class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
                     </div>
                     <div class="operation-fields js-fields">
                         <label class="field">
@@ -310,11 +310,11 @@
                 </div>
             </script>
             <div class="actions">
-                <button class="primary right js-operation-apply">
+                <button tabindex="-1" class="primary right js-operation-apply">
                     <i class="fa fa-check"></i>
                     {{main.toolbar.apply}}
                 </button>
-                <button class="secondary right js-operation-add">
+                <button tabindex="-1" class="secondary right js-operation-add">
                     <i class="fa fa-cog"></i>
                     {{main.toolbar.add_operation}}
                 </button>

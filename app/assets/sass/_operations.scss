@@ -122,10 +122,11 @@
             z-index            : 2;
             -webkit-appearance : none;
             position           : absolute;
-            width              : 100%;
-            height             : 100%;
+            width              : 11px;
+            height             : 12px;
+            margin             : 4px 0 0 4px;
+            border-radius      : 2px;
             background         : transparent;
-            opacity            : 0;
             text-indent        : 20px;
         }
     }
@@ -241,6 +242,12 @@
     border        : 1px solid #2c2c2c;
     border-top    : 0;
 
+    & input:focus,
+    & select:focus
+    {
+        box-shadow : 0 0 0 2px #3b99fc !important;
+    }
+
     & .field-help
     {
         position : absolute;
@@ -318,15 +325,8 @@
             box-shadow    : inset 0 1px 2px #373737, 0 1px 0 #5e5e5e;
             height        : 26px;
             margin        : 6px 0 0 0;
-            transition    : border 150ms;
             background    : #3a3a3a;
             text-indent   : 2px;
-        }
-
-        & input[type=text]:focus
-        {
-            border      : 2px solid #3b99fc;
-            text-indent : 0;
         }
 
         & input[type=checkbox]
