@@ -22,14 +22,13 @@
 
     /**
      * Sets the current window (used with the "Close" shortcut)
-     * @todo fix memory leak, 11 "move" events added
      * @param window
      */
     module.setCurrentWindow = function(window)
     {
         if (_currentWindow !== false)
         {
-            _currentWindow.removeListener('move', $.proxy(_updateBackgroundWindowPosition, this));
+            _currentWindow.removeAllListeners('move');
         }
         _currentWindow = window;
         if (_currentWindow !== false)
