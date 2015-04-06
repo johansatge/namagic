@@ -79,9 +79,11 @@
      */
     module.creationDate = function(subject, options, index, path)
     {
-        var stats = app.node.fs.statSync(path);
-        var date = stats.birthtime !== 'undefined' ? app.utils.string.formatDate(stats.birthtime, options.format) : '/!\\';
-        return {type: 'add', text: date};
+        var birthtime = _getFileStat.apply(this, [path, 'birthtime']);
+        return birthtime instanceof Error ? birthtime : {
+            type: 'add',
+            text: app.utils.string.formatDate(birthtime, options.format)
+        };
     };
 
     /**
@@ -93,9 +95,11 @@
      */
     module.lastModifiedDate = function(subject, options, index, path)
     {
-        var stats = app.node.fs.statSync(path);
-        var date = stats.mtime !== 'undefined' ? app.utils.string.formatDate(stats.mtime, options.format) : '/!\\';
-        return {type: 'add', text: date};
+        var mtime = _getFileStat.apply(this, [path, 'mtime']);
+        return mtime instanceof Error ? mtime : {
+            type: 'add',
+            text: app.utils.string.formatDate(mtime, options.format)
+        };
     };
 
     /**
@@ -107,8 +111,29 @@
      */
     module.fileSize = function(subject, options, index, path)
     {
-        var stats = app.node.fs.statSync(path);
-        return {type: 'add', text: app.node.filesize(stats.size, {bits: true, spacer: ''})};
+        var size = _getFileStat.apply(this, [path, 'size']);
+        return size instanceof Error ? size : {
+            type: 'add',
+            text: app.node.filesize(stats.size, {bits: true, spacer: ''})
+        };
+    };
+
+    /**
+     * Returns the stat of a file if available
+     * @param file_path
+     * @param stat
+     */
+    var _getFileStat = function(file_path, stat)
+    {
+        try
+        {
+            var stats = app.node.fs.statSync(file_path);
+            return stats[stat];
+        }
+        catch (error)
+        {
+            return new Error(app.utils.locale.get('main.errors.stat_not_found'));
+        }
     };
 
     app.models.action = module;

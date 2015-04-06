@@ -12,7 +12,9 @@
   "main": {
     "drop": "Drop files here",
     "errors": {
-      "duplicate_filename": "Duplicate filename"
+      "duplicate_filename": "Duplicate filename",
+      "stat_not_found": "File information not found",
+      "error": "error"
     },
     "toolbar": {
       "add_operation": "Add operation",

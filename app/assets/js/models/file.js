@@ -77,7 +77,15 @@
                 {
                     var action_callable = app.models.action[actions[act_index].type];
                     var new_text = action_callable(updated_subject_part, actions[act_index].options, file_index, file_path);
-                    updated_subject_part = new_text.type === 'add' ? updated_subject_part + new_text.text : new_text.text;
+                    if (new_text instanceof Error)
+                    {
+                        this.setError(true, new_text.message);
+                        updated_subject_part = app.utils.locale.get('main.errors.error');
+                    }
+                    else
+                    {
+                        updated_subject_part = new_text.type === 'add' ? updated_subject_part + new_text.text : new_text.text;
+                    }
                 }
                 updated_subject += updated_subject_part;
                 previous_range = range;
