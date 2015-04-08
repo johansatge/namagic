@@ -128,6 +128,7 @@
             {
                 $ui.add.hide();
                 $ui.remove.hide();
+                $ui.filesCount.hide();
                 $ui.progressBarProgress.css({width: 0});
                 $ui.progressbar.show();
             }
@@ -135,6 +136,7 @@
             {
                 $ui.add.show();
                 $ui.remove.show();
+                $ui.filesCount.show();
                 $ui.progressbar.hide();
                 $ui.placeholder.toggle($ui.list.children().length === 0);
             }
@@ -167,7 +169,7 @@
             $ui.list = $dom.find('.js-files-list');
             $ui.progressbar = $dom.find('.js-progressbar');
             $ui.progressBarProgress = $dom.find('.js-progressbar-progress');
-            $ui.filesCount = $dom.find('.js-files-count').get(0);
+            $ui.filesCount = $dom.find('.js-files-count');
             fileTemplate = $dom.find('.js-file-template').html();
             _updateFilesCount.apply(this);
         };
@@ -190,7 +192,7 @@
                 locale = 'main.toolbar.count.selected_' + (active_count <= 1 ? 'one' : 'many');
                 status = app.utils.locale.get(locale).replace('$1', active_count).replace('$2', filesCount);
             }
-            $ui.filesCount.innerHTML = status;
+            $ui.filesCount.html(status);
         };
 
         /**
