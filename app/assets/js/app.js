@@ -23,7 +23,6 @@
         app.utils.menubar.init();
         app.utils.menubar.on('new', _onNew);
         app.utils.menubar.on('close', _onClose);
-        app.utils.menubar.on('about', _onAbout);
         app.utils.menubar.on('help', _onHelp);
         app.utils.menubar.on('quit', _onQuit);
         _onNew();
@@ -44,15 +43,6 @@
     var _onClose = function()
     {
         app.utils.windowmanager.closeCurrentWindow();
-    };
-
-    /**
-     * Requests the "About..." page
-     */
-    var _onAbout = function()
-    {
-        var about = new app.controllers.about();
-        about.init();
     };
 
     /**

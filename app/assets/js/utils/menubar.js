@@ -29,15 +29,8 @@
         menubar = new app.node.gui.Menu({type: 'menubar'});
         menubar.createMacBuiltin(app.utils.locale.get('manifest.name'));
 
-        // Overrides default "about" item
+        // Removes default "about" item
         menubar.items[0].submenu.removeAt(0);
-        menubar.items[0].submenu.insert(new app.node.gui.MenuItem({
-            label: app.utils.locale.get('menu.about') + ' ' + app.utils.locale.get('manifest.name'), click: function()
-            {
-                events.emit('about');
-            }
-        }), 0);
-        menubar.items[0].submenu.insert(new app.node.gui.MenuItem({type: 'separator'}), 1);
 
         // Removes "cmd-z" items
         menubar.items[1].submenu.removeAt(0);
@@ -61,6 +54,8 @@
         var help_menu = new app.node.gui.Menu();
         help_menu.append(new app.node.gui.MenuItem({
             label: app.utils.locale.get('menu.view_help'),
+            key: '?',
+            modifiers: 'cmd',
             click: function()
             {
                 events.emit('help');
