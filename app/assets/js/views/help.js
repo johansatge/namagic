@@ -31,7 +31,7 @@
             var bootstrap = new app.utils.windowbootstrap('templates/help.html', {
                 toolbar: false,
                 frame: true,
-                width: 350,
+                width: 550,
                 height: 600,
                 min_width: 350,
                 min_height: 600,
