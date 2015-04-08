@@ -188,6 +188,7 @@
                 placeholder: 'js-action-placeholder',
                 handle: '.js-action-handle',
                 axis: 'y',
+                containment: $new_operation,
                 stop: $.proxy(_onEditOperations, this)
             });
             $new_operation.find('.js-select-selection-type').trigger('change');
