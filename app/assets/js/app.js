@@ -1,7 +1,7 @@
 /**
  * App bootstrap
  */
-(function(window, $)
+(function(window, navigator)
 {
 
     'use strict';
@@ -19,7 +19,7 @@
     {
         app.node = modules;
         app.devMode = app.node.fs.existsSync('.dev') && app.node.fs.readFileSync('.dev', {encoding: 'utf8'}) === '1';
-        app.utils.locale.init('en');
+        app.utils.locale.init(typeof navigator.language !== 'undefined' ? navigator.language : '');
         app.utils.menubar.init();
         app.utils.menubar.on('new', _onNew);
         app.utils.menubar.on('close', _onClose);
@@ -74,4 +74,4 @@
 
     window.App = app;
 
-})(window, jQuery);
+})(window, navigator);

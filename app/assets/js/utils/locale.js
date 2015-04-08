@@ -1,7 +1,7 @@
 /**
  * Locale utils
  */
-(function(app, $)
+(function(app)
 {
 
     'use strict';
@@ -15,7 +15,15 @@
      */
     module.init = function(language_code)
     {
-        var json = eval('(' + app.node.fs.readFileSync('locale/' + language_code + '.json') + ')');
+        var json;
+        try
+        {
+            json = eval('(' + app.node.fs.readFileSync('locale/' + language_code + '.json') + ')');
+        }
+        catch (error)
+        {
+            json = eval('(' + app.node.fs.readFileSync('locale/en.json') + ')');
+        }
         json.manifest = app.node.gui.App.manifest;
         _parseObject('', json);
     };
@@ -34,20 +42,20 @@
      * Gets all locale strings
      * @returns {}
      */
-    module.getAll  = function()
+    module.getAll = function()
     {
         return strings;
     };
 
     /**
-     * Parses an object and makes its hierarchy flat
+     * Parses an object and makes its hierarchy flat by using dots (.)
      * @param prefix
      * @param json
      * @private
      */
     var _parseObject = function(prefix, json)
     {
-        for(var index in json)
+        for (var index in json)
         {
             if (typeof json[index] === 'string')
             {
@@ -62,4 +70,4 @@
 
     app.utils.locale = module;
 
-})(window.App, jQuery);
+})(window.App);
