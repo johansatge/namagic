@@ -93,6 +93,10 @@
                     currentFiles.push(new_file);
                 }
             }
+            if (typeof new_file !== 'undefined')
+            {
+                defaultDestinationDir = new_file.getDirectory();
+            }
             events.emit('add_files', new_files);
             events.emit('progress', newFiles.length > 0 ? ((newFilesCount - newFiles.length) * 100) / newFilesCount : 100);
             if (newFiles.length > 0)
@@ -101,10 +105,6 @@
             }
             else
             {
-                if (typeof new_file !== 'undefined')
-                {
-                    defaultDestinationDir = new_file.getDirectory();
-                }
                 events.emit('idle');
             }
         };
