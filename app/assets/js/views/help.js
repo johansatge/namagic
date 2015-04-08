@@ -34,7 +34,8 @@
                 width: 550,
                 height: 600,
                 min_width: 350,
-                min_height: 600,
+                min_height: 350,
+                max_width: 1000,
                 position: 'mouse',
                 resizable: true,
                 show: false,
@@ -62,6 +63,16 @@
         {
             $ui.window = $window;
             $ui.body = $body;
+            $ui.body.find('img').on('dragstart', $.proxy(_onDragImage, this));
+        };
+
+        /**
+         * Dragging images
+         * @param evt
+         */
+        var _onDragImage = function(evt)
+        {
+            evt.preventDefault();
         };
 
         /**

@@ -10,6 +10,11 @@ html, body, div, span, p, form, input, textarea, select, h1, h2, h3, table, tbod
     box-sizing     : border-box;
 }
 
+html
+{
+    background : #fefefe;
+}
+
 body
 {
     padding : 50px 50px 15px 50px;
@@ -43,8 +48,19 @@ p
     margin      : 0 0 25px 0;
 }
 
+p.centered
+{
+    text-align : center;
+}
+
 section
 {
     margin        : 0 0 20px 0;
     border-bottom : 1px solid #cccccc;
+}
+
+img
+{
+    max-width  : 100%;
+    box-shadow : 0 0 10px rgba(0, 0, 0, 0.25);
 }
