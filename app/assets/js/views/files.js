@@ -36,6 +36,8 @@
         {
             _initUI.apply(this, [$window, $dom]);
             $ui.cancelAsync.on('click', $.proxy(_onCancelAsync, this));
+            $ui.filesInput.on('change', $.proxy(_onAddFilesFromUploader, this));
+            $ui.destinationInput.on('change', $.proxy(_onSelectDestination, this));
             this.lockInterface(false);
         };
 
@@ -45,7 +47,7 @@
          */
         this.getDestinationDir = function(default_dir)
         {
-            $ui.destinationInput.attr('nwworkingdir', default_dir).trigger('click');
+            $ui.destinationInput.val('').attr('nwworkingdir', default_dir).trigger('click');
         };
 
         /**
@@ -63,8 +65,6 @@
             (is_locked ? $ui.list.off : $ui.list.on).apply($ui.list, ['click', '.js-file', $.proxy(_onFileClick, this)]);
             (is_locked ? $ui.add.off : $ui.add.on).apply($ui.add, ['click', $.proxy(_onAddFilesFromButton, this)]);
             (is_locked ? $ui.remove.off : $ui.remove.on).apply($ui.remove, ['click', $.proxy(_onRemoveActiveFiles, this)]);
-            (is_locked ? $ui.filesInput.off : $ui.filesInput.on).apply($ui.filesInput, ['change', $.proxy(_onAddFilesFromUploader, this)]);
-            (is_locked ? $ui.destinationInput.off : $ui.destinationInput.on).apply($ui.destinationInput, ['change', $.proxy(_onSelectDestination, this)]);
         };
 
         /**
