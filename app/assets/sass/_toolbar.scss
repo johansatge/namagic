@@ -16,6 +16,16 @@
     position : fixed;
     bottom   : 11px;
 
+    span
+    {
+        cursor      : default;
+        float       : left;
+        margin      : 7px 0 0 10px;
+        font-size   : 11px;
+        color       : #3c3c3c;
+        text-shadow : 0 1px 0 #ffffff;
+    }
+
     & button.left
     {
         float  : left;

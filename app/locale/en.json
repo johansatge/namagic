@@ -22,7 +22,13 @@
       "add_operation": "Add operation",
       "add_files": "Add files...",
       "remove_files": "Remove",
-      "apply": "Apply"
+      "apply": "Apply",
+      "count": {
+        "one": "$1 file added",
+        "many": "$1 files added",
+        "selected_one": "$1 on $2 selected",
+        "selected_many": "$1 on $2 selected"
+      }
     },
     "operations": {
       "no_operation": "No operation set",

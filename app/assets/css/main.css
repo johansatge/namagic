@@ -34,27 +34,36 @@ html, body {
   bottom: 11px;
 }
 /* line 19, ../sass/_toolbar.scss */
+.panel .actions span {
+  cursor: default;
+  float: left;
+  margin: 7px 0 0 10px;
+  font-size: 11px;
+  color: #3c3c3c;
+  text-shadow: 0 1px 0 #ffffff;
+}
+/* line 29, ../sass/_toolbar.scss */
 .panel .actions button.left {
   float: left;
   margin: 0 0 0 10px;
 }
-/* line 25, ../sass/_toolbar.scss */
+/* line 35, ../sass/_toolbar.scss */
 .panel .actions button.right {
   float: right;
   margin: 0 10px 0 0;
 }
-/* line 31, ../sass/_toolbar.scss */
+/* line 41, ../sass/_toolbar.scss */
 .panel .actions button[disabled=disabled] {
   opacity: 0.5;
 }
-/* line 36, ../sass/_toolbar.scss */
+/* line 46, ../sass/_toolbar.scss */
 .panel .actions button {
   border-radius: 4px;
   padding: 4px 14px 4px 6px;
   box-shadow: inset 0 1px 0 #ffffff, 0 1px 0 #f1f6f9;
   opacity: 1;
 }
-/* line 43, ../sass/_toolbar.scss */
+/* line 53, ../sass/_toolbar.scss */
 .panel .actions button.primary {
   color: #ffffff;
   background: linear-gradient(to bottom, #4a9de5, #0072d5);
@@ -63,27 +72,27 @@ html, body {
   padding: 4px 13px 4px 6px;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
-/* line 53, ../sass/_toolbar.scss */
+/* line 63, ../sass/_toolbar.scss */
 .panel .actions button.primary:active {
   background: linear-gradient(to top, #4a9de5, #0072d5);
 }
-/* line 58, ../sass/_toolbar.scss */
+/* line 68, ../sass/_toolbar.scss */
 .panel .actions button.secondary {
   background: linear-gradient(to bottom, #f1f6f9, #d8d8d8);
   border: 1px solid #a3a3a3;
 }
-/* line 64, ../sass/_toolbar.scss */
+/* line 74, ../sass/_toolbar.scss */
 .panel .actions button.secondary:active {
   background: linear-gradient(to top, #f1f6f9, #d8d8d8);
 }
-/* line 69, ../sass/_toolbar.scss */
+/* line 79, ../sass/_toolbar.scss */
 .panel .actions button i {
   float: left;
   margin: 0 6px 0 0;
   font-size: 15px;
   color: rgba(51, 51, 51, 0.35);
 }
-/* line 77, ../sass/_toolbar.scss */
+/* line 87, ../sass/_toolbar.scss */
 .panel .actions button.primary i {
   color: rgba(255, 255, 255, 0.4);
 }

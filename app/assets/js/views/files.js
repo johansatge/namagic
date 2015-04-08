@@ -15,6 +15,7 @@
         var fileTemplate;
         var $lastSelectedFile = false;
         var $files = {};
+        var filesCount = 0;
 
         /**
          * Attaches an event
@@ -76,10 +77,12 @@
             {
                 $files[ids[index]].row.parentNode.removeChild($files[ids[index]].row);
                 delete $files[ids[index]];
+                filesCount -= 1;
             }
             $lastSelectedFile = false;
             $ui.remove.attr('disabled', 'disabled');
             $ui.placeholder.toggle($ui.list.children().length === 0);
+            _updateFilesCount.apply(this);
         };
 
         /**
@@ -95,6 +98,7 @@
                 var file_id = file.getID();
                 if (add)
                 {
+                    filesCount += 1;
                     var $row = $(app.utils.template.render(fileTemplate, [file]));
                     $ui.list.append($row);
                     var row = $row.get(0);
@@ -110,6 +114,7 @@
                 $files[file_id].status.innerHTML = file.getMessage();
                 app.utils.dom.toggleClass($files[file_id].row, 'js-error', file.hasError());
             }
+            _updateFilesCount.apply(this);
         };
 
         /**
@@ -162,7 +167,30 @@
             $ui.list = $dom.find('.js-files-list');
             $ui.progressbar = $dom.find('.js-progressbar');
             $ui.progressBarProgress = $dom.find('.js-progressbar-progress');
+            $ui.filesCount = $dom.find('.js-files-count').get(0);
             fileTemplate = $dom.find('.js-file-template').html();
+            _updateFilesCount.apply(this);
+        };
+
+        /**
+         * Updates the files count in the toolbar
+         */
+        var _updateFilesCount = function()
+        {
+            var active_count = $ui.list.children().filter('.js-active').length;
+            var status;
+            var locale;
+            if (active_count === 0)
+            {
+                locale = 'main.toolbar.count.' + (filesCount <= 1 ? 'one' : 'many');
+                status = app.utils.locale.get(locale).replace('$1', filesCount);
+            }
+            else
+            {
+                locale = 'main.toolbar.count.selected_' + (active_count <= 1 ? 'one' : 'many');
+                status = app.utils.locale.get(locale).replace('$1', active_count).replace('$2', filesCount);
+            }
+            $ui.filesCount.innerHTML = status;
         };
 
         /**
@@ -266,6 +294,7 @@
             }
             $lastSelectedFile = $file.hasClass('js-active') ? $file : false;
             $ui.remove.attr('disabled', $file.hasClass('js-active') ? false : 'disabled');
+            _updateFilesCount.apply(this);
         };
 
         /**
