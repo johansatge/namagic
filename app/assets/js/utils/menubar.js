@@ -31,6 +31,10 @@
 
         // Removes default "about" item
         menubar.items[0].submenu.removeAt(0);
+        menubar.items[0].submenu.insert(new app.node.gui.MenuItem({
+            label: app.utils.locale.get('manifest.name') + ' ' + app.utils.locale.get('manifest.version'),
+            enabled: false
+        }), 0);
 
         // Removes "cmd-z" items
         menubar.items[1].submenu.removeAt(0);
