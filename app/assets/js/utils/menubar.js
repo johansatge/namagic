@@ -53,7 +53,7 @@
         // Adds "help" item
         var help_menu = new app.node.gui.Menu();
         help_menu.append(new app.node.gui.MenuItem({
-            label: app.utils.locale.get('menu.view_help'),
+            label: app.utils.locale.get('menu.help.help'),
             key: '?',
             modifiers: 'cmd',
             click: function()
@@ -61,7 +61,25 @@
                 events.emit('help');
             }
         }));
-        menubar.insert(new app.node.gui.MenuItem({label: app.utils.locale.get('menu.help'), submenu: help_menu}), 4);
+        help_menu.append(new app.node.gui.MenuItem({type: 'separator'}));
+        help_menu.append(new app.node.gui.MenuItem({
+            label: app.utils.locale.get('menu.help.website'),
+            click: function()
+            {
+                events.emit('website');
+            }
+        }));
+        help_menu.append(new app.node.gui.MenuItem({
+            label: app.utils.locale.get('menu.help.bug_report'),
+            click: function()
+            {
+                events.emit('bug_report');
+            }
+        }));
+        menubar.insert(new app.node.gui.MenuItem({
+            label: app.utils.locale.get('menu.help.title'),
+            submenu: help_menu
+        }), 4);
     };
 
     /**

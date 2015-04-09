@@ -3,8 +3,12 @@
     "file": "File",
     "about": "About",
     "new": "New...",
-    "help": "Help",
-    "view_help": "Help & informations"
+    "help": {
+      "title": "Help",
+      "help": "Online help",
+      "website": "Website",
+      "bug_report": "Report a bug or request a feature"
+    }
   },
   "main": {
     "drop": "Drop files here",

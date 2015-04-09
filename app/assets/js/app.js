@@ -23,7 +23,9 @@
         app.utils.menubar.init();
         app.utils.menubar.on('new', _onNew);
         app.utils.menubar.on('close', _onClose);
+        app.utils.menubar.on('website', _onWebsite);
         app.utils.menubar.on('help', _onHelp);
+        app.utils.menubar.on('bug_report', _onBugReport);
         app.utils.menubar.on('quit', _onQuit);
         _onNew();
     };
@@ -46,12 +48,27 @@
     };
 
     /**
-     * Requests the "Help" page
+     * Requests website
+     */
+    var _onWebsite = function()
+    {
+        app.node.gui.Shell.openExternal(app.utils.locale.get('manifest.urls.website'));
+    };
+
+    /**
+     * Requests help
      */
     var _onHelp = function()
     {
-        var help = new app.controllers.help();
-        help.init();
+        app.node.gui.Shell.openExternal(app.utils.locale.get('manifest.urls.help'));
+    };
+
+    /**
+     * Requests bug reporter
+     */
+    var _onBugReport = function()
+    {
+        app.node.gui.Shell.openExternal(app.utils.locale.get('manifest.urls.bug_report'));
     };
 
     /**

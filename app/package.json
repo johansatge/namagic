@@ -2,6 +2,11 @@
   "name": "Namagic",
   "version": "1.0.0",
   "main": "app.html",
+  "urls": {
+    "website": "http://@todo",
+    "help": "http://@todo/help",
+    "bug_report": "http://@todo/bug-report"
+  },
   "window": {
     "width": 500,
     "height": 500,
