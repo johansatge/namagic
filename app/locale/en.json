@@ -14,6 +14,7 @@
     "drop": "Drop files here",
     "errors": {
       "duplicate_filename": "Duplicate filename",
+      "empty_filename": "Empty filename",
       "stat_not_found": "File information not found",
       "error": "error"
     },

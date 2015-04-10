@@ -80,6 +80,10 @@
                     updatedName = _processText.apply(this, [updatedName, op.selection, op.actions, file_index, file_path]);
                 }
             }
+            if (updatedName === '')
+            {
+                this.setError(true, app.utils.locale.get('main.errors.empty_filename'));
+            }
         };
 
         /**
