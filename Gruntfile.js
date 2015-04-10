@@ -4,9 +4,6 @@ module.exports = function(grunt)
     'use strict';
 
     var exec = require('child_process').exec;
-    var nwb = require('node-webkit-builder');
-
-    grunt.registerTask('default', []);
 
     /**
      * Runs the app
@@ -16,22 +13,10 @@ module.exports = function(grunt)
     {
         setDevMode(grunt.option('dev') === true);
         var done = this.async();
-        var child = exec('/Applications/nwjs.app/Contents/MacOS/nwjs ./app');
+        var child = exec('node_modules/nw/nwjs/nwjs.app/Contents/MacOS/nwjs app');
         child.stdout.on('data', grunt.log.write);
         child.stderr.on('data', grunt.log.write);
         child.on('close', done);
-    });
-
-    /**
-     * Builds sample files list
-     */
-    grunt.registerTask('files', function()
-    {
-        exec('mkdir cache');
-        for (var index = 0; index < 1000; index += 1)
-        {
-            exec('touch cache/test_' + index + '.txt');
-        }
     });
 
     /**
@@ -39,29 +24,23 @@ module.exports = function(grunt)
      */
     grunt.registerTask('build', function()
     {
-        var builder = new nwb(
-            {
-                files: './app/**/**',
-                platforms: ['osx'],
-                buildDir: './build',
-                macCredits: false,
-                macIcns: './assets/icns/icon.icns'
-            });
         var done = this.async();
-        grunt.log.writeln('Building app...');
-        setDevMode(false);
-        builder.build().then(function()
+        grunt.log.writeln('Cleaning...');
+        exec('rm -r macappstore/nwjs.app', function(error, stdout, stderr)
         {
-            grunt.log.ok('Build done.');
-            if (grunt.option('launch'))
+            grunt.log.writeln('Copying empty application...');
+            exec('cp -r node_modules/nw/nwjs/nwjs.app macappstore', function(error, stdout, stderr)
             {
-                exec('./build/Namagik/osx/Namagik.app/Contents/MacOS/nwjs');
-            }
-            done();
-        }).catch(function(error)
-        {
-            grunt.log.error(error);
-            done();
+                grunt.log.writeln('Installing icon...');
+                exec('cp assets/icns/icon.icns macappstore/nwjs.app/Contents/Resources/nw.icns', function(error, stdout, stderr)
+                {
+                    grunt.log.writeln('Installing plist...');
+                    exec('cp assets/plist/info.plist macappstore/nwjs.app/Contents/Info.plist', function(error, stdout, stderr)
+                    {
+                        done();
+                    });
+                });
+            });
         });
     });
 

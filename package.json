@@ -1,6 +1,8 @@
 {
   "devDependencies": {
-    "grunt": "~0.4.5",
-    "node-webkit-builder": "~0.3.0"
+    "grunt": "~0.4.5"
+  },
+  "dependencies": {
+    "nw": "~0.12.0-1"
   }
 }
