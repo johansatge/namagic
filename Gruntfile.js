@@ -4,6 +4,8 @@ module.exports = function(grunt)
     'use strict';
 
     var exec = require('child_process').exec;
+    var fs = require('fs');
+    var manifest = eval('(' + fs.readFileSync('app/package.json', {encoding: 'utf8'}) + ')');
 
     /**
      * Runs the app
@@ -35,7 +37,8 @@ module.exports = function(grunt)
                 exec('cp assets/icns/icon.icns macappstore/nwjs.app/Contents/Resources/nw.icns', function(error, stdout, stderr)
                 {
                     grunt.log.writeln('Installing plist...');
-                    exec('cp assets/plist/info.plist macappstore/nwjs.app/Contents/Info.plist', function(error, stdout, stderr)
+                    var plist = fillTemplate(fs.readFileSync('assets/plist/info.plist', {encoding: 'utf8'}), manifest);
+                    fs.writeFile('macappstore/nwjs.app/Contents/Info.plist', plist, function(error)
                     {
                         done();
                     });
@@ -43,6 +46,19 @@ module.exports = function(grunt)
             });
         });
     });
+
+    /**
+     * Fills a template file with an object
+     */
+    function fillTemplate(template, object)
+    {
+        for (var property in object)
+        {
+            var regex = new RegExp('{{' + property + '}}', 'g');
+            template = template.replace(regex, object[property]);
+        }
+        return template;
+    }
 
     /**
      * Toggles dev mode
