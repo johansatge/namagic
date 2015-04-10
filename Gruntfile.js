@@ -29,6 +29,7 @@ module.exports = function(grunt)
         var app_name = manifest.name + '.app';
         var done = this.async();
         grunt.log.writeln('Cleaning...');
+        setDevMode(false);
         exec('rm -r .mas; mkdir .mas', function(error, stdout, stderr)
         {
             grunt.log.writeln('Creating empty application...');
@@ -119,7 +120,7 @@ module.exports = function(grunt)
      */
     function setDevMode(enable)
     {
-        grunt.file.write('./app/.dev', enable ? '1' : '0', {encoding: 'utf8'});
+        grunt.file.write('./app.nw/.dev', enable ? '1' : '0', {encoding: 'utf8'});
     }
 
 };
