@@ -26,22 +26,23 @@ module.exports = function(grunt)
      */
     grunt.registerTask('build', function()
     {
+        var app_name = manifest.name + '.app';
         var done = this.async();
         grunt.log.writeln('Cleaning...');
-        exec('rm -r macappstore/nwjs.app', function(error, stdout, stderr)
+        exec('rm -r .mas; mkdir .mas', function(error, stdout, stderr)
         {
             grunt.log.writeln('Creating empty application...');
-            exec('cp -r node_modules/nw/nwjs/nwjs.app macappstore', function(error, stdout, stderr)
+            exec('cp -r node_modules/nw/nwjs/nwjs.app .mas/' + app_name, function(error, stdout, stderr)
             {
                 grunt.log.writeln('Installing icon...');
-                exec('cp assets/icns/icon.icns macappstore/nwjs.app/Contents/Resources/nw.icns', function(error, stdout, stderr)
+                exec('cp assets/icns/icon.icns .mas/' + app_name + '/Contents/Resources/nw.icns', function(error, stdout, stderr)
                 {
                     grunt.log.writeln('Installing plist...');
                     var plist = fillTemplate(fs.readFileSync('assets/plist/info.plist', {encoding: 'utf8'}), manifest);
-                    fs.writeFile('macappstore/nwjs.app/Contents/Info.plist', plist, function(error)
+                    fs.writeFile('.mas/' + app_name + '/Contents/Info.plist', plist, function(error)
                     {
                         grunt.log.writeln('Installing app files...');
-                        exec('cp -r app.nw macappstore/nwjs.app/Contents/Resources', function(error, stdout, stderr)
+                        exec('cp -r app.nw .mas/' + app_name + '/Contents/Resources', function(error, stdout, stderr)
                         {
                             done();
                         });
@@ -50,6 +51,54 @@ module.exports = function(grunt)
             });
         });
     });
+
+    /**
+     * Signs the app
+     */
+    grunt.registerTask('sign', function()
+    {
+        var app_name = manifest.name + '.app';
+        var done = this.async();
+        var identity = 'LK7U6U8DZ4' // @todo move this elsewhere
+        var bundle_id = manifest.bundle_identifier;
+        var command = getSignCommand(identity, bundle_id, 'assets/entitlements/child.plist', '.mas/' + app_name + '/Contents/Frameworks/nwjs Helper.app');
+        exec(command, function(error, stdout, stderr)
+        {
+            grunt.log.writeln(stdout);
+            grunt.log.writeln(stderr);
+            var command = getSignCommand(identity, bundle_id, 'assets/entitlements/child.plist', '.mas/' + app_name + '/Contents/Frameworks/nwjs Helper EH.app');
+            exec(command, function(error, stdout, stderr)
+            {
+                grunt.log.writeln(stdout);
+                grunt.log.writeln(stderr);
+                var command = getSignCommand(identity, bundle_id, 'assets/entitlements/child.plist', '.mas/' + app_name + '/Contents/Frameworks/nwjs Helper NP.app');
+                exec(command, function(error, stdout, stderr)
+                {
+                    grunt.log.writeln(stdout);
+                    grunt.log.writeln(stderr);
+                    var command = getSignCommand(identity, bundle_id, 'assets/entitlements/parent.plist', '.mas/' + app_name + '');
+                    exec(command, function(error, stdout, stderr)
+                    {
+                        grunt.log.writeln(stdout);
+                        grunt.log.writeln(stderr);
+                        done();
+                    });
+                });
+            });
+        });
+    });
+
+    /**
+     * Gets a codesign command
+     * @param identity
+     * @param bundle_id
+     * @param entitlement_path
+     * @param app_path
+     */
+    function getSignCommand(identity, bundle_id, entitlement_path, app_path)
+    {
+        return 'codesign --deep -s ' + identity + ' -i ' + bundle_id + ' --entitlements ' + entitlement_path + ' "' + app_path + '"';
+    }
 
     /**
      * Fills a template file with an object
