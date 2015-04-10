@@ -1,7 +1,7 @@
 .idea
 node_modules
-app/assets/.sass-cache
-app/.dev
+app.nw/assets/.sass-cache
+app.nw/.dev
 build
 cache
 macappstore

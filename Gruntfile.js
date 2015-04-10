@@ -5,7 +5,7 @@ module.exports = function(grunt)
 
     var exec = require('child_process').exec;
     var fs = require('fs');
-    var manifest = eval('(' + fs.readFileSync('app/package.json', {encoding: 'utf8'}) + ')');
+    var manifest = eval('(' + fs.readFileSync('app.nw/package.json', {encoding: 'utf8'}) + ')');
 
     /**
      * Runs the app
@@ -15,7 +15,7 @@ module.exports = function(grunt)
     {
         setDevMode(grunt.option('dev') === true);
         var done = this.async();
-        var child = exec('node_modules/nw/nwjs/nwjs.app/Contents/MacOS/nwjs app');
+        var child = exec('node_modules/nw/nwjs/nwjs.app/Contents/MacOS/nwjs app.nw');
         child.stdout.on('data', grunt.log.write);
         child.stderr.on('data', grunt.log.write);
         child.on('close', done);
@@ -30,7 +30,7 @@ module.exports = function(grunt)
         grunt.log.writeln('Cleaning...');
         exec('rm -r macappstore/nwjs.app', function(error, stdout, stderr)
         {
-            grunt.log.writeln('Copying empty application...');
+            grunt.log.writeln('Creating empty application...');
             exec('cp -r node_modules/nw/nwjs/nwjs.app macappstore', function(error, stdout, stderr)
             {
                 grunt.log.writeln('Installing icon...');
@@ -40,7 +40,11 @@ module.exports = function(grunt)
                     var plist = fillTemplate(fs.readFileSync('assets/plist/info.plist', {encoding: 'utf8'}), manifest);
                     fs.writeFile('macappstore/nwjs.app/Contents/Info.plist', plist, function(error)
                     {
-                        done();
+                        grunt.log.writeln('Installing app files...');
+                        exec('cp -r app.nw macappstore/nwjs.app/Contents/Resources', function(error, stdout, stderr)
+                        {
+                            done();
+                        });
                     });
                 });
             });
