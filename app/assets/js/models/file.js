@@ -25,11 +25,12 @@
          */
         this.applyUpdatedName = function(destination_dir, callback)
         {
+            applyCallback = callback;
             if (this.hasError())
             {
                 applyCallback(this, false);
+                return;
             }
-            applyCallback = callback;
             var source_path = directory + '/' + name;
             var destination_path = destination_dir + '/' + updatedName;
             app.node.fs.rename(source_path, destination_path, $.proxy(_updatedNameApplied, this));
