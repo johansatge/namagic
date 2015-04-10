@@ -114,7 +114,7 @@
         var size = _getFileStat.apply(this, [path, 'size']);
         return size instanceof Error ? size : {
             type: 'add',
-            text: app.node.filesize(stats.size, {bits: true, spacer: ''})
+            text: app.node.filesize(size, {bits: true, spacer: ''})
         };
     };
 
