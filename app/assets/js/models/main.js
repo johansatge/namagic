@@ -131,15 +131,15 @@
         var _asyncApplyOperations = function()
         {
             var file = currentFiles[pendingIndex];
-            file.applyUpdatedName(destinationDir, $.proxy(_onFileApplied, this));
+            file.applyUpdatedName(destinationDir, $.proxy(_onOperationAppliedOnFile, this));
         };
 
         /**
-         * Triggered when a file has been modified by using the current operations
+         * Triggered when a file has been modified by using the current operations; when everything is done, triggers the needed events
          * @param file
          * @param success
          */
-        var _onFileApplied = function(file, success)
+        var _onOperationAppliedOnFile = function(file, success)
         {
             pendingFilesDoneCount += 1;
             if (success)
