@@ -85,7 +85,7 @@
     module.textPosition = function(subject, options)
     {
         var index = !isNaN(parseInt(options.index)) ? parseInt(options.index) : false;
-        if (index !== false)
+        if (index !== false && index >= 0)
         {
             var real_index = !options.fromEnd ? index : subject.length - index;
             return [{start: real_index, end: real_index}];
@@ -102,7 +102,7 @@
     {
         var index = !isNaN(parseInt(options.index)) ? parseInt(options.index) : false;
         var length = !isNaN(parseInt(options.length)) ? parseInt(options.length) : false;
-        if (index !== false && length !== false)
+        if (index !== false && index >= 0 && length !== false && length >= 0)
         {
             var real_index = !options.fromEnd ? index : subject.length - index - length;
             return [{start: real_index, end: real_index + length}];
