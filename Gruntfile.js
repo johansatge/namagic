@@ -9,6 +9,8 @@ module.exports = function(grunt)
     var manifest = eval('(' + fs.readFileSync('app.nw/package.json', {encoding: 'utf8'}) + ')');
     var source_app = '/Applications/node-webkit.app';
     var app_name = 'namagic.app'; // No capital letters allowed ? Makes the app crash when signed
+    var identity = 'LK7U6U8DZ4' // @todo move this elsewhere
+    var bundle_id = manifest.bundle_identifier;
 
     /**
      * Runs the app
@@ -35,51 +37,41 @@ module.exports = function(grunt)
             function(callback)
             {
                 grunt.log.writeln('Cleaning...');
-                exec('rm -r .mas; mkdir .mas', function(error, stdout, stderr)
-                {
-                    callback();
-                });
+                exec('rm -r .mas; mkdir .mas', callback);
             },
             function(callback)
             {
                 grunt.log.writeln('Creating empty application...');
-                exec('cp -r ' + source_app + ' .mas/' + app_name, function(error, stdout, stderr)
-                {
-                    callback();
-                });
+                exec('cp -r ' + source_app + ' .mas/' + app_name, callback);
             },
             function(callback)
             {
                 grunt.log.writeln('Installing plist...');
-                var plist = fillTemplate(fs.readFileSync('assets/plist/info.plist', {encoding: 'utf8'}), manifest);
-                fs.writeFile('.mas/' + app_name + '/Contents/Info.plist', plist, {encoding: 'utf8'}, function(error)
+                var plist = fs.readFileSync('assets/plist/info.plist', {encoding: 'utf8'});
+                for (var property in manifest)
                 {
-                    callback();
-                });
+                    var regex = new RegExp('{{' + property + '}}', 'g');
+                    plist = plist.replace(regex, manifest[property]);
+                }
+                fs.writeFile('.mas/' + app_name + '/Contents/Info.plist', plist, {encoding: 'utf8'}, callback);
             },
             function(callback)
             {
                 grunt.log.writeln('Installing icon...');
-                exec('cp assets/icns/icon.icns .mas/' + app_name + '/Contents/Resources/nw.icns', function(error, stdout, stderr)
-                {
-                    callback();
-                });
+                exec('cp assets/icns/icon.icns .mas/' + app_name + '/Contents/Resources/nw.icns', callback);
             },
             function(callback)
             {
                 grunt.log.writeln('Updating helpers...');
-                updateHelperPlist('.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper.app', manifest.bundle_identifier);
-                updateHelperPlist('.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper EH.app', manifest.bundle_identifier);
-                updateHelperPlist('.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper NP.app', manifest.bundle_identifier);
+                updateHelperPlist('.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper.app');
+                updateHelperPlist('.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper EH.app');
+                updateHelperPlist('.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper NP.app');
                 callback();
             },
             function(callback)
             {
                 grunt.log.writeln('Installing app files...');
-                exec('cp -r app.nw .mas/' + app_name + '/Contents/Resources', function(error, stdout, stderr)
-                {
-                    callback();
-                });
+                exec('cp -r app.nw .mas/' + app_name + '/Contents/Resources', callback);
             }
         ];
         async.series(series, function()
@@ -94,43 +86,40 @@ module.exports = function(grunt)
     grunt.registerTask('sign', function()
     {
         var done = this.async();
-        var identity = 'LK7U6U8DZ4' // @todo move this elsewhere
-        var bundle_id = manifest.bundle_identifier;
-        var command = getSignCommand(identity, bundle_id, 'assets/entitlements/child.plist', '.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper.app');
-        exec(command, function(error, stdout, stderr)
-        {
-            grunt.log.writeln(stdout);
-            grunt.log.writeln(stderr);
-            var command = getSignCommand(identity, bundle_id, 'assets/entitlements/child.plist', '.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper EH.app');
-            exec(command, function(error, stdout, stderr)
+        var series = [
+            function(callback)
             {
-                grunt.log.writeln(stdout);
-                grunt.log.writeln(stderr);
-                var command = getSignCommand(identity, bundle_id, 'assets/entitlements/child.plist', '.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper NP.app');
-                exec(command, function(error, stdout, stderr)
-                {
-                    grunt.log.writeln(stdout);
-                    grunt.log.writeln(stderr);
-                    var command = getSignCommand(identity, bundle_id, 'assets/entitlements/parent.plist', '.mas/' + app_name);
-                    exec(command, function(error, stdout, stderr)
-                    {
-                        grunt.log.writeln(stdout);
-                        grunt.log.writeln(stderr);
-                        done();
-                    });
-                });
-            });
+                grunt.log.writeln('Signing node-webkit Helper.app...');
+                exec(signCommand('assets/entitlements/child.plist', '.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper.app'), callback);
+            },
+            function(callback)
+            {
+                grunt.log.writeln('Signing node-webkit Helper EH.app...');
+                exec(signCommand('assets/entitlements/child.plist', '.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper EH.app'), callback);
+            },
+            function(callback)
+            {
+                grunt.log.writeln('Signing node-webkit Helper NP.app...');
+                exec(signCommand('assets/entitlements/child.plist', '.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper NP.app'), callback);
+            },
+            function(callback)
+            {
+                grunt.log.writeln('Signing app...');
+                exec(signCommand('assets/entitlements/parent.plist', '.mas/' + app_name), callback);
+            }
+        ];
+        async.series(series, function()
+        {
+            done();
         });
     });
 
     /**
      * Gets a codesign command
-     * @param identity
-     * @param bundle_id
      * @param entitlement_path
      * @param app_path
      */
-    function getSignCommand(identity, bundle_id, entitlement_path, app_path)
+    function signCommand(entitlement_path, app_path)
     {
         return 'codesign --deep -s ' + identity + ' -i ' + bundle_id + ' --entitlements ' + entitlement_path + ' "' + app_path + '"';
     }
@@ -138,26 +127,12 @@ module.exports = function(grunt)
     /**
      * Updates the Info.plist file of the needed helper app
      * @param helper_path
-     * @param bundle_id
      */
-    function updateHelperPlist(helper_path, bundle_id)
+    function updateHelperPlist(helper_path)
     {
         var plist = fs.readFileSync(helper_path + '/Contents/Info.plist', {encoding: 'utf8'});
         plist = plist.replace(/<key>CFBundleIdentifier<\/key>[^\/]*\/string>/g, '<key>CFBundleIdentifier<\/key>\n	<string>' + bundle_id + '</string>');
         fs.writeFileSync(helper_path + '/Contents/Info.plist', plist, {encoding: 'utf8'});
-    }
-
-    /**
-     * Fills a template file with an object
-     */
-    function fillTemplate(template, object)
-    {
-        for (var property in object)
-        {
-            var regex = new RegExp('{{' + property + '}}', 'g');
-            template = template.replace(regex, object[property]);
-        }
-        return template;
     }
 
     /**
