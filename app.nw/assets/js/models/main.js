@@ -82,12 +82,12 @@
             var new_files = [];
             for (var index = 0; index < files.length; index += 1)
             {
-                var fileinfo = app.node.path.parse(files[index]);
-                var id = app.node.crypto.createHash('md5').update(files[index]).digest('hex');
+                var path = files[index];
+                var id = app.node.crypto.createHash('md5').update(path).digest('hex');
                 if (typeof currentFilesIndexes[id] === 'undefined')
                 {
                     currentFilesIndexes[id] = currentFiles.length;
-                    var new_file = new app.models.file(id, fileinfo.dir, fileinfo.name + fileinfo.ext);
+                    var new_file = new app.models.file(id, path.substring(0, path.lastIndexOf('/')), path.substring(path.lastIndexOf('/') + 1));
                     new_file.processOperations(currentOperations, currentFiles.length);
                     new_files.push(new_file);
                     currentFiles.push(new_file);
