@@ -20,7 +20,7 @@ module.exports = function(grunt)
     {
         setDevMode(grunt.option('dev') === true);
         var done = this.async();
-        var child = exec(source_app + 'app.nw');
+        var child = exec(source_app + '/Contents/MacOS/node-webkit app.nw');
         child.stdout.on('data', grunt.log.write);
         child.stderr.on('data', grunt.log.write);
         child.on('close', done);
