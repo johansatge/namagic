@@ -8,6 +8,7 @@ module.exports = function(grunt)
     var fs = require('fs');
     var manifest = eval('(' + fs.readFileSync('app.nw/package.json', {encoding: 'utf8'}) + ')');
     var source_app = '/Applications/node-webkit.app';
+    var app_name = 'node-webkit.app';//manifest.name + '.app';
 
     /**
      * Runs the app
@@ -28,7 +29,6 @@ module.exports = function(grunt)
      */
     grunt.registerTask('build', function()
     {
-        var app_name = manifest.name + '.app';
         var done = this.async();
         setDevMode(false);
         var series = [
@@ -50,17 +50,17 @@ module.exports = function(grunt)
             },
             function(callback)
             {
-                grunt.log.writeln('Installing icon...');
-                exec('cp assets/icns/icon.icns .mas/' + app_name + '/Contents/Resources/nw.icns', function(error, stdout, stderr)
+                grunt.log.writeln('Installing plist...');
+                var plist = fillTemplate(fs.readFileSync('assets/plist/info.plist', {encoding: 'utf8'}), manifest);
+                fs.writeFile('.mas/' + app_name + '/Contents/Info.plist', plist, {encoding: 'utf8'}, function(error)
                 {
                     callback();
                 });
             },
             function(callback)
             {
-                grunt.log.writeln('Installing plist...');
-                var plist = fillTemplate(fs.readFileSync('assets/plist/info.plist', {encoding: 'utf8'}), manifest);
-                fs.writeFile('.mas/' + app_name + '/Contents/Info.plist', plist, {encoding: 'utf8'}, function(error)
+                grunt.log.writeln('Installing icon...');
+                exec('cp assets/icns/icon.icns .mas/' + app_name + '/Contents/Resources/nw.icns', function(error, stdout, stderr)
                 {
                     callback();
                 });
@@ -93,7 +93,6 @@ module.exports = function(grunt)
      */
     grunt.registerTask('sign', function()
     {
-        var app_name = manifest.name + '.app';
         var done = this.async();
         var identity = 'LK7U6U8DZ4' // @todo move this elsewhere
         var bundle_id = manifest.bundle_identifier;
