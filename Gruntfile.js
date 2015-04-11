@@ -8,7 +8,7 @@ module.exports = function(grunt)
     var fs = require('fs');
     var manifest = eval('(' + fs.readFileSync('app.nw/package.json', {encoding: 'utf8'}) + ')');
     var source_app = '/Applications/node-webkit.app';
-    var app_name = 'node-webkit.app';//manifest.name + '.app';
+    var app_name = 'namagic.app'; // No capital letters allowed ? Makes the app crash when signed
 
     /**
      * Runs the app
@@ -111,7 +111,7 @@ module.exports = function(grunt)
                 {
                     grunt.log.writeln(stdout);
                     grunt.log.writeln(stderr);
-                    var command = getSignCommand(identity, bundle_id, 'assets/entitlements/parent.plist', '.mas/' + app_name + '');
+                    var command = getSignCommand(identity, bundle_id, 'assets/entitlements/parent.plist', '.mas/' + app_name);
                     exec(command, function(error, stdout, stderr)
                     {
                         grunt.log.writeln(stdout);
