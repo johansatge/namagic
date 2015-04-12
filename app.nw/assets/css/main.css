@@ -258,30 +258,25 @@ html, body {
   color: #a0a0a0;
 }
 /* line 143, ../sass/_files.scss */
-.files-list tr td span {
+.files-list tr td .message {
   display: block;
   font-size: 11px;
-  margin: 2px 0 0 0;
 }
 /* line 150, ../sass/_files.scss */
-.files-list tr td em {
-  font-style: normal;
-}
-/* line 156, ../sass/_files.scss */
 .files-list tr:nth-child(odd) td {
   background: #ffffff;
 }
-/* line 161, ../sass/_files.scss */
+/* line 155, ../sass/_files.scss */
 .files-list tr:nth-child(even) td {
   background: #f3f6fa;
 }
-/* line 166, ../sass/_files.scss */
+/* line 160, ../sass/_files.scss */
 .files-list tr.js-active td {
   background: #0072d5 !important;
   color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
 }
-/* line 173, ../sass/_files.scss */
+/* line 167, ../sass/_files.scss */
 .files-list tr.js-active td .dir, .files-list tr.js-active td i, .files-list tr.js-active td span {
   color: #ffffff !important;
 }

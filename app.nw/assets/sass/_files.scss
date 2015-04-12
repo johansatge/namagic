@@ -140,16 +140,10 @@
             color   : #a0a0a0;
         }
 
-        & span
+        & .message
         {
             display   : block;
             font-size : 11px;
-            margin    : 2px 0 0 0;
-        }
-
-        & em
-        {
-            font-style : normal;
         }
     }
 
