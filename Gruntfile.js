@@ -38,7 +38,7 @@ module.exports = function(grunt)
             function(callback)
             {
                 grunt.log.writeln('Cleaning...');
-                exec('rm -r .mas; mkdir .mas', callback);
+                exec('rm -r .mas && mkdir .mas', callback);
             },
             function(callback)
             {
