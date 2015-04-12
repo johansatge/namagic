@@ -72,6 +72,11 @@ module.exports = function(grunt)
             {
                 grunt.log.writeln('Installing app files...');
                 exec('cp -r app.nw .mas/' + app_name + '/Contents/Resources', callback);
+            },
+            function(callback)
+            {
+                grunt.log.writeln('Cleaning built app...');
+                exec('cd .mas/' + app_name + ' && find . -name "*.DS_Store" -type f -delete', callback);
             }
         ];
         async.series(series, function()
