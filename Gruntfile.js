@@ -4,6 +4,7 @@ module.exports = function(grunt)
     'use strict';
 
     var async = require('async');
+    var util = require('util');
     var exec = require('child_process').exec;
     var fs = require('fs');
     var manifest = eval('(' + fs.readFileSync('app.nw/package.json', {encoding: 'utf8'}) + ')');
@@ -46,19 +47,23 @@ module.exports = function(grunt)
             },
             function(callback)
             {
+                grunt.log.writeln('Installing icon...');
+                exec('cp assets/icns/icon.icns .mas/' + app_name + '/Contents/Resources/nw.icns', callback);
+            },
+            function(callback)
+            {
                 grunt.log.writeln('Installing plist...');
                 var plist = fs.readFileSync('assets/plist/info.plist', {encoding: 'utf8'});
+                var stats = fs.statSync('.mas/' + app_name + '/Contents/Info.plist');
                 for (var property in manifest)
                 {
                     var regex = new RegExp('{{' + property + '}}', 'g');
                     plist = plist.replace(regex, manifest[property]);
                 }
-                fs.writeFile('.mas/' + app_name + '/Contents/Info.plist', plist, {encoding: 'utf8'}, callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Installing icon...');
-                exec('cp assets/icns/icon.icns .mas/' + app_name + '/Contents/Resources/nw.icns', callback);
+                fs.writeFile('.mas/' + app_name + '/Contents/Info.plist', plist, {
+                    encoding: 'utf8',
+                    mode: stats.mode
+                }, callback);
             },
             function(callback)
             {
@@ -136,8 +141,9 @@ module.exports = function(grunt)
     function updateHelperPlist(helper_path)
     {
         var plist = fs.readFileSync(helper_path + '/Contents/Info.plist', {encoding: 'utf8'});
+        var stats = fs.statSync(helper_path + '/Contents/Info.plist');
         plist = plist.replace(/<key>CFBundleIdentifier<\/key>[^\/]*\/string>/g, '<key>CFBundleIdentifier<\/key>\n	<string>' + bundle_id + '</string>');
-        fs.writeFileSync(helper_path + '/Contents/Info.plist', plist, {encoding: 'utf8'});
+        fs.writeFileSync(helper_path + '/Contents/Info.plist', plist, {encoding: 'utf8', mode: stats.mode});
     }
 
     /**
