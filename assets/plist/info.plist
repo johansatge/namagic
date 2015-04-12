@@ -26,15 +26,13 @@
     <string>{{minimum_system_version}}</string>
 	<key>NSPrincipalClass</key>
     <string>NSApplication</string>
-	<key>CFBundleSignature</key>
-	<string>????</string>
 	<key>NSHumanReadableCopyright</key>
 	<string>{{copyright}}</string>
-	<key>NSMainStoryboardFile</key>
-	<string>Main</string>
 	<key>LSApplicationCategoryType</key>
     <string>public.app-category.utilities</string>
     <key>LSApplicationSecondaryCategoryType</key>
     <string>public.app-category.productivity</string>
+    <key>NSSupportsAutomaticGraphicsSwitching</key>
+    <true/>
 </dict>
 </plist>
