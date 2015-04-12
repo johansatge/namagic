@@ -186,23 +186,10 @@
         this.storeAndProcessOperations = function(operations)
         {
             currentOperations = operations;
-            var processed_filenames = [];
             for (var index = 0; index < currentFiles.length; index += 1)
             {
                 var file = currentFiles[index];
                 file.processOperations(currentOperations, index);
-                var name = file.getUpdatedName();
-                if (processed_filenames.indexOf(name) === -1)
-                {
-                    processed_filenames.push(name);
-                }
-                else
-                {
-                    if (!file.hasError())
-                    {
-                        file.setError(true, app.utils.locale.get('main.errors.duplicate_filename'));
-                    }
-                }
             }
             events.emit('update_files', currentFiles);
         };

@@ -85,6 +85,7 @@
             {
                 this.setError(true, app.utils.locale.get('main.errors.empty_filename'));
             }
+            // @todo what ? this.setError(true, app.utils.locale.get('main.errors.duplicate_filename'));
         };
 
         /**
