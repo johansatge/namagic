@@ -587,8 +587,9 @@ html, body {
   margin: 6px 0 0 0;
   background: #3a3a3a;
   text-indent: 2px;
+  -webkit-font-smoothing: antialiased;
 }
-/* line 333, ../sass/_operations.scss */
+/* line 334, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox] {
   position: relative;
   float: left;
@@ -601,12 +602,12 @@ html, body {
   border-radius: 3px;
   border: 1px solid #2c2c2c;
 }
-/* line 347, ../sass/_operations.scss */
+/* line 348, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked {
   background: #3b99fc;
   box-shadow: 0 1px 0 rgba(105, 105, 105, 0.7);
 }
-/* line 353, ../sass/_operations.scss */
+/* line 354, ../sass/_operations.scss */
 .operation-fields .field input[type=checkbox]:checked:after {
   font-family: "FontAwesome", sans-serif;
   position: absolute;
@@ -616,7 +617,7 @@ html, body {
   content: '\f00c';
   color: #ffffff;
 }
-/* line 364, ../sass/_operations.scss */
+/* line 365, ../sass/_operations.scss */
 .operation-fields .field input[type=radio] {
   position: relative;
   float: left;
@@ -629,12 +630,12 @@ html, body {
   border-radius: 50%;
   border: 1px solid #2c2c2c;
 }
-/* line 378, ../sass/_operations.scss */
+/* line 379, ../sass/_operations.scss */
 .operation-fields .field input[type=radio]:checked {
   background: #3b99fc;
   box-shadow: 0 1px 0 rgba(105, 105, 105, 0.7);
 }
-/* line 384, ../sass/_operations.scss */
+/* line 385, ../sass/_operations.scss */
 .operation-fields .field input[type=radio]:checked:after {
   font-family: "FontAwesome", sans-serif;
   position: absolute;
