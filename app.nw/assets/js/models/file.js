@@ -12,7 +12,7 @@
         var applyCallback;
 
         var id = _id;
-        var name = _name;
+        var name = app.node.unorm.nfkc(_name);
         var directory = _dir;
         var hasError = false;
         var message = '';
