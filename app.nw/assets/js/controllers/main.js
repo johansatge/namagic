@@ -62,7 +62,9 @@
             }
             if (type === 'overwrite')
             {
-                model.applyOverwriteFiles(ids);
+                view.files.lockInterface(true);
+                view.operations.lockInterface(true);
+                model.applyOperationsOnFiles(ids, false, true);
             }
         };
 
@@ -86,7 +88,7 @@
         {
             view.files.lockInterface(true);
             view.operations.lockInterface(true);
-            model.applyOperationsOnFiles(destination_dir);
+            model.applyOperationsOnFiles(true, destination_dir, false);
         };
 
         /**

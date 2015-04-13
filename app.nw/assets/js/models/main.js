@@ -18,13 +18,14 @@
         var newFiles = [];
         var newFilesCount;
 
-        var pendingFilesBaseCount;
         var pendingFilesDoneCount;
         var pendingIndex;
+        var pendingIndexes;
         var pendingDeletedFiles;
 
         var defaultDestinationDir;
         var destinationDir;
+        var allowOverwrite;
 
         /**
          * Attaches an event
@@ -41,6 +42,7 @@
          */
         this.cancelCurrentWork = function()
         {
+            pendingIndexes = [];
             pendingIndex = currentFiles.length;
             newFiles = [];
         };
@@ -59,6 +61,7 @@
          */
         this.dismissOverwriteFiles = function(ids)
         {
+            app.utils.log(ids);
             var updated_files = [];
             for (var index = 0; index < ids.length; index += 1)
             {
@@ -67,15 +70,6 @@
                 updated_files.push(file);
             }
             events.emit('update_files', updated_files);
-        };
-
-        /**
-         * Overwrites files
-         * @param ids
-         */
-        this.applyOverwriteFiles = function(ids)
-        {
-            // @todo
         };
 
         /**
@@ -135,31 +129,48 @@
         };
 
         /**
-         * Applies operations on files
+         * Applies operations on files (all the current ones, or list of IDs)
+         * @param ids
          * @param destination_dir
+         * @param allow_overwrite
          */
-        this.applyOperationsOnFiles = function(destination_dir)
+        this.applyOperationsOnFiles = function(ids, destination_dir, allow_overwrite)
         {
             events.emit('progress', 0);
-            destinationDir = destination_dir;
+            if (typeof destination_dir === 'string')
+            {
+                destinationDir = destination_dir;
+            }
             pendingIndex = 0;
+            if (typeof ids === 'object')
+            {
+                pendingIndexes = ids;
+            }
+            else
+            {
+                pendingIndexes = [];
+                for (var index in currentFilesIndexes)
+                {
+                    pendingIndexes.push(index);
+                }
+            }
             pendingFilesDoneCount = 0;
-            pendingFilesBaseCount = currentFiles.length;
             pendingDeletedFiles = [];
+            allowOverwrite = allow_overwrite ? true : false;
             _asyncApplyOperations.apply(this);
         };
 
         /**
-         * Processes a slice of files when applying operations and recursively calls itself while the queue is not empty
-         * Processed files are removed from currentFiles and the UI, remaining ones show a message
+         * Processes a file when applying operations and recursively calls itself while the queue is not empty
          */
         var _asyncApplyOperations = function()
         {
-            var file = currentFiles[pendingIndex];
-            if (file.getError() === false)
+            var file = currentFiles[currentFilesIndexes[pendingIndexes[pendingIndex]]];
+            if (file.getError() === false || file.getError().overwrites)
             {
-                if (!file.destinationExists())
+                if (!file.destinationExists() || allowOverwrite)
                 {
+                    app.utils.log(file);
                     file.applyUpdatedName(destinationDir, $.proxy(_onOperationAppliedOnFile, this));
                     return;
                 }
@@ -169,26 +180,28 @@
         };
 
         /**
-         * Triggered when a file has been modified by using the current operations; when everything is done, triggers the needed events
+         * Triggered when a file has been modified by using the current operations
+         * When everything is done, triggers the needed events
          * @param file
          * @param success
          */
         var _onOperationAppliedOnFile = function(file, success)
         {
             pendingFilesDoneCount += 1;
+            pendingIndex += 1;
             if (success)
             {
-                pendingDeletedFiles.push(file.getID());
-                currentFiles.shift();
-                delete currentFilesIndexes[file.getID()];
+                var file_id = file.getID();
+                pendingDeletedFiles.push(file_id);
+                currentFiles[currentFilesIndexes[file_id]] = false;
+                delete currentFilesIndexes[file_id];
             }
             else
             {
-                pendingIndex += 1;
                 events.emit('update_files', [file]);
             }
-            events.emit('progress', pendingIndex < currentFiles.length ? (pendingFilesDoneCount * 100) / pendingFilesBaseCount : 100);
-            if (pendingIndex < currentFiles.length)
+            events.emit('progress', pendingIndex < pendingIndexes.length ? (pendingFilesDoneCount * 100) / pendingIndexes.length : 100);
+            if (pendingIndex < pendingIndexes.length)
             {
                 _asyncApplyOperations.apply(this);
             }
