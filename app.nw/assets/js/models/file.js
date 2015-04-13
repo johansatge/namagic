@@ -84,8 +84,18 @@
                 {
                     continue;
                 }
-                var name_part = updatedName.substring(0, updatedName.lastIndexOf('.'));
-                var extension_part = updatedName.substring(updatedName.lastIndexOf('.'));
+                var name_part;
+                var extension_part;
+                if (updatedName.indexOf('.') !== -1)
+                {
+                    name_part = updatedName.substring(0, updatedName.lastIndexOf('.'));
+                    extension_part = updatedName.substring(updatedName.lastIndexOf('.'));
+                }
+                else
+                {
+                    name_part = updatedName;
+                    extension_part = '';
+                }
                 if (op.applyTo === 'filename')
                 {
                     updatedName = _processText.apply(this, [name_part, op.selection, op.actions, file_index, file_path]) + extension_part;
