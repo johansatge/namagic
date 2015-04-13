@@ -47,8 +47,13 @@ module.exports = function(grunt)
             },
             function(callback)
             {
+                grunt.log.writeln('Building icon...');
+                exec('makeicns -in assets/icon/icon.png -out assets/icon/icon.icns', callback);
+            },
+            function(callback)
+            {
                 grunt.log.writeln('Installing icon...');
-                exec('cp assets/icns/icon.icns .mas/' + app_name + '/Contents/Resources/nw.icns', callback);
+                exec('mv assets/icon/icon.icns .mas/' + app_name + '/Contents/Resources/nw.icns', callback);
             },
             function(callback)
             {
