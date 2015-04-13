@@ -107,10 +107,6 @@
 
 .files-list
 {
-    & tr.js-error td span
-    {
-        color : #ed0000;
-    }
 
     & tr td
     {
@@ -140,9 +136,10 @@
             color   : #a0a0a0;
         }
 
-        & .message
+        & .error
         {
             display   : block;
+            color     : #ed0000;
             font-size : 11px;
         }
     }

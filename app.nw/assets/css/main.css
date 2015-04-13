@@ -229,54 +229,51 @@ html, body {
   border: 2px dashed #8896a1;
 }
 
-/* line 110, ../sass/_files.scss */
-.files-list tr.js-error td span {
-  color: #ed0000;
-}
-/* line 115, ../sass/_files.scss */
+/* line 111, ../sass/_files.scss */
 .files-list tr td {
   cursor: default;
   color: #333333;
   padding: 6px 8px 6px 8px;
 }
-/* line 121, ../sass/_files.scss */
+/* line 117, ../sass/_files.scss */
 .files-list tr td:nth-child(1) {
   width: 50%;
 }
-/* line 126, ../sass/_files.scss */
+/* line 122, ../sass/_files.scss */
 .files-list tr td:nth-child(2) {
   width: 10px;
 }
-/* line 131, ../sass/_files.scss */
+/* line 127, ../sass/_files.scss */
 .files-list tr td i {
   color: #999999;
   font-size: 11px;
 }
-/* line 137, ../sass/_files.scss */
+/* line 133, ../sass/_files.scss */
 .files-list tr td .dir {
   display: none;
   color: #a0a0a0;
 }
-/* line 143, ../sass/_files.scss */
-.files-list tr td .message {
+/* line 139, ../sass/_files.scss */
+.files-list tr td .error {
   display: block;
+  color: #ed0000;
   font-size: 11px;
 }
-/* line 150, ../sass/_files.scss */
+/* line 147, ../sass/_files.scss */
 .files-list tr:nth-child(odd) td {
   background: #ffffff;
 }
-/* line 155, ../sass/_files.scss */
+/* line 152, ../sass/_files.scss */
 .files-list tr:nth-child(even) td {
   background: #f3f6fa;
 }
-/* line 160, ../sass/_files.scss */
+/* line 157, ../sass/_files.scss */
 .files-list tr.js-active td {
   background: #0072d5 !important;
   color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
 }
-/* line 167, ../sass/_files.scss */
+/* line 164, ../sass/_files.scss */
 .files-list tr.js-active td .dir, .files-list tr.js-active td i, .files-list tr.js-active td span {
   color: #ffffff !important;
 }

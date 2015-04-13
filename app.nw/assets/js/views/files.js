@@ -105,14 +105,13 @@
                     $files[file_id] = {
                         row: row,
                         updatedName: row.querySelector('.js-new-name'),
-                        status: row.querySelector('.js-status-message')
+                        error: row.querySelector('.js-error')
                     };
                     row.setAttribute('id', file_id);
                     row.querySelector('.js-name').innerHTML = file.getName();
                 }
                 $files[file_id].updatedName.innerHTML = file.getUpdatedName();
-                $files[file_id].status.innerHTML = file.getMessage();
-                app.utils.dom.toggleClass($files[file_id].row, 'js-error', file.hasError());
+                $files[file_id].error.innerHTML = file.getError();
             }
             _updateFilesCount.apply(this);
         };

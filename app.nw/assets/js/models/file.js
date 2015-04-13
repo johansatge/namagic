@@ -15,7 +15,7 @@
         var name = app.node.unorm.nfkc(_name);
         var directory = _dir;
         var hasError = false;
-        var message = '';
+        var errorMessage = '';
         var updatedName = '';
 
         /**
@@ -25,6 +25,8 @@
          */
         this.applyUpdatedName = function(destination_dir, callback)
         {
+            // @todo check if destination file exists (and other than the current one)
+            // this.setError(true, app.utils.locale.get('main.errors.duplicate_filename'));
             applyCallback = callback;
             if (this.hasError())
             {
@@ -85,7 +87,6 @@
             {
                 this.setError(true, app.utils.locale.get('main.errors.empty_filename'));
             }
-            // @todo what ? this.setError(true, app.utils.locale.get('main.errors.duplicate_filename'));
         };
 
         /**
@@ -176,15 +177,15 @@
         this.setError = function(has_error, text)
         {
             hasError = has_error;
-            message = text;
+            errorMessage = text;
         };
 
         /**
          * Returns the message of the file
          */
-        this.getMessage = function()
+        this.getError = function()
         {
-            return message;
+            return errorMessage;
         };
 
     };
