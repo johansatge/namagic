@@ -58,11 +58,13 @@
         {
             $ui.add.attr('disabled', is_locked ? 'disabled' : null);
             $ui.remove.attr('disabled', is_locked || $ui.list.children().filter('.js-active').length === 0 ? 'disabled' : null);
+            $ui.list.find('.js-overwrite-button').attr('disabled', is_locked ? 'disabled' : null);
             (is_locked ? $ui.window.off : $ui.window.on).apply($ui.window, ['keydown keyup', $.proxy(_onRecordKey, this)]);
             (is_locked ? $ui.panel.off : $ui.panel.on).apply($ui.panel, ['dragenter', $.proxy(_onDragEnter, this)]);
             (is_locked ? $ui.dragOverlay.off : $ui.dragOverlay.on).apply($ui.dragOverlay, ['dragleave', $.proxy(_onDragLeave, this)]);
             (is_locked ? $ui.panel.off : $ui.panel.on).apply($ui.panel, ['drop', $.proxy(_onAddFilesFromDrop, this)]);
             (is_locked ? $ui.list.off : $ui.list.on).apply($ui.list, ['click', '.js-file', $.proxy(_onFileClick, this)]);
+            (is_locked ? $ui.list.off : $ui.list.on).apply($ui.list, ['click', '.js-overwrite-button', $.proxy(_onOverwriteClick, this)]);
             (is_locked ? $ui.add.off : $ui.add.on).apply($ui.add, ['click', $.proxy(_onAddFilesFromButton, this)]);
             (is_locked ? $ui.remove.off : $ui.remove.on).apply($ui.remove, ['click', $.proxy(_onRemoveActiveFiles, this)]);
         };
@@ -275,6 +277,18 @@
             evt.preventDefault();
             var dir = evt.target.files.length > 0 ? evt.target.files[0].path : false;
             events.emit('set_destination', dir);
+        };
+
+        /**
+         * Clicks on an overwrite action, in a file
+         * @param evt
+         */
+        var _onOverwriteClick = function(evt)
+        {
+            var $button = $(evt.currentTarget);
+            evt.preventDefault();
+            evt.stopPropagation();
+            events.emit('overwrite', $button.closest('.js-file').attr('id'), $button.data('type'));
         };
 
         /**

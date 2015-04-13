@@ -35,7 +35,8 @@
             view.files.on('add_files', $.proxy(_onAddFilesFromView, this));
             view.files.on('remove_files', $.proxy(_onRemoveFilesFromView, this));
             view.files.on('set_destination', $.proxy(_onSetDestinationFromView), this);
-            view.files.on('cancel', $.proxy(_onCancelCurrentWork), this);
+            view.files.on('cancel', $.proxy(_onCancelCurrentWorkFromView), this);
+            view.files.on('overwrite', $.proxy(_onOverwriteFileFromView), this);
             view.operations.on('edit_operations', $.proxy(_onEditOperationsFromView, this));
             view.operations.on('apply_operations', $.proxy(_onApplyOperationsFromView, this));
         };
@@ -43,9 +44,21 @@
         /**
          * Cancels the current work
          */
-        var _onCancelCurrentWork = function()
+        var _onCancelCurrentWorkFromView = function()
         {
             model.cancelCurrentWork();
+        };
+
+        /**
+         * Triggers an overwrite action from the view
+         * @param id
+         * @param type
+         */
+        var _onOverwriteFileFromView = function(id, type)
+        {
+            app.utils.log(id);
+            app.utils.log(type);
+            // @todo
         };
 
         /**

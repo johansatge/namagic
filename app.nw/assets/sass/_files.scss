@@ -183,6 +183,11 @@
             float  : left;
             margin : 3px 5px 0 0;
         }
+
+        & button[disabled=disabled]
+        {
+            opacity : 0.5;
+        }
     }
 
     & tr.js-active button.primary
