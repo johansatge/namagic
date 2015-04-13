@@ -52,12 +52,13 @@
         };
 
         /**
-         * Applies given operations on the file
+         * Applies given operations on the file and returns TRUE if the name has been changed (FALSE otherwise)
          * @param operations
          * @param file_index
          */
         this.processOperations = function(operations, file_index)
         {
+            var old_updated_name = updatedName;
             this.setError(false, '');
             updatedName = name;
             var file_path = directory + '/' + name;
@@ -87,6 +88,7 @@
             {
                 this.setError(true, app.utils.locale.get('main.errors.empty_filename'));
             }
+            return updatedName !== old_updated_name;
         };
 
         /**

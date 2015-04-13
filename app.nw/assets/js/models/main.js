@@ -185,13 +185,17 @@
          */
         this.storeAndProcessOperations = function(operations)
         {
+            var updated_files = [];
             currentOperations = operations;
             for (var index = 0; index < currentFiles.length; index += 1)
             {
                 var file = currentFiles[index];
-                file.processOperations(currentOperations, index);
+                if (file.processOperations(currentOperations, index))
+                {
+                    updated_files.push(file);
+                }
             }
-            events.emit('update_files', currentFiles);
+            events.emit('update_files', updated_files);
         };
     };
 
