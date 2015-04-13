@@ -21,10 +21,25 @@
 
         /**
          * Checks if the destination path already exists
+         * @param destination_dir
          */
-        this.destinationExists = function()
+        this.destinationExists = function(destination_dir)
         {
-            return true; // @todo check it in the fs
+            if (destination_dir === directory)
+            {
+                return false;
+            }
+            var exists;
+            try
+            {
+                app.node.fs.readFileSync(destination_dir + '/' + updatedName);
+                exists = true;
+            }
+            catch (error)
+            {
+                exists = false;
+            }
+            return exists;
         };
 
         /**

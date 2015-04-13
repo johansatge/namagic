@@ -168,9 +168,8 @@
             var file = currentFiles[currentFilesIndexes[pendingIndexes[pendingIndex]]];
             if (file.getError() === false || file.getError().overwrites)
             {
-                if (!file.destinationExists() || allowOverwrite)
+                if (!file.destinationExists(destinationDir) || allowOverwrite)
                 {
-                    app.utils.log(file);
                     file.applyUpdatedName(destinationDir, $.proxy(_onOperationAppliedOnFile, this));
                     return;
                 }
