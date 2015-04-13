@@ -13,10 +13,16 @@
   "main": {
     "drop": "Drop files here",
     "errors": {
-      "duplicate_filename": "Duplicate filename",
+      "file_exists": "File already exists",
       "empty_filename": "Empty filename",
       "stat_not_found": "File information not found",
       "error": "error"
+    },
+    "files": {
+      "overwrite": "Overwrite",
+      "overwrite_all": "Overwrite all",
+      "dismiss": "Dismiss ",
+      "dismiss_all": "Dismiss all"
     },
     "toolbar": {
       "add_operation": "Add operation",

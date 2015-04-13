@@ -131,7 +131,16 @@
         var _asyncApplyOperations = function()
         {
             var file = currentFiles[pendingIndex];
-            file.applyUpdatedName(destinationDir, $.proxy(_onOperationAppliedOnFile, this));
+            if (file.getError() === false)
+            {
+                if (!file.destinationExists())
+                {
+                    file.applyUpdatedName(destinationDir, $.proxy(_onOperationAppliedOnFile, this));
+                    return;
+                }
+                file.setError(true, app.utils.locale.get('main.errors.file_exists'), true);
+            }
+            _onOperationAppliedOnFile.apply(this, [file, false]);
         };
 
         /**

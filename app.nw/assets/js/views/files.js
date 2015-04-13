@@ -105,13 +105,25 @@
                     $files[file_id] = {
                         row: row,
                         updatedName: row.querySelector('.js-new-name'),
-                        error: row.querySelector('.js-error')
+                        error: row.querySelector('.js-error'),
+                        overwriteButtons: row.querySelector('.js-overwrite')
                     };
                     row.setAttribute('id', file_id);
                     row.querySelector('.js-name').innerHTML = file.getName();
                 }
                 $files[file_id].updatedName.innerHTML = file.getUpdatedName();
-                $files[file_id].error.innerHTML = file.getError();
+                var error = file.getError();
+                $files[file_id].error.style.display = error !== false ? 'block' : 'none';
+                if (error !== false)
+                {
+                    $files[file_id].error.innerHTML = error.message;
+                    $files[file_id].overwriteButtons.style.display = error.overwrites ? 'block' : 'none';
+                }
+                else
+                {
+                    $files[file_id].error.innerHTML = '';
+                    $files[file_id].overwriteButtons.style.display = 'none';
+                }
             }
             _updateFilesCount.apply(this);
         };

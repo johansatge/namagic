@@ -15,8 +15,17 @@
         var name = app.node.unorm.nfkc(_name);
         var directory = _dir;
         var hasError = false;
+        var showOverwrites = false;
         var errorMessage = '';
         var updatedName = '';
+
+        /**
+         * Checks if the destination path already exists
+         */
+        this.destinationExists = function()
+        {
+            return true; // @todo check it in the fs
+        };
 
         /**
          * Asynchronously applies the updated name on the file
@@ -25,17 +34,8 @@
          */
         this.applyUpdatedName = function(destination_dir, callback)
         {
-            // @todo check if destination file exists (and other than the current one)
-            // this.setError(true, app.utils.locale.get('main.errors.duplicate_filename'));
             applyCallback = callback;
-            if (this.hasError())
-            {
-                applyCallback(this, false);
-                return;
-            }
-            var source_path = directory + '/' + name;
-            var destination_path = destination_dir + '/' + updatedName;
-            app.node.fs.rename(source_path, destination_path, $.proxy(_updatedNameApplied, this));
+            app.node.fs.rename(directory + '/' + name, destination_dir + '/' + updatedName, $.proxy(_updatedNameApplied, this));
         };
 
         /**
@@ -164,30 +164,24 @@
         };
 
         /**
-         * Checks if the file has an error status
-         */
-        this.hasError = function()
-        {
-            return hasError;
-        };
-
-        /**
          * Sets the error status of the file
          * @param has_error
          * @param text
+         * @param overwrites
          */
-        this.setError = function(has_error, text)
+        this.setError = function(has_error, text, overwrites)
         {
-            hasError = has_error;
+            hasError = has_error ? true : false;
+            showOverwrites = overwrites ? true : false;
             errorMessage = text;
         };
 
         /**
-         * Returns the message of the file
+         * Returns the error status of the file
          */
         this.getError = function()
         {
-            return errorMessage;
+            return hasError ? {message: errorMessage, overwrites: showOverwrites} : false;
         };
 
     };
