@@ -51,14 +51,19 @@
 
         /**
          * Triggers an overwrite action from the view
-         * @param id
          * @param type
+         * @param target
          */
-        var _onOverwriteFileFromView = function(id, type)
+        var _onOverwriteFileFromView = function(type, ids)
         {
-            app.utils.log(id);
-            app.utils.log(type);
-            // @todo
+            if (type === 'dismiss')
+            {
+                model.dismissOverwriteFiles(ids);
+            }
+            if (type === 'overwrite')
+            {
+                model.applyOverwriteFiles(ids);
+            }
         };
 
         /**

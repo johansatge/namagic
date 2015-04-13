@@ -98,6 +98,7 @@
             {
                 var file = files[index];
                 var file_id = file.getID();
+                var file_error = file.getError();
                 if (add)
                 {
                     filesCount += 1;
@@ -114,18 +115,9 @@
                     row.querySelector('.js-name').innerHTML = file.getName();
                 }
                 $files[file_id].updatedName.innerHTML = file.getUpdatedName();
-                var error = file.getError();
-                $files[file_id].error.style.display = error !== false ? 'block' : 'none';
-                if (error !== false)
-                {
-                    $files[file_id].error.innerHTML = error.message;
-                    $files[file_id].overwriteButtons.style.display = error.overwrites ? 'block' : 'none';
-                }
-                else
-                {
-                    $files[file_id].error.innerHTML = '';
-                    $files[file_id].overwriteButtons.style.display = 'none';
-                }
+                $files[file_id].error.style.display = file_error !== false ? 'block' : 'none';
+                $files[file_id].error.innerHTML = file_error !== false ? file_error.message : '';
+                $files[file_id].overwriteButtons.style.display = file_error !== false && file_error.overwrites ? 'block' : 'none';
             }
             _updateFilesCount.apply(this);
         };
@@ -288,7 +280,21 @@
             var $button = $(evt.currentTarget);
             evt.preventDefault();
             evt.stopPropagation();
-            events.emit('overwrite', $button.closest('.js-file').attr('id'), $button.data('type'));
+            var type = $button.data('type');
+            var ids = [];
+            if ($button.data('target'))
+            {
+                var $targets = $ui.list.find('.js-overwrite:visible').closest('.js-file');
+                $targets.each(function()
+                {
+                    ids.push($(this).attr('id'));
+                });
+            }
+            else
+            {
+                ids.push($button.closest('.js-file').attr('id'))
+            }
+            events.emit('overwrite', type, ids);
         };
 
         /**

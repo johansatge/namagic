@@ -54,6 +54,31 @@
         };
 
         /**
+         * Dismisses files (when asking to overwrite)
+         * @param ids
+         */
+        this.dismissOverwriteFiles = function(ids)
+        {
+            var updated_files = [];
+            for (var index = 0; index < ids.length; index += 1)
+            {
+                var file = currentFiles[currentFilesIndexes[ids[index]]];
+                file.setError(false, '');
+                updated_files.push(file);
+            }
+            events.emit('update_files', updated_files);
+        };
+
+        /**
+         * Overwrites files
+         * @param ids
+         */
+        this.applyOverwriteFiles = function(ids)
+        {
+            // @todo
+        };
+
+        /**
          * Returns the default destination path
          */
         this.getDefaultDestinationDir = function()
