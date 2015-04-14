@@ -69,7 +69,7 @@ module.exports = function(grunt)
                     encoding: 'utf8',
                     mode: stats.mode
                 }, callback);
-            },
+            },/*
             function(callback)
             {
                 grunt.log.writeln('Updating helpers...');
@@ -77,7 +77,7 @@ module.exports = function(grunt)
                 updateHelperPlist('.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper EH.app');
                 updateHelperPlist('.mas/' + app_name + '/Contents/Frameworks/node-webkit Helper NP.app');
                 callback();
-            },
+            },*/
             function(callback)
             {
                 grunt.log.writeln('Installing app files...');
