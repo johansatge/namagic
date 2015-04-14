@@ -9,7 +9,7 @@ module.exports = function(grunt)
     var fs = require('fs');
     var manifest = eval('(' + fs.readFileSync('app.nw/package.json', {encoding: 'utf8'}) + ')');
     var source_app = '/Applications/node-webkit.app';
-    var app_name = 'namagic.app'; // No capital letters allowed ? Makes the app crash when signed
+    var app_name = 'Namagic.app';
     var identity = 'LK7U6U8DZ4' // @todo move this elsewhere
     var bundle_id = manifest.bundle_identifier;
 
