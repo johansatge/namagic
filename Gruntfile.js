@@ -130,6 +130,20 @@ module.exports = function(grunt)
     });
 
     /**
+     * Packages the app
+     */
+    grunt.registerTask('pkg', function()
+    {
+        var done = this.async();
+        var command = 'cd .mas && productbuild --component "' + app_name + '" /Applications  --sign "' + identity + '" ' + app_name.replace('.app', '.pkg');
+        exec(command, function(error, stdout, stderr)
+        {
+            grunt.log.writeln(stdout);
+            done();
+        });
+    });
+
+    /**
      * Gets a codesign command
      * @param entitlement_path
      * @param app_path
