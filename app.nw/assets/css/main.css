@@ -113,7 +113,7 @@ html, body {
   top: 50%;
   left: 50%;
   margin: -65px 0 0 -150px;
-  border: 3px dashed transparent;
+  border: 2px dashed transparent;
   border-radius: 8px;
 }
 /* line 20, ../sass/_placeholders.scss */
