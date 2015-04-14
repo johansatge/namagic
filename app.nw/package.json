@@ -6,9 +6,9 @@
   "minimum_system_version": "10.8",
   "copyright": "Copyright © 2015 Johan Satgé. All rights reserved.",
   "urls": {
-    "website": "http://@todo",
-    "help": "http://@todo/help",
-    "bug_report": "http://@todo/bug-report"
+    "website": "http://www.namagicapp.com",
+    "help": "https://github.com/namagicapp/support",
+    "bug_report": "https://github.com/namagicapp/support/issues"
   },
   "main": "app.html",
   "window": {
