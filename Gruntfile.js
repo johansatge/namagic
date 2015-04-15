@@ -47,6 +47,11 @@ module.exports = function(grunt)
             },
             function(callback)
             {
+                grunt.log.writeln('Removing FFMpeg binary...');
+                exec('rm ".mas/' + appName + '/Contents/Frameworks/node-webkit Framework.framework/Libraries/ffmpegsumo.so"', callback);
+            },
+            function(callback)
+            {
                 grunt.log.writeln('Installing icon...');
                 exec('cp assets/icon/icon.icns .mas/' + appName + '/Contents/Resources/nw.icns', callback);
             },
