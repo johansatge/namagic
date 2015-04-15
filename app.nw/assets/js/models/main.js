@@ -14,6 +14,7 @@
         var currentFiles = [];
         var currentFilesIndexes = {};
         var currentOperations = [];
+        var currentFilesCount = 0;
 
         var newFiles = [];
         var newFilesCount;
@@ -43,7 +44,7 @@
         this.cancelCurrentWork = function()
         {
             pendingIndexes = [];
-            pendingIndex = currentFiles.length;
+            pendingIndex = currentFilesCount;
             newFiles = [];
         };
 
@@ -52,7 +53,7 @@
          */
         this.hasFiles = function()
         {
-            return currentFiles.length > 0;
+            return currentFilesCount > 0;
         };
 
         /**
@@ -109,6 +110,7 @@
                     new_file.processOperations(currentOperations, currentFiles.length);
                     new_files.push(new_file);
                     currentFiles.push(new_file);
+                    currentFilesCount += 1;
                 }
             }
             if (typeof new_file !== 'undefined')
@@ -193,6 +195,7 @@
                 pendingDeletedFiles.push(file_id);
                 currentFiles[currentFilesIndexes[file_id]] = false;
                 delete currentFilesIndexes[file_id];
+                currentFilesCount -= 1;
             }
             else
             {
@@ -218,8 +221,9 @@
         {
             for (var index = 0; index < ids.length; index += 1)
             {
-                currentFiles.splice(currentFilesIndexes[ids[index]], 1);
+                currentFiles[currentFilesIndexes[ids[index]]] = null;
                 delete currentFilesIndexes[ids[index]];
+                currentFilesCount -= 1;
             }
             events.emit('remove_files', ids);
         };
@@ -232,13 +236,15 @@
         {
             var updated_files = [];
             currentOperations = operations;
-            for (var index = 0; index < currentFiles.length; index += 1)
+            var num = 0;
+            for (var index in currentFilesIndexes)
             {
-                var file = currentFiles[index];
-                if (file.processOperations(currentOperations, index))
+                var file = currentFiles[currentFilesIndexes[index]];
+                if (file.processOperations(currentOperations, num))
                 {
                     updated_files.push(file);
                 }
+                num += 1;
             }
             events.emit('update_files', updated_files);
         };
