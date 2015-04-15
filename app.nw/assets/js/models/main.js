@@ -61,7 +61,6 @@
          */
         this.dismissOverwriteFiles = function(ids)
         {
-            app.utils.log(ids);
             var updated_files = [];
             for (var index = 0; index < ids.length; index += 1)
             {
