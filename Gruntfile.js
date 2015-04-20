@@ -14,6 +14,18 @@ module.exports = function(grunt)
     var bundleID = manifest.bundle_identifier;
 
     /**
+     * Watches SASS files
+     */
+    grunt.registerTask('sass', function()
+    {
+        var done = this.async();
+        var child = exec('cd app.nw/assets && compass watch sass/main.scss');
+        child.stdout.on('data', grunt.log.write);
+        child.stderr.on('data', grunt.log.write);
+        child.on('close', done);
+    });
+
+    /**
      * Runs the app
      * Use the "--dev" option to enable toolbars and debug
      */
