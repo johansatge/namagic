@@ -1,6 +1,7 @@
 http_path = "/"
 css_dir = "css"
 sass_dir = "sass"
+cache_path = "../../.sass-cache"
 
 # You can select your preferred output style here (can be overridden via the command line):
 # output_style = :expanded or :nested or :compact or :compressed

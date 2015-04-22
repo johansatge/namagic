@@ -1,7 +1,5 @@
 .idea
 node_modules
-app.nw/assets/.sass-cache
+.sass-cache
 app.nw/.dev
-build
-cache
 .mas
