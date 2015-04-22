@@ -1,6 +1,7 @@
 .panel.operations
 {
     position               : absolute;
+    overflow-x             : hidden;
     z-index                : 30;
     width                  : 300px;
     right                  : 0;
@@ -143,6 +144,7 @@
 .operation-bar
 {
     position : relative;
+    padding  : 0 20px 0 0;
 
     & .chevron
     {
@@ -165,7 +167,7 @@
         z-index                : 34;
         text-indent            : 6px;
         line-height            : 14px;
-        width                  : 279px;
+        width                  : 100%;
         height                 : 30px;
         margin                 : 0 0 0 10px;
         background             : linear-gradient(to bottom, #535353, #454545);
@@ -221,9 +223,8 @@
         text-shadow   : 0 1px 0 #373737;
         text-indent   : 6px;
         background    : linear-gradient(to bottom, #535353, #454545);
-        width         : 279px;
         height        : 30px;
-        margin        : 0 0 0 10px;
+        margin        : 0 10px 0 10px;
         border        : 1px solid #2c2c2c;
         box-shadow    : inset 0 1px 0 #6f6f6f;
         border-radius : 3px 3px 0 0;
