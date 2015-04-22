@@ -6,11 +6,5 @@
 	<true/>
 	<key>com.apple.security.files.user-selected.read-write</key>
     <true/>
-	<key>com.apple.security.temporary-exception.files.absolute-path.read-write</key>
-	<array>
-		<string>/private/tmp/</string>
-		<string>/private/var/tmp/</string>
-        <string>/private/var/folders/ml/</string>
-	</array>
 </dict>
 </plist>
