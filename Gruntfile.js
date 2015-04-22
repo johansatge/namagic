@@ -98,6 +98,11 @@ module.exports = function(grunt)
             {
                 grunt.log.writeln('Cleaning built app...');
                 exec('cd .mas/' + appName + ' && find . -name "*.DS_Store" -type f -delete', callback);
+            },
+            function(callback)
+            {
+                grunt.log.writeln('Setting permissions...');
+                exec('cd .mas/' + appName + '/Contents/Resources/app.nw && find . -type f | xargs chmod -v 644', callback);
             }
         ];
         async.series(series, function()
