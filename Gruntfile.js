@@ -118,7 +118,13 @@ module.exports = function(grunt)
             function(callback)
             {
                 grunt.log.writeln('Cleaning built app...');
-                exec('cd .mas/' + appName + ' && find . -name "*.DS_Store" -type f -delete', callback);
+                exec('cd .mas/' + appName + ' && find . -name "*.DS_Store" -type f -delete', function()
+                {
+                    exec('rm -r .mas/' + appName + '/Contents/Resources/app.nw/assets/sass', function()
+                    {
+                        callback();
+                    });
+                });
             },
             function(callback)
             {
