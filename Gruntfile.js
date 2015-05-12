@@ -10,7 +10,9 @@ module.exports = function(grunt)
     var exec = require('child_process').exec;
     var fs = require('fs');
     var manifest = eval('(' + fs.readFileSync('app.nw/package.json', {encoding: 'utf8'}) + ')');
-    var sourceApp = '/Applications/node-webkit.app';
+    //var appExecutable = 'node-webkit';
+    var appExecutable = 'nwjs';
+    var sourceApp = '/Applications/' + appExecutable + '.app';
     var appName = 'Namagic.app';
     var identity = 'LK7U6U8DZ4' // @todo move this elsewhere
     var bundleID = manifest.bundle_identifier;
@@ -35,7 +37,7 @@ module.exports = function(grunt)
     {
         setDevMode(grunt.option('dev') === true);
         var done = this.async();
-        var child = exec(sourceApp + '/Contents/MacOS/node-webkit app.nw');
+        var child = exec(sourceApp + '/Contents/MacOS/' + appExecutable + ' app.nw');
         child.stdout.on('data', grunt.log.write);
         child.stderr.on('data', grunt.log.write);
         child.on('close', done);
@@ -62,7 +64,7 @@ module.exports = function(grunt)
             function(callback)
             {
                 grunt.log.writeln('Removing FFMpeg binary...');
-                exec('rm ".mas/' + appName + '/Contents/Frameworks/node-webkit Framework.framework/Libraries/ffmpegsumo.so"', callback);
+                exec('rm ".mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Framework.framework/Libraries/ffmpegsumo.so"', callback);
             },
             function(callback)
             {
@@ -78,6 +80,7 @@ module.exports = function(grunt)
                 {
                     plist = plist.replace(new RegExp('{{' + property + '}}', 'g'), manifest[property]);
                 }
+                plist = plist.replace(new RegExp('{{executable}}', 'g'), appExecutable);
                 fs.writeFile('.mas/' + appName + '/Contents/Info.plist', plist, {
                     encoding: 'utf8',
                     mode: stats.mode
@@ -86,9 +89,9 @@ module.exports = function(grunt)
             function(callback)
             {
                 grunt.log.writeln('Updating helper plist files...');
-                updateHelperPlist('.mas/' + appName + '/Contents/Frameworks/node-webkit Helper.app', bundleID + '.helper');
-                updateHelperPlist('.mas/' + appName + '/Contents/Frameworks/node-webkit Helper EH.app', bundleID + '.helper.eh');
-                updateHelperPlist('.mas/' + appName + '/Contents/Frameworks/node-webkit Helper NP.app', bundleID + '.helper.np');
+                updateHelperPlist('.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper.app', bundleID + '.helper');
+                updateHelperPlist('.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper EH.app', bundleID + '.helper.eh');
+                updateHelperPlist('.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper NP.app', bundleID + '.helper.np');
                 callback();
             },
             function(callback)
@@ -150,22 +153,22 @@ module.exports = function(grunt)
         var series = [
             function(callback)
             {
-                grunt.log.writeln('Signing node-webkit Helper.app...');
-                var app_path = '.mas/' + appName + '/Contents/Frameworks/node-webkit Helper.app';
+                grunt.log.writeln('Signing ' + appExecutable + ' Helper.app...');
+                var app_path = '.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper.app';
                 var bundle_id = bundleID + '.helper';
                 exec(cmd.replace('$1', identity).replace('$2', bundle_id).replace('$3', child_ent).replace('$4', app_path), callback);
             },
             function(callback)
             {
-                grunt.log.writeln('Signing node-webkit Helper EH.app...');
-                var app_path = '.mas/' + appName + '/Contents/Frameworks/node-webkit Helper EH.app';
+                grunt.log.writeln('Signing ' + appExecutable + ' Helper EH.app...');
+                var app_path = '.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper EH.app';
                 var bundle_id = bundleID + '.helper.eh';
                 exec(cmd.replace('$1', identity).replace('$2', bundle_id).replace('$3', child_ent).replace('$4', app_path), callback);
             },
             function(callback)
             {
-                grunt.log.writeln('Signing node-webkit Helper NP.app...');
-                var app_path = '.mas/' + appName + '/Contents/Frameworks/node-webkit Helper NP.app';
+                grunt.log.writeln('Signing ' + appExecutable + ' Helper NP.app...');
+                var app_path = '.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper NP.app';
                 var bundle_id = bundleID + '.helper.np';
                 exec(cmd.replace('$1', identity).replace('$2', bundle_id).replace('$3', child_ent).replace('$4', app_path), callback);
             },
