@@ -5,6 +5,8 @@ module.exports = function(grunt)
 
     var async = require('async');
     var util = require('util');
+    var glob = require('glob');
+    var uglifyjs = require('uglify-js');
     var exec = require('child_process').exec;
     var fs = require('fs');
     var manifest = eval('(' + fs.readFileSync('app.nw/package.json', {encoding: 'utf8'}) + ')');
@@ -50,7 +52,7 @@ module.exports = function(grunt)
             function(callback)
             {
                 grunt.log.writeln('Cleaning...');
-                exec('rm -r .mas && mkdir .mas', callback);
+                exec('rm -r .mas;mkdir .mas', callback);
             },
             function(callback)
             {
@@ -93,6 +95,25 @@ module.exports = function(grunt)
             {
                 grunt.log.writeln('Installing app files...');
                 exec('cp -r app.nw .mas/' + appName + '/Contents/Resources', callback);
+            },
+            function(callback)
+            {
+                grunt.log.writeln('Minifies JS...');
+                var js_path = '.mas/' + appName + '/Contents/Resources/app.nw/assets/';
+                glob('**/*.js', {cwd: js_path}, function(error, files)
+                {
+                    for (var index = 0; index < files.length; index += 1)
+                    {
+                        if (files[index].search('.min.') !== -1)
+                        {
+                            continue;
+                        }
+                        grunt.log.writeln('Minifies ' + files[index] + '...');
+                        var minified = uglifyjs.minify(js_path + files[index]);
+                        fs.writeFileSync(js_path + files[index], minified.code, {encoding: 'utf8'});
+                    }
+                    callback();
+                });
             },
             function(callback)
             {
