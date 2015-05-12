@@ -17,6 +17,8 @@ module.exports = function(grunt)
     var identity = 'LK7U6U8DZ4' // @todo move this elsewhere
     var bundleID = manifest.bundle_identifier;
 
+    grunt.log.writeln('Uses ' + appExecutable + '.');
+
     /**
      * Watches SASS files
      */
