@@ -127,7 +127,10 @@ module.exports = function(grunt)
                 {
                     exec('rm -r .mas/' + appName + '/Contents/Resources/app.nw/assets/sass', function()
                     {
-                        callback();
+                        exec('rm -r .mas/' + appName + '/Contents/Frameworks/crash_inspector', function()
+                        {
+                            callback();
+                        });
                     });
                 });
             },
