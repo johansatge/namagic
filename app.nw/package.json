@@ -1,8 +1,8 @@
 {
   "name": "Namagic",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "bundle_identifier": "com.namagicapp.namagic",
-  "bundle_version": "103",
+  "bundle_version": "104",
   "minimum_system_version": "10.8",
   "copyright": "Copyright © 2015 Johan Satgé. All rights reserved.",
   "urls": {
