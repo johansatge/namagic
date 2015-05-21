@@ -34,9 +34,18 @@
             webView.left = webView.top = webView.right = webView.bottom = 0;
             webView.location = "app://assets/html/main.html";
 
+
+            webView.on('message', function(message)
+            {
+                console.log(message)
+            });
             webView.on('load', function()
             {
                 window.visible = true;
+            });
+            webView.on('error', function(err)
+            {
+                console.log(err);
             });
 
 
