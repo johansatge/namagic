@@ -1,0 +1,14 @@
+{
+  "name": "namagic",
+  "longname": "Namagic",
+  "namespace": "com.namagicapp.namagic",
+  "version": "1.1.0",
+  "description": "",
+  "author": "Johan Satgé",
+  "sources": {
+    "directory":"."
+  },
+  "icon": {"osx":["../assets/icon/icon.png"] },
+  "main": "assets/js/app.js",
+  "copyright": "Copyright © 2015 Johan Satgé. All rights reserved."
+}

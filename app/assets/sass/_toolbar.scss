@@ -1,0 +1,93 @@
+.panel.toolbar
+{
+    position   : absolute;
+    z-index    : 1;
+    width      : 100%;
+    height     : 48px;
+    left       : 0;
+    bottom     : 0;
+    background : linear-gradient(to bottom, #f1f6f9, #d8d8d8);
+    box-shadow : inset 0 1px 0 #ffffff
+}
+
+.panel .actions
+{
+    z-index  : 30;
+    position : fixed;
+    bottom   : 11px;
+
+    span
+    {
+        cursor      : default;
+        float       : left;
+        margin      : 7px 0 0 10px;
+        font-size   : 11px;
+        color       : #3c3c3c;
+        text-shadow : 0 1px 0 #ffffff;
+    }
+
+    & button.left
+    {
+        float  : left;
+        margin : 0 0 0 10px;
+    }
+
+    & button.right
+    {
+        float  : right;
+        margin : 0 10px 0 0;
+    }
+
+    & button[disabled=disabled]
+    {
+        opacity : 0.5;
+    }
+
+    & button
+    {
+        border-radius : 4px;
+        padding       : 4px 14px 4px 6px;
+        box-shadow    : inset 0 1px 0 #ffffff, 0 1px 0 #f1f6f9;
+        opacity       : 1;
+
+        &.primary
+        {
+            color                  : #ffffff;
+            background             : linear-gradient(to bottom, #4a9de5, #0072d5);
+            border                 : 1px solid #005fb2;
+            -webkit-font-smoothing : antialiased;
+            padding                : 4px 13px 4px 6px;
+            box-shadow             : inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        &.primary:active
+        {
+            background : linear-gradient(to top, #4a9de5, #0072d5);
+        }
+
+        &.secondary
+        {
+            background : linear-gradient(to bottom, #f1f6f9, #d8d8d8);
+            border     : 1px solid #a3a3a3;
+        }
+
+        &.secondary:active
+        {
+            background : linear-gradient(to top, #f1f6f9, #d8d8d8);
+        }
+
+        & i
+        {
+            float     : left;
+            margin    : 0 6px 0 0;
+            font-size : 15px;
+            color     : rgba(51, 51, 51, 0.35);
+        }
+
+        &.primary i
+        {
+            color : rgba(255, 255, 255, 0.4);
+        }
+    }
+
+}

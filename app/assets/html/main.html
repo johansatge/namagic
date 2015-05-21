@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="../css/font-awesome.min.css" type="text/css">
+        <link rel="stylesheet" href="../css/main.css" type="text/css">
+    </head>
+    <body>
+        <div class="panel files js-files-panel">
+            <div class="js-drag-overlay drag-overlay"></div>
+            <div class="placeholder bordered js-placeholder">
+                <div class="text">
+                    <i class="fa fa-files-o"></i>
+                    <div>{{main.drop}}</div>
+                </div>
+            </div>
+            <table cellpadding="0" cellspacing="0">
+                <tbody class="files-list js-files-list"></tbody>
+            </table>
+            <script type="text/template" class="js-file-template">
+                <tr class="js-file">
+                    <td class="js-name"></td>
+                    <td><i class="fa fa-arrow-right"></i></td>
+                    <td>
+                        <span class="js-new-name"></span>
+                        <span class="error js-error"></span>
+                        <span class="overwrite js-overwrite">
+                            <span class="buttons">
+                                <button class="primary js-overwrite-button" data-type="overwrite">
+                                    {{main.files.overwrite}}
+                                </button>
+                                <button class="secondary js-overwrite-button" data-type="overwrite" data-target="all">
+                                    {{main.files.overwrite_all}}
+                                </button>
+                            </span>
+                            <span class="buttons">
+                                <button class="secondary js-overwrite-button" data-type="dismiss">
+                                    {{main.files.dismiss}}
+                                </button>
+                                <button class="secondary js-overwrite-button" data-type="dismiss" data-target="all">
+                                    {{main.files.dismiss_all}}
+                                </button>
+                            </span>
+                        </span>
+                    </td>
+                </tr>
+            </script>
+            <div class="actions">
+                <button tabindex="-1" class="secondary left js-files-add">
+                    <i class="fa fa-plus-circle"></i>{{main.toolbar.add_files}}
+                </button>
+                <button tabindex="-1" class="secondary left js-files-remove">
+                    <i class="fa fa-trash-o"></i>{{main.toolbar.remove_files}}
+                </button>
+                <span class="js-files-count"></span>
+                <input type="file" class="js-files-input" multiple>
+                <input type="file" class="js-dest-input" nwdirectory>
+            </div>
+            <div class="progressbar js-progressbar">
+                <i class="cancel js-cancel fa fa-times-circle"></i>
+                <div class="bar">
+                    <div class="progress js-progressbar-progress"></div>
+                </div>
+            </div>
+        </div>
+        <div class="panel operations js-operations-panel">
+            <div class="placeholder js-placeholder">
+                <div class="text">
+                    <i class="fa fa-cogs"></i>
+                    <div>{{main.operations.no_operation}}</div>
+                </div>
+            </div>
+            <div class="js-operations"></div>
+            <script type="text/template" class="js-operation-template">
+                <div class="operation js-operation">
+                    <div class="operation-subtitle">
+                        {{main.operations.selection.subtitle}}
+                        <div class="operation-helper operation-handle js-handle"><i class="fa fa-arrows"></i></div>
+                        <button tabindex="-1" class="operation-helper operation-delete js-delete-operation"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                    <div class="operation-bar">
+                        <i class="chevron fa fa-chevron-down"></i>
+                        <select tabindex="-1" class="js-select-selection-type">
+                            <optgroup label="{{main.operations.selection.text_selections}}">
+                                <option value="allText">{{main.operations.selection.all_text.option}}</option>
+                                <option value="freeText">{{main.operations.selection.free_text.option}}</option>
+                                <option value="charsList">{{main.operations.selection.chars_list.option}}</option>
+                            </optgroup>
+                            <optgroup label="{{main.operations.selection.position_selections}}">
+                                <option value="textPosition">{{main.operations.selection.text_position.option}}</option>
+                                <option value="textRange">{{main.operations.selection.text_range.option}}</option>
+                            </optgroup>
+                            <optgroup label="{{main.operations.selection.advanced_selections}}">
+                                <option value="regex">{{main.operations.selection.regex.option}}</option>
+                            </optgroup>
+                        </select>
+                    </div>
+                    <div class="operation-fields js-selection-fields" rel="allText">
+                        <label class="field">
+                            {{main.operations.selection.all_text.no_options}}
+                        </label>
+                    </div>
+                    <div class="operation-fields js-selection-fields" rel="freeText">
+                        <label class="field">
+                            {{main.operations.selection.free_text.text_to_find}}<input type="text" name="text">
+                        </label>
+                        <label class="field">
+                            <input type="checkbox" name="caseInsensitive">{{main.operations.selection.free_text.case_insensitive}}
+                        </label>
+                    </div>
+                    <div class="operation-fields js-selection-fields" rel="charsList">
+                        <label class="field">
+                            {{main.operations.selection.chars_list.custom_list}}<input type="text" name="customList">
+                        </label>
+                        <label class="field">
+                            <input type="checkbox" name="alphabeticChars">{{main.operations.selection.chars_list.alpha_chars}}
+                        </label>
+                        <label class="field">
+                            <input type="checkbox" name="digits">{{main.operations.selection.chars_list.digits}}
+                        </label>
+                        <label class="field">
+                            <input type="checkbox" name="specialChars">{{main.operations.selection.chars_list.special_chars}}
+                        </label>
+                    </div>
+                    <div class="operation-fields js-selection-fields" rel="textPosition">
+                        <label class="field">
+                            {{main.operations.selection.text_position.index}}<input type="text" name="index" value="0">
+                        </label>
+                        <label class="field">
+                            <input type="checkbox" name="fromEnd">{{main.operations.selection.text_position.from_end}}
+                        </label>
+                    </div>
+                    <div class="operation-fields js-selection-fields" rel="textRange">
+                        <label class="field">
+                            {{main.operations.selection.text_range.index}}<input type="text" name="index">
+                        </label>
+                        <label class="field">
+                            {{main.operations.selection.text_range.length}}<input type="text" name="length">
+                        </label>
+                        <label class="field">
+                            <input type="checkbox" name="fromEnd">{{main.operations.selection.text_range.from_end}}
+                        </label>
+                    </div>
+                    <div class="operation-fields js-selection-fields" rel="regex">
+                        <label class="field">
+                            {{main.operations.selection.regex.expression}}<input type="text" name="regex">
+                        </label>
+                        <label class="field">
+                            <input type="checkbox" name="isGlobal">{{main.operations.selection.regex.is_global}}
+                        </label>
+                        <label class="field">
+                            <input type="checkbox" name="caseInsensitive">{{main.operations.selection.regex.case_insensitive}}
+                        </label>
+                    </div>
+                    <div class="operation-separator"></div>
+                    <div class="operation-subtitle">
+                        {{main.operations.actions.subtitle}}
+                        <div class="operation-helper add-action">
+                            <select tabindex="-1" class="js-add-action">
+                                <option value="">{{main.operations.actions.select}}</option>
+                                <optgroup label="{{main.operations.actions.text_actions}}">
+                                    <option value="removeText">{{main.operations.actions.remove_text.option}}</option>
+                                    <option value="freeText">{{main.operations.actions.free_text.option}}</option>
+                                    <option value="digitsSequence">{{main.operations.actions.digits_sequence.option}}</option>
+                                    <option value="updateCase">{{main.operations.actions.update_case.option}}</option>
+                                </optgroup>
+                                <optgroup label="{{main.operations.actions.file_actions}}">
+                                    <option value="creationDate">{{main.operations.actions.creation_date.option}}</option>
+                                    <option value="lastModifiedDate">{{main.operations.actions.last_modified_date.option}}</option>
+                                    <option value="fileSize">{{main.operations.actions.file_size.option}}</option>
+                                </optgroup>
+                            </select>
+                            <i class="fa fa-plus-square"></i>
+                        </div>
+                    </div>
+                    <div class="operation-actions js-actions">
+                        <div class="no-action js-no-action">
+                            {{main.operations.actions.no_action}}
+                        </div>
+                    </div>
+                    <div class="operation-separator"></div>
+                    <div class="operation-subtitle">
+                        {{main.operations.apply_to.subtitle}}
+                    </div>
+                    <div class="operation-bar closed">
+                        <i class="chevron fa fa-chevron-down"></i>
+                        <select tabindex="-1" class="js-apply-to">
+                            <option value="filename">{{main.operations.apply_to.filename_only}}</option>
+                            <option value="extension">{{main.operations.apply_to.extension_only}}</option>
+                            <option value="both">{{main.operations.apply_to.filename_and_extension}}</option>
+                        </select>
+                    </div>
+                </div>
+            </script>
+            <script type="text/template" class="js-action-template" rel="removeText">
+                <div class="operation-action js-action" rel="removeText">
+                    <div class="heading">
+                        {{main.operations.actions.remove_text.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                    <div class="operation-fields js-fields">
+                        <label class="field">
+                            {{main.operations.actions.remove_text.help}}
+                        </label>
+                    </div>
+                </div>
+            </script>
+            <script type="text/template" class="js-action-template" rel="freeText">
+                <div class="operation-action js-action" rel="freeText">
+                    <div class="heading">
+                        {{main.operations.actions.free_text.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                    <div class="operation-fields js-fields">
+                        <label class="field">
+                            {{main.operations.actions.free_text.text_to_set}}
+                            <input type="text" name="text">
+                        </label>
+                    </div>
+                </div>
+            </script>
+            <script type="text/template" class="js-action-template" rel="digitsSequence">
+                <div class="operation-action js-action" rel="digitsSequence">
+                    <div class="heading">
+                        {{main.operations.actions.digits_sequence.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                    <div class="operation-fields js-fields">
+                        <label class="field">
+                            {{main.operations.actions.digits_sequence.start_index}}
+                            <input type="text" name="startIndex" value="0">
+                        </label>
+                        <label class="field">
+                            {{main.operations.actions.digits_sequence.step}}
+                            <input type="text" name="step" value="1">
+                        </label>
+                    </div>
+                </div>
+            </script>
+            <script type="text/template" class="js-action-template" rel="updateCase">
+                <div class="operation-action js-action" rel="updateCase">
+                    <div class="heading">
+                        {{main.operations.actions.update_case.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                    <div class="operation-fields js-fields">
+                        <label class="field">
+                            {{main.operations.actions.update_case.switch_uppercase}}
+                            <input type="radio" name="type" value="uppercase">
+                        </label>
+                        <label class="field">
+                            {{main.operations.actions.update_case.switch_lowercase}}
+                            <input type="radio" name="type" value="lowercase">
+                        </label>
+                        <label class="field">
+                            {{main.operations.actions.update_case.invert_case}}
+                            <input type="radio" name="type" value="invert">
+                        </label>
+                    </div>
+                </div>
+            </script>
+            <script type="text/template" class="js-action-template" rel="creationDate">
+                <div class="operation-action js-action" rel="creationDate">
+                    <div class="heading">
+                        {{main.operations.actions.creation_date.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                    <div class="operation-fields js-fields">
+                        <label class="field">
+                            {{main.operations.actions.creation_date.format}}
+                            <input type="text" name="format">
+                            <div class="field-help">
+                                <i class="fa fa-question-circle"></i>
+                                <ul class="popin">
+                                    <li><span>YYYY</span>{{main.operations.actions.last_modified_date.help.year}}</li>
+                                    <li><span>MM</span>{{main.operations.actions.last_modified_date.help.month}}</li>
+                                    <li><span>DD</span>{{main.operations.actions.last_modified_date.help.day}}</li>
+                                    <li><span>hh</span>{{main.operations.actions.last_modified_date.help.hours}}</li>
+                                    <li><span>mm</span>{{main.operations.actions.last_modified_date.help.minutes}}</li>
+                                    <li><span>ss</span>{{main.operations.actions.last_modified_date.help.seconds}}</li>
+                                </ul>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </script>
+            <script type="text/template" class="js-action-template" rel="lastModifiedDate">
+                <div class="operation-action js-action" rel="lastModifiedDate">
+                    <div class="heading">
+                        {{main.operations.actions.last_modified_date.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                    <div class="operation-fields js-fields">
+                        <label class="field">
+                            {{main.operations.actions.last_modified_date.format}}
+                            <input type="text" name="format">
+                            <div class="field-help">
+                                <i class="fa fa-question-circle"></i>
+                                <ul class="popin">
+                                    <li><span>YYYY</span>{{main.operations.actions.last_modified_date.help.year}}</li>
+                                    <li><span>MM</span>{{main.operations.actions.last_modified_date.help.month}}</li>
+                                    <li><span>DD</span>{{main.operations.actions.last_modified_date.help.day}}</li>
+                                    <li><span>hh</span>{{main.operations.actions.last_modified_date.help.hours}}</li>
+                                    <li><span>mm</span>{{main.operations.actions.last_modified_date.help.minutes}}</li>
+                                    <li><span>ss</span>{{main.operations.actions.last_modified_date.help.seconds}}</li>
+                                </ul>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </script>
+            <script type="text/template" class="js-action-template" rel="fileSize">
+                <div class="operation-action js-action" rel="fileSize">
+                    <div class="heading">
+                        {{main.operations.actions.file_size.option}}
+                        <div class="operation-helper action-handle js-action-handle"><i class="fa fa-arrows"></i></div>
+                        <button tabindex="-1" class="operation-helper action-delete js-delete-action"><i class="fa fa-trash-o"></i></button>
+                    </div>
+                    <div class="operation-fields js-fields">
+                        <label class="field">
+                            {{main.operations.actions.file_size.help}}
+                        </label>
+                    </div>
+                </div>
+            </script>
+            <div class="actions">
+                <button tabindex="-1" class="primary right js-operation-apply">
+                    <i class="fa fa-check"></i>
+                    {{main.toolbar.apply}}
+                </button>
+                <button tabindex="-1" class="secondary right js-operation-add">
+                    <i class="fa fa-cog"></i>
+                    {{main.toolbar.add_operation}}
+                </button>
+            </div>
+        </div>
+        <div class="panel toolbar js-toolbar-panel"></div>
+    </body>
+</html>
