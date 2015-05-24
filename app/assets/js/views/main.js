@@ -61,7 +61,6 @@
          */
         this.init = function()
         {
-            window.postMessageToHost('test2');
             var $window = $(window);
             var $body = $(window.document.body);
             //_initDOM.apply(this, [$window, $body]);

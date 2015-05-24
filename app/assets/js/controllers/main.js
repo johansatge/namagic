@@ -35,9 +35,13 @@
             webView.location = "app://assets/html/main.html";
 
 
-            webView.on('message', function(message)
+            webView.on('message', function(evt)
             {
-                console.log(message)
+                evt = JSON.parse(evt);
+                if (evt.type === 'console')
+                {
+                    console.log(evt.data);
+                }
             });
             webView.on('load', function()
             {
