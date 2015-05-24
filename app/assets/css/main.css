@@ -145,7 +145,7 @@ html, body {
   left: 0;
   top: 0;
   bottom: 0;
-  /*overflow-y    : auto;*/
+  overflow-y: auto;
   border-top: 1px solid #a3a3a3;
   border-bottom: 1px solid #a3a3a3;
   background: #d8dfe7;
@@ -341,13 +341,13 @@ html, body {
 /* line 1, ../sass/_operations.scss */
 .panel.operations {
   position: absolute;
+  overflow-x: hidden;
   z-index: 30;
   width: 300px;
   right: 0;
   top: 0;
   bottom: 0;
-  /*overflow-x             : hidden;*/
-  /*overflow-y             : auto;*/
+  overflow-y: auto;
   background: radial-gradient(ellipse at center, #3f3f3f 0%, #242424 100%);
   border-bottom: 1px solid #2c2c2c;
   border-left: 1px solid #2c2c2c;

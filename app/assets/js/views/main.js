@@ -41,8 +41,7 @@
     var _initSubviews = function()
     {
         Files.init($ui.window, $ui.filesPanel);
-        //module.operations = new app.views.operations();
-        //module.operations.init($ui.operationsPanel);
+        Operations.init($ui.operationsPanel);
     };
 
     /**
