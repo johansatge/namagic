@@ -1,7 +1,7 @@
 /**
  * Operations subview
  */
-(function(app, $)
+(function(window, $)
 {
 
     'use strict';
@@ -220,6 +220,6 @@
 
     };
 
-    app.views.operations = module;
+    window.Operations = module;
 
-})(window.App, jQuery);
+})(window, jQuery);

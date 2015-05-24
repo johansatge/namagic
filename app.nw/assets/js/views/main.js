@@ -9,11 +9,11 @@
     var module = function()
     {
 
-        this.files;
-        this.operations;
+        this.files = null;
+        this.operations = null;
 
         var window = null;
-        var events = new app.node.events.EventEmitter();
+        var events = {};//new app.node.events.EventEmitter();
         var $ui = {};
 
         /**
@@ -23,7 +23,7 @@
          */
         this.on = function(event, callback)
         {
-            events.on(event, callback);
+            //events.on(event, callback);
         };
 
         /**
