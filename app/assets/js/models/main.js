@@ -119,7 +119,7 @@
             }
             if (typeof new_file !== 'undefined')
             {
-                defaultDestinationDir = new_file.getDirectory();
+                defaultDestinationDir = new_file.directory;
             }
             events.emit('add_files', new_files);
             events.emit('progress', newFiles.length > 0 ? ((newFilesCount - newFiles.length) * 100) / newFilesCount : 100);
@@ -171,7 +171,7 @@
         var _asyncApplyOperations = function()
         {
             var file = currentFiles[currentFilesIndexes[pendingIndexes[pendingIndex]]];
-            if (file.getError() === false || file.getError().overwrites)
+            if (file.hasError === false || file.showOverwrites)
             {
                 if (!file.destinationExists(destinationDir) || allowOverwrite)
                 {
@@ -195,7 +195,7 @@
             pendingIndex += 1;
             if (success)
             {
-                var file_id = file.getID();
+                var file_id = file.id;
                 pendingDeletedFiles.push(file_id);
                 currentFiles[currentFilesIndexes[file_id]] = false;
                 delete currentFilesIndexes[file_id];

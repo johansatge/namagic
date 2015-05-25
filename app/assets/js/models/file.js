@@ -8,6 +8,8 @@
 
     var unorm = require('unorm');
     var fs = require('fs');
+    var Selection = require('./selection.js');
+    var Action = require('./action.js');
 
     var module = function(_id, _dir, _name)
     {
@@ -28,14 +30,14 @@
          */
         this.destinationExists = function(destination_dir)
         {
-            if (destination_dir === directory)
+            if (destination_dir === this.directory)
             {
                 return false;
             }
             var exists;
             try
             {
-                fs.readFileSync(destination_dir + '/' + updatedName);
+                fs.readFileSync(destination_dir + '/' + this.updatedName);
                 exists = true;
             }
             catch (error)
@@ -53,7 +55,7 @@
         this.applyUpdatedName = function(destination_dir, callback)
         {
             applyCallback = callback;
-            fs.rename(directory + '/' + name, destination_dir + '/' + updatedName, _updatedNameApplied.bind(this));
+            fs.rename(this.directory + '/' + this.name, destination_dir + '/' + this.updatedName, _updatedNameApplied.bind(this));
         };
 
         /**
@@ -133,7 +135,7 @@
          */
         var _processText = function(subject, selection, actions, file_index, file_path)
         {
-            var ranges = app.models.selection[selection.type](subject, selection.options);
+            var ranges = Selection[selection.type](subject, selection.options);
             var updated_subject = '';
             var previous_range = false;
             var range = false;
@@ -144,7 +146,7 @@
                 var updated_subject_part = subject.substring(range.start, range.end);
                 for (var act_index = 0; act_index < actions.length; act_index += 1)
                 {
-                    var action_callable = app.models.action[actions[act_index].type];
+                    var action_callable = Action[actions[act_index].type];
                     var new_text = action_callable(updated_subject_part, actions[act_index].options, file_index, file_path);
                     if (new_text instanceof Error)
                     {
@@ -163,35 +165,6 @@
         };
 
         /**
-         * Returns the ID of the file
-         */
-        this.getID = function()
-        {
-            return id;
-        };
-
-        /**
-         * Returns the name of the file
-         */
-        this.getName = function()
-        {
-            return this.name;
-        };
-
-        this.getUpdatedName = function()
-        {
-            return this.updatedName;
-        };
-
-        /**
-         * Returns the directory of the file
-         */
-        this.getDirectory = function()
-        {
-            return this.directory;
-        };
-
-        /**
          * Sets the error status of the file
          * @param has_error
          * @param text
@@ -202,14 +175,6 @@
             this.hasError = has_error ? true : false;
             this.showOverwrites = overwrites ? true : false;
             this.errorMessage = text;
-        };
-
-        /**
-         * Returns the error status of the file
-         */
-        this.getError = function()
-        {
-            return this.hasError ? {message: this.errorMessage, overwrites: this.showOverwrites} : false;
         };
 
     };

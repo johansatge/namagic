@@ -64,6 +64,10 @@
                 {
                     model.removeFiles(evt.data);
                 }
+                if (evt.type === 'edit_operations')
+                {
+                    model.storeAndProcessOperations(evt.data);
+                }
                 if (evt.type === 'console')
                 {
                     console.log(evt.data);
@@ -85,6 +89,16 @@
             webview.postMessage(JSON.stringify({type: 'add_files', data: files}));
             webview.postMessage(JSON.stringify({type: 'lock_ui', data: true}));
         };
+
+        /**
+         * Set status on files from the model
+         * @param files
+         */
+        var _onUpdateFilesFromModel = function(files)
+        {
+            webview.postMessage(JSON.stringify({type: 'update_files', data: files}));
+        };
+
 
         /**
          * Removes files from the model
@@ -121,7 +135,6 @@
             view.files.on('set_destination', $.proxy(_onSetDestinationFromView), this);
             view.files.on('cancel', $.proxy(_onCancelCurrentWorkFromView), this);
             view.files.on('overwrite', $.proxy(_onOverwriteFileFromView), this);
-            view.operations.on('edit_operations', $.proxy(_onEditOperationsFromView, this));
             view.operations.on('apply_operations', $.proxy(_onApplyOperationsFromView, this));
         };
 
@@ -136,7 +149,7 @@
         /**
          * Triggers an overwrite action from the view
          * @param type
-         * @param target
+         * @param ids
          */
         var _onOverwriteFileFromView = function(type, ids)
         {
@@ -173,24 +186,6 @@
             view.files.lockInterface(true);
             view.operations.lockInterface(true);
             model.applyOperationsOnFiles(true, destination_dir, false);
-        };
-
-        /**
-         * Set status on files from the model
-         * @param files
-         */
-        var _onUpdateFilesFromModel = function(files)
-        {
-            view.files.updateFiles(files, false);
-        };
-
-        /**
-         * Processes files when modifying an operation from the view
-         * @param operations
-         */
-        var _onEditOperationsFromView = function(operations)
-        {
-            model.storeAndProcessOperations(operations);
         };
 
         /**

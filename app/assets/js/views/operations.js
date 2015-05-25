@@ -8,20 +8,9 @@
 
     var module = {};
 
-    var events = {};//new app.node.events.EventEmitter();
     var $ui = {};
     var operationTemplate;
     var actionTemplates = {};
-
-    /**
-     * Attaches an event
-     * @param event
-     * @param callback
-     */
-    module.on = function(event, callback)
-    {
-        //events.on(event, callback);
-    };
 
     /**
      * Inits the subview
@@ -139,7 +128,7 @@
                 applyTo: operation.querySelector('.js-apply-to').value
             });
         }
-        events.emit('edit_operations', operations_list);
+        window.postMessageToHost(JSON.stringify({type: 'edit_operations', data: operations_list}));
     };
 
     /**

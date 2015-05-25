@@ -33,6 +33,10 @@
             {
                 Files.updateFiles(evt.data, true);
             }
+            if (evt.type === 'update_files')
+            {
+                Files.updateFiles(evt.data, false);
+            }
             if (evt.type === 'remove_files')
             {
                 Files.removeFiles(evt.data);
