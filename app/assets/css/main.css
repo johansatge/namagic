@@ -200,39 +200,35 @@ html, body {
   color: #616161;
 }
 /* line 68, ../sass/_files.scss */
-.panel.files input[type=file] {
-  display: none;
-}
-/* line 73, ../sass/_files.scss */
 .panel.files table {
   width: 100%;
   position: relative;
   z-index: 23;
 }
-/* line 80, ../sass/_files.scss */
+/* line 75, ../sass/_files.scss */
 .panel.files.files .actions {
   width: 500px;
 }
-/* line 85, ../sass/_files.scss */
+/* line 80, ../sass/_files.scss */
 .panel.files .placeholder {
   color: #aabcca;
 }
-/* line 89, ../sass/_files.scss */
+/* line 84, ../sass/_files.scss */
 .panel.files .placeholder.bordered .text {
   text-shadow: 0 1px 0 rgba(255, 255, 255, 0.5);
   border: 2px dashed #aabcca;
 }
-/* line 96, ../sass/_files.scss */
+/* line 91, ../sass/_files.scss */
 .panel.files.js-drag .placeholder {
   cursor: copy;
 }
-/* line 100, ../sass/_files.scss */
+/* line 95, ../sass/_files.scss */
 .panel.files.js-drag .placeholder .text {
   color: #8896a1;
   border: 2px dashed #8896a1;
 }
 
-/* line 108, ../sass/_files.scss */
+/* line 103, ../sass/_files.scss */
 .files-scroll {
   overflow-y: auto;
   position: absolute;
@@ -241,82 +237,82 @@ html, body {
   width: 100%;
 }
 
-/* line 120, ../sass/_files.scss */
+/* line 115, ../sass/_files.scss */
 .files-list tr td {
   cursor: default;
   color: #333333;
   padding: 6px 8px 6px 8px;
 }
-/* line 126, ../sass/_files.scss */
+/* line 121, ../sass/_files.scss */
 .files-list tr td:nth-child(1) {
   width: 40%;
 }
-/* line 131, ../sass/_files.scss */
+/* line 126, ../sass/_files.scss */
 .files-list tr td:nth-child(2) {
   width: 10px;
 }
-/* line 136, ../sass/_files.scss */
+/* line 131, ../sass/_files.scss */
 .files-list tr td i {
   color: #999999;
   font-size: 11px;
 }
-/* line 142, ../sass/_files.scss */
+/* line 137, ../sass/_files.scss */
 .files-list tr td .dir {
   display: none;
   color: #a0a0a0;
 }
-/* line 148, ../sass/_files.scss */
+/* line 143, ../sass/_files.scss */
 .files-list tr td .error {
   display: none;
   color: #ed0000;
   font-size: 11px;
   margin: 2px 0 0 0;
 }
-/* line 157, ../sass/_files.scss */
+/* line 152, ../sass/_files.scss */
 .files-list tr:nth-child(odd) td {
   background: #ffffff;
 }
-/* line 162, ../sass/_files.scss */
+/* line 157, ../sass/_files.scss */
 .files-list tr:nth-child(even) td {
   background: #f3f6fa;
 }
-/* line 167, ../sass/_files.scss */
+/* line 162, ../sass/_files.scss */
 .files-list tr.js-active td {
   background: #0072d5 !important;
   color: #ffffff !important;
   -webkit-font-smoothing: antialiased;
 }
-/* line 174, ../sass/_files.scss */
+/* line 169, ../sass/_files.scss */
 .files-list tr.js-active td .dir, .files-list tr.js-active td i, .files-list tr.js-active td span {
   color: #ffffff !important;
 }
-/* line 181, ../sass/_files.scss */
+/* line 176, ../sass/_files.scss */
 .files-list .overwrite {
   display: none;
 }
-/* line 186, ../sass/_files.scss */
+/* line 181, ../sass/_files.scss */
 .files-list .buttons {
   float: left;
 }
-/* line 190, ../sass/_files.scss */
+/* line 185, ../sass/_files.scss */
 .files-list .buttons button {
   float: left;
   margin: 3px 5px 0 0;
 }
-/* line 196, ../sass/_files.scss */
+/* line 191, ../sass/_files.scss */
 .files-list .buttons button[disabled=disabled] {
   opacity: 0.5;
 }
-/* line 202, ../sass/_files.scss */
+/* line 197, ../sass/_files.scss */
 .files-list tr.js-active button.primary {
   border: 1px solid #004989;
 }
-/* line 207, ../sass/_files.scss */
+/* line 202, ../sass/_files.scss */
 .files-list tr.js-active button.secondary {
   border: 1px solid #004989;
   box-shadow: inset 0 1px 0 #ffffff;
 }
-/* line 213, ../sass/_files.scss */
+/* line 208, ../sass/_files.scss */
 .files-list button {
   border-radius: 3px;
   padding: 2px 5px 3px 5px;
@@ -324,24 +320,24 @@ html, body {
   font-size: 10px;
   -webkit-font-smoothing: antialiased;
 }
-/* line 221, ../sass/_files.scss */
+/* line 216, ../sass/_files.scss */
 .files-list button.primary {
   color: #ffffff;
   background: linear-gradient(to bottom, #4a9de5, #0072d5);
   border: 1px solid #005fb2;
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2);
 }
-/* line 229, ../sass/_files.scss */
+/* line 224, ../sass/_files.scss */
 .files-list button.primary:active {
   background: linear-gradient(to top, #4a9de5, #0072d5);
 }
-/* line 234, ../sass/_files.scss */
+/* line 229, ../sass/_files.scss */
 .files-list button.secondary {
   box-shadow: inset 0 1px 0 #ffffff, 0 1px 0 #f1f6f9;
   background: linear-gradient(to bottom, #f1f6f9, #d8d8d8);
   border: 1px solid #a3a3a3;
 }
-/* line 241, ../sass/_files.scss */
+/* line 236, ../sass/_files.scss */
 .files-list button.secondary:active {
   background: linear-gradient(to top, #f1f6f9, #d8d8d8);
 }

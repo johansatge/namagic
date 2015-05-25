@@ -9,6 +9,7 @@
     var EventEmitter = require('events').EventEmitter;
     var crypto = require('crypto');
     var File = require('./file.js');
+    var FileDialog = require('FileDialog');
 
     var module = function()
     {
@@ -77,11 +78,21 @@
         };
 
         /**
-         * Returns the default destination path
+         * Gets the destination dir
+         * @param window
          */
-        this.getDefaultDestinationDir = function()
+        this.getDestinationDir = function(window)
         {
-            return defaultDestinationDir;
+            var dialog = new FileDialog('open');
+            dialog.allowMultiple = false;
+            dialog.allowDirectories = true;
+            dialog.allowFileTypes = ['none/none'];
+            dialog.directory = defaultDestinationDir;
+            dialog.open(window);
+            dialog.addEventListener('select', function()
+            {
+                events.emit('set_destination', dialog.selection[0].replace(/\/$/, ''));
+            });
         };
 
         /**
@@ -105,7 +116,7 @@
             var new_files = [];
             for (var index = 0; index < files.length; index += 1)
             {
-                var path = files[index].replace(/\/$/, '');
+                var path = files[index];
                 var id = crypto.createHash('md5').update(path).digest('hex');
                 if (typeof currentFilesIndexes[id] === 'undefined')
                 {
@@ -146,6 +157,7 @@
             {
                 destinationDir = destination_dir;
             }
+            console.log(destinationDir);
             pendingIndex = 0;
             if (typeof ids === 'object')
             {
@@ -178,7 +190,7 @@
                     file.applyUpdatedName(destinationDir, _onOperationAppliedOnFile.bind(this));
                     return;
                 }
-                file.setError(true, 'locale:main.errors.file_exists');
+                file.setError(true, 'locale:main.errors.file_exists', true);
             }
             _onOperationAppliedOnFile.apply(this, [file, false]);
         };

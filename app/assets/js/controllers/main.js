@@ -30,6 +30,7 @@
             model.on('add_files', _onAddFilesFromModel.bind(this));
             model.on('remove_files', _onRemoveFilesFromModel.bind(this));
             model.on('update_files', _onUpdateFilesFromModel.bind(this));
+            model.on('set_destination', _onSetDestinationFromModel.bind(this));
 
             window = new Window();
             window.visible = false;
@@ -57,7 +58,12 @@
                     dialog.open(window);
                     dialog.addEventListener('select', function()
                     {
-                        model.addFiles(dialog.selection);
+                        var files = [];
+                        for (var index = 0; index < dialog.selection.length; index += 1)
+                        {
+                            files.push(dialog.selection[index].replace(/\/$/, ''));
+                        }
+                        model.addFiles(files);
                     });
                 }
                 if (evt.type === 'remove_files')
@@ -68,16 +74,29 @@
                 {
                     model.storeAndProcessOperations(evt.data);
                 }
+                if (evt.type === 'apply_operations' && model.hasFiles())
+                {
+                    model.getDestinationDir(window);
+                }
                 if (evt.type === 'console')
                 {
                     console.log(evt.data);
                 }
-            });
 
-            /*
-             view.on('close', $.proxy(_onViewClose, this));
-             view.on('loaded', $.proxy(_onViewLoaded, this));
-             view.show();*/
+                //view.files.on('cancel', $.proxy(_onCancelCurrentWorkFromView), this);
+                //view.files.on('overwrite', $.proxy(_onOverwriteFileFromView), this);
+
+            });
+        };
+
+        /**
+         * Start applying operations when the user has selected a destination dir
+         * @param destination_dir
+         */
+        var _onSetDestinationFromModel = function(destination_dir)
+        {
+            webview.postMessage(JSON.stringify({type: 'lock_ui', data: true}));
+            model.applyOperationsOnFiles(true, destination_dir, false);
         };
 
         /**
@@ -98,7 +117,6 @@
         {
             webview.postMessage(JSON.stringify({type: 'update_files', data: files}));
         };
-
 
         /**
          * Removes files from the model
@@ -128,17 +146,6 @@
         };
 
         /**
-         * Inits the subview when the view is ready
-         */
-        var _onViewLoaded = function()
-        {
-            view.files.on('set_destination', $.proxy(_onSetDestinationFromView), this);
-            view.files.on('cancel', $.proxy(_onCancelCurrentWorkFromView), this);
-            view.files.on('overwrite', $.proxy(_onOverwriteFileFromView), this);
-            view.operations.on('apply_operations', $.proxy(_onApplyOperationsFromView, this));
-        };
-
-        /**
          * Cancels the current work
          */
         var _onCancelCurrentWorkFromView = function()
@@ -163,38 +170,6 @@
                 view.operations.lockInterface(true);
                 model.applyOperationsOnFiles(ids, false, true);
             }
-        };
-
-        /**
-         * Starts applying operations on current files
-         */
-        var _onApplyOperationsFromView = function()
-        {
-            if (model.hasFiles())
-            {
-                var destination_dir = model.getDefaultDestinationDir();
-                view.files.getDestinationDir(destination_dir);
-            }
-        };
-
-        /**
-         * Start applying operations when the user has selected a destination dir
-         * @param destination_dir
-         */
-        var _onSetDestinationFromView = function(destination_dir)
-        {
-            view.files.lockInterface(true);
-            view.operations.lockInterface(true);
-            model.applyOperationsOnFiles(true, destination_dir, false);
-        };
-
-        /**
-         * Closes the view
-         */
-        var _onViewClose = function()
-        {
-            model.cancelCurrentWork();
-            view.close();
         };
 
     };

@@ -37,17 +37,7 @@
             _initUI.apply(this, [$window, $dom]);
             $ui.cancelAsync.on('click', $.proxy(_onCancelAsync, this));
             $ui.filesInput.on('change', $.proxy(_onAddFilesFromUploader, this));
-            $ui.destinationInput.on('change', $.proxy(_onSelectDestination, this));
             this.lockInterface(false);
-        };
-
-        /**
-         * Opens the "Choose destination dir" dir
-         * @param default_dir
-         */
-        this.getDestinationDir = function(default_dir)
-        {
-            $ui.destinationInput.val('').attr('nwworkingdir', default_dir).trigger('click');
         };
 
         /**
@@ -167,8 +157,6 @@
             $ui.cancelAsync = $dom.find('.js-cancel');
             $ui.dragOverlay = $dom.find('.js-drag-overlay');
             $ui.placeholder = $dom.find('.js-placeholder');
-            $ui.filesInput = $dom.find('.js-files-input');
-            $ui.destinationInput = $dom.find('.js-dest-input');
             $ui.add = $dom.find('.js-files-add');
             $ui.remove = $dom.find('.js-files-remove');
             $ui.list = $dom.find('.js-files-list');

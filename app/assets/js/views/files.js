@@ -23,17 +23,7 @@
     {
         _initUI($window, $dom);
         $ui.cancelAsync.on('click', _onCancelAsync);
-        $ui.destinationInput.on('change', _onSelectDestination);
         module.lockInterface(false);
-    };
-
-    /**
-     * Opens the "Choose destination dir" dir
-     * @param default_dir
-     */
-    module.getDestinationDir = function(default_dir)
-    {
-        $ui.destinationInput.val('').attr('nwworkingdir', default_dir).trigger('click');
     };
 
     /**
@@ -102,7 +92,7 @@
             $files[file_id].updatedName.innerHTML = file.updatedName;
             $files[file_id].error.style.display = file.hasError !== false ? 'block' : 'none';
             $files[file_id].error.innerHTML = file.hasError !== false ? Locale.get(file.errorMessage.replace('locale:', '')) : '';
-            $files[file_id].overwriteButtons.style.display = file.hasError !== false && file.hasError.showOverwrites ? 'block' : 'none';
+            $files[file_id].overwriteButtons.style.display = file.hasError !== false && file.showOverwrites ? 'block' : 'none';
         }
         _updateFilesCount();
     };
@@ -152,7 +142,6 @@
         $ui.cancelAsync = $dom.find('.js-cancel');
         $ui.dragOverlay = $dom.find('.js-drag-overlay');
         $ui.placeholder = $dom.find('.js-placeholder');
-        $ui.destinationInput = $dom.find('.js-dest-input');
         $ui.add = $dom.find('.js-files-add');
         $ui.remove = $dom.find('.js-files-remove');
         $ui.list = $dom.find('.js-files-list');

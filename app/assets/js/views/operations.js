@@ -203,7 +203,7 @@
     var _onProcessOperations = function(evt)
     {
         evt.preventDefault();
-        events.emit('apply_operations');
+        window.postMessageToHost(JSON.stringify({type: 'apply_operations'}));
     };
 
     window.Operations = module;
