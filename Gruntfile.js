@@ -102,7 +102,7 @@ module.exports = function(grunt)
     {
         var done = this.async();
         grunt.log.writeln('Signing app...');
-        var command = 'codesign --deep -s $1 -i $2 --entitlements $3 "$4"'
+        var command = 'codesign -s $1 -i $2 --entitlements $3 "$4"'
             .replace('$1', identity)
             .replace('$2', manifest.namespace)
             .replace('$3', 'assets/entitlements.plist')
