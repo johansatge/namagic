@@ -5,7 +5,6 @@
     left          : 0;
     top           : 0;
     bottom        : 0;
-    overflow-y    : auto;
     border-top    : 1px solid #a3a3a3;
     border-bottom : 1px solid #a3a3a3;
     background    : #d8dfe7;
@@ -104,6 +103,15 @@
             border : 2px dashed #8896a1;
         }
     }
+}
+
+.files-scroll
+{
+    overflow-y : auto;
+    position   : absolute;
+    top        : 0;
+    bottom     : 0;
+    width      : 100%;
 }
 
 .files-list
