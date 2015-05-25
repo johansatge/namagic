@@ -7,23 +7,12 @@
     'use strict';
 
     var module = {};
-    var events = {};//new app.node.events.EventEmitter();
     var $ui = {};
     var currentHotkey = false;
     var fileTemplate;
     var $lastSelectedFile = false;
     var $files = {};
     var filesCount = 0;
-
-    /**
-     * Attaches an event
-     * @param event
-     * @param callback
-     */
-    module.on = function(event, callback)
-    {
-        //events.on(event, callback);
-    };
 
     /**
      * Inits the subview
@@ -34,7 +23,6 @@
     {
         _initUI($window, $dom);
         $ui.cancelAsync.on('click', _onCancelAsync);
-        $ui.filesInput.on('change', _onAddFilesFromUploader);
         $ui.destinationInput.on('change', _onSelectDestination);
         module.lockInterface(false);
     };
@@ -95,12 +83,11 @@
         for (var index = 0; index < files.length; index += 1)
         {
             var file = files[index];
-            var file_id = file.getID();
-            var file_error = file.getError();
+            var file_id = file.id;
             if (add)
             {
                 filesCount += 1;
-                var $row = $(app.utils.template.render(fileTemplate, [file]));
+                var $row = $(Template.render(fileTemplate, [file]));
                 $ui.list.append($row);
                 var row = $row.get(0);
                 $files[file_id] = {
@@ -110,12 +97,12 @@
                     overwriteButtons: row.querySelector('.js-overwrite')
                 };
                 row.setAttribute('id', file_id);
-                row.querySelector('.js-name').innerHTML = file.getName();
+                row.querySelector('.js-name').innerHTML = file.name;
             }
-            $files[file_id].updatedName.innerHTML = file.getUpdatedName();
-            $files[file_id].error.style.display = file_error !== false ? 'block' : 'none';
-            $files[file_id].error.innerHTML = file_error !== false ? file_error.message : '';
-            $files[file_id].overwriteButtons.style.display = file_error !== false && file_error.overwrites ? 'block' : 'none';
+            $files[file_id].updatedName.innerHTML = file.updatedName;
+            $files[file_id].error.style.display = file.hasError !== false ? 'block' : 'none';
+            $files[file_id].error.innerHTML = file.hasError !== false ? file.errorMessage : '';
+            $files[file_id].overwriteButtons.style.display = file.hasError !== false && file.hasError.showOverwrites ? 'block' : 'none';
         }
         _updateFilesCount();
     };
@@ -165,7 +152,6 @@
         $ui.cancelAsync = $dom.find('.js-cancel');
         $ui.dragOverlay = $dom.find('.js-drag-overlay');
         $ui.placeholder = $dom.find('.js-placeholder');
-        $ui.filesInput = $dom.find('.js-files-input');
         $ui.destinationInput = $dom.find('.js-dest-input');
         $ui.add = $dom.find('.js-files-add');
         $ui.remove = $dom.find('.js-files-remove');
@@ -237,16 +223,7 @@
     var _onAddFilesFromDrop = function(evt)
     {
         _onDragLeave();
-
-        events.emit('add_files', _cleanSelectedFiles(evt.originalEvent.dataTransfer.files));
-    };
-
-    /**
-     * Selecting files from the hidden upload input
-     */
-    var _onAddFilesFromUploader = function(evt)
-    {
-        events.emit('add_files', _cleanSelectedFiles(evt.target.files));
+        // @todo support drop
     };
 
     /**
@@ -256,7 +233,7 @@
     var _onAddFilesFromButton = function(evt)
     {
         evt.preventDefault();
-        $ui.filesInput.trigger('click');
+        window.postMessageToHost(JSON.stringify({type: 'add_files'}));
     };
 
     /**
@@ -340,24 +317,7 @@
         {
             ids.push($(this).attr('id'));
         });
-        events.emit('remove_files', ids);
-    };
-
-    /**
-     * Cleans files selected in the view
-     * @param raw_files
-     */
-    var _cleanSelectedFiles = function(raw_files)
-    {
-        var files = [];
-        for (var index in raw_files)
-        {
-            if (typeof raw_files[index].path !== 'undefined' && raw_files[index].path !== '')
-            {
-                files.push(raw_files[index].path);
-            }
-        }
-        return files;
+        window.postMessageToHost(JSON.stringify({type: 'remove_files', data: ids}));
     };
 
     window.Files = module;

@@ -7,20 +7,29 @@
     'use strict';
 
     var Window = require('Window');
+    var FileDialog = require('FileDialog');
 
     var module = function()
     {
 
         //var view = new app.views.main();
-        //var model = new app.models.main();
+        var Model = require('../models/main.js');
+        var model = new Model();
 
         var window = null;
+        var webview = null;
 
         /**
          * Inits the controller
          */
         this.init = function()
         {
+
+            model.on('progress', _onModelProgress.bind(this));
+            model.on('idle', _onModelIdle.bind(this));
+            model.on('add_files', _onAddFilesFromModel.bind(this));
+            model.on('remove_files', _onRemoveFilesFromModel.bind(this));
+            model.on('update_files', _onUpdateFilesFromModel.bind(this));
 
             window = new Window();
             window.visible = false;
@@ -29,29 +38,37 @@
             window.resizable = true;
             window.title = '';
 
-            var webView = new WebView();
-            window.appendChild(webView);
-            webView.left = webView.top = webView.right = webView.bottom = 0;
-            webView.location = "app://assets/html/main.html";
-
-
-            webView.on('message', function(evt)
+            webview = new WebView();
+            window.appendChild(webview);
+            webview.left = webview.top = webview.right = webview.bottom = 0;
+            webview.location = "app://assets/html/main.html";
+            webview.on('load', function()
+            {
+                window.visible = true;
+            });
+            webview.on('message', function(evt)
             {
                 evt = JSON.parse(evt);
+                if (evt.type === 'add_files')
+                {
+                    var dialog = new FileDialog('open');
+                    dialog.allowMultiple = true;
+                    dialog.allowDirectories = true;
+                    dialog.open(window);
+                    dialog.addEventListener('select', function()
+                    {
+                        model.addFiles(dialog.selection);
+                    });
+                }
+                if (evt.type === 'remove_files')
+                {
+                    model.removeFiles(evt.data);
+                }
                 if (evt.type === 'console')
                 {
                     console.log(evt.data);
                 }
             });
-            webView.on('load', function()
-            {
-                window.visible = true;
-            });
-            webView.on('error', function(err)
-            {
-                console.log(err);
-            });
-
 
             /*
              view.on('close', $.proxy(_onViewClose, this));
@@ -60,17 +77,47 @@
         };
 
         /**
+         * Adds files to the view while the model is working
+         * @param files
+         */
+        var _onAddFilesFromModel = function(files)
+        {
+            webview.postMessage(JSON.stringify({type: 'add_files', data: files}));
+            webview.postMessage(JSON.stringify({type: 'lock_ui', data: true}));
+        };
+
+        /**
+         * Removes files from the model
+         * @param ids
+         */
+        var _onRemoveFilesFromModel = function(ids)
+        {
+            webview.postMessage(JSON.stringify({type: 'remove_files', data: ids}));
+        };
+
+        /**
+         * Updates the file view while the model is working
+         * @param percentage
+         */
+        var _onModelProgress = function(percentage)
+        {
+            webview.postMessage(JSON.stringify({type: 'set_progress', data: percentage}));
+        };
+
+        /**
+         * Enables UI when a delayed operation has been finished
+         * @private
+         */
+        var _onModelIdle = function()
+        {
+            webview.postMessage(JSON.stringify({type: 'lock_ui', data: false}));
+        };
+
+        /**
          * Inits the subview when the view is ready
          */
         var _onViewLoaded = function()
         {
-            model.on('progress', $.proxy(_onModelProgress), this);
-            model.on('idle', $.proxy(_onModelIdle), this);
-            model.on('add_files', $.proxy(_onAddFilesFromModel), this);
-            model.on('remove_files', $.proxy(_onRemoveFilesFromModel), this);
-            model.on('update_files', $.proxy(_onUpdateFilesFromModel), this);
-            view.files.on('add_files', $.proxy(_onAddFilesFromView, this));
-            view.files.on('remove_files', $.proxy(_onRemoveFilesFromView, this));
             view.files.on('set_destination', $.proxy(_onSetDestinationFromView), this);
             view.files.on('cancel', $.proxy(_onCancelCurrentWorkFromView), this);
             view.files.on('overwrite', $.proxy(_onOverwriteFileFromView), this);
@@ -129,35 +176,6 @@
         };
 
         /**
-         * Processes files added from the view and send them back
-         * @param files
-         */
-        var _onAddFilesFromView = function(files)
-        {
-            view.files.lockInterface(true);
-            view.operations.lockInterface(true);
-            model.addFiles(files);
-        };
-
-        /**
-         * Processes files deleted from the view and send them back
-         * @param ids
-         */
-        var _onRemoveFilesFromView = function(ids)
-        {
-            model.removeFiles(ids);
-        };
-
-        /**
-         * Removes files from the model
-         * @param ids
-         */
-        var _onRemoveFilesFromModel = function(ids)
-        {
-            view.files.removeFiles(ids);
-        };
-
-        /**
          * Set status on files from the model
          * @param files
          */
@@ -173,34 +191,6 @@
         var _onEditOperationsFromView = function(operations)
         {
             model.storeAndProcessOperations(operations);
-        };
-
-        /**
-         * Adds files to the view while the model is working
-         * @param files
-         */
-        var _onAddFilesFromModel = function(files)
-        {
-            view.files.updateFiles(files, true);
-        };
-
-        /**
-         * Updates the file view while the model is working
-         * @param percentage
-         */
-        var _onModelProgress = function(percentage)
-        {
-            view.files.setProgress(percentage);
-        };
-
-        /**
-         * Enables UI when a delayed operation has been finished
-         * @private
-         */
-        var _onModelIdle = function()
-        {
-            view.files.lockInterface(false);
-            view.operations.lockInterface(false);
         };
 
         /**

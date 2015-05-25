@@ -6,9 +6,13 @@
   "description": "",
   "author": "Johan Satgé",
   "sources": {
-    "directory":"."
+    "directory": "."
   },
-  "icon": {"osx":["../assets/icon/icon.png"] },
+  "icon": {"osx": ["../assets/icon/icon.png"]},
   "main": "assets/js/app.js",
-  "copyright": "Copyright © 2015 Johan Satgé. All rights reserved."
+  "copyright": "Copyright © 2015 Johan Satgé. All rights reserved.",
+  "dependencies": {
+    "filesize": "~3.1.2",
+    "unorm": "~1.3.3"
+  }
 }
