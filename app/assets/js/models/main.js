@@ -105,7 +105,7 @@
             var new_files = [];
             for (var index = 0; index < files.length; index += 1)
             {
-                var path = files[index];
+                var path = files[index].replace(/\/$/, '');
                 var id = crypto.createHash('md5').update(path).digest('hex');
                 if (typeof currentFilesIndexes[id] === 'undefined')
                 {
