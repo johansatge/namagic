@@ -8,26 +8,23 @@
 
     var Menu = require('Menu');
     var MenuItem = require('MenuItem');
+    var System = require('System');
 
     var module = function()
     {
         var mainMenu = new Menu();
         var window = null;
         var appleMenu = new MenuItem('@todo name', '');
-        var fileMenu = new MenuItem('File', '');
         var editMenu = new MenuItem('Edit', '');
         var windowMenu = new MenuItem('Window', '');
         var helpMenu = new MenuItem('Help', '');
         mainMenu.appendChild(appleMenu);
-        mainMenu.appendChild(fileMenu);
         mainMenu.appendChild(editMenu);
         mainMenu.appendChild(windowMenu);
         mainMenu.appendChild(helpMenu);
 
-        var appleSubmenu = new Menu('@todo name');
-        appleSubmenu.appendChild(new MenuItem('About ' + '@todo name', ''));
-        appleSubmenu.appendChild(new MenuItemSeparator());
-        appleSubmenu.appendChild(new MenuItem('Hide ' + '@todo name', 'h'))
+        var appleSubmenu = new Menu(application.name);
+        appleSubmenu.appendChild(new MenuItem('Hide ' + application.name, 'h'))
             .addEventListener('click', function()
             {
                 application.visible = false;
@@ -49,15 +46,6 @@
                 process.exit(0);
             });
         appleMenu.submenu = appleSubmenu;
-
-        var fileSubmenu = new Menu('File');
-        fileSubmenu.appendChild(new MenuItem('New File', 'f'));
-        fileSubmenu.appendChild(new MenuItem('Open...', 'o'));
-        fileSubmenu.appendChild(new MenuItem('Save', 's'));
-        fileSubmenu.appendChild(new MenuItem('Save As...', 'S', 'shift'));
-        fileSubmenu.appendChild(new MenuItemSeparator());
-        fileSubmenu.appendChild(new MenuItem('Close', 'c', 'cmd'));
-        fileMenu.submenu = fileSubmenu;
 
         var editSubmenu = new Menu('Edit');
         var undo = new MenuItem('Undo', 'u');
@@ -110,17 +98,33 @@
         windowMenu.submenu = windowSubmenu;
 
         var helpSubmenu = new Menu('Help');
-        helpSubmenu.appendChild(new MenuItem('Website', ''));
-        helpSubmenu.appendChild(new MenuItem('Online Documentation', ''));
-        helpSubmenu.appendChild(new MenuItem('License', ''));
+        helpSubmenu.appendChild(new MenuItem('Online help', ''))
+            .addEventListener('click', function()
+            {
+                System.openURL('https://github.com/namagicapp/support');
+            });
+        helpSubmenu.appendChild(new MenuItemSeparator());
+        helpSubmenu.appendChild(new MenuItem('Website', ''))
+            .addEventListener('click', function()
+            {
+                System.openURL('http://www.namagicapp.com');
+            });
+        helpSubmenu.appendChild(new MenuItem('Report a bug or request a feature', ''))
+            .addEventListener('click', function()
+            {
+                System.openURL('https://github.com/namagicapp/support/issues');
+            });
         helpMenu.submenu = helpSubmenu;
 
+        /**
+         * Associates the menubar to a window
+         * @param win
+         */
         this.setOnWindow = function(win)
         {
             window = win;
             window.menu = mainMenu;
         };
-
     };
 
     m.exports = module;

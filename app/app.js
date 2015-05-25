@@ -32,40 +32,12 @@
     var controller = new MainController();
     controller.init();
 
-
-    /*
-
-
-
-     var win = new Window(); // Create a new window.
-     win.visible = true; // make sure the window is shown.
-     appMenu.setOnWindow(win);
-
-     */
-
-    /**
-     * Request a new window
-     */
-    var _onNew = function()
-    {
-        var main = new app.controllers.main();
-        main.init();
-    };
-
-    /**
-     * Tries to close the current window
-     */
-    var _onClose = function()
-    {
-        app.utils.windowmanager.closeCurrentWindow();
-    };
-
     /**
      * Requests website
      */
     var _onWebsite = function()
     {
-        app.node.gui.Shell.openExternal(app.utils.locale.get('manifest.urls.website'));
+
     };
 
     /**
