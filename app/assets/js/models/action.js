@@ -134,7 +134,7 @@
         }
         catch (error)
         {
-            return new Error(app.utils.locale.get('main.errors.stat_not_found'));
+            return new Error('locale:main.errors.stat_not_found');
         }
     };
 

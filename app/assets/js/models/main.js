@@ -178,7 +178,7 @@
                     file.applyUpdatedName(destinationDir, _onOperationAppliedOnFile.bind(this));
                     return;
                 }
-                file.setError(true, app.utils.locale.get('main.errors.file_exists'), true);
+                file.setError(true, 'locale:main.errors.file_exists');
             }
             _onOperationAppliedOnFile.apply(this, [file, false]);
         };

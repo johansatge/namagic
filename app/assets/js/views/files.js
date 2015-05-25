@@ -101,7 +101,7 @@
             }
             $files[file_id].updatedName.innerHTML = file.updatedName;
             $files[file_id].error.style.display = file.hasError !== false ? 'block' : 'none';
-            $files[file_id].error.innerHTML = file.hasError !== false ? file.errorMessage : '';
+            $files[file_id].error.innerHTML = file.hasError !== false ? Locale.get(file.errorMessage.replace('locale:', '')) : '';
             $files[file_id].overwriteButtons.style.display = file.hasError !== false && file.hasError.showOverwrites ? 'block' : 'none';
         }
         _updateFilesCount();

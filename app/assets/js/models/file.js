@@ -116,7 +116,7 @@
             }
             if (this.updatedName === '')
             {
-                this.setError(true, app.utils.locale.get('main.errors.empty_filename'));
+                this.setError(true, 'locale:main.errors.empty_filename');
             }
             return this.updatedName !== old_updated_name;
         };
@@ -151,7 +151,7 @@
                     if (new_text instanceof Error)
                     {
                         this.setError(true, new_text.message);
-                        updated_subject_part = app.utils.locale.get('main.errors.error');
+                        updated_subject_part = 'locale:main.errors.error';
                     }
                     else
                     {
