@@ -127,7 +127,7 @@
      */
     var _onCancelAsync = function()
     {
-        events.emit('cancel');
+        window.postMessageToHost(JSON.stringify({type: 'cancel'}));
     };
 
     /**
@@ -226,17 +226,6 @@
     };
 
     /**
-     * Selects the destination dir from the file dialog
-     * @param evt
-     */
-    var _onSelectDestination = function(evt)
-    {
-        evt.preventDefault();
-        var dir = evt.target.files.length > 0 ? evt.target.files[0].path : false;
-        events.emit('set_destination', dir);
-    };
-
-    /**
      * Clicks on an overwrite action, in a file
      * @param evt
      */
@@ -259,7 +248,7 @@
         {
             ids.push($button.closest('.js-file').attr('id'))
         }
-        events.emit('overwrite', type, ids);
+        window.postMessageToHost(JSON.stringify({type: 'overwrite', data: {type: type, ids: ids}}));
     };
 
     /**

@@ -8,11 +8,11 @@
 
     var Window = require('Window');
     var FileDialog = require('FileDialog');
+    var Menubar = require('../utils/menubar.js');
 
     var module = function()
     {
 
-        //var view = new app.views.main();
         var Model = require('../models/main.js');
         var model = new Model();
 
@@ -38,6 +38,9 @@
             window.height = 600;
             window.resizable = true;
             window.title = '';
+
+            var menubar = new Menubar();
+            menubar.setOnWindow(window);
 
             webview = new WebView();
             window.appendChild(webview);
@@ -78,14 +81,26 @@
                 {
                     model.getDestinationDir(window);
                 }
+                if (evt.type === 'overwrite')
+                {
+                    if (evt.data.type === 'dismiss')
+                    {
+                        model.dismissOverwriteFiles(evt.data.ids);
+                    }
+                    if (evt.data.type === 'overwrite')
+                    {
+                        webview.postMessage(JSON.stringify({type: 'lock_ui', data: true}));
+                        model.applyOperationsOnFiles(evt.data.ids, false, true);
+                    }
+                }
+                if (evt.type === 'cancel')
+                {
+                    model.cancelCurrentWork();
+                }
                 if (evt.type === 'console')
                 {
                     console.log(evt.data);
                 }
-
-                //view.files.on('cancel', $.proxy(_onCancelCurrentWorkFromView), this);
-                //view.files.on('overwrite', $.proxy(_onOverwriteFileFromView), this);
-
             });
         };
 
@@ -143,33 +158,6 @@
         var _onModelIdle = function()
         {
             webview.postMessage(JSON.stringify({type: 'lock_ui', data: false}));
-        };
-
-        /**
-         * Cancels the current work
-         */
-        var _onCancelCurrentWorkFromView = function()
-        {
-            model.cancelCurrentWork();
-        };
-
-        /**
-         * Triggers an overwrite action from the view
-         * @param type
-         * @param ids
-         */
-        var _onOverwriteFileFromView = function(type, ids)
-        {
-            if (type === 'dismiss')
-            {
-                model.dismissOverwriteFiles(ids);
-            }
-            if (type === 'overwrite')
-            {
-                view.files.lockInterface(true);
-                view.operations.lockInterface(true);
-                model.applyOperationsOnFiles(ids, false, true);
-            }
         };
 
     };

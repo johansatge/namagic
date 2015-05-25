@@ -7,17 +7,14 @@
     'use strict';
 
     require('Common');
-    var AppMenu = require('./assets/js/utils/menubar.js');
     var MainController = require('./assets/js/controllers/main.js');
+
     //application.exitAfterWindowsClose = false;
 
     //app.models = {};
     //app.views = {};
     //app.controllers = {};
     //app.utils = {};
-
-    var appMenu = new AppMenu();
-
 
     /*app.node = modules;
      app.devMode = app.node.fs.existsSync('.dev') && app.node.fs.readFileSync('.dev', {encoding: 'utf8'}) === '1';
@@ -40,11 +37,11 @@
 
 
 
-    var win = new Window(); // Create a new window.
-    win.visible = true; // make sure the window is shown.
-    appMenu.setOnWindow(win);
+     var win = new Window(); // Create a new window.
+     win.visible = true; // make sure the window is shown.
+     appMenu.setOnWindow(win);
 
-*/
+     */
 
     /**
      * Request a new window
