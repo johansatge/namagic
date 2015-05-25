@@ -3,21 +3,10 @@ module.exports = function(grunt)
 
     'use strict';
 
-    var async = require('async');
-    var util = require('util');
-    var glob = require('glob');
-    var uglifyjs = require('uglify-js');
-    var exec = require('child_process').exec;
     var fs = require('fs');
-    var manifest = eval('(' + fs.readFileSync('app.nw/package.json', {encoding: 'utf8'}) + ')');
-    //var appExecutable = 'node-webkit';
-    var appExecutable = 'nwjs';
-    var sourceApp = '/Applications/' + appExecutable + '.app';
-    var appName = 'Namagic.app';
-    var identity = 'LK7U6U8DZ4' // @todo move this elsewhere
-    var bundleID = manifest.bundle_identifier;
-
-    grunt.log.writeln('Uses ' + appExecutable + '.');
+    var exec = require('child_process').exec;
+    var manifest = JSON.parse(fs.readFileSync('app/package.json', {encoding: 'utf8'}));
+    var identity = 'LK7U6U8DZ4'; // @todo move this elsewhere
 
     /**
      * Watches SASS files
@@ -33,7 +22,6 @@ module.exports = function(grunt)
 
     /**
      * Runs the app
-     * Use the "--dev" option to enable toolbars and debug
      */
     grunt.registerTask('run', function()
     {
@@ -53,92 +41,34 @@ module.exports = function(grunt)
         var series = [
             function(callback)
             {
-                grunt.log.writeln('Cleaning...');
-                exec('rm -r .mas;mkdir .mas', callback);
+                grunt.log.writeln('Building app...');
+                exec('tntbuild --out .build --clean --no-windows-build app/package.json', callback);
             },
             function(callback)
             {
-                grunt.log.writeln('Creating empty application...');
-                exec('cp -r ' + sourceApp + ' .mas/' + appName, callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Removing FFMpeg binary...');
-                exec('rm ".mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Framework.framework/Libraries/ffmpegsumo.so"', callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Installing icon...');
-                exec('cp assets/icon/icon.icns .mas/' + appName + '/Contents/Resources/nw.icns', callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Updating app plist file...');
-                var plist = fs.readFileSync('assets/plist/info.plist', {encoding: 'utf8'});
-                var stats = fs.statSync('.mas/' + appName + '/Contents/Info.plist');
-                for (var property in manifest)
+                grunt.log.writeln('Looking for JS...');
+                var js_path = '.build/MacOS X/' + manifest.name + '.app' + '/Contents/Resources/assets/';
+                require('glob')('**/*!(.min).js', {cwd: js_path}, function(error, files)
                 {
-                    plist = plist.replace(new RegExp('{{' + property + '}}', 'g'), manifest[property]);
-                }
-                plist = plist.replace(new RegExp('{{executable}}', 'g'), appExecutable);
-                fs.writeFile('.mas/' + appName + '/Contents/Info.plist', plist, {
-                    encoding: 'utf8',
-                    mode: stats.mode
-                }, callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Updating helper plist files...');
-                updateHelperPlist('.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper.app', bundleID + '.helper');
-                updateHelperPlist('.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper EH.app', bundleID + '.helper.eh');
-                updateHelperPlist('.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper NP.app', bundleID + '.helper.np');
-                callback();
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Installing app files...');
-                exec('cp -r app.nw .mas/' + appName + '/Contents/Resources', callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Minifies JS...');
-                var js_path = '.mas/' + appName + '/Contents/Resources/app.nw/assets/';
-                glob('**/*.js', {cwd: js_path}, function(error, files)
-                {
-                    for (var index = 0; index < files.length; index += 1)
+                    grunt.log.writeln('Minifying ' + files.length + ' JS files...');
+                    var uglifyjs = require('uglify-js');
+                    files.map(function(path)
                     {
-                        if (files[index].search('.min.') !== -1)
+                        if (path.search('.min.') === -1)
                         {
-                            continue;
+                            fs.writeFileSync(js_path + path, uglifyjs.minify(js_path + path).code, {encoding: 'utf8'});
                         }
-                        grunt.log.writeln('Minifies ' + files[index] + '...');
-                        var minified = uglifyjs.minify(js_path + files[index]);
-                        fs.writeFileSync(js_path + files[index], minified.code, {encoding: 'utf8'});
-                    }
+                    });
                     callback();
                 });
             },
             function(callback)
             {
-                grunt.log.writeln('Cleaning built app...');
-                exec('cd .mas/' + appName + ' && find . -name "*.DS_Store" -type f -delete', function()
-                {
-                    exec('rm -r .mas/' + appName + '/Contents/Resources/app.nw/assets/sass', function()
-                    {
-                        exec('rm -r .mas/' + appName + '/Contents/Frameworks/crash_inspector', function()
-                        {
-                            callback();
-                        });
-                    });
-                });
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Setting permissions...');
-                exec('cd .mas/' + appName + '/Contents/Resources/app.nw && find . -type f | xargs chmod -v 644', callback);
+                grunt.log.writeln('Cleaning app...');
+                exec('rm -r ".build/MacOS X/' + manifest.name + '.app' + '/Contents/Resources/assets/sass"', callback);
             }
         ];
-        async.series(series, function()
+        require('async').series(series, function()
         {
             done();
         });
@@ -150,42 +80,13 @@ module.exports = function(grunt)
     grunt.registerTask('sign', function()
     {
         var done = this.async();
-        var child_ent = 'assets/entitlements/child.plist';
-        var parent_ent = 'assets/entitlements/parent.plist';
-        var cmd = 'codesign --deep -s $1 -i $2 --entitlements $3 "$4"';
-        var series = [
-            function(callback)
-            {
-                grunt.log.writeln('Signing ' + appExecutable + ' Helper.app...');
-                var app_path = '.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper.app';
-                var bundle_id = bundleID + '.helper';
-                exec(cmd.replace('$1', identity).replace('$2', bundle_id).replace('$3', child_ent).replace('$4', app_path), callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Signing ' + appExecutable + ' Helper EH.app...');
-                var app_path = '.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper EH.app';
-                var bundle_id = bundleID + '.helper.eh';
-                exec(cmd.replace('$1', identity).replace('$2', bundle_id).replace('$3', child_ent).replace('$4', app_path), callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Signing ' + appExecutable + ' Helper NP.app...');
-                var app_path = '.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper NP.app';
-                var bundle_id = bundleID + '.helper.np';
-                exec(cmd.replace('$1', identity).replace('$2', bundle_id).replace('$3', child_ent).replace('$4', app_path), callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Signing app...');
-                var app_path = '.mas/' + appName;
-                exec(cmd.replace('$1', identity).replace('$2', bundleID).replace('$3', parent_ent).replace('$4', app_path), callback);
-            }
-        ];
-        async.series(series, function()
-        {
-            done();
-        });
+        grunt.log.writeln('Signing app...');
+        var command = 'codesign --deep -s $1 -i $2 --entitlements $3 "$4"'
+            .replace('$1', identity)
+            .replace('$2', manifest.namespace)
+            .replace('$3', 'assets/entitlements.plist')
+            .replace('$4', '.build/MacOS X/' + manifest.name + '.app');
+        exec(command, done);
     });
 
     /**
@@ -194,25 +95,13 @@ module.exports = function(grunt)
     grunt.registerTask('pkg', function()
     {
         var done = this.async();
-        var command = 'cd .mas && productbuild --component "' + appName + '" /Applications  --sign "' + identity + '" ' + appName.replace('.app', '.pkg');
-        exec(command, function(error, stdout, stderr)
-        {
-            grunt.log.writeln(stdout);
-            done();
-        });
+        grunt.log.writeln('Packaging app...');
+        var command = 'cd ".build/MacOS X" && productbuild --component "$1.app" $2  --sign "$3" $4.pkg'
+            .replace('$1', manifest.name)
+            .replace('$2', '/Applications')
+            .replace('$3', identity)
+            .replace('$4', manifest.name);
+        exec(command, done);
     });
-
-    /**
-     * Updates the Info.plist file of the needed helper app
-     * @param helper_path
-     * @param bundle_id
-     */
-    function updateHelperPlist(helper_path, bundle_id)
-    {
-        var plist = fs.readFileSync(helper_path + '/Contents/Info.plist', {encoding: 'utf8'});
-        var stats = fs.statSync(helper_path + '/Contents/Info.plist');
-        plist = plist.replace(/<key>CFBundleIdentifier<\/key>[^\/]*\/string>/g, '<key>CFBundleIdentifier<\/key>\n	<string>' + bundle_id + '</string>');
-        fs.writeFileSync(helper_path + '/Contents/Info.plist', plist, {encoding: 'utf8', mode: stats.mode});
-    }
 
 };
