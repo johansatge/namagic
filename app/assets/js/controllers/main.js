@@ -10,6 +10,7 @@
     var FileDialog = require('FileDialog');
     var Menubar = require('../utils/menubar.js');
     var Model = require('../models/main.js');
+    var fs = require('fs');
 
     var module = {};
 
@@ -17,6 +18,7 @@
     var window = null;
     var webview = null;
     var menubar = null;
+    var manifest = JSON.parse(fs.readFileSync(__dirname + '/../../../package.json', {encoding: 'utf8'}));
 
     /**
      * Inits
@@ -58,7 +60,7 @@
         window.resizable = true;
         window.title = '';
 
-        menubar = new Menubar();
+        menubar = new Menubar(manifest.name, manifest.version);
         menubar.setOnWindow(window);
 
         webview = new WebView();

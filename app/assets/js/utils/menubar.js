@@ -10,11 +10,11 @@
     var MenuItem = require('MenuItem');
     var System = require('System');
 
-    var module = function()
+    var module = function(app_name, app_version)
     {
         var mainMenu = new Menu();
         var window = null;
-        var appleMenu = new MenuItem(application.name, '');
+        var appleMenu = new MenuItem(app_name, '');
         var editMenu = new MenuItem('Edit', '');
         var windowMenu = new MenuItem('Window', '');
         var helpMenu = new MenuItem('Help', '');
@@ -23,8 +23,8 @@
         mainMenu.appendChild(windowMenu);
         mainMenu.appendChild(helpMenu);
 
-        var appleSubmenu = new Menu(application.name);
-        appleSubmenu.appendChild(new MenuItem('Hide ' + application.name, 'h'))
+        var appleSubmenu = new Menu(app_name);
+        appleSubmenu.appendChild(new MenuItem('Hide ' + app_name, 'h'))
             .addEventListener('click', function()
             {
                 application.visible = false;
@@ -40,7 +40,7 @@
                 application.unhideAllOtherApplications();
             });
         appleSubmenu.appendChild(new MenuItemSeparator());
-        appleSubmenu.appendChild(new MenuItem('Quit ' + application.name, 'q'))
+        appleSubmenu.appendChild(new MenuItem('Quit ' + app_name, 'q'))
             .addEventListener('click', function()
             {
                 process.exit(0);
