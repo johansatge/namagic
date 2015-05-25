@@ -69,6 +69,13 @@
         {
             window.visible = true;
         });
+        webview.on('console', function(evt, message)
+        {
+            if (evt === 'log')
+            {
+                console.log(message);
+            }
+        });
         webview.on('message', function(evt)
         {
             evt = JSON.parse(evt);
@@ -112,10 +119,6 @@
             if (evt.type === 'cancel')
             {
                 model.cancelCurrentWork();
-            }
-            if (evt.type === 'console')
-            {
-                console.log(evt.data);
             }
         });
     };

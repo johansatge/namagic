@@ -346,15 +346,20 @@
             </div>
         </div>
         <div class="panel toolbar js-toolbar-panel"></div>
+        <script>
+            window.onerror = function(error, url, line)
+            {
+                console.log('Error: ' + error + ' Script: ' + url + ' Line: ' + line);
+            };
+        </script>
         <script type="text/javascript" src="../js/libs/jquery-2.1.1.min.js"></script>
         <script type="text/javascript" src="../js/libs/jqueryui-1.11.3.min.js"></script>
-        <script type="text/javascript" src="../js/utils/console.js"></script>
         <script type="text/javascript" src="../js/utils/locale.js"></script>
         <script type="text/javascript" src="../js/utils/template.js"></script>
         <script type="text/javascript" src="../js/views/main.js"></script>
         <script type="text/javascript" src="../js/views/files.js"></script>
         <script type="text/javascript" src="../js/views/operations.js"></script>
-        <script type="text/javascript">
+        <script>
             document.addEventListener('dragover', function(evt)
             {
                 evt.preventDefault();
