@@ -48,7 +48,7 @@ module.exports = function(grunt)
             {
                 grunt.log.writeln('Looking for JS...');
                 var js_path = '.build/MacOS X/' + manifest.name + '.app' + '/Contents/Resources/assets/';
-                require('glob')('**/*!(.min).js', {cwd: js_path}, function(error, files)
+                require('glob')('**/*.js', {cwd: js_path}, function(error, files)
                 {
                     grunt.log.writeln('Minifying ' + files.length + ' JS files...');
                     var uglifyjs = require('uglify-js');
@@ -58,6 +58,27 @@ module.exports = function(grunt)
                         {
                             fs.writeFileSync(js_path + path, uglifyjs.minify(js_path + path).code, {encoding: 'utf8'});
                         }
+                    });
+                    callback();
+                });
+            },
+            function(callback)
+            {
+                grunt.log.writeln('Looking for HTML...');
+                var html_path = '.build/MacOS X/' + manifest.name + '.app' + '/Contents/Resources/assets/';
+                require('glob')('**/*.html', {cwd: html_path}, function(error, files)
+                {
+                    grunt.log.writeln('Minifying ' + files.length + ' HTML files...');
+                    var htmlminifier = require('html-minifier').minify;
+                    files.map(function(path)
+                    {
+                        var code = htmlminifier(fs.readFileSync(html_path + path, {encoding: 'utf8'}), {
+                            removeComments: true,
+                            minifyJS: true,
+                            preserveLineBreaks: false,
+                            collapseWhitespace: true
+                        });
+                        fs.writeFileSync(html_path + path, code, {encoding: 'utf8'});
                     });
                     callback();
                 });
