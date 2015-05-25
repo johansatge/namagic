@@ -25,7 +25,7 @@ module.exports = function(grunt)
     grunt.registerTask('sass', function()
     {
         var done = this.async();
-        var child = exec('cd app.nw/assets && compass watch sass/main.scss');
+        var child = exec('cd app/assets && compass watch sass/main.scss');
         child.stdout.on('data', grunt.log.write);
         child.stderr.on('data', grunt.log.write);
         child.on('close', done);
@@ -37,9 +37,8 @@ module.exports = function(grunt)
      */
     grunt.registerTask('run', function()
     {
-        setDevMode(grunt.option('dev') === true);
         var done = this.async();
-        var child = exec(sourceApp + '/Contents/MacOS/' + appExecutable + ' app.nw');
+        var child = exec('tint app/app.js');
         child.stdout.on('data', grunt.log.write);
         child.stderr.on('data', grunt.log.write);
         child.on('close', done);
@@ -51,7 +50,6 @@ module.exports = function(grunt)
     grunt.registerTask('build', function()
     {
         var done = this.async();
-        setDevMode(false);
         var series = [
             function(callback)
             {
@@ -215,15 +213,6 @@ module.exports = function(grunt)
         var stats = fs.statSync(helper_path + '/Contents/Info.plist');
         plist = plist.replace(/<key>CFBundleIdentifier<\/key>[^\/]*\/string>/g, '<key>CFBundleIdentifier<\/key>\n	<string>' + bundle_id + '</string>');
         fs.writeFileSync(helper_path + '/Contents/Info.plist', plist, {encoding: 'utf8', mode: stats.mode});
-    }
-
-    /**
-     * Toggles dev mode
-     * @param enable
-     */
-    function setDevMode(enable)
-    {
-        grunt.file.write('./app.nw/.dev', enable ? '1' : '0', {encoding: 'utf8'});
     }
 
 };
