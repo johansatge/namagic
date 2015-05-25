@@ -7,6 +7,7 @@
     'use strict';
 
     var module = {};
+    var String = require('../utils/string.js');
 
     /**
      * Selects all text
@@ -28,7 +29,7 @@
         var matches = [];
         if (options.text !== '')
         {
-            var regex = new RegExp(_quoteRegex(options.text), options.caseInsensitive ? 'gi' : 'g');
+            var regex = new RegExp(String.quoteRegex(options.text), options.caseInsensitive ? 'gi' : 'g');
             var match;
             while ((match = regex.exec(subject)) !== null)
             {
@@ -49,7 +50,7 @@
         var regex_parts = [];
         if (options.customList !== '')
         {
-            regex_parts.push('[' + _quoteRegex(options.customList) + ']+');
+            regex_parts.push('[' + String.quoteRegex(options.customList) + ']+');
         }
         if (options.alphabeticChars)
         {
@@ -140,16 +141,6 @@
             }
         }
         return matches;
-    };
-
-    /**
-     * Quotes the given subject to be used in a regex
-     * @param subject
-     */
-    var _quoteRegex = function(subject)
-    {
-        var regex = new RegExp('[.\\\\+*?\\[\\^\\]$(){}=!<>|:\\-]', 'g');
-        return subject.replace(regex, '\\$&');
     };
 
     m.exports = module;

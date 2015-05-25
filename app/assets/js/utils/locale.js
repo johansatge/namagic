@@ -21,7 +21,6 @@
     /**
      * Gets a locale string
      * @param id
-     * @return string
      */
     module.get = function(id)
     {
@@ -30,7 +29,6 @@
 
     /**
      * Gets all locale strings
-     * @returns {}
      */
     module.getAll = function()
     {
@@ -41,7 +39,6 @@
      * Parses an object and makes its hierarchy flat by using dots (.)
      * @param prefix
      * @param json
-     * @private
      */
     var _parseObject = function(prefix, json)
     {

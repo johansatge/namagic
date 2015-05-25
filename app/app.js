@@ -7,61 +7,119 @@
     'use strict';
 
     require('Common');
-    var MainController = require('./assets/js/controllers/main.js');
 
-    //application.exitAfterWindowsClose = false;
+    var Window = require('Window');
+    var FileDialog = require('FileDialog');
+    var Menubar = require('./assets/js/utils/menubar.js');
+    var Model = require('./assets/js/models/main.js');
 
-    //app.models = {};
-    //app.views = {};
-    //app.controllers = {};
-    //app.utils = {};
-
-    /*app.node = modules;
-     app.devMode = app.node.fs.existsSync('.dev') && app.node.fs.readFileSync('.dev', {encoding: 'utf8'}) === '1';
-     app.utils.locale.init(typeof navigator.language !== 'undefined' ? navigator.language : '');
-     app.utils.menubar.init();
-     app.utils.menubar.on('new', _onNew);
-     app.utils.menubar.on('close', _onClose);
-     app.utils.menubar.on('website', _onWebsite);
-     app.utils.menubar.on('help', _onHelp);
-     app.utils.menubar.on('bug_report', _onBugReport);
-     app.utils.menubar.on('quit', _onQuit);
-     _onNew();*/
-
-
-    var controller = new MainController();
-    controller.init();
+    var model = null;
+    var window = null;
+    var webview = null;
+    var menubar = null;
 
     /**
-     * Requests website
+     * Inits
      */
-    var _onWebsite = function()
+    var _init = function()
     {
+        model = new Model();
+        model.on('progress', function(percentage)
+        {
+            webview.postMessage(JSON.stringify({type: 'set_progress', data: percentage}));
+        });
+        model.on('idle', function()
+        {
+            webview.postMessage(JSON.stringify({type: 'lock_ui', data: false}));
+        });
+        model.on('add_files', function(files)
+        {
+            webview.postMessage(JSON.stringify({type: 'add_files', data: files}));
+            webview.postMessage(JSON.stringify({type: 'lock_ui', data: true}));
+        });
+        model.on('remove_files', function(ids)
+        {
+            webview.postMessage(JSON.stringify({type: 'remove_files', data: ids}));
+        });
+        model.on('update_files', function(files)
+        {
+            webview.postMessage(JSON.stringify({type: 'update_files', data: files}));
+        });
+        model.on('set_destination', function(destination_dir)
+        {
+            webview.postMessage(JSON.stringify({type: 'lock_ui', data: true}));
+            model.applyOperationsOnFiles(true, destination_dir, false);
+        });
 
+        window = new Window();
+        window.visible = false;
+        window.width = 900;
+        window.height = 600;
+        window.resizable = true;
+        window.title = '';
+
+        menubar = new Menubar();
+        menubar.setOnWindow(window);
+
+        webview = new WebView();
+        window.appendChild(webview);
+        webview.left = webview.top = webview.right = webview.bottom = 0;
+        webview.location = "app://assets/html/main.html";
+        webview.on('load', function()
+        {
+            window.visible = true;
+        });
+        webview.on('message', function(evt)
+        {
+            evt = JSON.parse(evt);
+            if (evt.type === 'add_files')
+            {
+                var dialog = new FileDialog('open');
+                dialog.allowMultiple = true;
+                dialog.allowDirectories = true;
+                dialog.open(window);
+                dialog.addEventListener('select', function()
+                {
+                    var files = [];
+                    for (var index = 0; index < dialog.selection.length; index += 1)
+                    {
+                        files.push(dialog.selection[index].replace(/\/$/, ''));
+                    }
+                    model.addFiles(files);
+                });
+            }
+            if (evt.type === 'remove_files')
+            {
+                model.removeFiles(evt.data);
+            }
+            if (evt.type === 'edit_operations')
+            {
+                model.storeAndProcessOperations(evt.data);
+            }
+            if (evt.type === 'apply_operations' && model.hasFiles())
+            {
+                model.getDestinationDir(window);
+            }
+            if (evt.type === 'overwrite' && evt.data.type === 'dismiss')
+            {
+                model.dismissOverwriteFiles(evt.data.ids);
+            }
+            if (evt.type === 'overwrite' && evt.data.type === 'overwrite')
+            {
+                webview.postMessage(JSON.stringify({type: 'lock_ui', data: true}));
+                model.applyOperationsOnFiles(evt.data.ids, false, true);
+            }
+            if (evt.type === 'cancel')
+            {
+                model.cancelCurrentWork();
+            }
+            if (evt.type === 'console')
+            {
+                console.log(evt.data);
+            }
+        });
     };
 
-    /**
-     * Requests help
-     */
-    var _onHelp = function()
-    {
-        app.node.gui.Shell.openExternal(app.utils.locale.get('manifest.urls.help'));
-    };
-
-    /**
-     * Requests bug reporter
-     */
-    var _onBugReport = function()
-    {
-        app.node.gui.Shell.openExternal(app.utils.locale.get('manifest.urls.bug_report'));
-    };
-
-    /**
-     * Closes the app
-     */
-    var _onQuit = function()
-    {
-        app.node.gui.App.closeAllWindows();
-    };
+    _init();
 
 })(require);

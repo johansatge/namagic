@@ -14,7 +14,7 @@
     {
         var mainMenu = new Menu();
         var window = null;
-        var appleMenu = new MenuItem('@todo name', '');
+        var appleMenu = new MenuItem(application.name, '');
         var editMenu = new MenuItem('Edit', '');
         var windowMenu = new MenuItem('Window', '');
         var helpMenu = new MenuItem('Help', '');
@@ -40,7 +40,7 @@
                 application.unhideAllOtherApplications();
             });
         appleSubmenu.appendChild(new MenuItemSeparator());
-        appleSubmenu.appendChild(new MenuItem('Quit ' + '@todo name', 'q'))
+        appleSubmenu.appendChild(new MenuItem('Quit ' + application.name, 'q'))
             .addEventListener('click', function()
             {
                 process.exit(0);

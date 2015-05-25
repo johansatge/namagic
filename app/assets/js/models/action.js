@@ -7,6 +7,8 @@
     'use strict';
 
     var fs = require('fs');
+    var filesize = require('filesize');
+    var String = require('../utils/string.js');
 
     var module = {};
 
@@ -67,7 +69,7 @@
         }
         if (options.type === 'invert')
         {
-            subject = app.utils.string.inverseCase(subject);
+            subject = String.inverseCase(subject);
         }
         return {type: 'replace', text: subject};
     };
@@ -84,7 +86,7 @@
         var birthtime = _getFileStat.apply(this, [path, 'birthtime']);
         return birthtime instanceof Error ? birthtime : {
             type: 'add',
-            text: app.utils.string.formatDate(birthtime, options.format)
+            text: String.formatDate(birthtime, options.format)
         };
     };
 
@@ -100,7 +102,7 @@
         var mtime = _getFileStat.apply(this, [path, 'mtime']);
         return mtime instanceof Error ? mtime : {
             type: 'add',
-            text: app.utils.string.formatDate(mtime, options.format)
+            text: String.formatDate(mtime, options.format)
         };
     };
 
@@ -116,7 +118,7 @@
         var size = _getFileStat.apply(this, [path, 'size']);
         return size instanceof Error ? size : {
             type: 'add',
-            text: app.node.filesize(size, {bits: false, spacer: ''})
+            text: filesize(size, {bits: false, spacer: ''})
         };
     };
 
