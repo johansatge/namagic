@@ -85,6 +85,20 @@ module.exports = function(grunt)
             },
             function(callback)
             {
+                grunt.log.writeln('Updating app manifest...');
+                var plist = fs.readFileSync('assets/info.plist', {encoding: 'utf8'});
+                var stats = fs.statSync('.build/MacOS X/' + manifest.name + '.app' + '/Contents/Info.plist');
+                for (var property in manifest)
+                {
+                    plist = plist.replace(new RegExp('{{' + property + '}}', 'g'), manifest[property]);
+                }
+                fs.writeFile('.build/MacOS X/' + manifest.name + '.app' + '/Contents/Info.plist', plist, {
+                    encoding: 'utf8',
+                    mode: stats.mode
+                }, callback);
+            },
+            function(callback)
+            {
                 grunt.log.writeln('Cleaning app...');
                 exec('rm -r ".build/MacOS X/' + manifest.name + '.app' + '/Contents/Resources/assets/sass"', callback);
             }
