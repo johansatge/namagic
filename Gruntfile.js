@@ -26,7 +26,7 @@ module.exports = function(grunt)
     grunt.registerTask('run', function()
     {
         var done = this.async();
-        var child = exec('tint app/app.js');
+        var child = exec('cd app && tint app.js');
         child.stdout.on('data', grunt.log.write);
         child.stderr.on('data', grunt.log.write);
         child.on('close', done);

@@ -6,6 +6,7 @@
 
     'use strict';
 
+    var WebView = require('WebView');
     var Window = require('Window');
     var FileDialog = require('FileDialog');
     var Menubar = require('../utils/menubar.js');
@@ -63,6 +64,7 @@
         menubar = new Menubar(manifest.name, manifest.version);
         menubar.setOnWindow(window);
 
+        WebView.useNewWKWebView = false;
         webview = new WebView();
         window.appendChild(webview);
         webview.left = webview.top = webview.right = webview.bottom = 0;
