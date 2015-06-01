@@ -36,9 +36,9 @@
         $ui.remove.attr('disabled', is_locked || $ui.list.children().filter('.js-active').length === 0 ? 'disabled' : null);
         $ui.list.find('.js-overwrite-button').attr('disabled', is_locked ? 'disabled' : null);
         (is_locked ? $ui.window.off : $ui.window.on).apply($ui.window, ['keydown keyup', _onRecordKey]);
-        (is_locked ? $ui.panel.off : $ui.panel.on).apply($ui.panel, ['dragenter', _onDragEnter]);
-        (is_locked ? $ui.dragOverlay.off : $ui.dragOverlay.on).apply($ui.dragOverlay, ['dragleave', _onDragLeave]);
-        (is_locked ? $ui.panel.off : $ui.panel.on).apply($ui.panel, ['drop', _onAddFilesFromDrop]);
+        //(is_locked ? $ui.panel.off : $ui.panel.on).apply($ui.panel, ['dragenter', _onDragEnter]);
+        //(is_locked ? $ui.dragOverlay.off : $ui.dragOverlay.on).apply($ui.dragOverlay, ['dragleave', _onDragLeave]);
+        //(is_locked ? $ui.panel.off : $ui.panel.on).apply($ui.panel, ['drop', _onAddFilesFromDrop]);
         (is_locked ? $ui.list.off : $ui.list.on).apply($ui.list, ['click', '.js-file', _onFileClick]);
         (is_locked ? $ui.list.off : $ui.list.on).apply($ui.list, ['click', '.js-overwrite-button', _onOverwriteClick]);
         (is_locked ? $ui.add.off : $ui.add.on).apply($ui.add, ['click', _onAddFilesFromButton]);

@@ -84,7 +84,8 @@
         &.bordered .text
         {
             text-shadow : 0 1px 0 rgba(255, 255, 255, 0.5);
-            border      : 2px dashed #aabcca;
+            //border      : 2px dashed #aabcca;
+            border      : 2px dashed transparent;
         }
     }
 
