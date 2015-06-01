@@ -21,38 +21,40 @@
         $ui.filesPanel = $ui.body.find('.js-files-panel');
         $ui.operationsPanel = $ui.body.find('.js-operations-panel');
         $ui.optionsPanel = $ui.body.find('.js-toolbar-panel');
-
         Files.init($ui.window, $ui.filesPanel);
         Operations.init($ui.operationsPanel);
-
-
-        window.addEventListener('message', function(evt)
-        {
-            var evt = JSON.parse(evt.data);
-            if (evt.type === 'add_files')
-            {
-                Files.updateFiles(evt.data, true);
-            }
-            if (evt.type === 'update_files')
-            {
-                Files.updateFiles(evt.data, false);
-            }
-            if (evt.type === 'remove_files')
-            {
-                Files.removeFiles(evt.data);
-            }
-            if (evt.type === 'set_progress')
-            {
-                Files.setProgress(evt.data);
-            }
-            if (evt.type === 'lock_ui')
-            {
-                Files.lockInterface(evt.data);
-                Operations.lockInterface(evt.data);
-            }
-        });
-
+        window.addEventListener('message', _onMessage);
         $ui.window.on('resize', _onWindowResize).trigger('resize');
+    };
+
+    /**
+     * Reception of a message from the controller
+     * @param evt
+     */
+    var _onMessage = function(evt)
+    {
+        evt = JSON.parse(evt.data);
+        if (evt.type === 'add_files')
+        {
+            Files.updateFiles(evt.data, true);
+        }
+        if (evt.type === 'update_files')
+        {
+            Files.updateFiles(evt.data, false);
+        }
+        if (evt.type === 'remove_files')
+        {
+            Files.removeFiles(evt.data);
+        }
+        if (evt.type === 'set_progress')
+        {
+            Files.setProgress(evt.data);
+        }
+        if (evt.type === 'lock_ui')
+        {
+            Files.lockInterface(evt.data);
+            Operations.lockInterface(evt.data);
+        }
     };
 
     /**
