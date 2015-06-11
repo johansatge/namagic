@@ -99,6 +99,14 @@ module.exports = function(grunt)
             },
             function(callback)
             {
+                grunt.log.writeln('Updating icon...');
+                exec('rm -r ".build/MacOS X/' + manifest.name + '.app' + '/Contents/Resources/app.icns"', function()
+                {
+                    exec('cp assets/icon/icon.icns ".build/MacOS X/' + manifest.name + '.app' + '/Contents/Resources/app.icns"', callback);
+                });
+            },
+            function(callback)
+            {
                 grunt.log.writeln('Cleaning app...');
                 exec('rm -r ".build/MacOS X/' + manifest.name + '.app' + '/Contents/Resources/assets/sass"', callback);
             }
