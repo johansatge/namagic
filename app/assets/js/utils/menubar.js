@@ -8,6 +8,7 @@
 
     var Menu = require('Menu');
     var MenuItem = require('MenuItem');
+    var MenuItemSeparator = require('MenuItemSeparator');
     var System = require('System');
 
     var module = function(app_name, app_version)
@@ -24,6 +25,12 @@
         mainMenu.appendChild(helpMenu);
 
         var appleSubmenu = new Menu(app_name);
+        appleSubmenu.appendChild(new MenuItem(app_name + ' ' + app_version))
+            .addEventListener('click', function()
+            {
+                System.openURL('http://www.namagicapp.com');
+            });
+        appleSubmenu.appendChild(new MenuItemSeparator());
         appleSubmenu.appendChild(new MenuItem('Hide ' + app_name, 'h'))
             .addEventListener('click', function()
             {
