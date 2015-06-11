@@ -64,11 +64,48 @@
         menubar = new Menubar(manifest.name, manifest.version);
         menubar.setOnWindow(window);
 
+
+        var Button = require('DateWell');
+        var button = new Button();
+        button.left = button.top = button.right = button.bottom = 0;
+        button.acceptsDroppedTypes = ['file'];//['text', 'image', 'rtf', 'html', 'video', 'audio', 'file'];
+        window.appendChild(button);
+
+
+        button.addEventListener('dragenter', function()
+        {
+            console.log('dragenter');
+        });
+        button.addEventListener('dragexit', function()
+        {
+            console.log('dragexit');
+
+        });
+        button.addEventListener('drop', function()
+        {
+            console.log('drop');
+
+        });
+        button.addEventListener('dropped', function(files)
+        {
+            files.map(function(file)
+            {
+                console.log(file.data.toString());
+            });
+            return true;
+        });
+        button.addEventListener('dropping', function()
+        {
+            console.log('dropping');
+        });
+
+
         WebView.useNewWKWebView = false;
         webview = new WebView();
-        window.appendChild(webview);
+        //window.appendChild(webview);
         webview.left = webview.top = webview.right = webview.bottom = 0;
         webview.location = "app://assets/html/main.html";
+        webview.acceptsDroppedTypes = ['text', 'image', 'rtf', 'html', 'video', 'audio', 'file'];
         webview.on('load', function()
         {
             window.visible = true;
