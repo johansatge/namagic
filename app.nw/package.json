@@ -1,0 +1,27 @@
+{
+  "name": "Namagic",
+  "version": "1.0.1",
+  "bundle_identifier": "com.namagicapp.namagic",
+  "bundle_version": "105",
+  "minimum_system_version": "10.8",
+  "copyright": "Copyright © 2015 Johan Satgé. All rights reserved.",
+  "urls": {
+    "website": "http://www.namagicapp.com",
+    "help": "https://github.com/namagicapp/support",
+    "bug_report": "https://github.com/namagicapp/support/issues"
+  },
+  "main": "app.html",
+  "window": {
+    "width": 500,
+    "height": 500,
+    "show": false
+  },
+  "webkit": {
+    "plugin": true,
+    "page-cache": false
+  },
+  "dependencies": {
+    "filesize": "~3.1.2",
+    "unorm": "~1.3.3"
+  }
+}

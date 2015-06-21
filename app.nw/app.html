@@ -1,0 +1,45 @@
+<!-- Libs -->
+<script src="./assets/js/libs/jquery-2.1.1.min.js"></script>
+<script src="./assets/js/libs/jqueryui-1.11.3.min.js"></script>
+
+<!-- App structure -->
+<script src="./assets/js/app.js"></script>
+
+<!-- Utils -->
+<script src="./assets/js/utils/log.js"></script>
+<script src="./assets/js/utils/locale.js"></script>
+<script src="./assets/js/utils/windowbootstrap.js"></script>
+<script src="./assets/js/utils/windowmanager.js"></script>
+<script src="./assets/js/utils/template.js"></script>
+<script src="./assets/js/utils/menubar.js"></script>
+<script src="./assets/js/utils/string.js"></script>
+<script src="./assets/js/utils/dom.js"></script>
+
+<!-- Models -->
+<script src="./assets/js/models/main.js"></script>
+<script src="./assets/js/models/selection.js"></script>
+<script src="./assets/js/models/action.js"></script>
+<script src="./assets/js/models/file.js"></script>
+
+<!-- Views -->
+<script src="./assets/js/views/main.js"></script>
+<script src="./assets/js/views/files.js"></script>
+<script src="./assets/js/views/operations.js"></script>
+
+<!-- Controllers -->
+<script src="./assets/js/controllers/main.js"></script>
+
+<script>
+    window.onload = function()
+    {
+        App.init({
+            gui: require('nw.gui'),
+            fs: require('fs'),
+            events: require('events'),
+            crypto: require('crypto'),
+            util: require('util'),
+            filesize: require('filesize'),
+            unorm: require('unorm')
+        });
+    };
+</script>
