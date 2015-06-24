@@ -90,14 +90,6 @@ module.exports = function(grunt)
             },
             function(callback)
             {
-                grunt.log.writeln('Updating helper plist files...');
-                updateHelperPlist('.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper.app', bundleID + '.helper');
-                updateHelperPlist('.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper EH.app', bundleID + '.helper.eh');
-                updateHelperPlist('.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper NP.app', bundleID + '.helper.np');
-                callback();
-            },
-            function(callback)
-            {
                 grunt.log.writeln('Installing app files...');
                 exec('cp -r app.nw .mas/' + appName + '/Contents/Resources', callback);
             },
@@ -160,22 +152,19 @@ module.exports = function(grunt)
             {
                 grunt.log.writeln('Signing ' + appExecutable + ' Helper.app...');
                 var app_path = '.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper.app';
-                var bundle_id = bundleID + '.helper';
-                exec(cmd.replace('$1', identity).replace('$2', bundle_id).replace('$3', child_ent).replace('$4', app_path), callback);
+                exec(cmd.replace('$1', identity).replace('$2', 'io.nwjs.nw.helper').replace('$3', child_ent).replace('$4', app_path), callback);
             },
             function(callback)
             {
                 grunt.log.writeln('Signing ' + appExecutable + ' Helper EH.app...');
                 var app_path = '.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper EH.app';
-                var bundle_id = bundleID + '.helper.eh';
-                exec(cmd.replace('$1', identity).replace('$2', bundle_id).replace('$3', child_ent).replace('$4', app_path), callback);
+                exec(cmd.replace('$1', identity).replace('$2', 'io.nwjs.nw.helper.EH').replace('$3', child_ent).replace('$4', app_path), callback);
             },
             function(callback)
             {
                 grunt.log.writeln('Signing ' + appExecutable + ' Helper NP.app...');
                 var app_path = '.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper NP.app';
-                var bundle_id = bundleID + '.helper.np';
-                exec(cmd.replace('$1', identity).replace('$2', bundle_id).replace('$3', child_ent).replace('$4', app_path), callback);
+                exec(cmd.replace('$1', identity).replace('$2', 'io.nwjs.nw.helper.NP').replace('$3', child_ent).replace('$4', app_path), callback);
             },
             function(callback)
             {
@@ -203,19 +192,6 @@ module.exports = function(grunt)
             done();
         });
     });
-
-    /**
-     * Updates the Info.plist file of the needed helper app
-     * @param helper_path
-     * @param bundle_id
-     */
-    function updateHelperPlist(helper_path, bundle_id)
-    {
-        var plist = fs.readFileSync(helper_path + '/Contents/Info.plist', {encoding: 'utf8'});
-        var stats = fs.statSync(helper_path + '/Contents/Info.plist');
-        plist = plist.replace(/<key>CFBundleIdentifier<\/key>[^\/]*\/string>/g, '<key>CFBundleIdentifier<\/key>\n	<string>' + bundle_id + '</string>');
-        fs.writeFileSync(helper_path + '/Contents/Info.plist', plist, {encoding: 'utf8', mode: stats.mode});
-    }
 
     /**
      * Toggles dev mode
