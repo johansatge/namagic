@@ -31,7 +31,13 @@
     {
         var start_index = !isNaN(parseInt(options.startIndex)) ? parseInt(options.startIndex) : 0;
         var step = !isNaN(parseInt(options.step)) ? parseInt(options.step) : 1;
-        return {type: 'add', text: start_index + (index * step)};
+        var num = start_index + (index * step);
+        var max_num = start_index + (count * step);
+        if (options.add_leading_zeros)
+        {
+            num = (new Array(max_num.toString().length - num.toString().length + 1).join('0')) + num;
+        }
+        return {type: 'add', text: num};
     };
 
     /**

@@ -94,7 +94,8 @@
         "digits_sequence": {
           "option": "Ajouter une séquence de chiffres",
           "start_index": "Index de départ",
-          "step": "Pas"
+          "step": "Pas",
+          "add_leading_zeros": "Ajouter des zéros"
         },
         "update_case": {
           "option": "Modifier la casse",

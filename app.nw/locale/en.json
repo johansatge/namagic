@@ -94,7 +94,8 @@
         "digits_sequence": {
           "option": "Add digits sequence",
           "start_index": "Start index",
-          "step": "Step"
+          "step": "Step",
+          "add_leading_zeros": "Add leading zeros"
         },
         "update_case": {
           "option": "Update text case",
