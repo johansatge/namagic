@@ -15,6 +15,7 @@
      */
     module.init = function(language_code)
     {
+        language_code = _parseLanguageCode(language_code);
         var json;
         try
         {
@@ -40,7 +41,6 @@
 
     /**
      * Gets all locale strings
-     * @returns {}
      */
     module.getAll = function()
     {
@@ -66,6 +66,19 @@
                 _parseObject(prefix + (prefix !== '' ? '.' : '') + index, json[index]);
             }
         }
+    };
+
+    /**
+     * Checks the given language code
+     * @param raw_code
+     */
+    var _parseLanguageCode = function(raw_code)
+    {
+        if (raw_code.search('-') === -1)
+        {
+            return raw_code;
+        }
+        return raw_code.substring(0, raw_code.indexOf('-'));
     };
 
     app.utils.locale = module;

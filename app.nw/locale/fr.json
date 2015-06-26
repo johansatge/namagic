@@ -1,0 +1,142 @@
+{
+  "menu": {
+    "file": "Fichier",
+    "about": "À propos",
+    "new": "Nouveau...",
+    "help": {
+      "title": "Aide",
+      "help": "Aide en ligne",
+      "website": "Site web",
+      "bug_report": "Signaler un bug ou proposer une fonctionnalité"
+    }
+  },
+  "main": {
+    "drop": "Déposer des fichiers",
+    "errors": {
+      "file_exists": "Fichier déjà existant",
+      "empty_filename": "Nom de fichier vide",
+      "stat_not_found": "Informations du fichier introuvables",
+      "error": "erreur"
+    },
+    "files": {
+      "overwrite": "Écraser",
+      "overwrite_all": "Tout écraser",
+      "dismiss": "Rejeter",
+      "dismiss_all": "Tout rejeter"
+    },
+    "toolbar": {
+      "add_operation": "Ajouter une opération",
+      "add_files": "Ajouter des fichiers...",
+      "remove_files": "Supprimer",
+      "apply": "Appliquer",
+      "count": {
+        "one": "$1 fichier ajouté",
+        "many": "$1 fichiers ajoutés",
+        "selected_one": "$1 sur $2 sélectionné",
+        "selected_many": "$1 sur $2 sélectionnés"
+      }
+    },
+    "operations": {
+      "no_operation": "Aucune opération",
+      "selection": {
+        "subtitle": "Sélection",
+        "text_selections": "Texte",
+        "position_selections": "Position",
+        "advanced_selections": "Avancé",
+        "all_text": {
+          "option": "Tout le texte",
+          "no_options": "Aucune option disponible"
+        },
+        "free_text": {
+          "option": "Texte libre",
+          "text_to_find": "Text à rechercher",
+          "case_insensitive": "Insensible à la casse"
+        },
+        "chars_list": {
+          "option": "Liste de caractères",
+          "custom_list": "Liste personnalisée",
+          "alpha_chars": "Alphabet",
+          "digits": "Chiffres",
+          "special_chars": "Caractères spéciaux"
+        },
+        "text_position": {
+          "option": "Position dans le texte",
+          "index": "Index",
+          "from_end": "Commencer depuis la fin"
+        },
+        "text_range": {
+          "option": "Sélection de texte",
+          "index": "Index de départ",
+          "from_end": "Commencer depuis la fin",
+          "length": "Longueur"
+        },
+        "regex": {
+          "option": "Expression régulière",
+          "expression": "Expression",
+          "is_global": "Globale",
+          "case_insensitive": "Insensible à la casse"
+        }
+      },
+      "actions": {
+        "subtitle": "Actions",
+        "select": "Ajouter une action...",
+        "no_action": "Aucune action",
+        "text_actions": "Texte",
+        "file_actions": "Informations du fichier",
+        "remove_text": {
+          "option": "Supprimer le texte",
+          "help": "Aucune option disponible"
+        },
+        "free_text": {
+          "option": "Ajouter un texte libre",
+          "text_to_set": "Texte"
+        },
+        "digits_sequence": {
+          "option": "Ajouter une séquence de chiffres",
+          "start_index": "Index de départ",
+          "step": "Pas"
+        },
+        "update_case": {
+          "option": "Modifier la casse",
+          "switch_uppercase": "Passer en majuscules",
+          "switch_lowercase": "Passer en minuscules",
+          "invert_case": "Inverser la casse"
+        },
+        "creation_date": {
+          "option": "Ajouter la date de création",
+          "format": "Format",
+          "help": {
+            "year": "Année",
+            "month": "Mois",
+            "day": "Jour",
+            "hours": "Heures",
+            "minutes": "Minutes",
+            "seconds": "Secondes"
+          }
+        },
+        "last_modified_date": {
+          "option": "Ajouter la date de modification",
+          "format": "Format",
+          "help": {
+            "year": "Année",
+            "month": "Mois",
+            "day": "Jour",
+            "hours": "Heures",
+            "minutes": "Minutes",
+            "seconds": "Secondes"
+          }
+        },
+        "file_size": {
+          "option": "Ajouter le poids du fichier",
+          "help": "Aucune option disponible"
+        }
+      },
+      "apply_to": {
+        "subtitle": "Appliquer sur",
+        "filename_only": "Le nom seulement",
+        "extension_only": "L'extension seulement",
+        "filename_and_extension": "Le nom et l'extension"
+      }
+    }
+  }
+}
