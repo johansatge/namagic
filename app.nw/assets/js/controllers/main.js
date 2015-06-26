@@ -30,6 +30,7 @@
             model.on('progress', $.proxy(_onModelProgress), this);
             model.on('idle', $.proxy(_onModelIdle), this);
             model.on('add_files', $.proxy(_onAddFilesFromModel), this);
+            model.on('added_files', $.proxy(_onAddedFilesFromModel), this);
             model.on('remove_files', $.proxy(_onRemoveFilesFromModel), this);
             model.on('update_files', $.proxy(_onUpdateFilesFromModel), this);
             view.files.on('add_files', $.proxy(_onAddFilesFromView, this));
@@ -135,7 +136,8 @@
          */
         var _onEditOperationsFromView = function(operations)
         {
-            model.storeAndProcessOperations(operations);
+            model.storeOperations(operations);
+            model.processCurrentOperations();
         };
 
         /**
@@ -145,6 +147,14 @@
         var _onAddFilesFromModel = function(files)
         {
             view.files.updateFiles(files, true);
+        };
+
+        /**
+         * Rebuilds filenames when all async files have been added to the view
+         */
+        var _onAddedFilesFromModel = function()
+        {
+            model.processCurrentOperations();
         };
 
         /**

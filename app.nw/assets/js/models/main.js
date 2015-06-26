@@ -107,7 +107,6 @@
                 {
                     currentFilesIndexes[id] = currentFiles.length;
                     var new_file = new app.models.file(id, path.substring(0, path.lastIndexOf('/')), path.substring(path.lastIndexOf('/') + 1));
-                    new_file.processOperations(currentOperations, currentFiles.length);
                     new_files.push(new_file);
                     currentFiles.push(new_file);
                     currentFilesCount += 1;
@@ -126,6 +125,7 @@
             else
             {
                 events.emit('idle');
+                events.emit('added_files');
             }
         };
 
@@ -229,18 +229,25 @@
         };
 
         /**
-         * Applies given operations on the current list of files and returns it
+         * Stores given operations
          * @param operations
          */
-        this.storeAndProcessOperations = function(operations)
+        this.storeOperations = function(operations)
+        {
+            currentOperations = operations;
+        };
+
+        /**
+         * Applies current operations on the current list of files and returns it
+         */
+        this.processCurrentOperations = function()
         {
             var updated_files = [];
-            currentOperations = operations;
             var num = 0;
             for (var index in currentFilesIndexes)
             {
                 var file = currentFiles[currentFilesIndexes[index]];
-                if (file.processOperations(currentOperations, num))
+                if (file.processOperations(currentOperations, num, currentFilesCount))
                 {
                     updated_files.push(file);
                 }

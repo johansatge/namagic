@@ -10,36 +10,24 @@
 
     /**
      * Removes text
-     * @param subject
-     * @param index
-     * @param options
-     * @param path
      */
-    module.removeText = function(subject, options, index, path)
+    module.removeText = function(subject, options, index, count, path)
     {
         return {type: 'replace', text: ''};
     };
 
     /**
      * Inserts free text
-     * @param subject
-     * @param index
-     * @param options
-     * @param path
      */
-    module.freeText = function(subject, options, index, path)
+    module.freeText = function(subject, options, index, count, path)
     {
         return {type: 'add', text: options.text};
     };
 
     /**
      * Inserts a sequence of digits
-     * @param subject
-     * @param index
-     * @param options
-     * @param path
      */
-    module.digitsSequence = function(subject, options, index, path)
+    module.digitsSequence = function(subject, options, index, count, path)
     {
         var start_index = !isNaN(parseInt(options.startIndex)) ? parseInt(options.startIndex) : 0;
         var step = !isNaN(parseInt(options.step)) ? parseInt(options.step) : 1;
@@ -48,12 +36,8 @@
 
     /**
      * Updates text case
-     * @param subject
-     * @param index
-     * @param options
-     * @param path
      */
-    module.updateCase = function(subject, options, index, path)
+    module.updateCase = function(subject, options, index, count, path)
     {
         if (options.type === 'uppercase')
         {
@@ -72,12 +56,8 @@
 
     /**
      * Inserts creation date
-     * @param subject
-     * @param index
-     * @param options
-     * @param path
      */
-    module.creationDate = function(subject, options, index, path)
+    module.creationDate = function(subject, options, index, count, path)
     {
         var birthtime = _getFileStat.apply(this, [path, 'birthtime']);
         return birthtime instanceof Error ? birthtime : {
@@ -88,12 +68,8 @@
 
     /**
      * Inserts last modified date
-     * @param subject
-     * @param index
-     * @param options
-     * @param path
      */
-    module.lastModifiedDate = function(subject, options, index, path)
+    module.lastModifiedDate = function(subject, options, index, count, path)
     {
         var mtime = _getFileStat.apply(this, [path, 'mtime']);
         return mtime instanceof Error ? mtime : {
@@ -104,12 +80,8 @@
 
     /**
      * Inserts file size
-     * @param subject
-     * @param index
-     * @param options
-     * @param path
      */
-    module.fileSize = function(subject, options, index, path)
+    module.fileSize = function(subject, options, index, count, path)
     {
         var size = _getFileStat.apply(this, [path, 'size']);
         return size instanceof Error ? size : {

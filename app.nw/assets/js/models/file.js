@@ -17,7 +17,7 @@
         var hasError = false;
         var showOverwrites = false;
         var errorMessage = '';
-        var updatedName = '';
+        var updatedName = '...';
 
         /**
          * Checks if the destination path already exists
@@ -70,8 +70,9 @@
          * Applies given operations on the file and returns TRUE if the name has been changed (FALSE otherwise)
          * @param operations
          * @param file_index
+         * @param files_count
          */
-        this.processOperations = function(operations, file_index)
+        this.processOperations = function(operations, file_index, files_count)
         {
             var old_updated_name = updatedName;
             this.setError(false, '');
@@ -98,15 +99,15 @@
                 }
                 if (op.applyTo === 'filename')
                 {
-                    updatedName = _processText.apply(this, [name_part, op.selection, op.actions, file_index, file_path]) + extension_part;
+                    updatedName = _processText.apply(this, [name_part, op.selection, op.actions, file_index, files_count, file_path]) + extension_part;
                 }
                 if (op.applyTo === 'extension')
                 {
-                    updatedName = name_part + _processText.apply(this, [extension_part, op.selection, op.actions, file_index, file_path]);
+                    updatedName = name_part + _processText.apply(this, [extension_part, op.selection, op.actions, file_index, files_count, file_path]);
                 }
                 if (op.applyTo === 'both')
                 {
-                    updatedName = _processText.apply(this, [updatedName, op.selection, op.actions, file_index, file_path]);
+                    updatedName = _processText.apply(this, [updatedName, op.selection, op.actions, file_index, files_count, file_path]);
                 }
             }
             if (updatedName === '')
@@ -126,9 +127,10 @@
          * @param selection
          * @param actions
          * @param file_index
+         * @param files_count
          * @param file_path
          */
-        var _processText = function(subject, selection, actions, file_index, file_path)
+        var _processText = function(subject, selection, actions, file_index, files_count, file_path)
         {
             var ranges = app.models.selection[selection.type](subject, selection.options);
             var updated_subject = '';
@@ -142,7 +144,7 @@
                 for (var act_index = 0; act_index < actions.length; act_index += 1)
                 {
                     var action_callable = app.models.action[actions[act_index].type];
-                    var new_text = action_callable(updated_subject_part, actions[act_index].options, file_index, file_path);
+                    var new_text = action_callable(updated_subject_part, actions[act_index].options, file_index, files_count, file_path);
                     if (new_text instanceof Error)
                     {
                         this.setError(true, new_text.message);
