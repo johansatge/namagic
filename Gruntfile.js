@@ -8,6 +8,7 @@ module.exports = function(grunt)
     var glob = require('glob');
     var uglifyjs = require('uglify-js');
     var exec = require('child_process').exec;
+    var Builder = require('nwjs-macappstore-builder');
     var fs = require('fs');
     var manifest = eval('(' + fs.readFileSync('app.nw/package.json', {encoding: 'utf8'}) + ')');
     //var appExecutable = 'node-webkit';
@@ -15,7 +16,6 @@ module.exports = function(grunt)
     var sourceApp = '/Applications/' + appExecutable + '.app';
     var appName = 'Namagic.app';
     var identity = 'LK7U6U8DZ4' // @todo move this elsewhere
-    var bundleID = manifest.bundle_identifier;
 
     grunt.log.writeln('Uses ' + appExecutable + '.');
 
@@ -52,131 +52,28 @@ module.exports = function(grunt)
     {
         var done = this.async();
         setDevMode(false);
-        var series = [
-            function(callback)
-            {
-                grunt.log.writeln('Cleaning...');
-                exec('rm -r .mas;mkdir .mas', callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Creating empty application...');
-                exec('cp -r ' + sourceApp + ' .mas/' + appName, callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Removing FFMpeg binary...');
-                exec('rm ".mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Framework.framework/Libraries/ffmpegsumo.so"', callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Installing icon...');
-                exec('cp assets/icon/icon.icns .mas/' + appName + '/Contents/Resources/nw.icns', callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Updating app plist file...');
-                var plist = fs.readFileSync('assets/plist/info.plist', {encoding: 'utf8'});
-                var stats = fs.statSync('.mas/' + appName + '/Contents/Info.plist');
-                for (var property in manifest)
-                {
-                    plist = plist.replace(new RegExp('{{' + property + '}}', 'g'), manifest[property]);
-                }
-                plist = plist.replace(new RegExp('{{executable}}', 'g'), appExecutable);
-                fs.writeFile('.mas/' + appName + '/Contents/Info.plist', plist, {
-                    encoding: 'utf8',
-                    mode: stats.mode
-                }, callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Installing app files...');
-                exec('cp -r app.nw .mas/' + appName + '/Contents/Resources', callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Minifies JS...');
-                var js_path = '.mas/' + appName + '/Contents/Resources/app.nw/assets/';
-                glob('**/*.js', {cwd: js_path}, function(error, files)
-                {
-                    for (var index = 0; index < files.length; index += 1)
-                    {
-                        if (files[index].search('.min.') !== -1)
-                        {
-                            continue;
-                        }
-                        grunt.log.writeln('Minifies ' + files[index] + '...');
-                        var minified = uglifyjs.minify(js_path + files[index]);
-                        fs.writeFileSync(js_path + files[index], minified.code, {encoding: 'utf8'});
-                    }
-                    callback();
-                });
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Cleaning built app...');
-                exec('cd .mas/' + appName + ' && find . -name "*.DS_Store" -type f -delete', function()
-                {
-                    exec('rm -r .mas/' + appName + '/Contents/Resources/app.nw/assets/sass', function()
-                    {
-                        exec('rm -r .mas/' + appName + '/Contents/Frameworks/crash_inspector', function()
-                        {
-                            callback();
-                        });
-                    });
-                });
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Setting permissions...');
-                exec('cd .mas/' + appName + '/Contents/Resources/app.nw && find . -type f | xargs chmod -v 644', callback);
-            }
-        ];
-        async.series(series, function()
+        var config = {
+            nwjs_path: '/Applications/nwjs.app',
+            source_path: 'app.nw',
+            build_path: '.mas',
+            name: manifest.name,
+            bundle_id: manifest.bundle_identifier,
+            version: manifest.version,
+            bundle_version: manifest.bundle_version,
+            copyright: manifest.copyright,
+            icon_path: 'assets/icon/icon.icns',
+            identity: identity,
+            entitlements: [
+                'com.apple.security.files.user-selected.read-write'
+            ],
+            app_category: 'public.app-category.utilities',
+            app_sec_category: 'public.app-category.productivity'
+        };
+        var builder = new Builder();
+        builder.build(config, function(error, app_path)
         {
-            done();
-        });
-    });
-
-    /**
-     * Signs the app
-     */
-    grunt.registerTask('sign', function()
-    {
-        var done = this.async();
-        var child_ent = 'assets/entitlements/child.plist';
-        var parent_ent = 'assets/entitlements/parent.plist';
-        var cmd = 'codesign --deep -s $1 -i $2 --entitlements $3 "$4"';
-        var series = [
-            function(callback)
-            {
-                grunt.log.writeln('Signing ' + appExecutable + ' Helper.app...');
-                var app_path = '.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper.app';
-                exec(cmd.replace('$1', identity).replace('$2', 'io.nwjs.nw.helper').replace('$3', child_ent).replace('$4', app_path), callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Signing ' + appExecutable + ' Helper EH.app...');
-                var app_path = '.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper EH.app';
-                exec(cmd.replace('$1', identity).replace('$2', 'io.nwjs.nw.helper.EH').replace('$3', child_ent).replace('$4', app_path), callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Signing ' + appExecutable + ' Helper NP.app...');
-                var app_path = '.mas/' + appName + '/Contents/Frameworks/' + appExecutable + ' Helper NP.app';
-                exec(cmd.replace('$1', identity).replace('$2', 'io.nwjs.nw.helper.NP').replace('$3', child_ent).replace('$4', app_path), callback);
-            },
-            function(callback)
-            {
-                grunt.log.writeln('Signing app...');
-                var app_path = '.mas/' + appName;
-                exec(cmd.replace('$1', identity).replace('$2', bundleID).replace('$3', parent_ent).replace('$4', app_path), callback);
-            }
-        ];
-        async.series(series, function()
-        {
-            done();
-        });
+            console.log(error ? error.message : 'Build done: ' + app_path);
+        }, true);
     });
 
     /**
