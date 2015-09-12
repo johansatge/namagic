@@ -5,7 +5,7 @@
   "dependencies": {
     "async": "~0.9.0",
     "glob": "~5.0.5",
-    "nwjs-macappstore-builder": "^1.0.1",
+    "nwjs-macappstore-builder": "^3.1.4",
     "uglify-js": "~2.4.21"
   }
 }

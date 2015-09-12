@@ -63,13 +63,16 @@ module.exports = function(grunt)
             copyright: manifest.copyright,
             icon_path: 'assets/icon/icon.icns',
             identity: identity,
+            identity_installer: identity,
             entitlements: [
                 'com.apple.security.files.user-selected.read-write'
             ],
             app_category: 'public.app-category.utilities',
-            app_sec_category: 'public.app-category.productivity'
+            app_sec_category: 'public.app-category.productivity',
+            uglify_js: true
         };
         var builder = new Builder();
+        exec('rm app.nw/node_modules/filesize/lib/filesize.es6.js'); // TMP fix: uglifyjs ne minifie pas ES6
         builder.build(config, function(error, app_path)
         {
             console.log(error ? error.message : 'Build done: ' + app_path);
