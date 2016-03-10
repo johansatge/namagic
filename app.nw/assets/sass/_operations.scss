@@ -22,7 +22,8 @@
 
     & .actions
     {
-        width : 300px;
+        width  : 450px;
+        margin : 0 0 0 -150px;
     }
 
     & .js-operation-placeholder
@@ -66,7 +67,7 @@
 .operation:first-child
 {
     margin-top : 0;
-    
+
     &:before
     {
         display : none;

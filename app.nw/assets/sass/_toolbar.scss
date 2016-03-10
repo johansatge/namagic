@@ -26,13 +26,15 @@
         text-shadow : 0 1px 0 #ffffff;
     }
 
-    & button.left
+    & button.left,
+    & .select.left,
     {
         float  : left;
         margin : 0 0 0 10px;
     }
 
-    & button.right
+    & button.right,
+    & .select.right
     {
         float  : right;
         margin : 0 10px 0 0;
@@ -76,7 +78,7 @@
             background : linear-gradient(to top, #f1f6f9, #d8d8d8);
         }
 
-        & i
+        & .fa
         {
             float     : left;
             margin    : 0 6px 0 0;
@@ -84,7 +86,70 @@
             color     : rgba(51, 51, 51, 0.35);
         }
 
-        &.primary i
+        & .fa.chevron
+        {
+            float     : right;
+            margin    : 1px -4px 0 6px;
+            color     : #333333;
+            font-size : 13px;
+        }
+
+        &.primary .fa
+        {
+            color : rgba(255, 255, 255, 0.4);
+        }
+    }
+
+    & .select
+    {
+        position      : relative;
+        border-radius : 4px;
+        padding       : 4px 14px 4px 6px;
+        box-shadow    : inset 0 1px 0 #ffffff, 0 1px 0 #f1f6f9;
+        opacity       : 1;
+
+        select
+        {
+            position : absolute;
+            display  : block;
+            width    : 100%;
+            height   : 100%;
+            top      : 0;
+            left     : 0;
+            opacity  : 0;
+        }
+
+        &.primary
+        {
+            color                  : #ffffff;
+            background             : linear-gradient(to bottom, #4a9de5, #0072d5);
+            border                 : 1px solid #005fb2;
+            -webkit-font-smoothing : antialiased;
+            padding                : 4px 13px 4px 6px;
+            box-shadow             : inset 0 1px 0 rgba(255, 255, 255, 0.2);
+        }
+
+        &.secondary
+        {
+            background : linear-gradient(to bottom, #f1f6f9, #d8d8d8);
+            border     : 1px solid #a3a3a3;
+        }
+
+        & .fa
+        {
+            float     : left;
+            margin    : 0 6px 0 0;
+            font-size : 15px;
+            color     : rgba(51, 51, 51, 0.35);
+
+            &.fa-bars
+            {
+                font-size : 12px;
+                margin    : 2px 6px 0 0;
+            }
+        }
+
+        &.primary .fa
         {
             color : rgba(255, 255, 255, 0.4);
         }

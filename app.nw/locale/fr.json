@@ -26,6 +26,7 @@
     },
     "toolbar": {
       "add_operation": "Ajouter une opération",
+      "presets": "Préréglages...",
       "add_files": "Ajouter des fichiers...",
       "remove_files": "Supprimer",
       "apply": "Appliquer",
