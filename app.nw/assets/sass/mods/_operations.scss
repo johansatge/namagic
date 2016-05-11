@@ -262,20 +262,21 @@
         position : absolute;
         right    : 0;
         bottom   : 0;
+        z-index: 10;
 
         &:hover i
         {
-            color : #1e1e1e;
+            display: none;
         }
 
         & i
         {
             position    : absolute;
             top         : -30px;
-            right       : 6px;
+            right       : 8px;
             font-size   : 14px;
             text-shadow : none;
-            z-index     : 2;
+            color: #888888;
         }
 
         &:hover .popin
@@ -289,7 +290,6 @@
             position        : absolute;
             bottom          : 10px;
             right           : 0px;
-            z-index         : 1;
             width           : 120px;
             padding         : 6px 6px 6px 6px;
             background      : rgba(0, 0, 0, 0.8);
