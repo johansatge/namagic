@@ -103,7 +103,7 @@
         };
 
         /**
-         * Tells the controller that the view has been closed
+         * Tells the controller that the view has to be closed
          */
         var _onWindowClose = function()
         {

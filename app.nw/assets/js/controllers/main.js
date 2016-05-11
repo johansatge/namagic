@@ -40,6 +40,7 @@
             view.files.on('overwrite', $.proxy(_onOverwriteFileFromView), this);
             view.operations.on('edit_operations', $.proxy(_onEditOperationsFromView, this));
             view.operations.on('apply_operations', $.proxy(_onApplyOperationsFromView, this));
+            view.operations.on('help_date_formats', $.proxy(_onHelpDateFormatsFromView, this));
         };
 
         /**
@@ -110,6 +111,14 @@
         var _onRemoveFilesFromView = function(ids)
         {
             model.removeFiles(ids);
+        };
+
+        /**
+         * Asks for dates help from the view
+         */
+        var _onHelpDateFormatsFromView = function()
+        {
+            app.openDateFormatsHelp();
         };
 
         /**

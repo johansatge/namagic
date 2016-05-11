@@ -88,6 +88,16 @@
             $ui.operations.on('change', '.js-apply-to', $.proxy(_onEditOperations, this));
             $ui.operations.on('change', '.js-add-action', $.proxy(_onAddAction, this));
             $ui.operations.on('click', '.js-delete-action', $.proxy(_onDeleteAction, this));
+            $ui.operations.on('click', '.js-help-date-formats', $.proxy(_onHelpDateFormats, this));
+        };
+
+        /**
+         * Opens dates help
+         * @param evt
+        */
+        var _onHelpDateFormats = function(evt)
+        {
+            events.emit('help_date_formats');
         };
 
         /**

@@ -40,20 +40,7 @@
     module.formatDate = function(date, format)
     {
         var object = new Date(date);
-        var formatted_date = format;
-        var parts = {
-            'YYYY': object.getFullYear(),
-            'MM': object.getMonth() + 1,
-            'DD': object.getDate(),
-            'hh': object.getHours(),
-            'mm': object.getMinutes(),
-            'ss': object.getSeconds()
-        };
-        for (var part in parts)
-        {
-            formatted_date = formatted_date.replace(part, _addLeadingZero(parts[part]));
-        }
-        return formatted_date;
+        return app.node.moment(object).format(format);
     };
 
     /**

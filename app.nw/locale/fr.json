@@ -111,9 +111,10 @@
             "year": "Année",
             "month": "Mois",
             "day": "Jour",
-            "hours": "Heures",
-            "minutes": "Minutes",
-            "seconds": "Secondes"
+            "hours": "Heure",
+            "minutes": "Minute",
+            "seconds": "Seconde",
+            "more": "Plus..."
           }
         },
         "last_modified_date": {
@@ -123,9 +124,10 @@
             "year": "Année",
             "month": "Mois",
             "day": "Jour",
-            "hours": "Heures",
-            "minutes": "Minutes",
-            "seconds": "Secondes"
+            "hours": "Heure",
+            "minutes": "Minute",
+            "seconds": "Seconde",
+            "more": "Plus..."
           }
         },
         "file_size": {
@@ -140,5 +142,42 @@
         "filename_and_extension": "Le nom et l'extension"
       }
     }
+  },
+  "dateformats": {
+      "title": "Formats de date",
+      "category": "Catégorie",
+      "symbol": "Symbole",
+      "value": "Valeur",
+      "month": "Mois",
+      "month_num": "1 2 ... 11 12",
+      "month_short": "jan fev ... nov déc",
+      "month_full": "janvier février ... novembre décembre",
+      "quarter": "Trimestre",
+      "quarter_num": "1 2 3 4",
+      "day_of_month": "Jour du mois",
+      "day_of_month_num": "1 2 ... 30 31",
+      "day_of_year": "Jour de l'année",
+      "day_of_year_num": "1 2 ... 364 365",
+      "day_of_week": "Jour de la semaine",
+      "day_of_week_num": "0 1 ... 5 6",
+      "day_of_week_shorter": "Lu Ma ... Sa Di",
+      "day_of_week_short": "lun mar ... sam dim",
+      "day_of_week_full": "lundi mardi ... samedi dimanche",
+      "day_of_week_locale": "Jour de la semaine (Locale)",
+      "day_of_week_iso": "Jour de la semaine (ISO)",
+      "week_of_year": "Semaine",
+      "week_of_year_num": "1 2 ... 52 53",
+      "week_of_year_iso": "Semaine (ISO)",
+      "week_of_year_iso_num": "1 2 ... 52 53",
+      "year": "Année",
+      "week_year": "Semaine de l'année",
+      "week_year_iso": "Semaine de l'année (ISO)",
+      "hour": "Heure",
+      "minute": "Minute",
+      "second": "Seconde",
+      "fractional_second": "Seconde fractionnée",
+      "timezone": "Fuseau horaire",
+      "unix_timestamp": "Timestamp Unix",
+      "unix_ms_timestamp": "Timestamp Unix (Millisecondes)",
   }
 }

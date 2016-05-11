@@ -20,10 +20,12 @@
         try
         {
             json = eval('(' + app.node.fs.readFileSync('locale/' + language_code + '.json') + ')');
+            app.node.moment.locale(language_code);
         }
         catch (error)
         {
             json = eval('(' + app.node.fs.readFileSync('locale/en.json') + ')');
+            app.node.moment.locale('en');
         }
         json.manifest = app.node.gui.App.manifest;
         _parseObject('', json);

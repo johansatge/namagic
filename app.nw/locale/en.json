@@ -111,9 +111,10 @@
             "year": "Year",
             "month": "Month",
             "day": "Day",
-            "hours": "Hours",
-            "minutes": "Minutes",
-            "seconds": "Seconds"
+            "hours": "Hour",
+            "minutes": "Minute",
+            "seconds": "Second",
+            "more": "More..."
           }
         },
         "last_modified_date": {
@@ -123,9 +124,10 @@
             "year": "Year",
             "month": "Month",
             "day": "Day",
-            "hours": "Hours",
-            "minutes": "Minutes",
-            "seconds": "Seconds"
+            "hours": "Hour",
+            "minutes": "Minute",
+            "seconds": "Second",
+            "more": "More..."
           }
         },
         "file_size": {
@@ -140,5 +142,42 @@
         "filename_and_extension": "Filename and extension"
       }
     }
+  },
+  "dateformats": {
+      "title": "Date Formats",
+      "category": "Category",
+      "symbol": "Symbol",
+      "value": "Value",
+      "month": "Month",
+      "month_num": "1st 2nd ... 11th 12th",
+      "month_short": "Jan Feb ... Nov Dec",
+      "month_full": "January February ... November December",
+      "quarter": "Quarter",
+      "quarter_num": "1st 2nd 3rd 4th",
+      "day_of_month": "Day of Month",
+      "day_of_month_num": "1st 2nd ... 30th 31st",
+      "day_of_year": "Day of Year",
+      "day_of_year_num": "1st 2nd ... 364th 365th",
+      "day_of_week": "Day of Week",
+      "day_of_week_num": "0th 1st ... 5th 6th",
+      "day_of_week_shorter": "Su Mo ... Fr Sa",
+      "day_of_week_short": "Sun Mon ... Fri Sat",
+      "day_of_week_full": "Sunday Monday ... Friday Saturday",
+      "day_of_week_locale": "Day of Week (Locale)",
+      "day_of_week_iso": "Day of Week (ISO)",
+      "week_of_year": "Week of Year",
+      "week_of_year_num": "1st 2nd ... 52nd 53rd",
+      "week_of_year_iso": "Week of Year (ISO)",
+      "week_of_year_iso_num": "1st 2nd ... 52nd 53rd",
+      "year": "Year",
+      "week_year": "Week Year",
+      "week_year_iso": "Week Year (ISO)",
+      "hour": "Hour",
+      "minute": "Minute",
+      "second": "Second",
+      "fractional_second": "Fractional Second",
+      "timezone": "Time zone",
+      "unix_timestamp": "Unix Timestamp",
+      "unix_ms_timestamp": "Unix Millisecond Timestamp",
   }
 }

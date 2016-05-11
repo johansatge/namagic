@@ -10,17 +10,6 @@
     var _currentWindow = false;
 
     /**
-     * Tries to close the current window
-     */
-    module.closeCurrentWindow = function()
-    {
-        if (_currentWindow !== false)
-        {
-            _currentWindow.close();
-        }
-    };
-
-    /**
      * Sets the current window (used with the "Close" shortcut)
      * @param window
      */
