@@ -8,6 +8,7 @@ module.exports = function(grunt)
     var glob = require('glob');
     var uglifyjs = require('uglify-js');
     var exec = require('child_process').exec;
+    var execSync = require('child_process').execSync;
     var Builder = require('nwjs-macappstore-builder');
     var fs = require('fs');
     var manifest = eval('(' + fs.readFileSync('app.nw/package.json', {encoding: 'utf8'}) + ')');
@@ -25,7 +26,7 @@ module.exports = function(grunt)
     grunt.registerTask('sass', function()
     {
         var done = this.async();
-        var child = exec('cd app.nw/assets && compass watch sass/main.scss');
+        var child = exec('cd app.nw/assets && compass watch sass/*');
         child.stdout.on('data', grunt.log.write);
         child.stderr.on('data', grunt.log.write);
         child.on('close', done);
@@ -52,9 +53,14 @@ module.exports = function(grunt)
     {
         var done = this.async();
         setDevMode(false);
+        execSync('cp -R app.nw app.nw.build');
+        execSync('rm app.nw.build/node_modules/filesize/lib/filesize.es6.js'); // TMP fix: uglifyjs ne minifie pas ES6
+        execSync('rm -r app.nw.build/assets/sass');
+        execSync('rm app.nw.build/assets/config.rb');
+        execSync('rm app.nw.build/.dev');
         var config = {
             nwjs_path: '/Applications/nwjs.app',
-            source_path: 'app.nw',
+            source_path: 'app.nw.build',
             build_path: '.mas',
             name: manifest.name,
             bundle_id: manifest.bundle_identifier,
@@ -72,25 +78,11 @@ module.exports = function(grunt)
             uglify_js: true
         };
         var builder = new Builder();
-        exec('rm app.nw/node_modules/filesize/lib/filesize.es6.js'); // TMP fix: uglifyjs ne minifie pas ES6
         builder.build(config, function(error, app_path)
         {
+            execSync('rm -r app.nw.build');
             console.log(error ? error.message : 'Build done: ' + app_path);
         }, true);
-    });
-
-    /**
-     * Packages the app
-     */
-    grunt.registerTask('pkg', function()
-    {
-        var done = this.async();
-        var command = 'cd .mas && productbuild --component "' + appName + '" /Applications  --sign "' + identity + '" ' + appName.replace('.app', '.pkg');
-        exec(command, function(error, stdout, stderr)
-        {
-            grunt.log.writeln(stdout);
-            done();
-        });
     });
 
     /**
