@@ -26,7 +26,7 @@ module.exports = function(grunt)
     grunt.registerTask('sass', function()
     {
         var done = this.async();
-        var child = exec('cd app.nw/assets && compass watch sass/*');
+        var child = exec('cd app.nw/assets && compass watch sass/*.scss');
         child.stdout.on('data', grunt.log.write);
         child.stderr.on('data', grunt.log.write);
         child.on('close', done);
