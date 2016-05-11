@@ -265,7 +265,7 @@
 
         &:hover i
         {
-            color : #3a3a3a;
+            color : #1e1e1e;
         }
 
         & i
@@ -291,8 +291,8 @@
             right           : 0px;
             z-index         : 1;
             width           : 120px;
-            padding         : 6px 24px 3px 3px;
-            background      : rgba(0, 0, 0, 0.7);
+            padding         : 6px 6px 6px 6px;
+            background      : rgba(0, 0, 0, 0.8);
             text-shadow     : none;
             border-radius   : 3px;
             list-style-type : none;
@@ -301,14 +301,25 @@
             {
                 font-size : 11px;
                 color     : #a3a3a3;
+
+                &.more
+                {
+                    background: #202020;
+                    color: #d2d2d2;
+                    width: 100%;
+                    padding: 2px 0 2px 0;
+                    border-radius: 2px;
+                    text-align: center;
+                    margin: 3px 0 0 0;
+                }
             }
 
             & span
             {
                 font-size     : 11px;
                 display       : inline-block;
-                padding       : 1px 0 1px 0;
-                margin        : 0 3px 3px 0;
+                padding       : 2px 0 2px 0;
+                margin        : 0 5px 3px 0;
                 width         : 36px;
                 border-radius : 2px;
                 background    : #202020;
