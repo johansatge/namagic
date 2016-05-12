@@ -19,7 +19,7 @@
     {
         app.node = modules;
         app.devMode = app.node.fs.existsSync('.dev') && app.node.fs.readFileSync('.dev', {encoding: 'utf8'}) === '1';
-        app.utils.locale.init('fr');//typeof navigator.language !== 'undefined' ? navigator.language : '');
+        app.utils.locale.init(typeof navigator.language !== 'undefined' ? navigator.language : '');
         app.utils.menubar.init();
         app.utils.menubar.on('new', _onNew);
         app.utils.menubar.on('website', _onWebsite);
@@ -34,7 +34,7 @@
      */
     app.openDateFormatsHelp = function()
     {
-        var bootstrap = new app.utils.windowbootstrap('templates/dateformats.html', {
+        var bootstrap = new app.utils.windowbootstrap('templates/dateformats.min.html', {
             toolbar: false,
             frame: true,
             width: 500,

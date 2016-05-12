@@ -31,7 +31,7 @@
          */
         this.show = function()
         {
-            var bootstrap = new app.utils.windowbootstrap('templates/main.html', {
+            var bootstrap = new app.utils.windowbootstrap('templates/main.min.html', {
                 toolbar: false,
                 frame: true,
                 width: 900,

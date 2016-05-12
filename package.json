@@ -6,6 +6,7 @@
     "async": "~0.9.0",
     "chokidar": "^1.5.0",
     "glob": "~5.0.5",
+    "html-minifier": "^2.1.2",
     "nwjs-macappstore-builder": "^3.1.6",
     "uglify-js": "~2.4.21"
   }
