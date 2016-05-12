@@ -6,6 +6,7 @@ module.exports = function(grunt)
     var async = require('async');
     var util = require('util');
     var glob = require('glob');
+    var chokidar = require('chokidar');
     var uglifyjs = require('uglify-js');
     var exec = require('child_process').exec;
     var execSync = require('child_process').execSync;
@@ -33,6 +34,56 @@ module.exports = function(grunt)
     });
 
     /**
+     * Watches JS files
+     */
+    grunt.registerTask('js', function()
+    {
+        var done = this.async();
+        chokidar.watch(['app.nw/assets/js/src/**/*']).on('change', function(evt, path)
+        {
+            console.log('Compiling...');
+            var files = [
+                'app.nw/assets/js/src/app.js',
+
+                'app.nw/assets/js/src/utils/log.js',
+                'app.nw/assets/js/src/utils/locale.js',
+                'app.nw/assets/js/src/utils/windowbootstrap.js',
+                'app.nw/assets/js/src/utils/windowmanager.js',
+                'app.nw/assets/js/src/utils/template.js',
+                'app.nw/assets/js/src/utils/menubar.js',
+                'app.nw/assets/js/src/utils/string.js',
+                'app.nw/assets/js/src/utils/dom.js',
+
+                'app.nw/assets/js/src/models/main.js',
+                'app.nw/assets/js/src/models/selection.js',
+                'app.nw/assets/js/src/models/action.js',
+                'app.nw/assets/js/src/models/file.js',
+
+                'app.nw/assets/js/src/views/main.js',
+                'app.nw/assets/js/src/views/files.js',
+                'app.nw/assets/js/src/views/operations.js',
+
+                'app.nw/assets/js/src/controllers/main.js'
+            ];
+            var uglified = uglifyjs.minify(files);
+            fs.writeFileSync('app.nw/assets/js/src.min.js', uglified.code, {encoding: 'utf8'});
+        });
+    });
+
+        /**
+         * Compiles JS libs
+         */
+        grunt.registerTask('js:libs', function()
+        {
+            var files = [
+                'app.nw/assets/js/libs/jquery-2.1.1.min.js',
+                'app.nw/assets/js/libs/jqueryui-1.11.3.min.js'
+            ];
+            var uglified = uglifyjs.minify(files);
+            fs.writeFileSync('app.nw/assets/js/libs.min.js', uglified.code, {encoding: 'utf8'});
+        });
+
+    /**
      * Runs the app
      * Use the "--dev" option to enable toolbars and debug
      */
@@ -54,8 +105,9 @@ module.exports = function(grunt)
         var done = this.async();
         setDevMode(false);
         execSync('cp -R app.nw app.nw.build');
-        execSync('rm app.nw.build/node_modules/filesize/lib/filesize.es6.js'); // TMP fix: uglifyjs ne minifie pas ES6
         execSync('rm -r app.nw.build/assets/sass');
+        execSync('rm -r app.nw.build/assets/js/libs');
+        execSync('rm -r app.nw.build/assets/js/src');
         execSync('rm app.nw.build/assets/config.rb');
         execSync('rm app.nw.build/.dev');
         var config = {
@@ -75,7 +127,7 @@ module.exports = function(grunt)
             ],
             app_category: 'public.app-category.utilities',
             app_sec_category: 'public.app-category.productivity',
-            uglify_js: true
+            uglify_js: false
         };
         var builder = new Builder();
         builder.build(config, function(error, app_path)
