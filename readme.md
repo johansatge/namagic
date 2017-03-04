@@ -3,6 +3,7 @@
 <h1>Namagic</h1>
 </div>
 
+* [User guide](userguide/)
 * [About the project](#about-the-project)
 * [App structure](#app-structure)
 * [Installation](#installation)
@@ -31,12 +32,6 @@ _That's why today (March 2017) I have decided to give that app a second life, by
 > Now the app is distributed under the [MIT license](license.md), the source code is available for free.
 >
 > However, if you want to support the project, the app can be bought [on the Mac App Store](https://itunes.apple.com/us/app/namagic/id985710846?l=fr&ls=1&mt=12).
-
-## Features
-
-The features are detailed on [the website](https://www.namagicapp.com/).
-
-<div align="center"><img src="assets/screenshots/screenshot-white.png"></div>
 
 ## App structure
 
