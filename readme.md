@@ -1,7 +1,8 @@
-<div align="center">
 <img src="assets/icon/icon_small.png">
-<h1>Namagic</h1>
-</div>
+
+# Namagic
+
+> Batch renaming reloaded for Mac OS X
 
 * [User guide](userguide/)
 * [About the project](#about-the-project)
