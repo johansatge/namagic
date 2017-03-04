@@ -8,6 +8,8 @@
 * [App structure](#app-structure)
 * [Installation](#installation)
 * [Development scripts](#development-scripts)
+* [Changelog](changelog.md)
+* [License](license.md)
 
 ## About the project
 
