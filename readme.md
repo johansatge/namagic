@@ -1,4 +1,4 @@
-<img src="assets/icon/icon_small.png">
+<img src="assets/banner.png">
 
 # Namagic
 
