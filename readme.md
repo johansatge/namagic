@@ -24,11 +24,11 @@ It was one of the first web-based apps to be published on the Mac App Store, in 
 
 When I tried to publish the app on the Mac App Store for the first time, it was rejected, because the structure of NW.js did not respect the Store's guidelines.
 
-So, with the useful help of [Alexey Stoletny](https://twitter.com/alexeyst), we [made it work](https://github.com/alexeyst/node-webkit-macappstore/pull/5), and we wrote a [Mac App Store submission guide](https://github.com/johansatge/nwjs-macappstore). That was a challenging - and awesome - part.
+So, with the useful help of [Alexey Stoletny](https://twitter.com/alexeyst), we [made it work](https://github.com/alexeyst/node-webkit-macappstore/pull/5), and we wrote a [Mac App Store submission guide](https://github.com/johansatge/nwjs-macappstore). That was challenging - and awesome.
 
-After a few more tries, the app got accepted. That was great! :tada: Our work was eventually merged in [NW.js core](https://github.com/nwjs/nw.js/issues/3609), and reused in [Github's Electron](https://github.com/electron/electron/issues/249).
+After a few more tries, the app got accepted. :tada: Our work was eventually merged in [NW.js core](https://github.com/nwjs/nw.js/issues/3609), and reused in [Github's Electron](https://github.com/electron/electron/issues/249). That was great!
 
-Then, ~50 copies of Namagic were sold in the first weeks, and it was featured in a few Mac-related websites (_thanks to them! [link (in French)](http://www.macg.co/logiciels/2015/05/namagic-renomme-les-fichiers-avec-beaucoup-doptions-88798)_)
+Then, ~50 copies of Namagic were sold in the first weeks, and it was featured in a few Mac-related websites ([_link (in French_)](http://www.macg.co/logiciels/2015/05/namagic-renomme-les-fichiers-avec-beaucoup-doptions-88798))
 
 After a few months, the app sunk in the Mac App Store's depths (probably because of my absence of skills in _selling stuff_, which is needed to maintain the app in the Trending section).
 
