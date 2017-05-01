@@ -4,6 +4,7 @@
 
 > Batch renaming reloaded for Mac OS X
 
+* [Official website](https://www.namagicapp.com/)
 * [User guide](userguide/)
 * [About the project](#about-the-project)
 * [App structure](#app-structure)
@@ -16,7 +17,7 @@
 
 _A few lines about the project's story..._
 
-[Namagic](https://www.namagicapp.com/) is a Mac application developed with web technologies.
+Namagic is a Mac application developed with web technologies.
 
 It was one of the first web-based apps to be published on the Mac App Store, in April 2015. Its first version was actively developed between February and April 2015.
 
