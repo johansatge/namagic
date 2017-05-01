@@ -2,8 +2,6 @@
 
 Welcome on the [Namagic](http://www.namagicapp.com) documentation.
 
-*If you do not find the informations you are looking for, please do not hesitate to contact the developer !*
-
 ## Working with your files
 
 * [Adding files](adding_files.md)
